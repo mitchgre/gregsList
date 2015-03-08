@@ -62,10 +62,17 @@
    height: 50%;
  }
 
- #calendar 
+ #calEdit 
  {
+   width:50%;
+ }
+
+ #calendar
+ {
+   left: 50%;
+   position: relative;
    width: 50%;
-   height: 50%;
+   /* height: 50%; */
  }
 
 
@@ -82,7 +89,7 @@
     border: none; 
 } 
  .ui-tabs-nav .ui-state-active { 
-    background: transparent url(img/uiTabsArrow.png) no-repeat bottom center; 
+    background: transparent no-repeat bottom center; 
     border: none; 
 } 
  .ui-tabs-nav .ui-state-default a { 
@@ -95,9 +102,9 @@
 </style>
   </head>
   <body>
-    <h1>
+    <h3>
       Greg's List
-    </h1>
+    </h3>
     <div id="encapsulator">
 
       <ul>
@@ -106,7 +113,7 @@
 	<li><a href="#postings">Postings</a></li>
 	<li><a href="#companies">Companies</a></li>
 	<li><a href="#contacts">Contacts</a></li>
-	<li><a href="#calendar">Calendar</a></li>
+	<li><a href="#cal">Calendar</a></li>
       </ul>
       
       <div id="overview">
@@ -135,7 +142,12 @@
 	<h3>contacts</h3>
       </div>
 
-      <div id="calendar">
+      <div id="cal">
+	<div id="calEdit">
+	  edit events
+	</div>
+	<div id="calendar">
+	</div>
       </div>
       
 
