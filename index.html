@@ -77,27 +77,38 @@
 
 
  .ui-widget-header { 
-    background: transparent; 
+    background: #aaaaaa transparent; 
     border: none; 
-    border-bottom: 1px solid #c0c0c0; 
+    border-bottom: 1px solid #222222; 
     -moz-border-radius: 0px; 
     -webkit-border-radius: 0px; 
     border-radius: 0px; 
 } 
  .ui-tabs-nav .ui-state-default { 
-    background: transparent; 
+    background: #dddddd; 
     border: none; 
 } 
  .ui-tabs-nav .ui-state-active { 
-    background: transparent no-repeat bottom center; 
+    background: #222222 no-repeat bottom center; 
     border: none; 
 } 
  .ui-tabs-nav .ui-state-default a { 
-    color: #c0c0c0; 
+    color: #aaaaaa; 
 } 
  .ui-tabs-nav .ui-state-active a { 
-    color: #19e00; 
+    color: #dddddd; 
 }
+
+.io tr:nth-child(even)
+ {
+   background-color : #eeeeee
+ }
+
+.io tr:nth-child(odd) 
+ {
+   background-color : #cccccc
+ }
+
 
 </style>
   </head>
@@ -114,36 +125,61 @@
 	<li><a href="#companies">Companies</a></li>
 	<li><a href="#contacts">Contacts</a></li>
 	<li><a href="#cal">Calendar</a></li>
+	<li><a href="#about">About</a></li>
       </ul>
       
       <div id="overview">
 	<p>
 	  <h3>Overview</h3>
-	  This is a sample project to demonstrate the orchestration of a job hunt. 
+	  <p>
+	    Link up goals, postings, companies etc here.
+	  </p>
+	  <p>
+	    The first hour of the 2-hour job search is spent building lists using the LAMP method.  List ideal employers.  Find Alumni working at these employers.  Decide on Motivation to follow up at each employers.  Search for Postings.  
+	  </p>
+	  <p>
+	    The general process should be to search for things elsewhere.  For example, pick a posting or a company to follow on glassdoor, indeed, etc.   Then insert postings if you can find them.  Try to find contacts related to the company on linkedIn, gitHub, facebook, etc. 
+	  </p>
+	  <p>
+	    The goal is to get an informational interview.   Add this to the calendar as an event. 
+	  </p>
+	  
 	</p>
       </div>
 
       <div id="goals">
 	<h3>goals</h3>
-	<h4>salary</h4>
+	<input type="text" id="goalToAdd">
+	<input type="button" value="Add goal" id="testButler">
+	<table id="tableOfGoals" class="io">
+	</table>
       </div>
 
       <div id="postings">
 	<h3>postings</h3>
 	<!--  <h4>job boards</h4>  -->
-	<input type="text" id="postingToAdd">
-	<input type="button" value="Add posting" id="testButler">
-	<table id="tableOfPostings">
+	Link <input type="text" id="postingLinkToAdd">
+	Company <input type="text" id="postingCompanyToAdd">
+	Source <input type="text" id="postingSourceToAdd">
+	<input type="button" value="Add posting" id="addPostingButton">
+	<table id="tableOfPostings" class="io">
 	</table>
       </div>
 
       <div id="companies">
 	<h3>companies</h3>
-	<h4>job boards</h4>
+	<input type="text" id="companyToAdd">
+	<input type="button" value="Add company" id="addCompanyButton">
+	<table id="tableOfCompanies" class="io">
+	</table>
       </div>
 
       <div id="contacts">
 	<h3>contacts</h3>
+	<input type="text" id="contactToAdd">
+	<input type="button" value="Add contact" id="testButler">
+	<table id="tableOfContacts" class="io">
+	</table>
       </div>
 
       <div id="cal">
@@ -154,6 +190,15 @@
 	</div>
       </div>
       
+      <div id="about">
+	<h3>about</h3>
+	<p>
+	  gregsList is a database driven project sample to demonstrate an orchestrated job search. 
+	</p>
+	<p>
+	  
+	</p>
+      </div>
 
     </div>
   </body>

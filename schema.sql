@@ -175,8 +175,6 @@ create table company_contacts(
 );
 
 
-
-
 # contains schedules
 drop table if exists schedule;
 create table schedule(

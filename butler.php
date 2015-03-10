@@ -14,20 +14,32 @@ $c = $_POST['c'];
 $d = $_POST['d'];
 */
 
+function parseInputs()
+{
 if (isset($_POST['func']))
     {
-        // echo getPostings(1);
+        $user = 1;
         $func = $_POST['func'];
+
         if ($func === "getPostings")
             {
-                echo getPostings(1);
-                //echo "got it";
+                $query = "select url from users inner join user_postings on user_postings.user=users.id ";
+                $query .= "inner join postings on user_postings.posting=postings.id ";
+                $query .= "where users.id = $user";
+                $postings = returnStuff($user,$query);
+                echo $postings;
             }
-        else
+
+        if ($func === "getCompanies")
             {
-                echo "func = " . $_POST['func'];
+                $query = "select name from companies ";
+                $companies = returnStuff($user,$query);
+                echo $companies;
             }
     }
+}
+parseInputs();
+
 
 function getPostings($user)
 {
@@ -48,6 +60,29 @@ function getPostings($user)
             // print_r($categories);
             return json_encode($postings);
         }
+}
+
+function returnStuff($user,$query)
+{
+    $mysqli = connectToDB();
+    $container = []; // empty container
+
+   if ($sql=$mysqli->prepare($query))
+        {
+            $sql->execute();
+            // bind results
+            $sql->bind_result($i);
+            while($sql->fetch()) // loop over results and push into array
+                array_push($container,$i);
+            
+            mysqli_close($mysqli);
+            return json_encode($container);
+        }
+   else
+       {
+           mysqli_close($mysqli);
+           return json_encode(["error"]);
+       }
 }
 
 /*
