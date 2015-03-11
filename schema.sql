@@ -42,34 +42,54 @@ create table user_companies(
 );
 
 
+
+
+# add some base case user_companies
+
+# the base case example is that the companies.name already exists in
+# the companies table. 
+
+insert into `user_companies` (`user`,company)
+       values ( # example where the company name is already defined
+		(select id from `users` where users.name="greg"),
+		(select id from `companies` where companies.name="Google")
+		),
+       	      ( # example where the company name is already defined
+		(select id from `users` where users.name="mitchell"),
+		(select id from `companies` where companies.name="Disney")
+		);
+       	      	
+# in the event that the companies.name isn't defined, will have to
+# resort to using php to process the companies.name insertion into
+# companies first, and then pass the resulting id into user_companies.
+
+
+
+
+
 # contains job postings
 drop table if exists postings;
 create table postings(
        id int primary key unique auto_increment,
        title varchar(255),
-       url varchar(255) unique,
+       url varchar(255),
+       `user` int references users.id,
        location int references location.id,
        company int references companies.id
 );
+# notes:
+# couldn't separate postings from user.  It was too complicated to
+# figure out how to remove postings if they weren't tied to a user id.
+
 
 # insert some base case postings
-insert into `postings` (`url`)
-       values ("http://www.indeed.com/cmp/The-Carney-Group/jobs/Software-Engineer-Application-Developer-b67c029e9687804f"),("https://us-amazon.icims.com/jobs/309767/it-support-engineer-ii/job?mode=job&iis=Indeed&iisn=Indeed+%28Free+Posting%29&mobile=false&width=1455&height=1200&bga=true&needsRedirect=false&jan1offset=-420&jun1offset=-420"),("http://www.infinera.com/career/ourjobs.html?nl=1&jvi=oxTv0fwF,Job&jvs=Indeed&jvk=Job");
+insert into `postings` (`user`,`url`)
+       values
+       (1,"http://www.indeed.com/cmp/The-Carney-Group/jobs/Software-Engineer-Application-Developer-b67c029e9687804f"),
+       (1,"https://us-amazon.icims.com/jobs/309767/it-support-engineer-ii/job?mode=job&iis=Indeed&iisn=Indeed+%28Free+Posting%29&mobile=false&width=1455&height=1200&bga=true&needsRedirect=false&jan1offset=-420&jun1offset=-420"),
+       (1,"http://www.infinera.com/career/ourjobs.html?nl=1&jvi=oxTv0fwF,Job&jvs=Indeed&jvk=Job"),
+       (2,"http://www.indeed.com/cmp/The-Carney-Group/jobs/Software-Engineer-Application-Developer-b67c029e9687804f");
 
-
-
-
-# contains relations between users and job postings
-drop table if exists user_postings;
-create table user_postings(
-       id int primary key unique auto_increment,
-       `user` int references users.id,
-       posting int references postings.id
-);
-
-# add base case user_postings
-insert into `user_postings` (`user`,posting)
-       values (1,1),(1,2),(1,3),(2,3);  # link "greg" with the first three postings, "mitchell" with the last
 
 
 

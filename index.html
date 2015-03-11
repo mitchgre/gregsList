@@ -19,6 +19,7 @@
 <!-- jQuery-ui -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.css">   -->
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.theme.css">  -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.structure.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.0/jquery-ui.js"></script>
 
@@ -72,32 +73,55 @@
    left: 50%;
    position: relative;
    width: 50%;
+   min-width: 300px;
    /* height: 50%; */
  }
 
+ #tableOfPostings 
+ {
+   table-layout:fixed;
+   width: 100%; !important;
+   overflow: hidden;
+ }
 
- .ui-widget-header { 
-    background: #aaaaaa transparent; 
-    border: none; 
-    border-bottom: 1px solid #222222; 
-    -moz-border-radius: 0px; 
-    -webkit-border-radius: 0px; 
-    border-radius: 0px; 
-} 
- .ui-tabs-nav .ui-state-default { 
-    background: #dddddd; 
-    border: none; 
-} 
- .ui-tabs-nav .ui-state-active { 
-    background: #222222 no-repeat bottom center; 
-    border: none; 
-} 
- .ui-tabs-nav .ui-state-default a { 
-    color: #aaaaaa; 
-} 
- .ui-tabs-nav .ui-state-active a { 
+
+ .ui-widget-header 
+ { 
+   background: #aaaaaa transparent; 
+   border: none; 
+   border-bottom: 1px solid #222222; 
+   -moz-border-radius: 0px; 
+   -webkit-border-radius: 0px; 
+   border-radius: 0px; 
+ } 
+
+/* Default Tab  */
+ .ui-tabs-nav .ui-state-default 
+ { 
+   background: #888888; 
+   color: #aaaaaa; 
+   border: none; 
+ } 
+ 
+/* Active Tab  */
+ .ui-tabs-nav .ui-state-active 
+ { 
+   background: #222222 no-repeat bottom center; 
+   color: #dddddd; 
+   border: none; 
+ } 
+
+/* Default Tab Link Color  */
+ .ui-tabs-nav .ui-state-default a 
+ { 
+    color: #cccccc; 
+ } 
+
+/* Active Tab Link Color  */
+ .ui-tabs-nav .ui-state-active a 
+ { 
     color: #dddddd; 
-}
+ }
 
 .io tr:nth-child(even)
  {
@@ -108,6 +132,43 @@
  {
    background-color : #cccccc
  }
+
+body{font-size:12px;}
+
+  .column 
+ {
+   width: 33%;
+   min-width: 300px;
+   float: left;
+   padding-top: 20px;
+   padding-bottom: 100px;
+  }
+  .portlet {
+    margin: 0 1em 1em 0;
+    padding: 0.3em;
+  }
+  .portlet-header {
+    padding: 0.2em 0.3em;
+    margin-bottom: 0.5em;
+    position: relative;
+  }
+  .portlet-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -8px;
+  }
+  .portlet-content {
+    padding: 0.4em;
+  }
+  .portlet-placeholder {
+    border: 1px dotted black;
+    margin: 0 1em 1em 0;
+    height: 50px;
+  }
+
+
+
 
 
 </style>
@@ -128,24 +189,75 @@
 	<li><a href="#about">About</a></li>
       </ul>
       
-      <div id="overview">
-	<p>
-	  <h3>Overview</h3>
-	  <p>
-	    Link up goals, postings, companies etc here.
-	  </p>
-	  <p>
-	    The first hour of the 2-hour job search is spent building lists using the LAMP method.  List ideal employers.  Find Alumni working at these employers.  Decide on Motivation to follow up at each employers.  Search for Postings.  
-	  </p>
-	  <p>
-	    The general process should be to search for things elsewhere.  For example, pick a posting or a company to follow on glassdoor, indeed, etc.   Then insert postings if you can find them.  Try to find contacts related to the company on linkedIn, gitHub, facebook, etc. 
-	  </p>
-	  <p>
-	    The goal is to get an informational interview.   Add this to the calendar as an event. 
-	  </p>
+      <div id="overview"> 
+	<div class="column"> <!-- column 1 -->
+	  <div class="portlet"> <!-- Overview portlet -->
+	    <div class="portlet-header">Overview</div>
+	    <div class="portlet-content">
+
+	      <p>
+		The first hour of the 2-hour job search is spent building lists using the LAMP method.  List ideal employers.  Find Alumni working at these employers.  Decide on Motivation to follow up at each employers.  Search for Postings.  
+	      </p>
+	      <p>
+		The general process should be to search for things elsewhere.  For example, pick a posting or a company to follow on glassdoor, indeed, etc.   Then insert postings if you can find them.  Try to find contacts related to the company on linkedIn, gitHub, facebook, etc. 
+	      </p>
+	      <p>
+		The goal is to get an informational interview.   Add this to the calendar as an event. 
+	      </p>
+	    </div> <!-- end portlet-content -->
+	  </div> <!-- end overview portlet -->
 	  
-	</p>
-      </div>
+	  <div class="portlet">
+	    <div class="portlet-header">Goals</div>
+	    <div class="portlet-content" id="goalsPortlet">
+	      Lorem ipsum
+	    </div> <!--  end portlet-content -->
+	  </div> <!-- end goals portlet -->
+	</div> <!-- end column1 -->
+
+	<div class="column"> <!-- column2 -->	
+
+	  <div class="portlet">
+
+	    <div class="portlet-header">Companies</div>
+	    <div class="portlet-content" id="companiesPortlet">
+	      ipsum lorem
+	    </div> <!--  end portlet-content -->
+	  </div>
+
+	  <div class="portlet">
+	    <div class="portlet-header">Postings</div>
+	    <div class="portlet-content" id="postingsPortlet">
+	      ipsum lorem
+	    </div> <!--  end portlet-content -->
+	  </div>
+
+	</div> <!-- end column2 -->
+
+	<div class="column"> <!-- column3 -->	
+
+	  <div class="portlet">
+
+	    <div class="portlet-header">Calendar</div>
+	    <div class="portlet-content" id="calendarPortlet">
+
+	    </div> <!--  end portlet-content -->
+	  </div>
+
+	  <div class="portlet">
+	    <div class="portlet-header">Contacts2</div>
+	    <div class="portlet-content" id="contactsPortlet">
+	      ipsum lorem
+	    </div> <!--  end portlet-content -->
+	  </div>
+
+	</div> <!-- end column3 -->
+
+
+
+      </div> <!-- end overview div -->
+	
+
 
       <div id="goals">
 	<h3>goals</h3>
@@ -156,14 +268,10 @@
       </div>
 
       <div id="postings">
-	<h3>postings</h3>
+	<h3>postings</h3> 
 	<!--  <h4>job boards</h4>  -->
-	Link <input type="text" id="postingLinkToAdd">
-	Company <input type="text" id="postingCompanyToAdd">
-	Source <input type="text" id="postingSourceToAdd">
-	<input type="button" value="Add posting" id="addPostingButton">
-	<table id="tableOfPostings" class="io">
-	</table>
+
+
       </div>
 
       <div id="companies">

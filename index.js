@@ -7,18 +7,31 @@ $(document).ready
 	$("#encapsulator").tabs();
 	// $("#calendar").resizable();
 	
-	setupCalendar();
+
+
+	setupCalendar('#calendar');
+	
 	// getPostings();
 
-	var gregsList = new glo(); // main object 
+	gregsList = new glo(); // main object 
+
+	// gregsList.setupPostings();
+
 	
 	// display postings, companies, contacts, goals
 
 	// get and display job postings	
-	getStuff(gregsList.postings);
-	getStuff(gregsList.companies);
+	//getStuff(gregsList.postings);
+	//getStuff(gregsList.companies);
 	
+	setupPortlets();
 
+	//$("#companiesPortlet").clone($("#tableOfCompanies"));	
+	// $("#tableOfCompanies").clone().appendTo( "#companiesPortlet" );
+	//$("#postingsPortlet").append($("#tableOfPostings"));
+
+	//$("#calendarPortlet").css("width","66%");
+	setupCalendar('#calendarPortlet');
 
 	// console.log("getter = ");
 	// console.log(gregsList.postings.get);
@@ -35,7 +48,7 @@ function glo()  // gregsList Object
 	{
 	    get: "getPostings",		// php function to call
 	    display: displayTable,	// javascript function to display
-	    table: $("#tableOfPostings")[0],	// a reference to the div container
+	    table: $("#tableOfPostings")[0],	// a reference to the div container. set in setupPostings()
 	    add: null			// php function to add posting
 	};
     this.companies =
@@ -58,6 +71,170 @@ function glo()  // gregsList Object
 	    display: null,//displaySchedules,
 	    add: null
 	}
+    
+    this.setupPostings();
+}
+
+glo.prototype.setupPostings = 
+    function setupPostings()
+{
+    var postings = $("#postings")[0]; // container div
+    //var postings = this.postings.table;
+    
+    emptyElement(postings);
+
+
+    // add text fields
+    postings.appendChild(document.createTextNode('Link'));
+    var linkField = addInput(postings,'text','','','postingLinkToAdd');
+
+    postings.appendChild(document.createTextNode('Company'));
+    var companyField = addInput(postings,'text','','','postingCompanyToAdd');
+
+    postings.appendChild(document.createTextNode('Source'));
+    var sourceField = addInput(postings,'text','','','postingSourceToAdd');
+
+    // add button
+    var addButton = addInput(postings,'button','','Add posting','addPostingButton');
+
+    // wire button
+    addButton.onclick = insertPosting.bind(this);
+
+    // insert empty results table
+    var table = createAppendedChildToParent('table',postings);
+    this.postings.table = table;
+    table.id = 'tableOfPostings';
+    table.className = 'io';
+
+    // fill results table
+    getStuff(this.postings);
+
+}
+
+
+
+
+/*
+  Get value from textboxes, and hand off to the butler
+*/
+function insertPosting()
+{
+    var object = this;
+    var link = $("#postingLinkToAdd")[0].value;
+    var comp = $("#postingCompanyToAdd")[0].value;
+    var src = $("#postingSourceToAdd")[0].value;
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		func: "insertPosting",
+		url: encodeURIComponent(link),
+		company: comp,
+		source: src
+	    },
+	    success: function(resp)
+	    {
+		// console.log(resp);
+		// 
+		if (JSON.parse(resp) === true)
+		{
+		    console.log("input worked");
+		    // displayTable(object,[]);
+		    getStuff(object.postings);
+		}
+		else
+		{
+		    console.log("input failed");
+		}
+	    }	
+	}
+    )
+}
+
+
+function removePosting(e)
+{
+    // e is an event
+    
+    console.log("removing row");
+    // console.log(e);
+    console.log(this);
+
+    // object is bound to the button as "data" property
+    console.log(this.data);
+    var object = this.data; 
+    // object is automatically gol.postings.  
+
+    // get url from DOM
+    // 'this' is the button clicked
+    var td = this.parentNode;
+    var tr = this.parentNode.parentNode;
+    var link = tr.firstChild.innerHTML;
+
+    console.log(link);
+    console.log(encodeURIComponent(link));
+    
+    
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		func: "removePosting",
+		//url: encodeURIComponent(link)
+		url: link
+		// company: comp,
+		// source: src
+	    },
+	    success: function(resp)
+	    {
+		console.log(JSON.parse(resp));
+		// 
+		if (JSON.parse(resp) === true)
+		{
+		    console.log("removal worked");
+		    // displayTable(object,[]);
+		    getStuff(object);
+		}
+		else
+		{
+		    console.log("removal failed");
+		}
+	    }	
+	}
+    )
+    
+    
+}
+
+
+
+
+/*
+  A function to render an input type to a container div (element).
+*/
+function addInput(parentDiv, inputType, inputClass, inputValue, inputId)
+{
+    var input = createAppendedChildToParent('input',parentDiv);
+    input.type = inputType;
+    
+    if (inputClass)
+	input.type = inputClass;
+    
+    if (inputValue)
+	input.value = inputValue;
+    
+    if (inputId)
+	input.id = inputId;
+    
+    return input;
 }
 
 /*
@@ -65,8 +242,8 @@ function glo()  // gregsList Object
 */
 function getStuff(object)
 {
-    //console.log(getter);
-    //console.log(callback);
+    // console.log(object);
+    // console.log(callback);
     var getter = object.get;
     var callback = object.display;
 
@@ -85,7 +262,7 @@ function getStuff(object)
 	    success: function(resp)
 	    {
 		console.log(resp);
-		console.log(object);
+		// console.log(object);
 		callback(object, JSON.parse(resp));
 	    }
 	}
@@ -93,17 +270,27 @@ function getStuff(object)
 }
 
 /*
-  A callback function to render responses from getStuff()
+  Remove all of element's children from DOM
+*/
+function emptyElement(e)
+{
+    if (typeof e != 'undefined')
+	if (e.firstChild)
+	    while (e.firstChild)
+		e.removeChild(e.firstChild);
+}
+
+/*
+  A generalized callback function to display tables.
 */
 function displayTable(object, input)
 {
+    // console.log("displaying table");
+
     var table = object.table;
-    while (table.firstChild)
-	table.removeChild(table.firstChild);
+    emptyElement(table);
 
-    $()
-
-    // insert postings retrieved via ajax
+    // insert into DOM elements retrieved via ajax
     for (var i = 0; i < input.length; i++)
     {
 	var tr = createAppendedChildToParent('tr',table);
@@ -115,6 +302,11 @@ function displayTable(object, input)
 	td = createAppendedChildToParent('td',tr);
 	var button = createAppendedChildToParent('input',td);
 	button.type = "button"; 	button.value = "remove";
+	button.data = object;
+	button.onclick = removePosting;
+
+	var button = createAppendedChildToParent('input',td);
+	button.type = "button"; 	button.value = "edit";
 	
     }
 
@@ -178,9 +370,9 @@ function createAppendedChildToParent( ct ,parent)
 
 
 
-function setupCalendar()
+function setupCalendar(divId)
 {
-    $('#calendar').fullCalendar
+    $(divId).fullCalendar
     (
 	{
 	    header:  
@@ -203,4 +395,33 @@ function setupCalendar()
 	    ]
 	}
     );
+}
+
+function setupPortlets()
+{
+    $(".column").sortable
+    (
+	{
+	    connectWith: ".column",
+	    handle: ".portlet-header",
+	    cancel: ".portlet-toggle",
+	    placeholder: "portlet-placeholder ui-corner-all"
+	}
+    );
+    
+    $( ".portlet" )
+	.addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
+	.find( ".portlet-header" )
+        .addClass( "ui-widget-header ui-corner-all" )
+        .prepend( "<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
+    
+    $( ".portlet-toggle" ).click(function() {
+	var icon = $( this );
+	icon.toggleClass( "ui-icon-minusthick ui-icon-plusthick" );
+	icon.closest( ".portlet" ).find( ".portlet-content" ).toggle();
+    });
+
+    
+    $(".portlet").resizable().css({overflow:'auto'});
+    
 }
