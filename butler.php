@@ -64,37 +64,96 @@ if (isset($_POST['func']))
             }
         if ($func === "removePosting")
             {
-                // $url = urldecode($_POST["url"]);
                 $url = htmlspecialchars_decode($_POST["url"]);
-                // $url = mysqli_real_escape_string($_POST["url"]);
-                //$url = $_POST["url"];
-                // $url = mysqli_real_escape_string($_POST["url"],$url);
 
                 $query  = "delete from postings where url = '$url' and user = $user";
-                // $query  = "select url from postings where id=47";
-                
-                
                 
                 if (preparedStatement($query))
                     echo json_encode(true);
                 else
                     echo json_encode(false);
                 
-                
-                // $mysqli = connectToDB();
-                // $result = mysqli_query($mysqli,$query);
-                
-                //echo json_encode($query);
-                // echo json_encode(preparedStatement($query));
-                // echo json_encode([$result]);
+            }
+        if ($func === "insertCompany")
+            {
+                insertCompany();
             }
     }
 }
 parseInputs();
 
+function removeCompany()
+{
+}
 
-
-
+function insertCompany()
+{
+    $url = urldecode($_POST["url"]);
+    $companyName = $_POST["company"];
+    $source = $_POST["source"];
+    
+    //echo "received insertPosting request with $url, $company, $source, $user";
+    
+    // if company already exists in companies, get it's id and tie it to $user
+    // if company doesn't already exist in companies, add it and tie it to $user
+    $mysqli = connectToDB();
+    $query = "select count(name) from companies where name = \"$companyName\"";
+    $count = reset(returnStuff($user,$query));
+    
+    if ($count > 0)
+        {
+            // company already exists in companies.
+            // if company doesn't exist in user_companies add connection
+            // otherwise return error code: "company already exists"
+            $query = "select count(name) from companies ";
+            $query .= "inner join user_companies on companies.id=user_companies.company ";
+            // $query .= "inner join users on user_companies.user=$user ";
+            $query .= "where companies.name = \"$companyName\" ";
+            $query .= "and user_companies.user = $user";
+            
+            $count = reset(returnStuff($user,$query));
+            
+            // echo json_encode(["Company exists in companies, user has $count references"]);
+            if ($count > 0) // user already has a reference to company
+                {
+                    echo json_encode(["ERROR: User $user is already tracking $companyName"]);
+                }
+            else // link user to company in user_companies
+                { 
+                    $query = "insert into user_companies ";
+                    $query .= "(user,company) ";
+                    $query .= "values ($user, (select companies.id from companies where name = \"$companyName\") ) ";
+                    
+                    if (preparedStatement($query))
+                        echo json_encode(true);
+                    else 
+                        echo json_encode(false);
+                    
+                }
+            
+        }
+    else  // company doesn't exist in companies, so add it and link to user_companies
+        {
+            //echo json_encode(["Company not in companies, user has $count references"]);
+            $query = "insert into companies (name) values (\"$companyName\")";
+            if (preparedStatement($query))
+                {
+                    $query = "insert into user_companies ";
+                    $query .= "(user,company) ";
+                    $query .= "values ($user, (select companies.id from companies where name = \"$companyName\") ) ";
+                    
+                    if (preparedStatement($query))
+                        echo json_encode(true);
+                    else 
+                        echo json_encode(false);
+                }
+            else
+                {
+                    echo json_encode(false);
+                }
+        }
+    
+}
 
 
 /*

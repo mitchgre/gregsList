@@ -22,7 +22,7 @@ $(document).ready
 
 	// get and display job postings	
 	//getStuff(gregsList.postings);
-	//getStuff(gregsList.companies);
+	getStuff(gregsList.companies);
 	
 	setupPortlets();
 
@@ -73,6 +73,7 @@ function glo()  // gregsList Object
 	}
     
     this.setupPostings();
+    this.setupCompanies();
 }
 
 glo.prototype.setupPostings = 
@@ -112,7 +113,73 @@ glo.prototype.setupPostings =
 }
 
 
+glo.prototype.setupCompanies = 
+    function setupCompanies()
+{
+    var companies = $("#companies")[0]; // container div
+    
+    emptyElement(companies);
 
+    // add text fields
+    // companies.appendChild(document.createTextNode('Companies'));
+    var companyField = addInput(companies,'text','','','CompanyToAdd');
+
+    // add button
+    var addButton = addInput(companies,'button','','Add Company','addCompanyButton');
+
+    // wire button
+    addButton.onclick = insertCompany.bind(this);
+
+    // insert empty results table
+    var table = createAppendedChildToParent('table',companies);
+    this.companies.table = table;
+    table.id = 'tableOfCompanies';
+    table.className = 'io';
+
+    // fill results table
+    getStuff(this.companies);
+
+}
+
+
+function insertCompany()
+{
+    var object = this;
+    var toAdd = $("#CompanyToAdd")[0].value;
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		func: "insertCompany",
+		company: toAdd,
+	    },
+	    success: function(resp)
+	    {
+		console.log(resp);
+		// 
+		// clear text fields
+		$("#CompanyToAdd")[0].value = '';
+		
+		if (JSON.parse(resp) === true)
+		{
+		    console.log("input worked");
+		    // displayTable(object,[]);
+		    getStuff(object.companies);
+		}
+		else
+		{
+		    console.log("input failed");
+		}
+		
+	    }	
+	}
+    )
+   
+}
 
 /*
   Get value from textboxes, and hand off to the butler
@@ -123,6 +190,8 @@ function insertPosting()
     var link = $("#postingLinkToAdd")[0].value;
     var comp = $("#postingCompanyToAdd")[0].value;
     var src = $("#postingSourceToAdd")[0].value;
+    
+
     $.ajax
     (
 	{
@@ -140,6 +209,11 @@ function insertPosting()
 	    {
 		// console.log(resp);
 		// 
+		// clear text fields
+		$("#postingLinkToAdd")[0].value = '';
+		$("#postingCompanyToAdd")[0].value = '';
+		$("#postingSourceToAdd")[0].value = '';
+
 		if (JSON.parse(resp) === true)
 		{
 		    console.log("input worked");
@@ -153,6 +227,9 @@ function insertPosting()
 	    }	
 	}
     )
+
+
+    
 }
 
 
@@ -188,7 +265,6 @@ function removePosting(e)
 	    data:
 	    {
 		func: "removePosting",
-		//url: encodeURIComponent(link)
 		url: link
 		// company: comp,
 		// source: src
@@ -270,7 +346,7 @@ function getStuff(object)
 }
 
 /*
-  Remove all of element's children from DOM
+  Remove all of element e's children from DOM
 */
 function emptyElement(e)
 {
