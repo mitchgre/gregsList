@@ -62,14 +62,15 @@ function glo()  // gregsList Object
     this.companies =
 	{
 	    contents: [],
-	    filler: null,
+	    filler: fillCompanies,
 	    type: "company",
 	    get: "getCompanies",
 	    display: displayTable,
 	    table: $("#tableOfCompanies")[0],
 	    add: null,
 	    removeFunction: remover,
-	    destroyer: "removeCompany" // php function to remove
+	    destroyer: "removeCompany", // php function to remove
+	    displayKeys: ["name"] // values to display in table
 	}
     this.contacts =
 	{
@@ -86,7 +87,7 @@ function glo()  // gregsList Object
 	}
     
     this.setupPostings();
-    // this.setupCompanies();
+    this.setupCompanies();
 }
 
 glo.prototype.setupPostings = 
@@ -474,6 +475,28 @@ function remover(e)
     
 }
 
+
+function fillCompanies(object,input)
+{
+    // erase previous contents
+    object.contents = [];
+    var contents = object.contents;
+    
+    for (var i = 0; i < input.length; i++)
+    {
+	var name = input[i];
+
+	var p = new company(null,name,null);
+	// console.log("p");
+	// console.log(p);
+	contents.push(p);
+    }
+    
+
+    displayTable(object);
+    
+}
+    
 
 
 function fillPostings(object, input)
