@@ -2,7 +2,7 @@
   This file will contain skeleton function classes.
 */
 
-function posting(sid,title,url,location,company)
+function posting(sid,title,url,location,company,source)
 {
     this.sid = sid || null;   // id in sql
     this.title = title || null;
@@ -10,7 +10,9 @@ function posting(sid,title,url,location,company)
     // this.user = null;  // not needed since back end will handle this?
     this.location = location || null; // location is ? city?  state? (arbitrary)
     this.company = company || null;
+    this.source = source || null;
 }
+
 
 function company(sid,name,url)
 {

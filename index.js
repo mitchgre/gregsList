@@ -21,8 +21,8 @@ $(document).ready
 	// display postings, companies, contacts, goals
 
 	// get and display job postings	
-	//getStuff(gregsList.postings);
-	getStuff(gregsList.companies);
+	// getStuff(gregsList.postings);
+	// getStuff(gregsList.companies);
 	
 	setupPortlets();
 
@@ -46,15 +46,22 @@ function glo()  // gregsList Object
 {
     this.postings = 
 	{
+	    contents: [],		// array of values to be filled from data store
+	    filler: fillPostings,	// javascript function to fill contents from data store
+	    type: "posting",
 	    get: "getPostings",		// php function to call
 	    display: displayTable,	// javascript function to display
 	    table: $("#tableOfPostings")[0],	// a reference to the div container. set in setupPostings()
 	    add: null,			// php function to add posting
-	    removeFunction: remover, // javascript function to remove
-	    destroyer: "removePosting" // php function to remove
+	    removeFunction: remover,	// javascript function to remove
+	    destroyer: "removePosting", // php function to remove
+	    displayKeys: ["title","url","company","location","source"] // values to display in table
 	};
     this.companies =
 	{
+	    contents: [],
+	    filler: null,
+	    type: "company",
 	    get: "getCompanies",
 	    display: displayTable,
 	    table: $("#tableOfCompanies")[0],
@@ -77,7 +84,7 @@ function glo()  // gregsList Object
 	}
     
     this.setupPostings();
-    this.setupCompanies();
+    // this.setupCompanies();
 }
 
 glo.prototype.setupPostings = 
@@ -88,19 +95,37 @@ glo.prototype.setupPostings =
     
     emptyElement(postings);
 
-
-    // add text fields
-    postings.appendChild(document.createTextNode('Link'));
-    var linkField = addInput(postings,'text','','','postingLinkToAdd');
-
-    postings.appendChild(document.createTextNode('Company'));
-    var companyField = addInput(postings,'text','','','postingCompanyToAdd');
-
-    postings.appendChild(document.createTextNode('Source'));
-    var sourceField = addInput(postings,'text','','','postingSourceToAdd');
+    // add inputs
+    var input = createAppendedChildToParent('table',postings);
+    input.style.width = "100%";
+    input.style.tableLayout = "fixed";
+    var tr = createAppendedChildToParent('tr',input);
 
     // add button
-    var addButton = addInput(postings,'button','','Add posting','addPostingButton');
+    var td = createAppendedChildToParent('td',tr);
+    var addButton = addInput(td,'button','','Add posting','addPostingButton');
+
+    // add text fields
+    var td = createAppendedChildToParent('td',tr);
+    td.appendChild(document.createTextNode('Title'));
+    var titleField = addInput(td,'text','','','postingTitleToAdd');
+ 
+    var td = createAppendedChildToParent('td',tr);
+    td.appendChild(document.createTextNode('Link'));
+    var linkField = addInput(td,'text','','','postingLinkToAdd');
+
+    var td = createAppendedChildToParent('td',tr);
+    td.appendChild(document.createTextNode('Company'));
+    var companyField = addInput(td,'text','','','postingCompanyToAdd');
+
+    var td = createAppendedChildToParent('td',tr);
+    td.appendChild(document.createTextNode('Location'));
+    var companyField = addInput(td,'text','','','postingLocationToAdd');
+
+    var td = createAppendedChildToParent('td',tr);
+    td.appendChild(document.createTextNode('Source'));
+    var sourceField = addInput(td,'text','','','postingSourceToAdd');
+
 
     // wire button
     addButton.onclick = insertPosting.bind(this);
@@ -191,8 +216,11 @@ function insertCompany()
 function insertPosting()
 {
     var object = this;
+
+    var ttl = $("#postingTitleToAdd")[0].value;
     var link = $("#postingLinkToAdd")[0].value;
     var comp = $("#postingCompanyToAdd")[0].value;
+    var loc = $("#postingLocationToAdd")[0].value;
     var src = $("#postingSourceToAdd")[0].value;
     
 
@@ -206,14 +234,17 @@ function insertPosting()
 	    {
 		func: "insertPosting",
 		url: encodeURIComponent(link),
+		title: ttl,
 		company: comp,
+		location: loc,
 		source: src
 	    },
 	    success: function(resp)
 	    {
-		// console.log(resp);
+		console.log(resp);
 		// 
 		// clear text fields
+		$("#postingTitleToAdd")[0].value = '';
 		$("#postingLinkToAdd")[0].value = '';
 		$("#postingCompanyToAdd")[0].value = '';
 		$("#postingSourceToAdd")[0].value = '';
@@ -240,27 +271,38 @@ function insertPosting()
 function remover(e)
 {
     // e is an event
-    
-    // console.log("removing row");
-    // console.log(e);
-    // console.log(this);
 
     // object is bound to the button as "data" property
     console.log(this.data);
     var object = this.data; 
+    
+    // console.log("removing row");
+    // console.log(e);
+    // console.log(this);
+    
+    console.log("this.sid:");
+    console.log(this.sid);
+
+    console.log("object.destroyer:");
+    console.log(object.destroyer);
+
+
 
     // object is automatically gol.postings.  
 
     // get url from DOM
     // 'this' is the button clicked
+    /*
     var td = this.parentNode;
     var tr = this.parentNode.parentNode;
     var link = tr.firstChild.innerHTML;
 
+
     console.log(link);
     console.log(encodeURIComponent(link));
+    */
     
-    
+    var link = this.sid;
     $.ajax
     (
 	{
@@ -297,6 +339,43 @@ function remover(e)
 
 
 
+function fillPostings(object, input)
+{
+
+    console.log("object");
+    console.log(object);
+
+    //console.log("input keys");
+    // console.log(input);
+    //console.log(JSON.parse(Object.keys(input)));
+
+    
+
+    
+    // erase object's contents and refill them from input
+    object.contents = [];
+    var contents = object.contents;
+
+    
+    for (var i = 0; i < input.ids.length; i++)
+    {
+	var id = input.ids[i];
+	var title = input.titles[i];
+	var url = input.urls[i];
+	var location = input.locations[i];
+	var company = input.companies[i];
+	var source = input.sources[i];
+
+	var p = new posting(id,title,url,location,company,source);
+	// console.log("p");
+	// console.log(p);
+	contents.push(p);
+    }
+    
+
+    displayTable(object);
+    
+}
 
 
 /*
@@ -307,7 +386,9 @@ function getStuff(object)
     // console.log(object);
     // console.log(callback);
     var getter = object.get;
-    var callback = object.display;
+    // var callback = object.display;
+    var callback = object.filler;
+
 
     $.ajax
     (
@@ -315,7 +396,8 @@ function getStuff(object)
 	    async: true,
 	    url: "butler.php",
 	    type: "post",
-	    dataType: "text",
+	    //dataType: "text",
+	    dataType: "json",
 	    data:
 	    {
 		// getter: true
@@ -324,8 +406,9 @@ function getStuff(object)
 	    success: function(resp)
 	    {
 		console.log(resp);
-		// console.log(object);
-		callback(object, JSON.parse(resp));
+		//console.log(object);
+		//callback(object, JSON.parse(resp));
+		callback(object, resp);
 	    }
 	}
     )
@@ -337,37 +420,58 @@ function getStuff(object)
 /*
   A generalized callback function to display tables.
 
-  'table' must be a member of object, 'input' must be an array
 */
-function displayTable(object, input)
+function displayTable(object)
 {
     // console.log("displaying table");
 
     var table = object.table;
     emptyElement(table);
+    var tr = createAppendedChildToParent('tr',table);
 
+    console.log("from displayTable");
+    console.log(object);
 
-    // insert into DOM elements retrieved via ajax
-    for (var i = 0; i < input.length; i++)
+    // console.log("input");
+    // console.log(input);
+
+    // add headers
+    for (var i = 0; i < object.displayKeys.length; i++)
     {
-	var tr = createAppendedChildToParent('tr',table);
-	// var th = createAppendedChildToParent('th',tr);
-	var td = createAppendedChildToParent('td',tr);
-	var content = document.createTextNode(input[i]);
-	td.appendChild(content);
-	// next cell
+	var th = createAppendedChildToParent('th',tr);
+	var content = document.createTextNode(object.displayKeys[i]);
+	th.appendChild(content);
+    }
+    
+
+    // insert into DOM elements stored in object
+    for (var i = 0; i < object.contents.length; i++)
+    {
+	tr = createAppendedChildToParent('tr',table);
+	var contents = object.contents[i];
+
+	for (var key in contents)
+	{
+	    if (isInArray(key, object.displayKeys))
+		{
+		    var td = createAppendedChildToParent('td',tr);
+		    var content = document.createTextNode(contents[key]);
+		    td.appendChild(content);
+		    // next cell
+		}
+	}
 	td = createAppendedChildToParent('td',tr);
 	var button = createAppendedChildToParent('input',td);
 	button.type = "button"; 	button.value = "remove";
-	button.data = object;
+	button.data = object;		button.sid = object.contents[i].sid;	
 	button.onclick = object.removeFunction;
-
+	
 	var button = createAppendedChildToParent('input',td);
 	button.type = "button"; 	button.value = "edit";
-	
-    }
+	button.data = object;		button.sid = object.contents[i].sid;	
+	button.onclick = object.editFunction;
 
-
+    }   
 }
 
 

@@ -28,9 +28,9 @@ function emptyElement(e)
 /*
   A function to render an input type to a container div (element).
 */
-function addInput(parentDiv, inputType, inputClass, inputValue, inputId)
+function addInput(parent, inputType, inputClass, inputValue, inputId)
 {
-    var input = createAppendedChildToParent('input',parentDiv);
+    var input = createAppendedChildToParent('input',parent);
     input.type = inputType;
     
     if (inputClass)
@@ -43,4 +43,8 @@ function addInput(parentDiv, inputType, inputClass, inputValue, inputId)
 	input.id = inputId;
     
     return input;
+}
+
+function isInArray(value, array) {
+  return array.indexOf(value) > -1;
 }

@@ -76,6 +76,7 @@ create table postings(
        `user` int references users.id,
        location int references location.id,
        company int references companies.id
+       `source` varchar(255);   # this should reference a new table instead
 );
 # notes:
 # couldn't separate postings from user.  It was too complicated to
