@@ -49,14 +49,18 @@ function glo()  // gregsList Object
 	    get: "getPostings",		// php function to call
 	    display: displayTable,	// javascript function to display
 	    table: $("#tableOfPostings")[0],	// a reference to the div container. set in setupPostings()
-	    add: null			// php function to add posting
+	    add: null,			// php function to add posting
+	    removeFunction: remover, // javascript function to remove
+	    destroyer: "removePosting" // php function to remove
 	};
     this.companies =
 	{
 	    get: "getCompanies",
 	    display: displayTable,
 	    table: $("#tableOfCompanies")[0],
-	    add: null
+	    add: null,
+	    removeFunction: remover,
+	    destroyer: "removeCompany" // php function to remove
 	}
     this.contacts =
 	{
@@ -232,18 +236,28 @@ function insertPosting()
     
 }
 
+function removeCompany()
+{
+    var object = this.data; 
 
-function removePosting(e)
+    var td = this.parentNode;
+    var tr = this.parentNode.parentNode;
+    var link = tr.firstChild.innerHTML;
+    
+}
+
+function remover(e)
 {
     // e is an event
     
-    console.log("removing row");
+    // console.log("removing row");
     // console.log(e);
-    console.log(this);
+    // console.log(this);
 
     // object is bound to the button as "data" property
     console.log(this.data);
     var object = this.data; 
+
     // object is automatically gol.postings.  
 
     // get url from DOM
@@ -264,7 +278,7 @@ function removePosting(e)
 	    dataType: "text",
 	    data:
 	    {
-		func: "removePosting",
+		func: object.destroyer,
 		url: link
 		// company: comp,
 		// source: src
@@ -366,6 +380,7 @@ function displayTable(object, input)
     var table = object.table;
     emptyElement(table);
 
+
     // insert into DOM elements retrieved via ajax
     for (var i = 0; i < input.length; i++)
     {
@@ -379,7 +394,7 @@ function displayTable(object, input)
 	var button = createAppendedChildToParent('input',td);
 	button.type = "button"; 	button.value = "remove";
 	button.data = object;
-	button.onclick = removePosting;
+	button.onclick = object.removeFunction;
 
 	var button = createAppendedChildToParent('input',td);
 	button.type = "button"; 	button.value = "edit";

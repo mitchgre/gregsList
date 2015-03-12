@@ -18,7 +18,7 @@ function parseInputs()
 {
 if (isset($_POST['func']))
     {
-        $user = 1;
+        $user = 2;
         $func = $_POST['func'];
 
         if ($func === "getPostings")
@@ -55,11 +55,7 @@ if (isset($_POST['func']))
 
                 
                 $query  = "insert into postings (url,user) values(\"$url\",$user)";
-                if (preparedStatement($query))
-                    echo json_encode(true);
-                else
-                    echo json_encode(false);
-                
+                booleanEcho($query);
                 
             }
         if ($func === "removePosting")
@@ -68,25 +64,76 @@ if (isset($_POST['func']))
 
                 $query  = "delete from postings where url = '$url' and user = $user";
                 
-                if (preparedStatement($query))
-                    echo json_encode(true);
-                else
-                    echo json_encode(false);
+                booleanEcho($query);
                 
             }
         if ($func === "insertCompany")
             {
-                insertCompany();
+                insertCompany($user);
+            }
+        if ($func === "removeCompany")
+            {
+                removeCompany($user);
             }
     }
 }
 parseInputs();
 
-function removeCompany()
+function removeCompany($user)
 {
+    $companyName = $_POST["url"];  // companyName is stored here
+    
+    // $mysqli = connectToDB();
+
+    // get id of company name
+    $query = "select id from companies where name = \"$companyName\"";
+    
+    // echo json_encode($query);
+    $companyID = reset(returnStuff($user,$query));
+    
+    // echo json_encode("company id = " . $companyID);
+
+    
+    // remove link from user_companies
+    $query = "delete from user_companies where company = $companyID";
+    // echo json_encode($query);
+    
+    
+    if (preparedStatement($query))
+        {
+            // check to see if any other users are tracking this company
+            $query = "select count(user) from user_companies where user_companies.company=$companyID";
+          
+            $count = reset(returnStuff($user,$query));
+
+            // echo json_encode("There are " . $count . " users tracking this company.");
+
+            
+            // if no users are tracking company, delete it from companies table and return true
+            // otherwise just return true
+            if ($count < 1)
+                {
+                    $query = "delete from companies where id=$companyID";
+                    booleanEcho($query);
+                }
+            else // other people are tracking the company, so leave it alone
+                {
+                    echo json_encode(true);
+                }
+            
+        }
+    else // prepared statement did not succeed
+        {
+            echo json_encode(false);
+        }
+    
+    
+    // if no one else is tracking the company, remove it from companies table
+    
+   
 }
 
-function insertCompany()
+function insertCompany($user)
 {
     $url = urldecode($_POST["url"]);
     $companyName = $_POST["company"];
@@ -96,9 +143,12 @@ function insertCompany()
     
     // if company already exists in companies, get it's id and tie it to $user
     // if company doesn't already exist in companies, add it and tie it to $user
-    $mysqli = connectToDB();
+    
     $query = "select count(name) from companies where name = \"$companyName\"";
     $count = reset(returnStuff($user,$query));
+    
+    //echo json_encode(["Company has $count references"]);
+
     
     if ($count > 0)
         {
@@ -110,28 +160,32 @@ function insertCompany()
             // $query .= "inner join users on user_companies.user=$user ";
             $query .= "where companies.name = \"$companyName\" ";
             $query .= "and user_companies.user = $user";
+
+            // echo json_encode($query);
             
             $count = reset(returnStuff($user,$query));
             
             // echo json_encode(["Company exists in companies, user has $count references"]);
+            
             if ($count > 0) // user already has a reference to company
                 {
+                    mysqli_close($mysqli);
                     echo json_encode(["ERROR: User $user is already tracking $companyName"]);
                 }
             else // link user to company in user_companies
                 { 
                     $query = "insert into user_companies ";
                     $query .= "(user,company) ";
-                    $query .= "values ($user, (select companies.id from companies where name = \"$companyName\") ) ";
+                    $query .= "values ($user, ";
+                    $query .= "(select companies.id from companies ";
+                    $query .= "where name = \"$companyName\") ) ";
                     
-                    if (preparedStatement($query))
-                        echo json_encode(true);
-                    else 
-                        echo json_encode(false);
-                    
+                                   
+                    booleanEcho($query);
                 }
             
         }
+    
     else  // company doesn't exist in companies, so add it and link to user_companies
         {
             //echo json_encode(["Company not in companies, user has $count references"]);
@@ -142,13 +196,11 @@ function insertCompany()
                     $query .= "(user,company) ";
                     $query .= "values ($user, (select companies.id from companies where name = \"$companyName\") ) ";
                     
-                    if (preparedStatement($query))
-                        echo json_encode(true);
-                    else 
-                        echo json_encode(false);
+                    booleanEcho($query);
                 }
             else
                 {
+
                     echo json_encode(false);
                 }
         }
@@ -234,6 +286,18 @@ function validURL($url)
     return strpos(@get_headers($url)[0],'200') === false ? false : true;
 }
 
+
+function booleanEcho($query)
+{
+    if (preparedStatement($query))
+        {
+            echo json_encode(true);
+        }
+    else 
+        {
+            echo json_encode(false);
+        }
+}
 
 
 ?>
