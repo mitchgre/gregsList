@@ -236,15 +236,6 @@ function insertPosting()
     
 }
 
-function removeCompany()
-{
-    var object = this.data; 
-
-    var td = this.parentNode;
-    var tr = this.parentNode.parentNode;
-    var link = tr.firstChild.innerHTML;
-    
-}
 
 function remover(e)
 {
@@ -307,25 +298,6 @@ function remover(e)
 
 
 
-/*
-  A function to render an input type to a container div (element).
-*/
-function addInput(parentDiv, inputType, inputClass, inputValue, inputId)
-{
-    var input = createAppendedChildToParent('input',parentDiv);
-    input.type = inputType;
-    
-    if (inputClass)
-	input.type = inputClass;
-    
-    if (inputValue)
-	input.value = inputValue;
-    
-    if (inputId)
-	input.id = inputId;
-    
-    return input;
-}
 
 /*
   A middle man to get things from the butler.
@@ -359,19 +331,13 @@ function getStuff(object)
     )
 }
 
-/*
-  Remove all of element e's children from DOM
-*/
-function emptyElement(e)
-{
-    if (typeof e != 'undefined')
-	if (e.firstChild)
-	    while (e.firstChild)
-		e.removeChild(e.firstChild);
-}
+
+
 
 /*
   A generalized callback function to display tables.
+
+  'table' must be a member of object, 'input' must be an array
 */
 function displayTable(object, input)
 {
@@ -450,14 +416,6 @@ function displayPostings(input)
 }
 
 
-// create a child DOM element of type childType ct and append to parent p
-// return the created child 
-function createAppendedChildToParent( ct ,parent)
-{
-    var c = document.createElement(ct);
-    parent.appendChild(c);
-    return c;
-}
 
 
 
