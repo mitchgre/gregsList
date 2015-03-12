@@ -48,3 +48,9 @@ function addInput(parent, inputType, inputClass, inputValue, inputId)
 function isInArray(value, array) {
   return array.indexOf(value) > -1;
 }
+
+function removeElement(id)
+{
+    var element = document.getElementById(id);
+    element.parentNode.removeChild(element);
+}

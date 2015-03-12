@@ -70,7 +70,45 @@ if (isset($_POST['func']))
 
                 echo json_encode($postings);
             }
+        if ($func === "updatePosting")
+            {
+                $title = $_POST["title"];
+                $url = urldecode($_POST["url"]);
+                $companyName = $_POST["company"];
+                $locationName = $_POST["location"]; # string value needs to be converted to int
+                $source = $_POST["source"];
+                $id = $_POST["sid"];
 
+
+                // if location doesn't exist in locations table yet, add it
+                if (locationExists($locationName) != true)
+                    addLocation($locationName);
+                
+                if (companyIdExists($companyName) != true)
+                    addCompany($companyName);
+
+                $companyId = getCompanyId($companyName);
+                $locationId = getLocationId($locationName);
+
+                $query  = "update postings ";
+                $query .= "set title=\"$title\", ";
+                $query .= "source=\"$source\", ";
+                $query .= "location=$locationId, ";
+                $query .= "company=$companyId, ";
+                $query .= "url=\"$url\" ";
+                $query .= "where id = $id ";
+
+                //echo $query;
+                
+                
+                if (booleanReturn($query))
+                    echo json_encode(true);
+                else
+                    echo "failed to add posting";
+                
+
+                
+            }
         if ($func === "getCompanies")
             {
 
@@ -115,21 +153,12 @@ if (isset($_POST['func']))
 
                 $locationId = getLocationId($locationName);
 
-
-
                 
-                if (companyIdExists($companyName))
-                    $companyId = getCompanyId($companyName);
-                else
-                    {
-                        if (addCompany($companyName))
-                            {
-                                $companyId = getCompanyId($companyName);
-                            }
-                        else
-                            echo json_encode("failed to add company");
-                            
-                    }
+                if (companyIdExists($companyName) != true)
+                    addCompany($companyName);
+
+                $companyId = getCompanyId($companyName);
+
                 /*
                 $string  =  "received insertPosting request with title = ". $title;
                 $string .=  " url = " . $url;
