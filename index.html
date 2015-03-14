@@ -37,146 +37,18 @@
 <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
 
 <script src="utilities.js"></script>
+<script src="classes.js"></script>
+<script src="goals.js"></script>
+<script src="industries.js"></script>
+<script src="locations.js"></script>
+<script src="companies.js"></script>
+<script src="postings.js"></script>
+<script src="contacts.js"></script>
+<script src="schedules.js"></script>
 <script src="objects.js"></script>
 <script src="index.js"></script>
-<style>
- #overview 
- {
-   width: 80%;
-   height: 50%;
- }
+<link rel="stylesheet" href="index.css">
 
- #goals 
- {
-   width: 80%;
-   height: 50%;
- }
-
-
- #postings 
- {
-   width: 80%;
-   height: 50%;
- }
-
- #contacts 
- {
-   width: 80%;
-   height: 50%;
- }
-
- #calEdit 
- {
-   width:50%;
- }
-
- #calendar
- {
-   left: 50%;
-   position: relative;
-   width: 50%;
-   min-width: 300px;
-   /* height: 50%; */
- }
-
- #tableOfPostings 
- {
-   table-layout:fixed;
-   /* width: 100%; !important;*/
-   overflow: hidden;
- }
-
-input 
-{
-   width: auto;
-}
- .ui-widget-header 
- { 
-   background: #aaaaaa transparent; 
-   border: none; 
-   border-bottom: 1px solid #222222; 
-   -moz-border-radius: 0px; 
-   -webkit-border-radius: 0px; 
-   border-radius: 0px; 
- } 
-
-/* Default Tab  */
- .ui-tabs-nav .ui-state-default 
- { 
-   background: #888888; 
-   color: #aaaaaa; 
-   border: none; 
- } 
- 
-/* Active Tab  */
- .ui-tabs-nav .ui-state-active 
- { 
-   background: #222222 no-repeat bottom center; 
-   color: #dddddd; 
-   border: none; 
- } 
-
-/* Default Tab Link Color  */
- .ui-tabs-nav .ui-state-default a 
- { 
-    color: #cccccc; 
- } 
-
-/* Active Tab Link Color  */
- .ui-tabs-nav .ui-state-active a 
- { 
-    color: #dddddd; 
- }
-
-.io tr:nth-child(even)
- {
-   background-color : #eeeeee
- }
-
-.io tr:nth-child(odd) 
- {
-   background-color : #cccccc
- }
-
-body{font-size:12px;}
-
-  .column 
- {
-   width: 33%;
-   min-width: 300px;
-   float: left;
-   padding-top: 20px;
-   padding-bottom: 100px;
-  }
-  .portlet {
-    margin: 0 1em 1em 0;
-    padding: 0.3em;
-  }
-  .portlet-header {
-    padding: 0.2em 0.3em;
-    margin-bottom: 0.5em;
-    position: relative;
-  }
-  .portlet-toggle {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    margin-top: -8px;
-  }
-  .portlet-content {
-    padding: 0.4em;
-  }
-  .portlet-placeholder {
-    border: 1px dotted black;
-    margin: 0 1em 1em 0;
-    height: 50px;
-  }
-
-
-
-
-
-</style>
   </head>
   <body>
     <h3>
@@ -186,11 +58,13 @@ body{font-size:12px;}
 
       <ul>
 	<li><a href="#overview">Overview</a></li>
-	<li><a href="#goals">Goals</a></li>
-	<li><a href="#postings">Postings</a></li>
-	<li><a href="#companies">Companies</a></li>
-	<li><a href="#contacts">Contacts</a></li>
-	<li><a href="#cal">Calendar</a></li>
+	<li><a href="#goals">Goals</a></li>		<!-- think about goals first -->
+	<li><a href="#industries">Industries</a></li>	<!-- think about industries before companies -->
+	<li><a href="#companies">Companies</a></li>	<!-- think about companies before locations -->
+	<li><a href="#locations">Locations</a></li>	<!-- think about locations before postings -->
+	<li><a href="#postings">Postings</a></li>	<!-- think about postings before contacts -->
+	<li><a href="#contacts">Contacts</a></li>	<!-- think about contacts after postings -->
+	<li><a href="#cal">Calendar</a></li>		<!-- think about schedules after contacts -->
 	<li><a href="#about">About</a></li>
       </ul>
       
@@ -201,34 +75,67 @@ body{font-size:12px;}
 	    <div class="portlet-content">
 
 	      <p>
-		The first hour of the 2-hour job search is spent building lists using the LAMP method.  List ideal employers.  Find Alumni working at these employers.  Decide on Motivation to follow up at each employers.  Search for Postings.  
+		The first hour of the 2-hour job search is spent
+		building lists using the LAMP method.  List ideal
+		employers.  Find Alumni working at these employers.
+		Decide on Motivation to follow up one each employer.
+		Search for Postings.   
 	      </p>
 	      <p>
-		The general process should be to search for things elsewhere.  For example, pick a posting or a company to follow on glassdoor, indeed, etc.   Then insert postings if you can find them.  Try to find contacts related to the company on linkedIn, gitHub, facebook, etc. 
+		The general process should be to search for things
+		elsewhere.  For example, pick a posting or a company
+		to follow on glassdoor, indeed, etc. Then insert
+		postings if you can find them.  Try to find contacts
+		related to the company on linkedIn,  gitHub, facebook,
+		etc.  
 	      </p>
 	      <p>
-		The goal is to get an informational interview.   Add this to the calendar as an event. 
+		The goal is to get an informational interview.   Add
+		this to the calendar as an event.  
 	      </p>
 	    </div> <!-- end portlet-content -->
 	  </div> <!-- end overview portlet -->
 	  
-	  <div class="portlet">
-	    <div class="portlet-header">Goals</div>
-	    <div class="portlet-content" id="goalsPortlet">
-	      Your goal list is currently empty.
-	    </div> <!--  end portlet-content -->
-	  </div> <!-- end goals portlet -->
+
 	</div> <!-- end column1 -->
 
 	<div class="column"> <!-- column2 -->	
 
 	  <div class="portlet">
+	    <div class="portlet-header">Goals</div>
+	    <div class="portlet-content" id="goalsPortlet">
+	      Your job goal list is currently empty.
+	    </div> <!--  end portlet-content -->
+	  </div> <!-- end goals portlet -->
 
+	  <div class="portlet">
+	    <div class="portlet-header">Industries</div>
+	    <div class="portlet-content" id="companiesPortlet">
+	      Your industry list is currently empty.
+	    </div> <!--  end portlet-content -->
+	  </div>
+
+
+	  <div class="portlet">
 	    <div class="portlet-header">Companies</div>
 	    <div class="portlet-content" id="companiesPortlet">
 	      Your company list is currently empty.
 	    </div> <!--  end portlet-content -->
 	  </div>
+
+
+	</div> <!-- end column2 -->
+
+	<div class="column"> <!-- column3 -->	
+
+	  <div class="portlet">
+	    <div class="portlet-header">Locations</div>
+	    <div class="portlet-content" id="locationsPortlet">
+	      Your job locations list is currently empty.
+	    </div> <!--  end portlet-content -->
+	  </div>
+
+
 
 	  <div class="portlet">
 	    <div class="portlet-header">Postings</div>
@@ -237,27 +144,28 @@ body{font-size:12px;}
 	    </div> <!--  end portlet-content -->
 	  </div>
 
-	</div> <!-- end column2 -->
 
-	<div class="column"> <!-- column3 -->	
 
 	  <div class="portlet">
-
-	    <div class="portlet-header">Calendar</div>
-	    <div class="portlet-content" id="calendarPortlet">
-
-	    </div> <!--  end portlet-content -->
-	  </div>
-
-	  <div class="portlet">
-	    <div class="portlet-header">Contacts2</div>
+	    <div class="portlet-header">Contacts</div>
 	    <div class="portlet-content" id="contactsPortlet">
-	      Your contact list is currently empty.
+	      Your job contacts list is currently empty.
 	    </div> <!--  end portlet-content -->
 	  </div>
+
 
 	</div> <!-- end column3 -->
 
+
+	<div class="column"> <!-- column4 -->	
+
+	  <div class="portlet">
+	    <div class="portlet-header">Calendar</div>
+	    <div class="portlet-content" id="calendarPortlet">
+	    </div> <!--  end portlet-content -->
+	  </div>
+
+	</div> <!-- end column4 -->
 
 
       </div> <!-- end overview div -->
@@ -275,13 +183,21 @@ body{font-size:12px;}
       <div id="postings">
 	<h3>postings</h3> 
 	<!--  <h4>job boards</h4>  -->
+      </div>
 
 
+      <div id="industries">
+	<h3>industries</h3>
       </div>
 
       <div id="companies">
 	<h3>companies</h3>
       </div>
+
+      <div id="locations">
+	<h3>locations</h3>
+      </div>
+
 
       <div id="contacts">
 	<h3>contacts</h3>

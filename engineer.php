@@ -1,5 +1,6 @@
 <?php
 
+
 /*
   Interface for sending a query using prepared statements.
   Returns true if the query is successful, false otherwise.

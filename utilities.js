@@ -1,5 +1,5 @@
 /*
-  This file will contain utility functions
+  This file will contain utility functions that are not specialized for this project. 
 */
 
 
