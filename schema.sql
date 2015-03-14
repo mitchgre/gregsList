@@ -10,10 +10,25 @@ create table `users`(
        `name` varchar(255) unique
 );
 
+
 # insert base case users 
 insert into `users` (`name`)
        values ("greg"),("mitchell");
 
+
+# table to contain passwords
+# this is a touchy subject, and I consider my implementation here
+# crude and naive
+drop table if exists `pass`;
+create table `pass`(
+       `user` int references users.id,
+       `word` varchar(255)              	     
+);
+
+# include base cases for pass?
+insert into `pass` (`user`,`word`)
+       values (1,"password"),(2,"123456");
+# hash and salt these later
 
 # list of companies
 drop table if exists companies;

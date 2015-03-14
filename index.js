@@ -44,8 +44,16 @@ $(document).ready
 */
 function glo()  // gregsList Object 
 {
+    this.user =
+	{
+	    name : null,
+	    password : null,
+	    token : null,
+	    sessionId : null
+	};
     this.postings = 
 	{
+	    parent: this,
 	    contents: [],		// array of values to be filled from data store
 	    filler: fillPostings,	// javascript function to fill contents from data store
 	    type: "posting",
@@ -61,6 +69,7 @@ function glo()  // gregsList Object
 	};
     this.companies =
 	{
+	    parent: this,
 	    contents: [],
 	    filler: fillCompanies,
 	    type: "company",
@@ -85,10 +94,137 @@ function glo()  // gregsList Object
 	    display: null,//displaySchedules,
 	    add: null
 	}
-    
-    this.setupPostings();
-    this.setupCompanies();
+    this.login();
 }
+
+glo.prototype.login = 
+    function login()
+{
+    var object = this;
+
+    // build form 
+    var string  = '<div id="login" title="Welcome to gregsList!">';
+    string += '<ul id="loginInstructions">';
+    string += '<li><td>Please enter a username and password.';
+    string += '<li>If you lost your password, you will need to create a new username.';
+    string += '</ul>';
+
+    string += '<table>';
+    string += '<tr>';
+    string += '<td>Username</td>'; 
+
+    string += '<td>';
+    string += '<input id="embedUsername" value="">';
+    string += '</td>';
+    string += '</tr>';
+
+    string += '<tr><td>Password</td>';
+    string += '<td><input id="embedPassword" value=""></td></tr>';
+
+    string += '</div>';
+
+
+    // create dialog
+    var dialog = $(string).dialog
+    (
+	{
+	    modal:true, 
+	    box: $(this).dialog,
+	    buttons:
+	    {
+		/*
+		Cancel: function() 
+		{
+		    $(this).dialog("close")
+		    // box("close")
+		},
+		*/
+		"Login":function()
+		{
+		    // get values from form
+		    var username = $("#embedUsername")[0].value;
+		    var password = $("#embedPassword")[0].value;
+
+		    console.log("attempting login");
+		    console.log("username: " + username);
+		    console.log("password: " + password);
+
+		    // validate these against database.
+		    // on successful validation, insert data to glo 
+
+
+		    // possible responses:
+		    // 1. username and password are taken, and they match (success)
+		    // 2. username and password are taken, but don't match (prompt user for new username)
+		    // 3. username is not taken, and password is not empty (create new account)
+		    // 4. username is not taken, but password is empty (prompt user for non-empty password)
+		    var box = $(this);
+		    $.ajax
+		    (
+			{
+			    url: "butler.php",
+			    type: "post",
+			    dataType: "text",
+			    data:
+			    {
+				user: username,
+				pass: password,
+			    },
+			    success: function(response)
+			    {
+				// done all we can do here. 
+				// close up shop, and send user to customs for processing.
+				object.customs(response,username,password,dialog,box);
+			    } // end success
+			} // end ajax data
+		    ); // end .ajax call
+		} // end login button function
+	    } // end buttons
+	}  // end dialog data
+    );  // end dialog function
+} // end login function
+
+
+glo.prototype.customs = 
+    function customs(response,username,password,dialog,box)
+{
+    var object = this;
+    console.log(response);
+
+    emptyElement("login");
+    removeElement("login");
+    box.dialog("close");
+
+    
+    // give 'em the boiler room treatment
+    // might want to act accordingly, but for now each of these is the same
+    if (response === 'invalid combination.')
+    {
+	alert(response);
+	object.login();  // try again
+    }
+    else if (response === "password cannot be empty.")
+    {
+	alert(response);
+	object.login();  // try again
+    }
+    else if (response ===  "username cannot be empty.")
+    {				    
+	alert(response);
+	object.login();  // try again
+    }
+    else
+    {
+	// houston you are clear for lift off, here are your papers, happy searching
+	object.user.name = username;
+	object.user.password = password;
+	object.setupPostings();
+	object.setupCompanies();
+    }
+    
+}
+
+
 
 glo.prototype.setupPostings = 
     function setupPostings()
@@ -186,6 +322,8 @@ function insertCompany()
 	    dataType: "text",
 	    data:
 	    {
+		user: object.parent.user.name,
+		pass: object.parent.user.password,
 		func: "insertCompany",
 		company: toAdd,
 	    },
@@ -235,6 +373,8 @@ function insertPosting()
 	    dataType: "text",
 	    data:
 	    {
+		user: object.parent.user.name,
+		pass: object.parent.user.password,
 		func: "insertPosting",
 		url: encodeURIComponent(link),
 		title: ttl,
@@ -367,6 +507,8 @@ function editPosting()
 			    dataType: "text",
 			    data:
 			    {
+				user: object.parent.user.name,
+				pass: object.parent.user.password,
 				func: object.updater,
 				sid: link,
 				title: title,
@@ -444,6 +586,8 @@ function remover(e)
 			    dataType: "text",
 			    data:
 			    {
+				user: object.parent.user.name,
+				pass: object.parent.user.password,
 				func: object.destroyer,
 				url: link
 				// company: comp,
@@ -543,13 +687,17 @@ function fillPostings(object, input)
 */
 function getStuff(object)
 {
-    // console.log(object);
+    console.log(object);
+    console.log("username,password=");
+    console.log(object.parent.user.name);
+    console.log(object.parent.user.password);
+
     // console.log(callback);
     var getter = object.get;
     // var callback = object.display;
     var callback = object.filler;
 
-
+    
     $.ajax
     (
 	{
@@ -561,6 +709,8 @@ function getStuff(object)
 	    data:
 	    {
 		// getter: true
+		user: object.parent.user.name,
+		pass: object.parent.user.password,
 		func: getter
 	    },
 	    success: function(resp)

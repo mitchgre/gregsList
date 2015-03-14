@@ -4,21 +4,70 @@
  */
 
 
-// get requests
+require "./engineer.php"; // utitlity functions
+require "./concierge.php"; // guest functions
 
-// test requests
 /*
-$a = $_POST['a'];
-$b = $_POST['b'];
-$c = $_POST['c'];
-$d = $_POST['d'];
-*/
-
-function parseInputs()
+  Give 'em an ocular pat down. 
+  https://www.youtube.com/watch?v=1SUmugkTyU8
+ */
+function clearUser()
 {
+
+    if (isset($_POST['user']))
+        {
+            $username = $_POST['user']; // lookup userid from db
+            if ($username !== null && $username !== '')
+                {
+
+                    //echo "received Username: " . $username;
+
+                    if (isset($_POST['pass']) && $_POST['pass'] !== "")
+                        {
+                            // if user/password does not exist, add it
+                            
+                            
+                            $userId = getUserId($username);
+                            //echo "calculated \nuserId: " . $userId . "\n";
+
+                            // else if () user password does exist retrieve it
+                            $pass = getPass($userId); // get pass from db
+                            //echo "calculated pass: " . $pass . "\n";
+                            
+                            if ($_POST['pass'] === $pass)  // successful clearance
+                                {
+
+                                    parseInputs($userId);
+                                }
+                            else 
+                                {
+                                    echo "invalid combination.";
+                                }
+                        }
+                    else
+                        {
+                            echo "password cannot be empty.";
+                        }
+
+                }
+            else
+                {
+                    echo "username cannot be empty.";
+                }
+        }
+
+}
+clearUser();
+// parseInputs();
+
+
+
+function parseInputs($user)
+{
+    
+
 if (isset($_POST['func']))
     {
-        $user = 2;
         $func = $_POST['func'];
 
         if ($func === "getPostings")
@@ -208,7 +257,7 @@ if (isset($_POST['func']))
             }
     }
 }
-parseInputs();
+
 
 /*
   location is a string
@@ -429,109 +478,7 @@ function insertCompany($user,$companyName)
 }
 
 
-/*
-  Interface for sending a query using prepared statements.
-  Returns true if the query is successful, false otherwise.
 
-  This function is used for insertions as opposed to extractions.
- */
-function preparedStatement($query){
-    $mysqli = connectToDB();
-    $mysqli -> set_charset("utf8");
-    if( $sql = $mysqli->prepare($query)){
-        // return $sql;
-        
-        $sql->execute();
-        if ($sql->affected_rows >= 1)
-            {
-                mysqli_close($mysqli);
-                return true;
-            }
-        
-    }
-    mysqli_close($mysqli);
-    return false;
-    
-}
-
-
-
-/*
-  This function can return a single column from mysql.  Useful for
-  generalizing quick searches, but not good for building entire tables
-  up from the database.
- */
-function returnStuff($query)
-{
-    $mysqli = connectToDB();
-    $container = []; // empty container
-
-   if ($statement=$mysqli->prepare($query))
-        {
-            $statement->execute();
-            // bind results
-            $statement->bind_result($i);
-            while($statement->fetch()) // loop over results and push into array
-                array_push($container,$i);
-            
-            mysqli_close($mysqli);
-            return $container;
-        }
-   else
-       {
-           mysqli_close($mysqli);
-           return ["error"];
-       }
-}
-
-/*
-  Establish a connection to the gregsList database, and return the connection.
- */
-function connectToDB(){
-    require './credentials.php';  // username, hostname,password
-    
-    $mysqli = new mysqli($hostname, $username, $password, "gregsList");
-    if ($mysqli->connect_errno)
-        {
-            echo "Failed to connect to MySQL: (" . 
-                $mysqli->connect_errno. ") " . 
-                $mysqli->connect_error;
-        }
-    return $mysqli;
-
-}
-
-// http://stackoverflow.com/questions/2280394/how-can-i-check-if-a-url-exists-via-php
-function validURL($url)
-{
-    return strpos(@get_headers($url)[0],'200') === false ? false : true;
-}
-
-
-function booleanEcho($query)
-{
-    if (preparedStatement($query))
-        {
-            echo json_encode(true);
-        }
-    else 
-        {
-            echo json_encode(false);
-        }
-}
-
-
-function booleanReturn($query)
-{
-    if (preparedStatement($query))
-        {
-            return true;
-        }
-    else 
-        {
-            return false;
-        }
-}
 
 
 
