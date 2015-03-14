@@ -391,6 +391,14 @@ create table user_industries(
       		  on delete set null on update cascade
 )engine=innodb;
 
+
+# base case user industries
+insert into user_industries (`user`,`industry`)
+       values	(2,7),(1,7),(2,13),(1,13),(1,2),(2,2),(1,14);
+
+
+
+
 # contains goals 
 drop table if exists goals;
 create table goals(
@@ -451,6 +459,23 @@ create table contacts(
        github varchar(255)
 )engine=innodb;
 
+# base case contacts (current instructors this semester)
+
+insert into contacts (fname,lname,email,linkedin,github)
+       values ("ameneh", "sarbaziazad",
+	       "sarbazia@onid.orst.edu","tbd",
+	       "tbd"
+	      ),
+      	      (	"justin", "wolford",
+		"wolfordj@engr.oregonstate.edu","tbd",
+		"wolfordj"
+		),
+		(
+		"samina","ehasan",
+		"ehsan@eecs.oregonstate.edu",
+		"tbd","tbd"
+		);
+
 # contains relations between users and contacts
 create table user_contacts(
        id int primary key auto_increment,
@@ -461,6 +486,12 @@ create table user_contacts(
        foreign key (`contact`) references contacts(id)
       		  on delete set null on update cascade
 )engine=innodb;
+
+# base cases
+insert into user_contacts (`user`,`contact`)
+       values (1,1),(1,2),(1,3),
+       	      (2,1),(2,2),(2,3);
+
 
 # contains relations between companies and contacts
 create table company_contacts(
@@ -473,6 +504,14 @@ create table company_contacts(
       		  on delete set null on update cascade
        
 )engine=innodb;
+
+# base cases
+insert into company_contacts (`company`,`contact`)
+       values 
+       ((select id from companies where name="Oregon State University"), 1),
+       ((select id from companies where name="Oregon State University"), 2),
+       ((select id from companies where name="Oregon State University"), 3);
+
 
 
 # contains schedules
@@ -488,6 +527,20 @@ create table schedule(
        `end` datetime
 )engine=innodb;
 
+# base case schedule
+insert into schedule (`name`,`description`,`start`,`end`)
+       values 
+       	      (
+       	      "write up final project",
+       	      "check against guidelines",
+	      "2015-03-14", "2015-03-15"),
+	      (
+       	      "study for finals",
+       	      "make note page",
+	      "2015-03-15", "2015-03-19");
+
+
+
 # contains relations between users and schedules
 create table user_schedule(
        id int primary key auto_increment,
@@ -499,5 +552,10 @@ create table user_schedule(
       		  on delete set null on update cascade
 );
 
-
+# base case
+insert into user_schedule (`user`,`schedule`)
+       values (1,1), (1,2),
+       	      (2,1), (2,2);
+       
+	
 

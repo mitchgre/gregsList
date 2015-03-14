@@ -92,10 +92,19 @@ function glo()  // gregsList Object
 	};
     this.contacts =
 	{
+	    parent: this,
+	    contents: [],
+	    filler: fillContacts,
+	    type: "contact",
 	    get: "getContacts",
 	    display: displayTable,
 	    table: $("#tableOfContacts")[0],
-	    add: null
+	    add: null,
+	    removeFunction: remover,
+	    destroyer: "removeContact", // php function to remove
+	    displayKeys: ["fname","lname","email","phone",
+			  "facebook","linkedin","github"] // values to display in table
+
 	};
     this.schedules =
 	{
@@ -253,6 +262,7 @@ glo.prototype.customs =
 	object.setupCompanies();
 	object.setupLocations();
 	object.setupPostings();
+	object.setupContacts();
     }
     
 }
@@ -443,6 +453,47 @@ glo.prototype.setupPostings =
     getStuff(this.postings);
 
 }
+
+
+
+/*
+  Empty the tables of contacts and rebuild them.
+*/
+glo.prototype.setupContacts = 
+    function setupContacts()
+{
+    var contacts = $("#contacts")[0]; // container div
+    
+    emptyElement(contacts);
+
+    // add text fields
+    // contacts.appendChild(document.createTextNode('Contacts'));
+    var fnameField = addInput(contacts,'text','','','fnameToAdd');
+    var lnameField = addInput(contacts,'text','','','lnameToAdd');
+    var emailField = addInput(contacts,'text','','','emailToAdd');
+    var phoneField = addInput(contacts,'text','','','phoneToAdd');
+    var facebookField = addInput(contacts,'text','','','facebookToAdd');
+    var linkedinField = addInput(contacts,'text','','','linkedinToAdd');
+    var githubField = addInput(contacts,'text','','','githubToAdd');
+
+    // add button
+    var addButton = addInput(contacts,'button','','Add Contact','addContactButton');
+
+    // wire button
+    addButton.onclick = insertContact.bind(this);
+
+    // insert empty results table
+    var table = createAppendedChildToParent('table',contacts);
+    this.contacts.table = table;
+    table.id = 'tableOfContacts';
+    table.className = 'io';
+
+    // fill results table
+    getStuff(this.contacts);
+
+}
+
+
 
 
 /*

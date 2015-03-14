@@ -54,3 +54,28 @@ function removeElement(id)
     var element = document.getElementById(id);
     element.parentNode.removeChild(element);
 }
+
+function month()
+{
+    this.names = 
+	[
+	    "January",
+	    "February", 
+	    "March", 
+	    "April", 
+	    "May", 
+	    "June",
+	    "July", 
+	    "August", 
+	    "September", 
+	    "October", 
+	    "November", 
+	    "December"
+	]
+}
+
+function getMonthName(date)
+{
+    var m = new month();
+    return m.names[date.getMonth()];
+}

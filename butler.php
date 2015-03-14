@@ -59,6 +59,10 @@ if (isset($_POST['func']))
             {
                 getPostings($user);
             }
+        if ($func === "getContacts")
+            {
+                echo json_encode(getContacts($user));
+            }
         if ($func === "updatePosting")
             {
                 updatePosting($user);

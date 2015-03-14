@@ -129,6 +129,65 @@ function getLocations($user)
 }
 
 
+function getContacts($user)
+{
+    $ids = [];
+    $fnames = [];
+    $lnames = [];
+    $emails = [];
+    $phones = [];
+    $facebooks = [];
+    $linkedins = [];
+    $githubs = [];
+    
+    $mysqli = connectToDB();
+    
+    $query  = "select user_contacts.id,contacts.fname, ";
+    $query .= "contacts.lname,contacts.email,contacts.phone, ";
+    $query .= "contacts.facebook,contacts.linkedin,contacts.github ";
+    $query .= "from user_contacts inner join contacts ";
+    $query .= "on user_contacts.contact = contacts.id ";
+    $query .= "where user=$user ";
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id,$fname,$lname,$email,$phone,$facebook,$linkedin,$github);
+            
+            while($statement->fetch())
+                {
+                    array_push($ids,$id);
+                    array_push($fnames,$fname);
+                    array_push($lnames,$lname);
+                    array_push($emails,$email);
+                    array_push($phones,$phone);
+                    array_push($facebooks,$facebook);
+                    array_push($linkedins,$linkedin);
+                    array_push($githubs,$github);
+                }
+        }
+    mysqli_close($mysqli);
+    
+    // associate arrays
+    $contacts = array
+        (
+            "ids" => $ids,
+            "fnames" => $fnames,
+            "lnames" => $lnames,
+            "emails" => $emails,
+            "phones" => $phones,
+            "facebooks" => $facebooks,
+            "githubs" => $githubs,
+            "linkedins" => $linkedins
+        );
+    
+    return $contacts;
+}
+
+
+
 
 function getPostings($user)
 {
