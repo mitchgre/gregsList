@@ -9,15 +9,6 @@ function editGoal()
 
 function fillGoals(object,input)
 {
-    console.log("fill industries");
-    console.log(object);
-
-    //console.log("input keys");
-    // console.log(input);
-    //console.log(JSON.parse(Object.keys(input)));
-
-    
-
     
     // erase object's contents and refill them from input
     object.contents = [];
@@ -30,14 +21,31 @@ function fillGoals(object,input)
 	var value = input.values[i];
 
 	var p = new goal(id,value);
-	// console.log("p");
-	// console.log(p);
 	contents.push(p);
     }
     
 
     displayTable(object);
-    
-
+    displayGoalsPortlet(object);
 }
 
+
+function displayGoalsPortlet(object)
+{
+    $("#goalsPortlet").empty();
+
+    var main = $("#goalsPortlet")[0];
+    var table = createAppendedChildToParent('table',main);
+    table.className += "io";
+    
+    for (var i = 0; i < object.contents.length; i++)
+    {
+	var tr = createAppendedChildToParent('tr',table);
+	var td = createAppendedChildToParent('td',tr);
+	var value = object.contents[i].value;
+	console.log(value);
+	var content = document.createTextNode(value);
+	td.appendChild(content);
+    }
+
+}

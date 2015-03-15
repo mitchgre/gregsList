@@ -239,5 +239,25 @@ function fillPostings(object, input)
     
 
     displayTable(object);
+    displayPostingsPortlet(object);
+}
+
+function displayPostingsPortlet(object)
+{
+    $("#postingsPortlet").empty();
+
+    var main = $("#postingsPortlet")[0];
+    var table = createAppendedChildToParent('table',main);
+    table.className += "io";
     
+    for (var i = 0; i < object.contents.length; i++)
+    {
+	var tr = createAppendedChildToParent('tr',table);
+	var td = createAppendedChildToParent('td',tr);
+	var value = object.contents[i].title;
+	
+	var content = document.createTextNode(value);
+	td.appendChild(content);
+    }
+
 }

@@ -37,7 +37,26 @@ function fillLocations(object,input)
     
 
     displayTable(object);
-    
+    displayLocationsPortlet(object);
 
 }
 
+function displayLocationsPortlet(object)
+{
+    $("#locationsPortlet").empty();
+
+    var main = $("#locationsPortlet")[0];
+    var table = createAppendedChildToParent('table',main);
+    table.className += "io";
+    
+    for (var i = 0; i < object.contents.length; i++)
+    {
+	var tr = createAppendedChildToParent('tr',table);
+	var td = createAppendedChildToParent('td',tr);
+	var value = object.contents[i].name;
+	
+	var content = document.createTextNode(value);
+	td.appendChild(content);
+    }
+
+}

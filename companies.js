@@ -54,9 +54,6 @@ function insertCompany()
 function fillCompanies(object,input)
 {
 
-    console.log("object");
-    console.log(object);
-
 
     // erase previous contents
     object.contents = [];
@@ -68,12 +65,31 @@ function fillCompanies(object,input)
 	var name = input.names[i];
 
 	var p = new company(id,name,null);
-	// console.log("p");
-	// console.log(p);
+
 	contents.push(p);
     }
     
 
     displayTable(object);
+    displayCompaniesPortlet(object);
+}
+
+function displayCompaniesPortlet(object)
+{
+    $("#companiesPortlet").empty();
+
+    var main = $("#companiesPortlet")[0];
+    var table = createAppendedChildToParent('table',main);
+    table.className += "io";
     
+    for (var i = 0; i < object.contents.length; i++)
+    {
+	var tr = createAppendedChildToParent('tr',table);
+	var td = createAppendedChildToParent('td',tr);
+	var value = object.contents[i].name;
+	
+	var content = document.createTextNode(value);
+	td.appendChild(content);
+    }
+
 }

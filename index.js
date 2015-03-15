@@ -61,6 +61,23 @@ function setupCalendar(divId)
 	    },
 	    editable: true,
 	    droppable: true,
+	    selectable: true,
+	    selectHelper:true,
+	    select: function(start, end) 
+	    {
+		var title = prompt('Event Title:');
+		var eventData;
+		if (title) {
+		    eventData = 
+			{
+			    title: title,
+			    start: start,
+			    end: end
+			};
+		    $(divId).fullCalendar('renderEvent', eventData, true); // stick? = true
+		}
+		$(divId).fullCalendar('unselect');
+	    },
 	    //theme: true,
 	    // resizable: true,
 	    events: 

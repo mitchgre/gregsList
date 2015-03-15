@@ -32,8 +32,31 @@ function fillContacts(object,input)
     
 
     displayTable(object);
-    
+    displayContactsPortlet(object);
 }
+
+function displayContactsPortlet(object)
+{
+    $("#contactsPortlet").empty();
+
+    var main = $("#contactsPortlet")[0];
+    var table = createAppendedChildToParent('table',main);
+    table.className += "io";
+    
+    for (var i = 0; i < object.contents.length; i++)
+    {
+	var tr = createAppendedChildToParent('tr',table);
+	var td = createAppendedChildToParent('td',tr);
+	var fname = object.contents[i].fname;
+	var lname = object.contents[i].lname;
+	var value = fname + ' ' + lname;
+	var content = document.createTextNode(value);
+	td.appendChild(content);
+    }
+
+}
+
+
 
 function insertContact()
 {

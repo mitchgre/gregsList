@@ -108,6 +108,10 @@ function glo()  // gregsList Object
 	};
     this.schedules =
 	{
+	    parent: this,
+	    contents: [],
+	    filler: fillSchedules,
+	    type: "contact",
 	    get: "getSchedules",
 	    display: null,//displaySchedules,
 	    add: null
@@ -263,9 +267,25 @@ glo.prototype.customs =
 	object.setupLocations();
 	object.setupPostings();
 	object.setupContacts();
+	object.setupSchedules();
     }
     
 }
+
+/*
+  empty the calendars and refill them from db
+*/
+glo.prototype.setupSchedules = 
+    function setupSchedules()
+{
+    // empty calendar events
+    $("#calendarPortlet").fullCalendar('removeEvents');
+    $("#calendar").fullCalendar('removeEvents');
+
+    // get events from db and refill calendars in callback
+    getStuff(this.schedules);
+}
+
 
 /*
   Empty the tables of goals and rebuild them.
@@ -582,19 +602,12 @@ function getStuff(object)
 {
     console.log("getting for ");
     console.log(object);
-    /*
-    console.log("username,password=");
-    console.log(object.parent.user.name);
-    console.log(object.parent.user.password);
-    */
-
 
     // console.log(callback);
     var getter = object.get;
     // var callback = object.display;
     var callback = object.filler;
-
-    
+   
     $.ajax
     (
 	{

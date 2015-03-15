@@ -89,7 +89,68 @@ function getIndustries($user)
 }
 
 
+function getSchedules($user)
+{
 
+    $ids = [];
+    $names = [];
+    $descriptions = [];
+    $locations = [];
+    $contacts = [];
+    $urls = [];
+    $starts = [];
+    $ends = [];
+    
+    $mysqli = connectToDB();
+
+
+    $query  = "select schedule.id, schedule.name, schedule.description, schedule.location, ";
+    $query .= "schedule.contact, schedule.url, schedule.start, schedule.end ";
+    $query .= "from user_schedule inner join schedule on user_schedule.schedule=schedule.id ";
+    $query .= "inner join users on user_schedule.user = users.id where users.id = $user";
+
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result
+            (
+                $id,$name,$description,$location,$contact,$url,$start,$end
+            );
+            
+            while($statement->fetch())
+                {
+                    array_push($ids,$id);
+                    array_push($names,$name);
+                    array_push($descriptions,$description);
+                    array_push($locations,$location);
+                    array_push($contacts,$contact);
+                    array_push($urls,$url);
+                    array_push($starts,$start);
+                    array_push($ends,$end);
+                }
+        }
+    mysqli_close($mysqli);
+    
+    // associate arrays
+    $schedules = array
+        (
+            "ids" => $ids,
+            "names" => $names,
+            "descriptions" => $descriptions,
+            "locations" => $locations,
+            "contacts" => $contacts,
+            "urls" => $urls,
+            "starts" => $starts,
+            "ends" => $ends,            
+        );
+    
+    return $schedules;
+
+
+
+}
 
 function getLocations($user)
 {
