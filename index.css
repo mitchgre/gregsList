@@ -25,22 +25,28 @@
 
  #calEdit 
  {
-   width:50%;
+ /* width:50%;*/
  }
 
  #calendar
  {
-   left: 50%;
-   position: relative;
-   width: 50%;
+   /* left: 50%; */
+   /* position: relative; */
+   /* width: 50%; */
    min-width: 300px;
    /* height: 50%; */
+ }
+
+ #tableOfEvents
+ {
+     table-layout:fixed;
+     width: 100% !important;
  }
 
  #tableOfPostings 
  {
    table-layout:fixed;
-   /* width: 100%; !important;*/
+   width: 100%; !important;
    overflow: hidden;
  }
 
@@ -103,6 +109,11 @@ input
  }
 
 body{font-size:12px;}
+
+.maincalendar /* the main portlets for calendar  */
+{
+    width:50% !important;
+}
 
   .column 
  {

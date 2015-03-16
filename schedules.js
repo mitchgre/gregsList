@@ -1,6 +1,123 @@
 
 function insertSchedule()
 {
+    var object = this.data; 
+    console.log("from insertSchedule: object = ");
+    console.log(object);
+    
+    //console.log("this.sid:");
+    // console.log(this.sid);
+    var link = this.sid;
+    
+    // console.log("object.destroyer:");
+    // console.log(object.destroyer);
+
+    // var current = object.contents[index];
+
+    // build form 
+    var string  = '<div id="scheduleUpdater" title="Update Schedule">';
+    string += '<table>';
+
+    string += '<tr>';
+    string += '<td>name</td>'; 
+    string += '<td>';
+    string += '<input id="embedName" value="'+null+'">';
+    string += '</td>';
+    string += '</tr>';
+
+    string += '<tr><td>description</td>';
+    string += '<td><input id="embedDescription" value="'+null+'"></td></tr>';
+
+    string += '<tr><td>contact</td>';
+    string += '<td><input id="embedContact" value="'+null+'"></td></tr>';
+
+    string += '<tr><td>start</td>';
+    string += '<td><input id="embedStart" value="'+null+'"></td></tr>';
+
+    string += '<tr><td>end</td>';
+    string += '<td><input id="embedEnd" value="'+null+'"></td></tr>';
+
+    string += '</table></div>';
+
+    $(string).dialog
+    (
+	{
+	    modal:true, 
+	    buttons:
+	    {
+		Cancel: function() 
+		{
+		    $(this).dialog("close")
+		},
+		"Update":function()
+		{
+		    // get values from form
+		    var name = $("#embedName")[0].value;
+		    var description = $("#embedDescription")[0].value;
+		    var contact = $("#embedContact")[0].value;
+		    var start = $("#embedStart")[0].value;
+		    var end = $("#embedEnd")[0].value;
+
+		    // give values to butler
+		    
+		    $(this).dialog("close");
+		    // emptyElement($("#scheduleUpdater")[0]);
+		    var toDestroy = 
+			[
+			    "#embedName","#embedDescription",
+			    "#embedContact","#embedStart", "#embedEnd",
+			    "scheduleUpdater"
+			];
+
+		    for (var i=0; i < toDestroy.length; i++)
+			removeElement(toDestroy[i]);
+
+
+
+		    $.ajax
+		    (
+			{
+			    url: "butler.php",
+			    type: "post",
+			    dataType: "text",
+			    data:
+			    {
+				user: object.parent.user.name,
+				pass: object.parent.user.password,
+				func: object.updater,
+				sid: link,
+				name: name,
+				description: description,
+				contact:contact,
+				start:start,
+				end:end
+			    },
+			    success: function(resp)
+			    {
+				console.log(resp);
+				//console.log(JSON.parse(resp));
+				// 
+				if (JSON.parse(resp) === true)
+				{
+				    console.log("removal worked");
+				    // displayTable(object,[]);
+				    // getStuff(object);
+				    object.parent.refresh();
+				}
+				else
+				{
+				    console.log("removal failed");
+				}
+			    }	
+			}
+		    );
+		    
+		}
+	    }
+	}
+    );
+
+ 
 }
 
 function editSchedule()
@@ -43,6 +160,7 @@ function fillSchedules(object,input)
 						   start:start,
 						   end:end
 						  },true);// add to calendars
+	// update portlet 
 	$("#calendarPortlet").fullCalendar('renderEvent',{title:name,
 						   sid: id,
 						   description:description,
@@ -53,10 +171,36 @@ function fillSchedules(object,input)
 						   end:end
 						  },true);// add to calendars
 
+	displayTable(object);
+	displayEventPortlet(object);
     }
     
     // no user defined table here, need to push into calendar above
     // displayTable(object);
     
+
+
+
+
+}
+
+
+function displayEventPortlet(object)
+{
+    $("#eventPortlet").empty();
+
+    var main = $("#eventPortlet")[0];
+    var table = createAppendedChildToParent('table',main);
+    table.className += "io";
+    
+    for (var i = 0; i < object.contents.length; i++)
+    {
+	var tr = createAppendedChildToParent('tr',table);
+	var td = createAppendedChildToParent('td',tr);
+	var value = object.contents[i].name;
+	
+	var content = document.createTextNode(value);
+	td.appendChild(content);
+    }
 
 }

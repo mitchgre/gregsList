@@ -113,9 +113,13 @@ function glo()  // gregsList Object
 	    parent: this,
 	    contents: [],
 	    filler: fillSchedules,
-	    type: "contact",
+	    removeFunction: remover,
+	    type: "schedule",
 	    get: "getSchedules",
-	    display: null,//displaySchedules,
+	    display: displayTable,//displaySchedules,
+	    destroyer: "removeContact", // php function to remove
+	    table: $("#tableOfEvents")[0],
+	    displayKeys: ["name","description","contact","start","end"],
 	    add: null
 	};
     this.login();
@@ -263,26 +267,62 @@ glo.prototype.customs =
 	// houston you are clear for lift off, here are your papers, happy hunting
 	object.user.name = username;
 	object.user.password = password;
-	object.setupGoals();
-	object.setupIndustries();
-	object.setupCompanies();
-	object.setupLocations();
-	object.setupPostings();
-	object.setupContacts();
-	object.setupSchedules();
+	object.refresh();
     }
     
 }
 
+glo.prototype.refresh = 
+    function refresh()
+{
+    var object = this;
+    object.setupGoals();
+    object.setupIndustries();
+    object.setupCompanies();
+    object.setupLocations();
+    object.setupPostings();
+    object.setupContacts();
+    object.setupSchedules();
+}
+
+
 /*
-  empty the calendars and refill them from db
+  empty tables and calendars then refill them from db
 */
 glo.prototype.setupSchedules = 
     function setupSchedules()
 {
+    var object = this.schedules;
+
+    console.log("from setupSchedule: object=");
+    console.log(object);
+
     // empty calendar events
     $("#calendarPortlet").fullCalendar('removeEvents');
     $("#calendar").fullCalendar('removeEvents');
+
+    // empty main table
+    var calEd = $("#calEdit")[0];
+    emptyElement(calEd);
+
+    // var calEdField = addInput(calEd,'text','','','EventToAdd');
+    var addButton = addInput(calEd,'button','','Add Event','addEventButton');
+    addButton.data = object; 
+    addButton.type="button";
+
+
+    // wire button
+    addButton.onclick = insertSchedule;
+
+    // insert empty results table
+    var table = createAppendedChildToParent('table',calEd);
+    this.schedules.table = table;
+    table.id = 'tableOfEvents';
+    table.className = 'io';
+    // table.style.tableLayout = "fixed";
+    // table.style.width = "50%";
+
+
 
     // get events from db and refill calendars in callback
     getStuff(this.schedules);

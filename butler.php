@@ -1,6 +1,10 @@
 <?php
 /*
-  This file acts as a middle manager between the browser (javascript) and gregsList's php members
+  This file acts as a middle manager between the browser (javascript) and gregsList's php members:
+
+  engineer.php contains utility functions 
+  concierge.php contains guest tracking functions
+  accountant.php contains functions to add/remove data from the database 
 
 
   "Life is the art of drawing sufficient conclusions from insufficient premises."
@@ -102,6 +106,11 @@ if (isset($_POST['func']))
             {
                 // more complex.  will be responsible for getting $_POST
                 echo json_encode(insertContact($user));  
+            }
+        if ($func === "insertSchedule")
+            {
+                // more complex.  will be responsible for getting $_POST
+                echo json_encode(insertSchedule($user));  
             }
         // removers ===============================
         if ($func === "removeGoal")

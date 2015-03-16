@@ -1,6 +1,6 @@
 <?php
 /*
-  This file keeps track of users' data
+  This file keeps track of users' data input and output. 
 
   "Never call an accountant a credit to his profession; a good
   accountant is a debit to his profession". 
@@ -778,6 +778,89 @@ function addUserContact($user,$contactId)
     $query .= "values ($user,$contactId) ";
     return booleanReturn($query);
 }
+
+
+
+
+
+
+
+
+
+
+function insertSchedule($user)
+{
+    // should error check that all post fields are set
+
+    $name = $_POST["name"];
+    $description = $_POST["description"];
+    $contact = $_POST["contact"];
+    $start = $_POST["start"];
+    $end = $_POST["end"];
+
+    // $name,$description,$contact,$start,$end
+    // add to schedules if it doesnt' exist already
+    
+    if ( scheduleExists($name,$description,$contact,$start,$end) !== true)
+        if ( addSchedule($name,$description,$contact,$start,$end) !== true )
+            return "error adding to schedules";
+    
+    // return addSchedule($name,$description,$contact,$start,$end);
+    
+    $scheduleId = getScheduleId($name,$description,$contact,$start,$end);
+
+    // return "schedule id = " . $scheduleId;
+
+    // add to user_schedules if it doesn't already exist
+    if ( userScheduleExists($user,$scheduleId) !== true)
+        {
+            // return "schedule $scheduleId exists";
+            
+            if ( addUserSchedule($user,$scheduleId) !== true )
+                return "error adding to user_schedules";
+            else
+                return true;
+        }
+    else
+        {
+            return "existential problem. for $scheduleId";
+        }
+    
+
+}
+
+
+function getScheduleId($name,$description,$contact,$start,$end)
+{
+    $query  = "select id from  schedules ";
+    $query .= "where name = \"$name\" ";
+    $query .= "and description = \"$description\" ";
+    $query .= "and contact = $contact ";
+    $query .= "and start =  \"$start\" ";
+    $query .= "and end = \"$end\" ";
+    
+    //return $query;
+    return reset(returnStuff($query));
+}
+
+function addSchedule($name,$description,$contact,$start,$end)
+{
+    $query  = "insert into schedules ";
+    $query .= "(name,description,contact,start,end) ";
+    $query .= "values ( \"$name\", ";
+    $query .= " \"$description\", ";
+    $query .= " $contact, ";
+    $query .= " \"$start\", ";
+    $query .= " \"$end\") ";
+    
+    //return $query;
+    return booleanReturn($query);
+}
+
+
+
+
+
 
 /*==========================================================
         END INSERTERS, START REMOVERS

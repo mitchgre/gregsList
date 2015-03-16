@@ -181,7 +181,8 @@ function editContact()
 				{
 				    console.log("update worked");
 				    // displayTable(object,[]);
-				    getStuff(object);
+				    // getStuff(object);
+				    object.parent.refresh();
 				}
 				else
 				{

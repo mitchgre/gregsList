@@ -30,6 +30,7 @@ function insertGoal()
 		    console.log("input worked");
 		    // displayTable(object,[]);
 		    getStuff(object.goals);
+		    // object.refresh();
 		}
 		else
 		{

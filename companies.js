@@ -33,7 +33,8 @@ function insertCompany()
 		{
 		    console.log("input worked");
 		    // displayTable(object,[]);
-		    getStuff(object.companies);
+		    // getStuff(object.companies);
+		    object.parent.refresh();
 		}
 		else
 		{

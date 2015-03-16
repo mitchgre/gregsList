@@ -1,4 +1,10 @@
 <?php
+/*
+  This file contains some utility functions to simplify queries and database connections. 
+
+
+ */
+
 
 
 /*
