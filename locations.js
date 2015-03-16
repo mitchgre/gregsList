@@ -1,7 +1,47 @@
 
 function insertLocation()
 {
-}
+    var object = this;
+
+    var locationText = $("#LocationToAdd")[0].value;
+    
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		user: object.user.name,
+		pass: object.user.password,
+		func: "insertLocation",
+		location: locationText
+	    },
+	    success: function(resp)
+	    {
+		console.log(resp);
+		// 
+		// clear text fields
+		$("#LocationToAdd")[0].value = '';
+
+		if (JSON.parse(resp) === true)
+		{
+		    console.log("input worked");
+		    // displayTable(object,[]);
+		    getStuff(object.locations);
+		}
+		else
+		{
+		    console.log("input failed");
+		}
+	    } // end success function
+	} // end ajax data
+    ) // end ajax function call
+} // end insertLocation function
+
+
+
 
 function editLocation()
 {

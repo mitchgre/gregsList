@@ -111,7 +111,7 @@ function editPosting()
 
     string += '<tr><td>source</td>';
     string += '<td><input id="embedSource" value="'+current.source+'"></td></tr>';
-    string += '</div>';
+    string += '</table></div>';
 
     $(string).dialog
     (

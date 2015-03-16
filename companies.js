@@ -17,8 +17,8 @@ function insertCompany()
 	    dataType: "text",
 	    data:
 	    {
-		user: object.parent.user.name,
-		pass: object.parent.user.password,
+		user: object.user.name,
+		pass: object.user.password,
 		func: "insertCompany",
 		company: toAdd,
 	    },

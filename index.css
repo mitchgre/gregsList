@@ -106,8 +106,8 @@ body{font-size:12px;}
 
   .column 
  {
-   width: 25%;
-   min-width: 300px;
+   width: 20%;
+   min-width: 200px;
    float: left;
    padding-top: 20px;
    padding-bottom: 100px;

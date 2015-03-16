@@ -3,19 +3,20 @@
 */
 
 # drop tables with foreign keys first
+
+drop table if exists company_industry;
+drop table if exists postings;
 drop table if exists user_schedule;
 drop table if exists company_contacts;
 drop table if exists user_contacts;
 drop table if exists user_goals;
 drop table if exists user_industries;
-drop table if exists company_industry;
 drop table if exists company_locations;
 drop table if exists user_locations;
-drop table if exists postings;
 drop table if exists `user_companies`;
 drop table if exists `pass`;
 drop table if exists `users`;
-
+drop table if exists industries;
 
 # table to contain users of gregsList
 create table `users`(
@@ -81,6 +82,9 @@ insert into `companies` (`name`)
 	      ("NVIDIA"),
 	      ("Qualcomm"),
 	      ("General Motors"),
+	      ("Infinera"),
+	      ("if(we), formally known as Tagged Inc"),
+	      ("Epsilon"),
 	      ("Monsanto");
 
 
@@ -89,6 +93,7 @@ create table user_companies(
        id int primary key unique auto_increment,
        `user` int, # references users.id,
        company int, # references companies.id
+       motivation int,
        foreign key (`user`) references users(id)
        	       on delete set null on update cascade,
        foreign key (`company`) references companies(id)
@@ -103,113 +108,139 @@ create table user_companies(
 # the base case example is that the companies.name already exists in
 # the companies table. 
 
-insert into `user_companies` (`user`,company)
+insert into `user_companies` (`user`,company,`motivation`)
        values ( # example where the company name is already defined
 		(select id from `users` where users.name="greg"),
-		(select id from `companies` where companies.name="Google")
+		(select id from `companies` where companies.name="Google"),
+		5
 		),
 		( # example where the company name is already defined
 		 (select id from `users` where users.name="greg"),
-		 (select id from `companies` where companies.name="NASA")
+		 (select id from `companies` where companies.name="NASA"),
+		 5
 		),
 		( # example where the company name is already defined
 		 (select id from `users` where users.name="greg"),
-		 (select id from `companies` where companies.name="US Dept of Energy")
+		 (select id from `companies` where companies.name="US Dept of Energy"),
+		 5
 		),
 		( # example where the company name is already defined
 		 (select id from `users` where users.name="greg"),
-		 (select id from `companies` where companies.name="Berkshire Hathaway")
+		 (select id from `companies` where companies.name="Berkshire Hathaway"),
+		 4
 		),
 		( # example where the company name is already defined
 		 (select id from `users` where users.name="greg"),
-		 (select id from `companies` where companies.name="United Airlines")
+		 (select id from `companies` where companies.name="United Airlines"),
+		 2		 
 		),
 		( # example where the company name is already defined
 		 (select id from `users` where users.name="greg"),
-		 (select id from `companies` where companies.name="Intel")
+		 (select id from `companies` where companies.name="Intel"),
+		 3
 		),
 		( # example where the company name is already defined
 		 (select id from `users` where users.name="greg"),
-		 (select id from `companies` where companies.name="Qualcomm")
+		 (select id from `companies` where companies.name="Qualcomm"),
+		 3
 		),
 		( # example where the company name is already defined
 		 (select id from `users` where users.name="greg"),
-		 (select id from `companies` where companies.name="NVIDIA")
+		 (select id from `companies` where companies.name="NVIDIA"),
+		 4
 		),
 		( # example where the company name is already defined
 		 (select id from `users` where users.name="greg"),
-		 (select id from `companies` where companies.name="General Motors")
+		 (select id from `companies` where companies.name="General Motors"),
+		 3
 		),
 		( # example where the company name is already defined
 		 (select id from `users` where users.name="greg"),
-		 (select id from `companies` where companies.name="The Carney Group")
+		 (select id from `companies` where companies.name="The Carney Group"),
+		 1
 		),
 
 		# next user
 
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Disney")
+		(select id from `companies` where companies.name="Disney"),
+		4
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Coca Cola")
+		(select id from `companies` where companies.name="Coca Cola"),
+		3
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Oregon State University")
+		(select id from `companies` where companies.name="Oregon State University"),
+		3
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="United Airlines")
+		(select id from `companies` where companies.name="United Airlines"),
+		2
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Amazon")
+		(select id from `companies` where companies.name="Amazon"),
+		2
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Berkshire Hathaway")
+		(select id from `companies` where companies.name="Berkshire Hathaway"),
+		3
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Wikipedia")
+		(select id from `companies` where companies.name="Wikipedia"),
+		4
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Facebook")
+		(select id from `companies` where companies.name="Facebook"),
+		4
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Twitter")
+		(select id from `companies` where companies.name="Twitter"),
+		4
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Walmart")
+		(select id from `companies` where companies.name="Walmart"),
+		2
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Intel")
+		(select id from `companies` where companies.name="Intel"),
+		3
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="NSA")
+		(select id from `companies` where companies.name="NSA"),
+		3
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Proctor & Gamble")
+		(select id from `companies` where companies.name="Proctor & Gamble"),
+		3
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Yahoo")
+		(select id from `companies` where companies.name="Yahoo"),
+		5
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="US Dept of Energy")
+		(select id from `companies` where companies.name="US Dept of Energy"),
+		4
 		),
        	      ( # example where the company name is already defined
 		(select id from `users` where users.name="mitchell"),
-		(select id from `companies` where companies.name="Marvel Studios")
+		(select id from `companies` where companies.name="Marvel Studios"),
+		5
 		);
        	      	
 # in the event that the companies.name isn't defined, will have to
@@ -232,6 +263,15 @@ insert into locations (name)
 	("west of the mississippi");
 # above are valid examples of why *not* to break down into countries,cities, etc.
 
+# base cases for posting dependencies
+insert into locations (name)
+       values
+	("Bethlehem, PA"),
+	("US-PA-Breinigsville"),
+	("Allentown, PA"),
+	("San Francisco"),
+	("K6-San Francisco - Spear St ");
+
 
 
 
@@ -240,6 +280,7 @@ create table user_locations(
        id int primary key auto_increment,
       `user` int, # references users.id,
       `location` int, # references locations.id
+      `motivation` int, #
       foreign key (`user`) references users(id)
       		  on delete set null on update cascade,
       foreign key (`location`) references locations(id)
@@ -248,8 +289,8 @@ create table user_locations(
 
 
 # user_location base cases
-insert into user_locations (`user`,`location`) 
- values (1,1),(1,2),(1,3),(2,3),(2,1);
+insert into user_locations (`user`,`location`,`motivation`) 
+ values (1,1,3),(1,2,3),(1,3,2),(2,3,4),(2,1,3),(2,2,2);
 
 
 
@@ -291,18 +332,48 @@ create table postings(
 
 
 # insert some base case postings
-insert into `postings` (`user`,`url`)
+insert into `postings` (`user`,`title`,`url`,`company`,`location`,`source`)
        values
-       (1,"http://www.indeed.com/cmp/The-Carney-Group/jobs/Software-Engineer-Application-Developer-b67c029e9687804f"),
-       (1,"https://us-amazon.icims.com/jobs/309767/it-support-engineer-ii/job?mode=job&iis=Indeed&iisn=Indeed+%28Free+Posting%29&mobile=false&width=1455&height=1200&bga=true&needsRedirect=false&jan1offset=-420&jun1offset=-420"),
-       (1,"http://www.infinera.com/career/ourjobs.html?nl=1&jvi=oxTv0fwF,Job&jvs=Indeed&jvk=Job"),
-       (2,"http://www.indeed.com/cmp/The-Carney-Group/jobs/Software-Engineer-Application-Developer-b67c029e9687804f");
+       (1,
+       "Software Engineer / Application Developer",
+       "http://www.indeed.com/cmp/The-Carney-Group/jobs/Software-Engineer-Application-Developer-b67c029e9687804f",
+       20,
+       4,
+       "indeed.com"
+       ),
+       (1,
+       "IT Support Engineer II",
+       "https://us-amazon.icims.com/jobs/309767/it-support-engineer-ii/job?mode=job&iis=Indeed&iisn=Indeed+%28Free+Posting%29&mobile=false&width=1455&height=1200&bga=true&needsRedirect=false&jan1offset=-420&jun1offset=-420",
+       19,
+       5,
+       "indeed.com"
+       ),
+       (1,
+       "Computer Engineer",
+       "http://www.infinera.com/career/ourjobs.html?nl=1&jvi=oxTv0fwF,Job&jvs=Indeed&jvk=Job",
+       26,
+       6,
+       "indeed.com"
+       ),
+       (2,
+       "Summer 2015 Intern - Software Engineer",
+       "http://www.indeed.com/viewjob?jk=42c7d94ab47fda67&q=intern+computer+science&l=san+francisco&tk=19ge8en191d3i0qb&from=web&advn=641811570115501&sjdu=ME_qcF1gz2XOe_-MpbFh208rDrQtJktyve_qLEqEOHE&pub=pub-indeed",
+       27,
+       7,
+       "indeed.com"
+       ),
+       (2,
+       "Software Engineer Intern-Computer Vision and Machine Learning",
+       "https://alliancedata.taleo.net/careersection/epsilon/jobdetail.ftl?job=85205&src=JB-10160",
+       28,
+       8,
+       "indeed.com"
+       );
 
 
 
 
 # list of industries
-drop table if exists industries;
 create table industries(
        id int primary key auto_increment,
        name varchar(255) unique

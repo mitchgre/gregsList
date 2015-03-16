@@ -45,8 +45,27 @@ function companyIdExists($companyName)
 {
     $query  = "select count(id) from companies ";
     $query .= "where name=\"$companyName\"";
-    return reset(returnStuff($query));
+
+    $count = reset(returnStuff($query));
+
+    if ( $count > 0 )
+        return true;
+    return false;
 }
+
+function userCompanyIdExists($user,$companyId)
+{
+    $query  = "select count(id) from user_companies ";
+    $query .= "where company = $companyId";
+    $query .= "and user = $user";
+
+    $count = reset(returnStuff($query));
+
+    if ( $count > 0 )
+        return true;
+    return false;
+}
+
 
 
 
@@ -65,6 +84,72 @@ function userLocationExists ($user,$locationId)
 {
     $query  = "select count(id) from user_locations ";
     $query .= "where location=$locationId and user=$user";
+    $count =  reset(returnStuff($query));
+
+    if ( $count > 0 )
+        return true;
+    else
+        return false;
+
+}
+
+function countUsersTrackingLocationId($locationId)
+{
+    $query  = "select count(id) from user_locations ";
+    $query .= "where location=$locationId";
+    return reset(returnStuff($query));
+}
+
+
+function getContactIdFromValues($fname,$lname,$email,$phone,$facebook,$linkedin,$github)
+{
+    $query  = "select id from contacts ";
+    $query .= "where fname = \"$fname\" ";
+    $query .= "and lname = \"$lname\" ";
+    $query .= "and email = \"$email\" ";
+    $query .= "and phone = \"$phone\" ";
+    $query .= "and facebook = \"$facebook\" ";
+    $query .= "and linkedin = \"$linkedin\" ";
+    $query .= "and github = \"$github\" ";
+
+    return reset(returnStuff($query));
+}
+
+function contactExists($fname,$lname,$email,$phone,$facebook,$linkedin,$github)
+{
+    $query  = "select count(id) from contacts ";
+    $query .= "where fname = \"$fname\" ";
+    $query .= "and lname = \"$lname\" ";
+    $query .= "and email = \"$email\" ";
+    $query .= "and phone = \"$phone\" ";
+    $query .= "and facebook = \"$facebook\" ";
+    $query .= "and linkedin = \"$linkedin\" ";
+    $query .= "and github = \"$github\" ";
+
+    $count = reset(returnStuff($query));
+    
+    if ( $count > 0 )
+        return true;
+    return false;
+}
+
+
+
+function userContactExists($user,$contactId)
+{
+    $query  = "select count(id) from user_contacts ";
+    $query .= "where contact=$contactId and $user=$user";
+    $count = reset(returnStuff($query));
+
+    if ( $count > 0 )
+        return true;
+    return false;
+}
+
+function countUsersTrackingContactId($contactId)
+{
+    $query  = "select count(id) from user_contacts ";
+    $query .= "where contact=$contactId";
     return reset(returnStuff($query));
 }
 

@@ -100,6 +100,8 @@ function glo()  // gregsList Object
 	    display: displayTable,
 	    table: $("#tableOfContacts")[0],
 	    add: null,
+	    editFunction: editContact,
+	    updater: "updateContact",		// php function to update
 	    removeFunction: remover,
 	    destroyer: "removeContact", // php function to remove
 	    displayKeys: ["fname","lname","email","phone",
@@ -394,13 +396,13 @@ glo.prototype.setupLocations =
 
     // add text fields
     // locations.appendChild(document.createTextNode('Locations'));
-    var companyField = addInput(locations,'text','','','CompanyToAdd');
+    var locationField = addInput(locations,'text','','','LocationToAdd');
 
     // add button
-    var addButton = addInput(locations,'button','','Add Company','addCompanyButton');
+    var addButton = addInput(locations,'button','','Add Location','addLocationButton');
 
     // wire button
-    addButton.onclick = insertCompany.bind(this);
+    addButton.onclick = insertLocation.bind(this);
 
     // insert empty results table
     var table = createAppendedChildToParent('table',locations);
@@ -486,18 +488,55 @@ glo.prototype.setupContacts =
     
     emptyElement(contacts);
 
-    // add text fields
-    // contacts.appendChild(document.createTextNode('Contacts'));
-    var fnameField = addInput(contacts,'text','','','fnameToAdd');
-    var lnameField = addInput(contacts,'text','','','lnameToAdd');
-    var emailField = addInput(contacts,'text','','','emailToAdd');
-    var phoneField = addInput(contacts,'text','','','phoneToAdd');
-    var facebookField = addInput(contacts,'text','','','facebookToAdd');
-    var linkedinField = addInput(contacts,'text','','','linkedinToAdd');
-    var githubField = addInput(contacts,'text','','','githubToAdd');
+    var input = createAppendedChildToParent('table',contacts);
+    // input.style.width = "100%";
+    // input.style.tableLayout = "fixed";
 
+    var tr = createAppendedChildToParent('tr',input);
+    var td = createAppendedChildToParent('td',tr);
+
+    // add text fields
+    td.appendChild(document.createTextNode('First Name'));
+    var fnameField = addInput(td,'text','','','fnameToAdd');
+
+    // new cell
+    td = createAppendedChildToParent('td',tr);
+    td.appendChild(document.createTextNode('Last Name'));
+    var lnameField = addInput(td,'text','','','lnameToAdd');
+
+    // new cell
+    td = createAppendedChildToParent('td',tr);
+    td.appendChild(document.createTextNode('Email'));
+    var emailField = addInput(td,'text','','','emailToAdd');
+
+    // new row
+    tr = createAppendedChildToParent('tr',input);
+    td = createAppendedChildToParent('td',tr);
+
+    td.appendChild(document.createTextNode('Phone'));
+    var phoneField = addInput(td,'text','','','phoneToAdd');
+
+    // new cell
+    td = createAppendedChildToParent('td',tr);
+    td.appendChild(document.createTextNode('Facebook'));
+    var facebookField = addInput(td,'text','','','facebookToAdd');
+
+    // new row
+    tr = createAppendedChildToParent('tr',input);
+    // new cell
+    td = createAppendedChildToParent('td',tr);
+    td.appendChild(document.createTextNode('Linked In'));
+    var linkedinField = addInput(td,'text','','','linkedinToAdd');
+
+    // new cell
+    td = createAppendedChildToParent('td',tr);
+    td.appendChild(document.createTextNode('Github'));
+    var githubField = addInput(td,'text','','','githubToAdd');
+
+    // new cell
+    td = createAppendedChildToParent('td',tr);
     // add button
-    var addButton = addInput(contacts,'button','','Add Contact','addContactButton');
+    var addButton = addInput(td,'button','','Add Contact','addContactButton');
 
     // wire button
     addButton.onclick = insertContact.bind(this);
@@ -581,6 +620,7 @@ function remover(e)
 				else
 				{
 				    console.log("removal failed");
+				    getStuff(object);
 				}
 			    }	
 			}
