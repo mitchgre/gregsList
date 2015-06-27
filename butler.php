@@ -110,8 +110,52 @@ if (isset($_POST['func']))
         if ($func === "insertSchedule")
             {
                 // more complex.  will be responsible for getting $_POST
-                echo json_encode(insertSchedule($user));  
+                // echo json_encode(insertSchedule($user));  
+
+                echo insertSchedule($user);  
             }
+        if ($func === "addSchedule")
+            {
+                // more complex.  will be responsible for getting $_POST
+                // echo json_encode(insertSchedule($user));  
+                // echo "adding ZSchecdule";
+
+                $name = $_POST["name"];
+                $description = $_POST["description"];
+                $contact = $_POST["contact"];
+                $start = $_POST["start"];
+                $end = $_POST["end"];
+
+                // addSchedule($name,$description,$contact,$start,$end)
+                if (addSchedule($name,$description,$contact,$start,$end) )
+                    {
+                        $scheduleId = getScheduleId(
+                            $name,
+                            $description,$contact,
+                            $start,$end);  
+
+                        if ( $scheduleId > 0 )
+                            {
+                                // echo $scheduleId;
+                                // insert schedule id and user id to user_schedule
+
+                                $query  = "insert into user_schedule ";
+                                $query .= "(user,schedule) ";
+                                $query .= "values ( $user, ";
+                                $query .= "$scheduleId ) ";
+                                
+                                //return $query;
+                                echo booleanEcho($query);
+
+                            }
+                        else
+                            echo "error getting schedule id.";
+
+                    }
+                else
+                    echo "error inserting schedule.";
+            }
+
         // removers ===============================
         if ($func === "removeGoal")
             {

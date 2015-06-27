@@ -124,8 +124,8 @@ function editIndustry()
 				{
 				    console.log("removal worked");
 				    // displayTable(object,[]);
-				    // getStuff(object);
-				    object.parent.refresh();
+				    getStuff(object);
+				    // object.parent.refresh();
 				}
 				else
 				{

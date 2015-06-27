@@ -25,9 +25,10 @@ function preparedStatement($query){
                 mysqli_close($mysqli);
                 return true;
             }
+        return false;
         
     }
-    mysqli_close($mysqli);
+    // mysqli_close($mysqli);
     return false;
     
 }
@@ -66,9 +67,10 @@ function returnStuff($query)
   Establish a connection to the gregsList database, and return the connection.
  */
 function connectToDB(){
-    require './credentials.php';  // username, hostname,password
-    
-    $mysqli = new mysqli($hostname, $username, $password, "gregsList");
+    //include'/root/credentials.php';  // username, hostname,password    
+    // $mysqli = new mysqli("localhost", "root", 'KdPNpynAeC', "gregsList");
+    // $mysqli = new mysqli($localhost, $root, $KdPNpynAeC, "gregsList");
+    $mysqli = new mysqli("localhost", "root", 'Ovukvlt4734', "gregsList");
     if ($mysqli->connect_errno)
         {
             echo "Failed to connect to MySQL: (" . 

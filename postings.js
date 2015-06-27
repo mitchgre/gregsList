@@ -35,12 +35,13 @@ function insertPosting()
 	    },
 	    success: function(resp)
 	    {
-		console.log(resp);
+		console.log(JSON.parse(resp));
 		// 
 		// clear text fields
 		$("#postingTitleToAdd")[0].value = '';
 		$("#postingLinkToAdd")[0].value = '';
 		$("#postingCompanyToAdd")[0].value = '';
+		$("#postingLocationToAdd")[0].value = '';
 		$("#postingSourceToAdd")[0].value = '';
 
 		if (JSON.parse(resp) === true)
