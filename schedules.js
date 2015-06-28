@@ -5,8 +5,8 @@ function insertSchedule()
     console.log("from insertSchedule: object = ");
     console.log(object);
     
-    //console.log("this.sid:");
-    // console.log(this.sid);
+    console.log("this.sid:");
+    console.log(this.sid);
     var link = this.sid;
     
     // console.log("object.destroyer:");
@@ -58,14 +58,24 @@ function insertSchedule()
 		    var start = $("#embedStart")[0].value;
 		    var end = $("#embedEnd")[0].value;
 
+		    // display what we're doing
+		    console.log("sending " + 
+				"name=" + name + ", " +
+				"description=" + description + ", " +
+				"contact=" + contact + ", " +
+				"start=" + start + ", " +
+				"end=" + end + ", " +
+				+ " to the butler."
+			       );
+		    
 		    // give values to butler
 		    
 		    $(this).dialog("close");
 		    // emptyElement($("#scheduleUpdater")[0]);
 		    var toDestroy = 
 			[
-			    "#embedName","#embedDescription",
-			    "#embedContact","#embedStart", "#embedEnd",
+			    "embedName","embedDescription",
+			    "embedContact","embedStart", "embedEnd",
 			    "scheduleUpdater"
 			];
 
@@ -84,24 +94,27 @@ function insertSchedule()
 			    {
 				user: object.parent.user.name,
 				pass: object.parent.user.password,
-				func: object.updater,
-				sid: link,
+				//func: object.updater,
+				// sid: link,
 				name: name,
 				description: description,
 				contact:contact,
 				start:start,
-				end:end
+				end:end,
+				//func: "insertSchedule"
+				func: "addSchedule"
 			    },
 			    success: function(resp)
 			    {
 				console.log(resp);
 				//console.log(JSON.parse(resp));
 				// 
-				if (JSON.parse(resp) === true)
+//				if (JSON.parse(resp) === true)
+				if (resp == "true" )
 				{
 				    console.log("removal worked");
 				    // displayTable(object,[]);
-				    // getStuff(object);
+				    getStuff(object);
 				    object.parent.refresh();
 				}
 				else

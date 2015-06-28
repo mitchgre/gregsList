@@ -25,9 +25,10 @@ function preparedStatement($query){
                 mysqli_close($mysqli);
                 return true;
             }
+        return false;
         
     }
-    mysqli_close($mysqli);
+    // mysqli_close($mysqli);
     return false;
     
 }
@@ -35,8 +36,7 @@ function preparedStatement($query){
 
 
 /*
-  This function can return a single column from mysql.  Useful for
-  generalizing quick searches, but not good for building entire tables
+  This function can return a single column from mysql.  Useful for"  generalizing quick searches, but not good for building entire tables
   up from the database.
  */
 function returnStuff($query)
@@ -65,10 +65,13 @@ function returnStuff($query)
 /*
   Establish a connection to the gregsList database, and return the connection.
  */
-function connectToDB(){
-    require './credentials.php';  // username, hostname,password
-    
-    $mysqli = new mysqli($hostname, $username, $password, "gregsList");
+function connectToDB()
+{
+    $config = parse_ini_file('config.ini');
+
+    $mysqli = new mysqli($config['sqlhostname'], $config['sqlusername'], $config['sqlpassword'], "gregsList");
+
+
     if ($mysqli->connect_errno)
         {
             echo "Failed to connect to MySQL: (" . 

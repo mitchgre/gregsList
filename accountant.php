@@ -476,7 +476,7 @@ function insertCompany($user,$companyName)
             if ($count > 0) // user already has a reference to company
                 {
                     mysqli_close($mysqli);
-                    echo json_encode(["ERROR: User $user is already tracking $companyName"]);
+                    echo json_encode("ERROR: User $user is already tracking $companyName");
                 }
             else // link user to company in user_companies
                 { 
@@ -792,6 +792,8 @@ function insertSchedule($user)
 {
     // should error check that all post fields are set
 
+
+
     $name = $_POST["name"];
     $description = $_POST["description"];
     $contact = $_POST["contact"];
@@ -801,17 +803,34 @@ function insertSchedule($user)
     // $name,$description,$contact,$start,$end
     // add to schedules if it doesnt' exist already
     
+/*
     if ( scheduleExists($name,$description,$contact,$start,$end) !== true)
         if ( addSchedule($name,$description,$contact,$start,$end) !== true )
             return "error adding to schedules";
+*/  
+//    return addSchedule($name,$description,$contact,$start,$end);
     
-    // return addSchedule($name,$description,$contact,$start,$end);
+
+    if ( addSchedule($name,$description,$contact,$start,$end) )
+        {
+            $scheduleId = getScheduleId($name,$description,$contact,$start,$end);
+            
+            return $scheduleId;
     
-    $scheduleId = getScheduleId($name,$description,$contact,$start,$end);
+            $query  = "insert into user_schedule ";
+            $query .= "(user,schedule) ";
+            $query .= "values ( $user, $scheduleId) ";
+            
+            booleanReturn($query);
+        }
+    else 
+        return "error inserting schedule";
 
     // return "schedule id = " . $scheduleId;
 
     // add to user_schedules if it doesn't already exist
+
+    /*
     if ( userScheduleExists($user,$scheduleId) !== true)
         {
             // return "schedule $scheduleId exists";
@@ -826,16 +845,16 @@ function insertSchedule($user)
             return "existential problem. for $scheduleId";
         }
     
-
+    */
 }
 
 
 function getScheduleId($name,$description,$contact,$start,$end)
 {
-    $query  = "select id from  schedules ";
+    $query  = "select id from  schedule ";
     $query .= "where name = \"$name\" ";
     $query .= "and description = \"$description\" ";
-    $query .= "and contact = $contact ";
+    $query .= "and contact = \"$contact\" ";
     $query .= "and start =  \"$start\" ";
     $query .= "and end = \"$end\" ";
     
@@ -845,11 +864,11 @@ function getScheduleId($name,$description,$contact,$start,$end)
 
 function addSchedule($name,$description,$contact,$start,$end)
 {
-    $query  = "insert into schedules ";
+    $query  = "insert into schedule ";
     $query .= "(name,description,contact,start,end) ";
     $query .= "values ( \"$name\", ";
     $query .= " \"$description\", ";
-    $query .= " $contact, ";
+    $query .= " \"$contact\", ";
     $query .= " \"$start\", ";
     $query .= " \"$end\") ";
     
