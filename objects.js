@@ -117,7 +117,7 @@ function glo()  // gregsList Object
 	    type: "schedule",
 	    get: "getSchedules",
 	    display: displayTable,//displaySchedules,
-	    destroyer: "removeContact", // php function to remove
+	    destroyer: "removeSchedule", // php function to remove
 	    table: $("#tableOfEvents")[0],
 	    displayKeys: ["name","description","contact","start","end"],
 	    add: null

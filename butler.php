@@ -192,6 +192,12 @@ if (isset($_POST['func']))
                 $companyId = $_POST["url"];  // companyID is stored here
                 removeCompany($user,$companyId);
             }
+        if ($func === "removeSchedule")
+            {
+                $scheduleId = $_POST["url"];  // scheduleID is stored here
+                echo json_encode(removeSchedule($user,$scheduleId));
+            }
+
         // updaters ===============================
         if ($func === "updateGoal")
             {

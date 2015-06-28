@@ -885,6 +885,48 @@ function addSchedule($name,$description,$contact,$start,$end)
         END INSERTERS, START REMOVERS
 ===========================================================*/
 
+
+function removeSchedule($user, $scheduleId)
+{
+    // userScheduleId is the id for user_schedules, not schedules
+    // if no one else is tracking this schedule, delete from schedule
+    // echo json_encode("trying to remove $scheduleId.");
+    // need to get schedule.id from this before deletion
+    // $query = "select schedule from user_schedule where =$scheduleId";
+    // $scheduleId = reset(returnStuff($query));
+    //echo json_encode("schedule id: " . $scheduleId);
+
+    // count how many users are tracking this schedule
+    $query  = "select count(users.id) from user_schedule ";
+    $query .= "inner join schedule on user_schedule.schedule = schedule.id ";
+    $query .= "inner join users on user_schedule.user = users.id ";
+    $query .= "where schedule.id = $scheduleId";
+    
+    $count = reset(returnStuff($query));
+    
+    // echo json_encode("$count users tracking this schedule.");
+
+    // remove first from user_schedule
+    $query = "delete from user_schedule where schedule = $scheduleId";
+    if ( preparedStatement($query) )
+        {
+            if ( $count < 2 )  // delete from schedule also
+                {
+                    $query = "delete from schedule where id = $scheduleId";
+                    return booleanReturn($query);
+                }
+            else
+                return true;
+        }
+    else
+        {
+            return "error deleting from user_schedule";
+        }
+        
+}
+
+
+
 function removeGoal($user,$userGoalId)
 {
     // userGoalId is the id for user_goals, not goals
