@@ -12,10 +12,11 @@
 
  */
 
-
+//require "./credentials.php";
 require "./engineer.php"; // utitlity functions
 require "./concierge.php"; // guest registry functions
 require "./accountant.php"; // guest record functions
+
 
 /*
   Clear everything with the concierge before proceeding. 
