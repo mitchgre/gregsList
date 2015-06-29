@@ -32,16 +32,32 @@ function insertSchedule()
     string += '<td><input id="embedContact" value="'+null+'"></td></tr>';
 
     string += '<tr><td>start</td>';
-    string += '<td><input id="embedStart" value="'+null+'"></td></tr>';
+    string += '<td><input id="embedStart" value="'+'"></td></tr>';
+    // add datepicker here
 
     string += '<tr><td>end</td>';
-    string += '<td><input id="embedEnd" value="'+null+'"></td></tr>';
+    string += '<td><input id="embedEnd" value="'+'"></td></tr>';
+    // add datepicker here
 
     string += '</table></div>';
+
+
 
     $(string).dialog
     (
 	{
+	    // http://stackoverflow.com/questions/13233321/jquery-datepicker-in-a-dialog
+	    open: function() 
+	    {
+		$( "#embedStart" ).datepicker({dateFormat:"yy-mm-dd"});
+		$( "#embedEnd" ).datepicker({dateFormat:"yy-mm-dd"});
+	    },
+	    close: function()
+	    {
+		$( "#embedStart" ).datepicker('destroy');
+		$( "#embedEnd" ).datepicker('destroy');
+	    },
+
 	    modal:true, 
 	    buttons:
 	    {
@@ -58,6 +74,7 @@ function insertSchedule()
 		    var start = $("#embedStart")[0].value;
 		    var end = $("#embedEnd")[0].value;
 
+
 		    // display what we're doing
 		    console.log("sending " + 
 				"name=" + name + ", " +
@@ -67,6 +84,7 @@ function insertSchedule()
 				"end=" + end + ", " +
 				+ " to the butler."
 			       );
+
 		    
 		    // give values to butler
 		    

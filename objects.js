@@ -736,7 +736,7 @@ function displayTable(object)
     // console.log("input");
     // console.log(input);
 
-    // add headers
+    // add headers (for table)
     for (var i = 0; i < object.displayKeys.length; i++)
     {
 	var th = createAppendedChildToParent('th',tr);
@@ -756,8 +756,24 @@ function displayTable(object)
 	    if (isInArray(key, object.displayKeys))
 		{
 		    var td = createAppendedChildToParent('td',tr);
+
+
+		    // http://stackoverflow.com/questions/10888198/how-do-i-get-html-tags-inside-of-a-javascript-text-node
+
+		    // the following does not work 
+		    // if element is a link
+		    // --------------------------
+		    
+		    /*
 		    var content = document.createTextNode(contents[key]);
 		    td.appendChild(content);
+		    */
+
+		    // there's probably a way around using innerHTML
+		    // but this is quick and dirty for now
+		    
+		    td.innerHTML = contents[key];
+
 		    // next cell
 		}
 	}
