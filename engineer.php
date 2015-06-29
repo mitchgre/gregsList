@@ -13,21 +13,20 @@
 
   This function is used for insertions as opposed to extractions.
  */
-function preparedStatement($query){
+function preparedStatement($query)
+{
     $mysqli = connectToDB();
     $mysqli -> set_charset("utf8");
-    if( $sql = $mysqli->prepare($query)){
-        // return $sql;
-        
-        $sql->execute();
-        if ($sql->affected_rows >= 1)
-            {
-                mysqli_close($mysqli);
-                return true;
-            }
-        return false;
-        
-    }
+    if( $sql = $mysqli->prepare($query))
+        {
+            $sql->execute();
+            if ($sql->affected_rows >= 1)
+                {
+                    mysqli_close($mysqli);
+                    return true;
+                }
+            return false;
+        }
     // mysqli_close($mysqli);
     return false;
     

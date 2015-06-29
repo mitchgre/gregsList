@@ -653,7 +653,8 @@ function addUserLocation($user,$locationName)
 function insertPosting($user)
 {
     $title = $_POST["title"];
-    $url = urldecode($_POST["url"]);
+    //$url = urldecode($_POST["url"]);
+    $url = $_POST["url"];
     $companyName = $_POST["company"];
     $locationName = $_POST["location"]; # string value needs to be converted to int
     $source = $_POST["source"];
@@ -668,13 +669,15 @@ function insertPosting($user)
     if (locationExists($locationName) != true)
         addLocation($locationName);
     
-    $locationId = getLocationId($locationName);
-
     // add locationId to user_locations if it doesn't already exist
     if ( userLocationExists($user,$locationId) !== true )
         {
-            return addUserLocation($user,$locationId);
+            // return addUserLocation($user,$locationId);
+            addUserLocation($user,$locationId);
         }
+
+    $locationId = getLocationId($locationName);
+
 
     // add $companyName to companies if it doesn't exist already
     if (companyIdExists($companyName) != true)
@@ -690,10 +693,16 @@ function insertPosting($user)
     $query  = "insert into postings (title,url,company,location,source,user) ";
     $query .= "values(\"$title\", \"$url\", ";
     $query .= "$companyId, $locationId, \"$source\", $user)";
+
+
+    // echo json_encode(preparedStatement($query));
+
+    // if (booleanReturn($query))
+    
     if (booleanReturn($query))
         echo json_encode(true);
     else
-        echo "failed to add posting";
+        echo json_encode("failed to add posting: " . $query);
     
 }
 

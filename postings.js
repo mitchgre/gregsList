@@ -1,8 +1,147 @@
 
 
+
+function insertPosting()
+{
+    var object = this.postings;
+    console.log("insert posting object");
+    console.log(object);
+
+
+    // build form 
+    var string  = '<div id="postingUpdater" title="Add '+object.type+'">';
+    string += '<table>';
+    string += '<tr>';
+    string += '<td>title</td>'; 
+
+    string += '<td>';
+    string += '<input id="embedTitle" value="">';
+    string += '</td>';
+    string += '</tr>';
+
+
+    string += '<tr><td>url</td>';
+    string += '<td><input id="embedURL" value=""></td></tr>';
+
+    string += '<tr><td>company</td>';
+    string += '<td><input id="embedCompany" value=""></td></tr>';
+
+    string += '<tr><td>location</td>';
+    string += '<td><input id="embedLocation" value=""></td></tr>';
+
+    string += '<tr><td>source</td>';
+    string += '<td><input id="embedSource" value=""></td></tr>';
+    string += '</table></div>';
+
+    $(string).dialog
+    (
+	{
+	    modal:true, 
+	    buttons:
+	    {
+		Cancel: function() 
+		{
+		    $(this).dialog("close")
+		},
+		"Add":function()
+		{
+		    // get values from form
+		    var title = $("#embedTitle")[0].value;
+
+		    var url = '<a href = \\"' + $("#embedURL")[0].value + '\\">link</a>';
+		    //var url = $("#embedURL")[0].value;
+
+		    // instead of using a string, try creating an element,
+		    // and embedding the url in element 
+
+		    var comp = $("#embedCompany")[0].value;
+		    var loc = $("#embedLocation")[0].value;
+		    var source = $("#embedSource")[0].value;
+
+		    console.log("title:"+title);
+		    console.log("url:"+url);
+		    console.log("comp:"+comp);
+		    console.log("loc:"+loc);
+		    console.log("source:"+source);
+
+		    // give values to butler
+		    
+		    $(this).dialog("close");
+		    // emptyElement($("#postingUpdater")[0]);
+		    var toDestroy = 
+			[
+			    "embedSource","embedLocation",
+			    "embedCompany","embedURL",
+			    "embedTitle","postingUpdater"
+			];
+
+		    for (var i=0; i < toDestroy.length; i++)
+			removeElement(toDestroy[i]);
+
+
+
+		    $.ajax
+		    (
+			{
+			    url: "butler.php",
+			    type: "post",
+			    dataType: "text",
+			    data:
+			    {
+				user: object.parent.user.name,
+				pass: object.parent.user.password,
+				func: "insertPosting",
+				url: url,// encodeURIComponent(url),
+				//url: encodeURIComponent(url),
+				title: title,
+				company: comp,
+				location: loc,
+				source: source
+			    },
+			    success: function(resp)
+			    {
+				if (resp !== '')
+				    {					
+					console.log(JSON.parse(resp));
+					if (JSON.parse(resp) === true)
+					{
+					    console.log("input worked");
+					    // displayTable(object,[]);
+					    getStuff(object);
+					}
+					else
+					{
+					    console.log("input failed");
+					}
+
+				    }
+				else
+				    console.log('empty response');
+				// 
+				// clear text fields
+				
+				// $("#postingTitleToAdd")[0].value = '';
+				// $("#postingLinkToAdd")[0].value = '';
+				// $("#postingCompanyToAdd")[0].value = '';
+				// $("#postingLocationToAdd")[0].value = '';
+				// $("#postingSourceToAdd")[0].value = '';
+				
+
+			    } // end success func
+			} // end ajax json
+		    ) // end ajax parameters
+		} // end add button func	
+	    } // end buttons
+	} //end dialog json
+    )  //end dialog func
+} //end insertPosting func
+
+
+
 /*
   Get value from textboxes, and hand off to the butler
 */
+/*
 function insertPosting()
 {
     var object = this;
@@ -61,6 +200,8 @@ function insertPosting()
 
     
 }
+
+*/
 
 /*
   Open a dialog box containing the current posting's contents.

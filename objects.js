@@ -470,6 +470,10 @@ glo.prototype.setupPostings =
     
     emptyElement(postings);
 
+     var addButton = addInput(postings,'button','','Add posting','addPostingButton');
+
+
+    /*
     // add inputs
     var input = createAppendedChildToParent('table',postings);
     input.style.width = "100%";
@@ -500,6 +504,7 @@ glo.prototype.setupPostings =
     var td = createAppendedChildToParent('td',tr);
     td.appendChild(document.createTextNode('Source'));
     var sourceField = addInput(td,'text','','','postingSourceToAdd');
+    */
 
 
     // wire button
