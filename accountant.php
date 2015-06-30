@@ -541,7 +541,7 @@ function addCompany($companyName)
 function addUserCompany($user,$companyId)
 {
     
-    $query  = "insert into companies (user,company) ";
+    $query  = "insert into user_companies (user,company) ";
     $query .= "values ($user,$companyId) "; 
     return booleanReturn($query);
     
@@ -681,12 +681,14 @@ function insertPosting($user)
 
     // add $companyName to companies if it doesn't exist already
     if (companyIdExists($companyName) != true)
-        addCompany($companyName);
+        if ( addCompany($companyName) === false )
+            return "error adding company";
     
     $companyId = getCompanyId($companyName);
 
-    if ( userCompanyIdExists($user,$companyId) )
-        addUserCompany($user,$companyId);
+    if ( userCompanyIdExists($user,$companyId) === false )
+        if ( addUserCompany($user,$companyId) === false )
+            return "error adding user_company: $user, $companyId, $companyName";
     
     // check if $url is valid
     
@@ -695,14 +697,14 @@ function insertPosting($user)
     $query .= "$companyId, $locationId, \"$source\", $user)";
 
 
-    // echo json_encode(preparedStatement($query));
+    // return json_encode(preparedStatement($query));
 
     // if (booleanReturn($query))
     
     if (booleanReturn($query))
-        echo json_encode(true);
+        return true;
     else
-        echo json_encode("failed to add posting: " . $query);
+        return "failed to add posting: " . $query;
     
 }
 

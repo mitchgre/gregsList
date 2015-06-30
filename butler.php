@@ -101,7 +101,7 @@ if (isset($_POST['func']))
             }
         if ($func === "insertPosting")
             {
-                insertPosting($user);
+                echo json_encode(insertPosting($user));
             }
         if ($func === "insertContact")
             {

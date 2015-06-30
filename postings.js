@@ -107,7 +107,8 @@ function insertPosting()
 					{
 					    console.log("input worked");
 					    // displayTable(object,[]);
-					    getStuff(object);
+					    // getStuff(object.parent);
+					    object.parent.refresh();
 					}
 					else
 					{
