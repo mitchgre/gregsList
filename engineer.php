@@ -5,6 +5,7 @@
 
  */
 
+//require_once "./credentials.php";
 
 
 /*
@@ -17,6 +18,7 @@ function preparedStatement($query)
 {
     $mysqli = connectToDB();
     $mysqli -> set_charset("utf8");
+<<<<<<< HEAD
     if( $sql = $mysqli->prepare($query))
         {
             $sql->execute();
@@ -27,6 +29,20 @@ function preparedStatement($query)
                 }
             return false;
         }
+=======
+    if( $sql = $mysqli->prepare($query)){
+        // return $sql;
+        
+        $sql->execute();
+        if ($sql->affected_rows >= 1)
+            {
+                mysqli_close($mysqli);
+                return true;
+            }
+        return false;
+        
+    }
+>>>>>>> 63274baafeae9446915cc2eb7cdec1be5efac672
     // mysqli_close($mysqli);
     return false;
     
@@ -68,6 +84,12 @@ function connectToDB()
 {
     $config = parse_ini_file('config.ini');
 
+<<<<<<< HEAD
+=======
+    // $mysqli = new mysqli("localhost", "root", 'KdPNpynAeC', "gregsList");
+    //$mysqli = new mysqli("localhost", "root", 'Ovukvlt4734', "gregsList");
+    // $mysqli = new mysqli($sqlhostname, $sqlusername, $sqlpassword, "gregsList");
+>>>>>>> 63274baafeae9446915cc2eb7cdec1be5efac672
     $mysqli = new mysqli($config['sqlhostname'], $config['sqlusername'], $config['sqlpassword'], "gregsList");
 
 

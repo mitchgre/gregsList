@@ -74,7 +74,10 @@ function insertSchedule()
 		    var start = $("#embedStart")[0].value;
 		    var end = $("#embedEnd")[0].value;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 63274baafeae9446915cc2eb7cdec1be5efac672
 		    // display what we're doing
 		    console.log("sending " + 
 				"name=" + name + ", " +
@@ -84,7 +87,10 @@ function insertSchedule()
 				"end=" + end + ", " +
 				+ " to the butler."
 			       );
+<<<<<<< HEAD
 
+=======
+>>>>>>> 63274baafeae9446915cc2eb7cdec1be5efac672
 		    
 		    // give values to butler
 		    
