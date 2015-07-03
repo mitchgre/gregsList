@@ -296,6 +296,7 @@ glo.prototype.refresh =
     object.setupLocations();
     object.setupPostings();
     object.setupContacts();
+    object.setupSchedules();
     object.setupBlog();
 
 }
