@@ -364,8 +364,9 @@ function getBlog($user)
     
 // select notes_user.id, notes.text from notes_user inner join notes on notes_user.note = notes.id;
     
-    $query = "select notes_user.id, notes.text, notes.title from notes_user ";
+    $query = "select notes_user.id, notes.title, notes.text from notes_user ";
     $query .= "inner join notes on notes_user.note = notes.id ";
+//    $query .= "inner join user on notes_user.user = user.id ";
     $query .= "where user=$user ";
     
     if ($statement = $mysqli->prepare($query))
@@ -379,7 +380,7 @@ function getBlog($user)
                 {
                     array_push($ids,$id);
                     array_push($titles,$title);
-                    array_push($values,$value);
+                    array_push($texts,$text);
                 }
         }
     mysqli_close($mysqli);
@@ -389,7 +390,7 @@ function getBlog($user)
         (
             "ids" => $ids,
             "titles" => $titles,
-            "values" => $values
+            "texts" => $texts
         );
     
     return $blog;

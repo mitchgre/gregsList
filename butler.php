@@ -77,6 +77,10 @@ if (isset($_POST['func']))
             {
                 echo getCompanies($user);
             }
+        if ($func === "getBlog")
+            {
+                echo json_encode(getBlog($user));
+            }
         // inserters ===============================
         if ($func === "insertGoal")
             {
