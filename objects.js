@@ -122,6 +122,20 @@ function glo()  // gregsList Object
 	    displayKeys: ["name","description","contact","start","end"],
 	    add: null
 	};
+    this.blog =
+	{
+	    parent: this,
+	    contents: [],
+	    filler: fillBlog,
+	    removeFunction: remover,
+	    type: "blog",
+	    get: "getBlog",
+	    display: displayTable,//displaySchedules,
+	    destroyer: "removeBlog", // php function to remove
+	    table: $("#tableOfBlogs")[0],
+	    displayKeys: ["text"],
+	    add: null
+	};
     this.login();
 }
 
@@ -282,7 +296,8 @@ glo.prototype.refresh =
     object.setupLocations();
     object.setupPostings();
     object.setupContacts();
-    object.setupSchedules();
+    object.setupBlog();
+
 }
 
 
@@ -598,6 +613,36 @@ glo.prototype.setupContacts =
 }
 
 
+/*
+  Empty the tables of blog and rebuild them.
+*/
+glo.prototype.setupBlog = 
+    function setupBlog()
+{
+    var blog = $("#blog")[0]; // container div
+    
+    emptyElement(blog);
+
+    // add text fields
+    // blog.appendChild(document.createTextNode('Blog'));
+    var blogField = addInput(blog,'text','','','BlogToAdd');
+
+    // add button
+    var addButton = addInput(blog,'button','','Add Blog','addBlogButton');
+
+    // wire button
+    addButton.onclick = insertBlog.bind(this);
+
+    // insert empty results table
+    var table = createAppendedChildToParent('table',blog);
+    this.blog.table = table;
+    table.id = 'tableOfBlog';
+    table.className = 'io';
+
+    // fill results table
+    getStuff(this.blog);
+
+}
 
 
 /*

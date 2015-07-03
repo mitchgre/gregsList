@@ -354,6 +354,49 @@ function getSchedules($user)
 }
 
 
+function getBlog($user)
+{
+    $ids = [];
+    $titles = [];
+    $texts = [];
+    
+    $mysqli = connectToDB();
+    
+// select notes_user.id, notes.text from notes_user inner join notes on notes_user.note = notes.id;
+    
+    $query = "select notes_user.id, notes.text, notes.title from notes_user ";
+    $query .= "inner join notes on notes_user.note = notes.id ";
+    $query .= "where user=$user ";
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id,$title,$text);
+            
+            while($statement->fetch())
+                {
+                    array_push($ids,$id);
+                    array_push($titles,$title);
+                    array_push($values,$value);
+                }
+        }
+    mysqli_close($mysqli);
+    
+    // associate arrays
+    $blog = array
+        (
+            "ids" => $ids,
+            "titles" => $titles,
+            "values" => $values
+        );
+    
+    return $blog;
+}
+
+
+
 
 
 /*==========================================================
