@@ -48,7 +48,6 @@ function insertBlog()
 
     string += '<tr id="blogUpdateContentRow"><td>blog post:</td>';
     string += '<td><textarea id="blogPostContentsToAdd"></textarea></td></tr>';
-    // add datepicker here
 
     string += '</table></div>';
 
@@ -95,21 +94,14 @@ function insertBlog()
 		"Update":function()
 		{
 		    // get values from form
-		    var name = $("#embedName")[0].value;
-		    var text = $("#embedDescription")[0].value;
-		    var contact = $("#embedContact")[0].value;
-		    var start = $("#embedStart")[0].value;
-		    var end = $("#embedEnd")[0].value;
-
+		    var title = $("#blogUpdateEmbedTitle")[0].value;
+		    var text = $("#blogPostContentsToAdd")[0].value;
 
 		    // display what we're doing
 		    console.log("sending " + 
-				"name=" + name + ", " +
-				"description=" + description + ", " +
-				"contact=" + contact + ", " +
-				"start=" + start + ", " +
-				"end=" + end + ", " +
-				+ " to the butler."
+				"title=" + title + ", " +
+				"text=" + text + ", " +
+				" to the butler."
 			       );
 
 		    
@@ -119,9 +111,9 @@ function insertBlog()
 		    // emptyElement($("#scheduleUpdater")[0]);
 		    var toDestroy = 
 			[
-			    "embedName","embedDescription",
-			    "embedContact","embedStart", "embedEnd",
-			    "scheduleUpdater"
+			    "blogPostContentsToAdd",
+			    "blogDialogAddTable",
+			    "blogUpdater"
 			];
 
 		    for (var i=0; i < toDestroy.length; i++)
@@ -141,13 +133,9 @@ function insertBlog()
 				pass: object.parent.user.password,
 				//func: object.updater,
 				// sid: link,
-				name: name,
-				description: description,
-				contact:contact,
-				start:start,
-				end:end,
-				//func: "insertSchedule"
-				func: "addSchedule"
+				title: title,
+				text: text,
+				func: "insertBlog"
 			    },
 			    success: function(resp)
 			    {

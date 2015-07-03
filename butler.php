@@ -161,6 +161,12 @@ if (isset($_POST['func']))
                     echo "error inserting schedule.";
             }
 
+        if ($func === "insertBlog")
+            {
+                echo json_encode(insertBlog($user));
+            }
+
+
         // removers ===============================
         if ($func === "removeGoal")
             {

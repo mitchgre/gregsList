@@ -934,6 +934,40 @@ function addSchedule($name,$description,$contact,$start,$end)
 
 
 
+function insertBlog($user)
+{
+    // get text from $_POST[]
+
+    $title = $_POST["title"];
+    $text = $_POST["text"];
+    
+    $query = "insert into notes (title,text) ";
+    $query .= "values (\"" . $title ."\",\"". $text ."\") ";
+
+    if ( booleanReturn($query) )
+        {
+            // get id of note that was just added.
+            $query = "select id from notes ";
+            $query .= "where title=\"" . $title ."\"";
+            $query .= "and text=\"" . $text ."\" ";
+
+            $noteId = reset(returnStuff($query));
+            // return "noteId = " . $noteId;
+            
+            // insert noteId and userId to notes_user
+            $query = "insert into notes_user (note,user) ";
+            $query .= "values (\"" . $noteId ."\",\"" . $user ."\") ";
+
+            if ( booleanReturn( $query ) )
+                return true;
+            else
+                return "Error inserting to notes_user";
+        }
+    else
+        return "Error inserting to notes.";
+
+    
+}
 
 
 /*==========================================================
