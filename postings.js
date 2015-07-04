@@ -384,6 +384,44 @@ function fillPostings(object, input)
 
     displayTable(object);
     displayPostingsPortlet(object);
+
+    // add analytics to titles on click.
+    $("#tableOfPostings tr td:first-child")
+	.click(
+	    function()
+	    {
+		// alert(this.innerHTML);
+		var postTitle = this.innerHTML;
+
+		// build up a dialog string
+		var postingPopUp = '<div id="popUp" title="'+postTitle+'">';
+		postingPopUp += '<button type="button">Notes</button>';
+		postingPopUp += '<button type="button">Dates</button>'
+		postingPopUp += '<button type="button">Similar</button>'
+		postingPopUp += '</div>';
+
+		$(postingPopUp)
+		    .dialog
+		(
+		    {
+			modal:true,
+			buttons:
+			{
+			    Cancel: function()
+			    {
+				$(this).dialog(close);
+			    },
+			    "Ok":function()
+			    {
+				$(this).dialog(close);
+			    }
+			}
+		    }
+		)
+
+
+	    }
+	);  // end click
 }
 
 function displayPostingsPortlet(object)
