@@ -368,19 +368,29 @@ function popUpDialogForJobPosting(postingObject)
 		"Show Notes": function()
 		{
 		    console.log("show notes clicked");
-		    
-		    
+		        
 		    $(this).dialog('close');
+
+		    // open dialog showing all blog posts that link to this posting
+		    
 		},
 		"Add Note":function()
 		{
 		    console.log("add notes clicked");
-		    
+
 		    $(this).dialog('close');
+
+		    // open dialog for inserting a blog post
+		    // get sid of blog post
+
 		}
 	    }
 	}
     )
+}
+
+function addPostingNote(postingObject)
+{
 }
 
 
@@ -399,8 +409,8 @@ function getPostingFromSid(sid)
     {
 	
 	var posting = gregsList.postings.contents[i]; 
-	console.log("posting["+i+"]="+posting.sid);
-
+	// console.log("posting["+i+"]="+posting.sid);
+	
 	if ( posting.sid == sid  )
 	{
 	    return posting;
