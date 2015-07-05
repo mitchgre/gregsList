@@ -17,9 +17,48 @@ function fillBlog(object,input)
     
 
     displayTable(object);
-    displayGoalsPortlet(object);
+    // displayGoalsPortlet(object);
 
 }
+
+function getBlogId(title,text)
+{
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		user: object.parent.user.name,
+		pass: object.parent.user.password,
+		//func: object.updater,
+		// sid: link,
+		title: title,
+		text: text,
+		func: "getBlogId"
+	    },
+	    success: function(resp)
+	    {
+		console.log(resp);
+		//				if (JSON.parse(resp) === true)
+		if (resp == "true" )
+		{
+		    console.log("removal worked");
+		    // displayTable(object,[]);
+		    getStuff(object);
+		    object.parent.refresh();
+		}
+		else
+		{
+		    console.log("removal failed");
+		}
+	    }	
+	}
+    );    
+}
+
 
 function buildBlogFormString()
 {
@@ -173,6 +212,8 @@ function insertBlog()
 
 		    giveBlogInsertionToButler(object,title,text);
 		    
+		    // return an id
+		    // return getBlogId(title,text);
 		}
 	    }
 	}

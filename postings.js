@@ -368,7 +368,9 @@ function popUpDialogForJobPosting(postingObject)
 		"Show Notes": function()
 		{
 		    console.log("show notes clicked");
-		        
+
+		    getPostingNotes(postingObject);
+
 		    $(this).dialog('close');
 
 		    // open dialog showing all blog posts that link to this posting
@@ -377,6 +379,8 @@ function popUpDialogForJobPosting(postingObject)
 		"Add Note":function()
 		{
 		    console.log("add notes clicked");
+
+		    addPostingNote(postingObject);
 
 		    $(this).dialog('close');
 
@@ -389,8 +393,28 @@ function popUpDialogForJobPosting(postingObject)
     )
 }
 
+
+function joinBlogToPosting( blogId , postingObject )
+{
+    // 
+}
+
+
 function addPostingNote(postingObject)
 {
+
+    // console.log('this=');
+    // console.log(this.gregsList);
+    // insert note to blog (generically)
+    var doBlog = insertBlog.bind(this.gregsList);
+    var blogId = doBlog();
+    
+
+    // get blogId
+
+    // insert blogId to relational table 
+    // joinBlogToPosting( blogId , postingObject.sid );
+    
 }
 
 

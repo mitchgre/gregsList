@@ -174,7 +174,10 @@ if (isset($_POST['func']))
             {
                 echo json_encode(insertBlog($user));
             }
-
+        if ($func === "insertPostingNote")
+            {
+                echo json_encode(insertPostingNote($user));
+            }
 
         // removers ===============================
         if ($func === "removeGoal")
