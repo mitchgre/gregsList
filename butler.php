@@ -77,6 +77,15 @@ if (isset($_POST['func']))
             {
                 echo getCompanies($user);
             }
+        if ($func === "getBlogId")
+            {                
+                echo json_encode(
+                    getBlogId(
+                        $user,
+                        $_POST['title'],
+                        $_POST['text']
+                    ));
+            }
         if ($func === "getBlog")
             {
                 echo json_encode(getBlog($user));

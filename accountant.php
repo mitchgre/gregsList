@@ -932,6 +932,16 @@ function addSchedule($name,$description,$contact,$start,$end)
 }
 
 
+function getBlogId($user,$title,$text)
+{
+    $query = "select id from notes ";
+    $query .= "where title=\"" . $title ."\"";
+    $query .= "and text=\"" . $text ."\" ";
+    
+    $noteId = reset(returnStuff($query));
+    //return "noteId = " . $noteId;
+    return $noteId;
+}
 
 
 function insertBlog($user)
@@ -947,13 +957,8 @@ function insertBlog($user)
     if ( booleanReturn($query) )
         {
             // get id of note that was just added.
-            $query = "select id from notes ";
-            $query .= "where title=\"" . $title ."\"";
-            $query .= "and text=\"" . $text ."\" ";
+            $noteId = getBlogId($user,$title,$text);
 
-            $noteId = reset(returnStuff($query));
-            // return "noteId = " . $noteId;
-            
             // insert noteId and userId to notes_user
             $query = "insert into notes_user (note,user) ";
             $query .= "values (\"" . $noteId ."\",\"" . $user ."\") ";
