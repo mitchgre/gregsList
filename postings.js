@@ -325,13 +325,26 @@ function fillPostings(object, input)
 
 function embelishTable()
 {
-   // add analytics to titles on click.  (This probably deserves its own function)
-    $("#tableOfPostings tr td:first-child")
+    // hide first children (headers and columns)   
+    $("#tableOfPostings tr th:first-child").css("display","none");
+    $("#tableOfPostings tr td:first-child").css("display","none");
+    
+
+
+    // add analytics to titles on click.  (This probably deserves its own function)
+    $("#tableOfPostings tr td:nth-child(2)")
+
 	.click(
 	    function()
 	    {
+		// get posting object by sid (stored in hidden cell)		
+		var sid = $(this.previousSibling).text();	// get sid from DOM
+		var postingObject = getPostingFromSid(sid);		
+		console.log(postingObject);
+		
 		// alert(this.innerHTML);
-		var postTitle = this.innerHTML;
+		// var postTitle = this.innerHTML;
+		var postTitle = postingObject.title;
 
 		// build up a dialog string
 		var postingPopUp = '<div id="popUp" title="'+postTitle+'">';
@@ -363,6 +376,28 @@ function embelishTable()
 	    }
 	);  // end click
 }
+
+
+function getPostingFromSid(sid)
+{
+    console.log("searching for sid=" + sid);
+
+    // loop over postings
+    for ( var i = 0; i < gregsList.postings.contents.length; i++ )
+    {
+	
+	var posting = gregsList.postings.contents[i]; 
+	console.log("posting["+i+"]="+posting.sid);
+
+	if ( posting.sid == sid  )
+	{
+	    return posting;
+	}
+    }
+}
+
+
+
 function displayPostingsPortlet(object)
 {
     $("#postingsPortlet").empty();

@@ -60,7 +60,7 @@ function glo()  // gregsList Object
 	    editFunction: editPosting,
 	    updater: "updatePosting",		// php function to update
 	    destroyer: "removePosting", // php function to remove
-	    displayKeys: ["title","url","location","company","source"] // values to display in table
+	    displayKeys: ["sid","title","url","location","company","source"] // values to display in table
 	};
     this.companies =
 	{
