@@ -138,72 +138,6 @@ function insertPosting()
 } //end insertPosting func
 
 
-
-/*
-  Get value from textboxes, and hand off to the butler
-*/
-/*
-function insertPosting()
-{
-    var object = this;
-    console.log("insert posting object");
-    console.log(object);
-
-    var ttl = $("#postingTitleToAdd")[0].value;
-    var link = $("#postingLinkToAdd")[0].value;
-    var comp = $("#postingCompanyToAdd")[0].value;
-    var loc = $("#postingLocationToAdd")[0].value;
-    var src = $("#postingSourceToAdd")[0].value;
-    
-
-    $.ajax
-    (
-	{
-	    url: "butler.php",
-	    type: "post",
-	    dataType: "text",
-	    data:
-	    {
-		user: object.user.name,
-		pass: object.user.password,
-		func: "insertPosting",
-		url: encodeURIComponent(link),
-		title: ttl,
-		company: comp,
-		location: loc,
-		source: src
-	    },
-	    success: function(resp)
-	    {
-		console.log(JSON.parse(resp));
-		// 
-		// clear text fields
-		$("#postingTitleToAdd")[0].value = '';
-		$("#postingLinkToAdd")[0].value = '';
-		$("#postingCompanyToAdd")[0].value = '';
-		$("#postingLocationToAdd")[0].value = '';
-		$("#postingSourceToAdd")[0].value = '';
-
-		if (JSON.parse(resp) === true)
-		{
-		    console.log("input worked");
-		    // displayTable(object,[]);
-		    getStuff(object.postings);
-		}
-		else
-		{
-		    console.log("input failed");
-		}
-	    }	
-	}
-    )
-
-
-    
-}
-
-*/
-
 /*
   Open a dialog box containing the current posting's contents.
   
@@ -385,7 +319,13 @@ function fillPostings(object, input)
     displayTable(object);
     displayPostingsPortlet(object);
 
-    // add analytics to titles on click.
+    embelishTable();
+}
+
+
+function embelishTable()
+{
+   // add analytics to titles on click.  (This probably deserves its own function)
     $("#tableOfPostings tr td:first-child")
 	.click(
 	    function()
@@ -395,8 +335,8 @@ function fillPostings(object, input)
 
 		// build up a dialog string
 		var postingPopUp = '<div id="popUp" title="'+postTitle+'">';
-		postingPopUp += '<button type="button">Notes</button>';
-		postingPopUp += '<button type="button">Dates</button>'
+		postingPopUp += '<button type="button">Notes</button>'; // add notes, view notes
+		postingPopUp += '<button type="button">Dates</button>' // 
 		postingPopUp += '<button type="button">Similar</button>'
 		postingPopUp += '</div>';
 
@@ -423,7 +363,6 @@ function fillPostings(object, input)
 	    }
 	);  // end click
 }
-
 function displayPostingsPortlet(object)
 {
     $("#postingsPortlet").empty();
