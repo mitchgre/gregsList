@@ -21,21 +21,8 @@ function fillBlog(object,input)
 
 }
 
-
-function insertBlog()
+function buildBlogFormString()
 {
-    // var object = this.data; 
-    var object = this.blog; 
-    console.log("from insertBlog: object = ");
-    console.log(object);
-    
-    // console.log("object.sid:");
-    // console.log(object.sid);
-    // var link = object.sid;
-
-
-
-    // build form 
     var string  = '<div id="blogUpdater" title="Update Blog Post">';
     string += '<table id="blogDialogAddTable">';
     
@@ -51,37 +38,100 @@ function insertBlog()
 
     string += '</table></div>';
 
+    
+    return string;
+}
+
+function fixBlogUpdaterDialogCSS()
+{
+    $("#blogUpdater").css("width","100%");
+    $("#blogDialogAddTable").css("height","80%");
+    
+    $("#blogDialogAddTable").css("width","100%");
+    $("#blogDialogAddTable").css("height","80%");
+    
+    $( "#blogUpdateTitleRow" ).css("width","80%");
+    
+    $( "#blogUpdateTitleContent" ).css("width","80%");
+    
+    $( "#blogUpdateTitleContent" ).css("width","80%");
+    
+    $( "#blogUpdateEmbedTitle" ).css("width","80%");
+    
+    $( "#blogUpdateContentRow" ).css("width","80%");
+    $( "#blogUpdateContentRow" ).css("height","80%");
+    
+    $( "#blogPostContentsToAdd" ).css("width","80%");
+    $( "#blogPostContentsToAdd" ).css("height","80%");
+    
+}
+
+
+
+
+function giveBlogInsertionToButler(object,title,text)
+{
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		user: object.parent.user.name,
+		pass: object.parent.user.password,
+		//func: object.updater,
+		// sid: link,
+		title: title,
+		text: text,
+		func: "insertBlog"
+	    },
+	    success: function(resp)
+	    {
+		console.log(resp);
+		//console.log(JSON.parse(resp));
+		// 
+		//				if (JSON.parse(resp) === true)
+		if (resp == "true" )
+		{
+		    console.log("removal worked");
+		    // displayTable(object,[]);
+		    getStuff(object);
+		    object.parent.refresh();
+		}
+		else
+		{
+		    console.log("removal failed");
+		}
+	    }	
+	}
+    );
+    
+}
+
+
+function insertBlog()
+{
+    // var object = this.data; 
+    var object = this.blog; 
+    console.log("from insertBlog: object = ");
+    console.log(object);
+    
+    // build form 
+    var string = buildBlogFormString();
 
 
     $(string).dialog
     (
 	{
-	    // http://stackoverflow.com/questions/13233321/jquery-datepicker-in-a-dialog
 	    width: "80%",
 	    //height: "80%",
 	    height: 400,
 	    
 	    open: function()
 	    {
-		$("#blogUpdater").css("width","100%");
-		$("#blogDialogAddTable").css("height","80%");
-
-		$("#blogDialogAddTable").css("width","100%");
-		$("#blogDialogAddTable").css("height","80%");
-
-		$( "#blogUpdateTitleRow" ).css("width","80%");
-
-		$( "#blogUpdateTitleContent" ).css("width","80%");
-
-		$( "#blogUpdateTitleContent" ).css("width","80%");
-
-		$( "#blogUpdateEmbedTitle" ).css("width","80%");
-
-		$( "#blogUpdateContentRow" ).css("width","80%");
-		$( "#blogUpdateContentRow" ).css("height","80%");
-
-		$( "#blogPostContentsToAdd" ).css("width","80%");
-		$( "#blogPostContentsToAdd" ).css("height","80%");
+		fixBlogUpdaterDialogCSS();
 	    },
 
 	    modal:true, 
@@ -121,42 +171,7 @@ function insertBlog()
 
 
 
-		    $.ajax
-		    (
-			{
-			    url: "butler.php",
-			    type: "post",
-			    dataType: "text",
-			    data:
-			    {
-				user: object.parent.user.name,
-				pass: object.parent.user.password,
-				//func: object.updater,
-				// sid: link,
-				title: title,
-				text: text,
-				func: "insertBlog"
-			    },
-			    success: function(resp)
-			    {
-				console.log(resp);
-				//console.log(JSON.parse(resp));
-				// 
-//				if (JSON.parse(resp) === true)
-				if (resp == "true" )
-				{
-				    console.log("removal worked");
-				    // displayTable(object,[]);
-				    getStuff(object);
-				    object.parent.refresh();
-				}
-				else
-				{
-				    console.log("removal failed");
-				}
-			    }	
-			}
-		    );
+		    giveBlogInsertionToButler(object,title,text);
 		    
 		}
 	    }
