@@ -342,40 +342,52 @@ function embelishTable()
 		var postingObject = getPostingFromSid(sid);		
 		console.log(postingObject);
 		
-		// alert(this.innerHTML);
-		// var postTitle = this.innerHTML;
-		var postTitle = postingObject.title;
-
-		// build up a dialog string
-		var postingPopUp = '<div id="popUp" title="'+postTitle+'">';
-		postingPopUp += '<button type="button">Notes</button>'; // add notes, view notes
-		postingPopUp += '<button type="button">Dates</button>' // 
-		postingPopUp += '<button type="button">Similar</button>'
-		postingPopUp += '</div>';
-
-		$(postingPopUp)
-		    .dialog
-		(
-		    {
-			modal:true,
-			buttons:
-			{
-			    Cancel: function()
-			    {
-				$(this).dialog(close);
-			    },
-			    "Ok":function()
-			    {
-				$(this).dialog(close);
-			    }
-			}
-		    }
-		)
-
+		popUpDialogForJobPosting(postingObject);
+		
 
 	    }
 	);  // end click
 }
+
+
+function popUpDialogForJobPosting(postingObject)
+{
+    var postTitle = postingObject.title;
+    // build up a dialog string
+    var postingPopUp = '<div id="popUp" title="'+postTitle+'">';
+    //postingPopUp += '<button type="button">Similar</button>'
+    postingPopUp += '</div>';
+    
+    $(postingPopUp)
+	.dialog
+    (
+	{
+	    modal:true,
+	    buttons:
+	    {
+		"Show Notes": function()
+		{
+		    console.log("show notes clicked");
+		    
+		    
+		    $(this).dialog('close');
+		},
+		"Add Note":function()
+		{
+		    console.log("add notes clicked");
+		    
+		    $(this).dialog('close');
+		}
+	    }
+	}
+    )
+}
+
+
+function getPostingNotes(postingObject)
+{
+}
+
 
 
 function getPostingFromSid(sid)
