@@ -388,10 +388,13 @@ function popUpDialogForJobPosting(postingObject)
 }
 
 
-function joinBlogToPosting( blogId , postingObject )
+function joinBlogToPosting( blogId , postingId )
 {
     // just send this to the butler and let PHP do the lifting
-
+    console.log("joining blogId:")
+    console.log(blogId);
+    console.log("with posting ID:");
+    console.log(postingId);
 
     $.ajax
     (
@@ -401,11 +404,11 @@ function joinBlogToPosting( blogId , postingObject )
 	    dataType: "text",
 	    data:
 	    {
-		user: object.parent.user.name,
-		pass: object.parent.user.password,
+		user: gregsList.user.name,
+		pass: gregsList.user.password,
 		func: "insertNotesPostingUser",
 		noteId: blogId,
-		postingId: postingObject.sid
+		postingId: postingId
 	    },
 	    success: function(resp)
 	    {
@@ -427,15 +430,6 @@ function joinBlogToPosting( blogId , postingObject )
 		}
 		else
 		    console.log('empty response');
-		// 
-		// clear text fields
-		
-		// $("#postingTitleToAdd")[0].value = '';
-		// $("#postingLinkToAdd")[0].value = '';
-		// $("#postingCompanyToAdd")[0].value = '';
-		// $("#postingLocationToAdd")[0].value = '';
-		// $("#postingSourceToAdd")[0].value = '';
-		
 		
 	    } // end success func
 	} // end ajax json
@@ -456,6 +450,11 @@ function addPostingNote(postingObject)
     
 
     // get blogId
+
+    console.log("from addPostingNote, postingObject.sid = ");
+    console.log(postingObject.sid);
+    console.log("from addPostingNote, blogId = ");
+    console.log(blogId);
 
     // insert blogId to relational table 
     joinBlogToPosting( blogId , postingObject.sid );

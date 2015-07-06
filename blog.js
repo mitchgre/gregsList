@@ -45,10 +45,12 @@ function getBlogId(object,title,text)
 		//				if (JSON.parse(resp) === true)
 		if (resp == "true" )
 		{
-		    console.log("removal worked");
+		    console.log("got blog id");
 		    // displayTable(object,[]);
-		    getStuff(object);
-		    object.parent.refresh();
+		    // getStuff(object);
+		    // object.parent.refresh();
+		    return resp;
+		    // call back
 		}
 		else
 		{
