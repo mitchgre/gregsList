@@ -121,12 +121,6 @@ function insertPosting()
 				// 
 				// clear text fields
 				
-				// $("#postingTitleToAdd")[0].value = '';
-				// $("#postingLinkToAdd")[0].value = '';
-				// $("#postingCompanyToAdd")[0].value = '';
-				// $("#postingLocationToAdd")[0].value = '';
-				// $("#postingSourceToAdd")[0].value = '';
-				
 
 			    } // end success func
 			} // end ajax json
@@ -409,13 +403,9 @@ function joinBlogToPosting( blogId , postingObject )
 	    {
 		user: object.parent.user.name,
 		pass: object.parent.user.password,
-		func: "insertPosting",
-		url: url,// encodeURIComponent(url),
-		//url: encodeURIComponent(url),
-		title: title,
-		company: comp,
-		location: loc,
-		source: source
+		func: "insertNotesPostingUser",
+		noteId: blogId,
+		postingId: postingObject.sid
 	    },
 	    success: function(resp)
 	    {
