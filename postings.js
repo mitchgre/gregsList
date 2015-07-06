@@ -445,9 +445,9 @@ function addPostingNote(postingObject)
     // console.log('this=');
     // console.log(this.gregsList);
     // insert note to blog (generically)
-    var doBlog = insertBlog.bind(this.gregsList);
-    var blogId = doBlog();
-    
+    // var doBlog = insertBlog.bind(this.gregsList);
+    // var blogId = doBlog();
+    var blogId = insertBlog(joinBlogToPosting(blogId,postingObject.sid)).bind(this.gregsList);
 
     // get blogId
 

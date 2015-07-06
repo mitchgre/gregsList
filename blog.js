@@ -20,7 +20,7 @@ function fillBlog(object,input)
     // displayGoalsPortlet(object);
 
 }
-
+	
 function getBlogId(object,title,text)
 {
     $.ajax
@@ -28,8 +28,8 @@ function getBlogId(object,title,text)
 	{
 	    url: "butler.php",
 	    type: "post",
-	    dataType: "text",
-	    data:
+	    dataType: "data",
+	    text:
 	    {
 		user: object.parent.user.name,
 		pass: object.parent.user.password,
@@ -110,8 +110,14 @@ function fixBlogUpdaterDialogCSS()
 
 
 
-function giveBlogInsertionToButler(object,title,text)
+function giveBlogInsertionToButler(object,title,text,callback)
 {
+    console.log("from giveBlogInsertionToButler: callback= ");
+    console.log(callback);
+
+    console.log("typeof callback == 'function'");
+    console.log(typeof callback == 'function');
+
     $.ajax
     (
 	{
@@ -120,8 +126,8 @@ function giveBlogInsertionToButler(object,title,text)
 	    dataType: "text",
 	    data:
 	    {
-		user: object.parent.user.name,
-		pass: object.parent.user.password,
+		user: gregsList.user.name,
+		pass: gregsList.user.password,
 		//func: object.updater,
 		// sid: link,
 		title: title,
@@ -134,12 +140,14 @@ function giveBlogInsertionToButler(object,title,text)
 		//console.log(JSON.parse(resp));
 		// 
 		//				if (JSON.parse(resp) === true)
-		if (resp == "true" )
+		// if (resp == "true" )
+		if ( !isNaN( resp ) )
 		{
-		    console.log("removal worked");
+		    // console.log("removal worked");
 		    // displayTable(object,[]);
-		    getStuff(object);
-		    object.parent.refresh();
+		    // getStuff(object);
+		    // object.parent.refresh();
+		    callback(object);
 		}
 		else
 		{
@@ -152,12 +160,16 @@ function giveBlogInsertionToButler(object,title,text)
 }
 
 
-function insertBlog()
+function insertBlog(callback)
 {
     // var object = this.data; 
     var object = this.blog; 
     console.log("from insertBlog: object = ");
     console.log(object);
+    console.log("callback");
+    console.log(callback);
+    console.log("typeof callback = ");
+    console.log(typeof callback);
     
     // build form 
     var string = buildBlogFormString();
@@ -212,10 +224,10 @@ function insertBlog()
 
 
 
-		    giveBlogInsertionToButler(object,title,text);
+		    giveBlogInsertionToButler(object,title,text,callback);
 		    
 		    // return an id
-		    return getBlogId(object,title,text);
+		    // return getBlogId(object,title,text);
 		}
 	    }
 	}

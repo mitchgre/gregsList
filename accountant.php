@@ -964,7 +964,8 @@ function insertBlog($user)
             $query .= "values (\"" . $noteId ."\",\"" . $user ."\") ";
 
             if ( booleanReturn( $query ) )
-                return true;
+                // return true;
+                return $noteId;
             else
                 return "Error inserting to notes_user";
         }
