@@ -421,10 +421,29 @@ function getNotesOnContact($user,$contactId)
 
 
 
-function getNotesOnPosting($user,$postingId)
+function getNotesOnPosting($userId,$postingId)
 {
-    // 
-    ;
+    // container for noteIds
+    $noteIds = [];
+
+    $query  = "select note from notes_posting_user ";
+    $query .= "where posting=".$postingId." and user=".$userId;
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id);
+            
+            while($statement->fetch())
+                {
+                    array_push($noteIds,$id);
+                }
+        }
+    mysqli_close($mysqli);
+
+    return $noteIds;
 }
 
 

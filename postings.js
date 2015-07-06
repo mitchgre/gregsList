@@ -573,6 +573,31 @@ function getPostingNotes(postingObject)
 {
     // get the butler to give you all the notes on this posting
     console.log('gonna get them notes.');
+    
+    
+    // expect an array of sIDs corresponding to the blogIds.
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		user: gregsList.user.name,
+		pass: gregsList.user.password,
+		func: "getNotesPosting",
+		postingId: postingObject.sid
+	    },
+	    success: function(resp)
+	    {
+		console.log("got notes on posting " + postingObject.sid);
+		console.log(resp);
+		// callback should display a tableOfBlogs.
+	    } // end success func
+	} // end ajax json
+    ) // end ajax parameters
+    
 }
 
 
