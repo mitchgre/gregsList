@@ -398,6 +398,35 @@ function getBlog($user)
 
 
 
+function getNotesOnGoal($user,$goalId)
+{
+    ;
+}
+
+function getNotesOnIndustry($user,$industryId)
+{
+    ;
+}
+
+
+function getNotesOnLocation($user,$locationId)
+{
+    ;
+}
+
+function getNotesOnContact($user,$contactId)
+{
+    ;
+}
+
+
+
+function getNotesOnPosting($user,$postingId)
+{
+    // 
+    ;
+}
+
 
 
 /*==========================================================

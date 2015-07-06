@@ -90,6 +90,10 @@ if (isset($_POST['func']))
             {
                 echo json_encode(getBlog($user));
             }
+        if ($func === "getNotesOnPosting")
+            {
+                echo json_encode(getNotesOnPosting($user));
+            }
         // inserters ===============================
         if ($func === "insertGoal")
             {
