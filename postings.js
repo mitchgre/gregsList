@@ -348,7 +348,7 @@ function popUpDialogForJobPosting(postingObject)
 {
     var postTitle = postingObject.title;
     // build up a dialog string
-    var postingPopUp = '<div id="popUp" title="'+postTitle+'">';
+    var postingPopUp = '<div id="popUpWindowForJobPosting" title="'+postTitle+'">';
     //postingPopUp += '<button type="button">Similar</button>'
     postingPopUp += '</div>';
     
@@ -365,7 +365,7 @@ function popUpDialogForJobPosting(postingObject)
 
 		    getPostingNotes(postingObject);
 
-		    $(this).dialog('close');
+		    // $(this).dialog('close');
 
 		    // open dialog showing all blog posts that link to this posting
 		    
@@ -591,9 +591,59 @@ function getPostingNotes(postingObject)
 	    },
 	    success: function(resp)
 	    {
+		// resp contains an array of ints (sIDs to blog postings)
+		// the blog texts should already be loaded in javascript memory. 
+		// (gregsList.blog.contents)
+		var postingBlogIDs = JSON.parse(resp);
+
 		console.log("got notes on posting " + postingObject.sid);
 		console.log(resp);
-		// callback should display a tableOfBlogs.
+		console.log(JSON.parse(resp));
+
+
+		// get a reference to the popUp dialog window in DOM
+		var div = document.getElementById('popUpWindowForJobPosting');
+		
+
+		// callback should display a tableOfBlogs.		
+		// var tableTitle = '"tableOfBlogsOn'+postingObject.title+'"';
+		var tableTitle = 'tableOfBlogsOnPosting';
+		var table = createAppendedChildToParent('table',div);
+		table.id = tableTitle;
+		table.border = '1';
+		// $('#popUpWindowForJobPosting').append("<table id="+tableTitle+"></table>");
+
+		
+
+		// loop over postingBlogIDs
+		console.log("looping over blog ids");
+		for ( var i = 0; i < postingBlogIDs.length; i++ )
+		{
+		    
+		    var thisID = postingBlogIDs[i];
+		    // console.log("i="+i);
+		    console.log("thisID="+thisID);
+		    // var tr = createAppendedChildToParent(tr,table);
+		    // tr.innerHTML = gregsList.blog.contents[thisID].text;
+
+
+		    
+		    // loop over gregsList.blog.contents
+		    for ( var j = 0;  j < gregsList.blog.contents.length; j++ )
+		    {
+			// console.log("j="+j)
+			console.log(gregsList.blog.contents[j].sid);
+
+			if ( gregsList.blog.contents[j].sid ==  thisID  )
+			{
+			    // insert blog to DOM table
+			    console.log()
+			    var tr = createAppendedChildToParent('tr',table);
+			    var td = createAppendedChildToParent('td',tr);
+			    td.innerHTML = gregsList.blog.contents[ j ].text;
+			}
+		    }
+		}
 	    } // end success func
 	} // end ajax json
     ) // end ajax parameters

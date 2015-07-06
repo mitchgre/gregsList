@@ -429,8 +429,9 @@ function getNotesOnPosting($userId,$postingId)
     // container for noteIds
     $noteIds = [];
 
-    $query  = "select note from notes_posting_user ";
-    $query .= "where posting=".$postingId." and user=".$userId;
+    $query  = "select notes_user.id from notes_posting_user ";
+    $query .= "inner join notes_user on notes_posting_user.note = notes_user.note ";
+    $query .= "where notes_posting_user.posting=".$postingId." and notes_user.user=".$userId;
     
     if ($statement = $mysqli->prepare($query))
         {
