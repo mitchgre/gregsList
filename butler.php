@@ -176,7 +176,11 @@ if (isset($_POST['func']))
             }
         if ($func === "insertPostingNote")
             {
-                echo json_encode(insertPostingNote($user));
+                $noteId = $_POST['noteId'];
+                $postingId = $_POST('postingId');
+                
+                echo json_encode(
+                    insertPostingNote($noteId,$postingId,$user));
             }
 
         // removers ===============================

@@ -213,7 +213,7 @@ function insertBlog()
 		    giveBlogInsertionToButler(object,title,text);
 		    
 		    // return an id
-		    // return getBlogId(title,text);
+		    return getBlogId(title,text);
 		}
 	    }
 	}

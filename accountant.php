@@ -974,6 +974,38 @@ function insertBlog($user)
     
 }
 
+function insertNotesGoalUser($noteId,$goalId,$userId)
+{
+}
+
+function insertNotesCompanyUser($noteId,$companyId,$userId,)
+{
+}
+
+function insertNotesIndustryUser($noteId,$industryId,$userId)
+{
+}
+
+
+function insertNotesPostingUser($noteId, $postingId, $userId,)
+{
+    $query = "insert into notes_posting_user (note,posting,user) ";
+    $query .= "values (\"" . $noteId ."\",\"". $postingId ."\",\"".$userId."\") ";
+    
+    if ( booleanReturn($query) )
+        {
+                return true;
+        }
+    else
+        return "Error inserting to notes_posting_user.";         
+}
+
+
+
+
+
+
+
 
 /*==========================================================
         END INSERTERS, START REMOVERS

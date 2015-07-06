@@ -396,8 +396,63 @@ function popUpDialogForJobPosting(postingObject)
 
 function joinBlogToPosting( blogId , postingObject )
 {
-    // 
+    // just send this to the butler and let PHP do the lifting
+
+
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		user: object.parent.user.name,
+		pass: object.parent.user.password,
+		func: "insertPosting",
+		url: url,// encodeURIComponent(url),
+		//url: encodeURIComponent(url),
+		title: title,
+		company: comp,
+		location: loc,
+		source: source
+	    },
+	    success: function(resp)
+	    {
+		if (resp !== '')
+		{					
+		    console.log(JSON.parse(resp));
+		    if (JSON.parse(resp) === true)
+		    {
+			console.log("input worked");
+			// displayTable(object,[]);
+			// getStuff(object.parent);
+			object.parent.refresh();
+		    }
+		    else
+		    {
+			console.log("input failed");
+		    }
+		    
+		}
+		else
+		    console.log('empty response');
+		// 
+		// clear text fields
+		
+		// $("#postingTitleToAdd")[0].value = '';
+		// $("#postingLinkToAdd")[0].value = '';
+		// $("#postingCompanyToAdd")[0].value = '';
+		// $("#postingLocationToAdd")[0].value = '';
+		// $("#postingSourceToAdd")[0].value = '';
+		
+		
+	    } // end success func
+	} // end ajax json
+    ) // end ajax parameters
 }
+
+
 
 
 function addPostingNote(postingObject)
@@ -413,7 +468,7 @@ function addPostingNote(postingObject)
     // get blogId
 
     // insert blogId to relational table 
-    // joinBlogToPosting( blogId , postingObject.sid );
+    joinBlogToPosting( blogId , postingObject.sid );
     
 }
 
