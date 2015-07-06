@@ -21,7 +21,7 @@ function fillBlog(object,input)
 
 }
 
-function getBlogId(title,text)
+function getBlogId(object,title,text)
 {
     $.ajax
     (
@@ -213,7 +213,7 @@ function insertBlog()
 		    giveBlogInsertionToButler(object,title,text);
 		    
 		    // return an id
-		    return getBlogId(title,text);
+		    return getBlogId(object,title,text);
 		}
 	    }
 	}

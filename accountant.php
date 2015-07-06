@@ -997,7 +997,7 @@ function insertNotesPostingUser($noteId, $postingId, $userId)
     
     if ( booleanReturn($query) )
         {
-                return true;
+            return true;
         }
     else
         return "Error inserting to notes_posting_user.";         
