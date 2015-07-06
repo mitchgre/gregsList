@@ -586,7 +586,7 @@ function getPostingNotes(postingObject)
 	    {
 		user: gregsList.user.name,
 		pass: gregsList.user.password,
-		func: "getNotesPosting",
+		func: "getNotesOnPosting",
 		postingId: postingObject.sid
 	    },
 	    success: function(resp)

@@ -423,6 +423,9 @@ function getNotesOnContact($user,$contactId)
 
 function getNotesOnPosting($userId,$postingId)
 {
+
+    $mysqli = connectToDB();
+
     // container for noteIds
     $noteIds = [];
 
