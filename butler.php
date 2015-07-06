@@ -176,8 +176,14 @@ if (isset($_POST['func']))
             }
         if ($func === "insertNotesPostingUser")
             {
-                $noteId = $_POST["noteId"];
+                // insertBlog, then insertNotesPostingUser
+
+                $noteId = insertBlog($user);
+
+                // $noteId = $_POST["noteId"];
                 $postingId = $_POST["postingId"];
+
+                
                 
                 echo json_encode(
                     insertNotesPostingUser($noteId,$postingId,$user));

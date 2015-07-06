@@ -438,27 +438,147 @@ function joinBlogToPosting( blogId , postingId )
 
 
 
+function givePostingNoteInsertionToButler(object,title,text,callback)
+{
+    console.log("from giveBlogInsertionToButler: callback= ");
+    console.log(callback);
 
+    console.log("typeof callback == 'function'");
+    console.log(typeof callback == 'function');
+
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		user: gregsList.user.name,
+		pass: gregsList.user.password,
+		//func: object.updater,
+		// sid: link,
+		title: title,
+		text: text,
+		postingId: object.sid,
+		func: "insertNotesPostingUser"
+	    },
+	    success: function(resp)
+	    {
+		console.log(resp);
+		//console.log(JSON.parse(resp));
+		// 
+		//				if (JSON.parse(resp) === true)
+		// if (resp == "true" )
+		if ( !isNaN( resp ) )
+		{
+		    // console.log("removal worked");
+		    // displayTable(object,[]);
+		    // getStuff(object);
+		    // object.parent.refresh();
+		    // callback(object);
+		    
+		    // resp should contain the blogId
+		    
+		    // need to call insertNotesPostingUser
+		    
+		}
+		else
+		{
+		    console.log("removal failed");
+		}
+	    }	
+	}
+    );
+    
+}
+
+
+
+// gets called when posting title is clicked, and "addNote" is selected
 function addPostingNote(postingObject)
 {
+    // postingObject is a specific post.
+    // console.log("postingObject=");
+    // console.log(postingObject);
 
-    // console.log('this=');
-    // console.log(this.gregsList);
-    // insert note to blog (generically)
-    // var doBlog = insertBlog.bind(this.gregsList);
-    // var blogId = doBlog();
-    var blogId = insertBlog(joinBlogToPosting(blogId,postingObject.sid)).bind(this.gregsList);
-
-    // get blogId
-
-    console.log("from addPostingNote, postingObject.sid = ");
-    console.log(postingObject.sid);
-    console.log("from addPostingNote, blogId = ");
-    console.log(blogId);
-
-    // insert blogId to relational table 
-    joinBlogToPosting( blogId , postingObject.sid );
+    console.log("addPostingNote called.");
     
+    // Mon Jul 06, 2015 15:32:03
+    // copy a lot of functionality from insertBlog.
+    // couldn't get it to work as a composition, but a decomposition might be easier.
+
+
+    // build form 
+    var string = buildBlogFormString();
+
+
+    $(string).dialog
+    (
+	{
+	    width: "80%",
+	    //height: "80%",
+	    height: 400,
+	    
+	    open: function()
+	    {
+		fixBlogUpdaterDialogCSS();
+	    },
+
+	    modal:true, 
+	    buttons:
+	    {
+		Cancel: function() 
+		{
+		    $(this).dialog("close")
+		},
+		"Update":function()
+		{
+		    // get values from form
+		    var title = $("#blogUpdateEmbedTitle")[0].value;
+		    var text = $("#blogPostContentsToAdd")[0].value;
+
+		    // display what we're doing
+		    console.log("sending " + 
+				"title=" + title + ", " +
+				"text=" + text + ", " +
+				" to the butler."
+			       );
+
+		    
+		    // give values to butler
+		    
+		    $(this).dialog("close");
+		    // emptyElement($("#scheduleUpdater")[0]);
+		    var toDestroy = 
+			[
+			    "blogPostContentsToAdd",
+			    "blogDialogAddTable",
+			    "blogUpdater"
+			];
+
+		    for (var i=0; i < toDestroy.length; i++)
+			removeElement(toDestroy[i]);
+
+		    // var callback = joinBlogToPosting( blogId , postingObject.sid );
+
+		    // giveBlogInsertionToButler(object,title,text,callback);
+		    
+		    // return an id
+		    // return getBlogId(object,title,text);
+
+		    givePostingNoteInsertionToButler(postingObject,title,text)
+
+
+		}
+	    }
+	}
+    );
+
+
+
+
+
 }
 
 
