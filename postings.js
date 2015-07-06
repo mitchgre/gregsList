@@ -470,23 +470,17 @@ function givePostingNoteInsertionToButler(object,title,text,callback)
 		// 
 		//				if (JSON.parse(resp) === true)
 		// if (resp == "true" )
-		if ( !isNaN( resp ) )
+		/*
+		if ( !isNaN( resp ) )  // response should be a number?
 		{
-		    // console.log("removal worked");
-		    // displayTable(object,[]);
-		    // getStuff(object);
-		    // object.parent.refresh();
-		    // callback(object);
-		    
-		    // resp should contain the blogId
-		    
-		    // need to call insertNotesPostingUser
-		    
+		    gregsList.refresh();
 		}
 		else
 		{
-		    console.log("removal failed");
+		    console.log("something went wrong in 'givePostingNoteInsertionToButler' ");
 		}
+		*/
+		gregsList.refresh();
 	    }	
 	}
     );
@@ -560,13 +554,6 @@ function addPostingNote(postingObject)
 		    for (var i=0; i < toDestroy.length; i++)
 			removeElement(toDestroy[i]);
 
-		    // var callback = joinBlogToPosting( blogId , postingObject.sid );
-
-		    // giveBlogInsertionToButler(object,title,text,callback);
-		    
-		    // return an id
-		    // return getBlogId(object,title,text);
-
 		    givePostingNoteInsertionToButler(postingObject,title,text)
 
 
@@ -584,6 +571,8 @@ function addPostingNote(postingObject)
 
 function getPostingNotes(postingObject)
 {
+    // get the butler to give you all the notes on this posting
+    console.log('gonna get them notes.');
 }
 
 

@@ -20,7 +20,14 @@ function fillBlog(object,input)
     // displayGoalsPortlet(object);
 
 }
-	
+
+
+/*
+  Mon Jul 06, 2015 16:01:15
+  This function is broken..
+
+  Maybe it should be deleted.
+*/	
 function getBlogId(object,title,text)
 {
     $.ajax
