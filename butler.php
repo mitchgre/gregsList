@@ -236,8 +236,12 @@ if (isset($_POST['func']))
             }
         if ($func === "removeBlog")
             {
-                $noteId = $_POST["url"];  // scheduleID is stored here
-                if ( removeNoteUser($user,$noteId) === true )
+                $userNoteId = $_POST["url"];  
+                // need to get noteId from userNoteId
+
+                $noteId = getNoteIdFromUserNoteId($userNoteId);
+
+                if ( removeNoteUser($user,$userNoteId) === true )
                     {
                         if ( removeNote( $noteId ) === true )
                             {

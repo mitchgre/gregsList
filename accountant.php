@@ -397,6 +397,12 @@ function getBlog($user)
 }
 
 
+function getNoteIdFromUserNoteId($userId,$userNoteId)
+{
+    $query = "select note from notes_user where user=$userId and id=$userNoteId";
+    return reset(returnStuff($query));
+}
+
 
 function getNotesOnGoal($user,$goalId)
 {
@@ -1321,7 +1327,7 @@ function removePosting($user)
 function removeNoteUser($userId, $noteUserId)
 {
     
-    $query  = "delete from notes_user where user = $userId and note = $noteId";
+    $query  = "delete from notes_user where id = $noteUserId";
     
     booleanReturn($query);
 }
