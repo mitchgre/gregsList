@@ -29,8 +29,8 @@ function insertLocation()
 		{
 		    console.log("input worked");
 		    // displayTable(object,[]);
-		    // getStuff(object.locations);
-		    object.parent.refresh();
+		    getStuff(object.locations);
+		    // object.refresh();
 		}
 		else
 		{

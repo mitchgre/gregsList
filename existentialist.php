@@ -15,8 +15,6 @@ function userCompanyToUserIndustry($user)
     
     $companyIds = $companies->{'ids'};
 
-    
-
 }
 
 /*
@@ -138,7 +136,7 @@ function contactExists($fname,$lname,$email,$phone,$facebook,$linkedin,$github)
 function userContactExists($user,$contactId)
 {
     $query  = "select count(id) from user_contacts ";
-    $query .= "where contact=$contactId and $user=$user";
+    $query .= "where contact=$contactId and $user=$user"; // questionable
     $count = reset(returnStuff($query));
 
     if ( $count > 0 )
@@ -154,5 +152,17 @@ function countUsersTrackingContactId($contactId)
 }
 
 
+
+function userScheduleExists($user,$scheduleId)
+{
+    $query  = "select count(id) from user_schedule ";
+    $query .= "where schedule=$scheduleId and user=$user";
+    $count = reset(returnStuff($query));
+
+    if ( $count > 0 )
+        return true;
+    return false;
+    
+}
 
 ?>
