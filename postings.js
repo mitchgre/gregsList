@@ -366,7 +366,7 @@ function popUpDialogForJobPosting(postingObject)
 		    getPostingNotes(postingObject);
 
 		    // $(this).dialog('close');
-
+		    
 		    // open dialog showing all blog posts that link to this posting
 		    // postingPopUp.innerHTML = '';
 		    // emptyElement(postingPopUp);
@@ -576,6 +576,43 @@ function getPostingNotes(postingObject)
     // get the butler to give you all the notes on this posting
     console.log('gonna get them notes.');
     
+    // use document create element
+    var postingPopUp;
+    if ( document.getElementById('popUpNotesOnPosting') === null ) // doesn't exist
+    {
+	// postingPopUp = '<div id="popUpNotesOnPosting" title="'+postingObject.title+'"Notes>';
+	postingPopUp = document.createElement('div');
+	postingPopUp.id = 'popUpNotesOnPosting';
+	postingPopUp.title = postingObject.title;
+	// // postingPopUp += '<button type="button">Similar</button>'
+	// postingPopUp += '</div>';
+    }
+    else // div already exists
+	postingPopUp = document.getElementById('popUpNotesOnPosting');
+    
+    // var postingPopUp = document.createElement('div');
+    // postingPopUp.id = postingObject.title + 'Notes';
+    // createAppendedChildToParent(postingPopUp);
+
+
+    $(postingPopUp)
+	.dialog
+    (
+	{
+	    modal:true,
+	    buttons:
+	    {
+		"OK": function()
+		{
+		    emptyElement(postingPopUp);
+		    $(this).dialog('close');
+		}
+	    }
+	}
+    );
+
+
+
     
     // expect an array of sIDs corresponding to the blogIds.
     $.ajax
@@ -604,7 +641,8 @@ function getPostingNotes(postingObject)
 
 
 		// get a reference to the popUp dialog window in DOM
-		var div = document.getElementById('popUpWindowForJobPosting');
+		// var div = document.getElementById(postingPopUp.id);
+		var div = document.getElementById("popUpNotesOnPosting");
 		emptyElement(div);
 		console.log(div.innerHTML)
 
