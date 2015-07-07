@@ -60,7 +60,7 @@ function glo()  // gregsList Object
 	    editFunction: editPosting,
 	    updater: "updatePosting",		// php function to update
 	    destroyer: "removePosting", // php function to remove
-	    displayKeys: ["title","url","location","company","source"] // values to display in table
+	    displayKeys: ["sid","title","url","location","company","source"] // values to display in table
 	};
     this.companies =
 	{
@@ -117,9 +117,23 @@ function glo()  // gregsList Object
 	    type: "schedule",
 	    get: "getSchedules",
 	    display: displayTable,//displaySchedules,
-	    destroyer: "removeContact", // php function to remove
+	    destroyer: "removeSchedule", // php function to remove
 	    table: $("#tableOfEvents")[0],
 	    displayKeys: ["name","description","contact","start","end"],
+	    add: null
+	};
+    this.blog =
+	{
+	    parent: this,
+	    contents: [],
+	    filler: fillBlog,
+	    removeFunction: remover,
+	    type: "blog",
+	    get: "getBlog",
+	    display: displayTable,//displaySchedules,
+	    destroyer: "removeBlog", // php function to remove
+	    table: $("#tableOfBlogs")[0],
+	    displayKeys: ["text"],
 	    add: null
 	};
     this.login();
@@ -283,6 +297,8 @@ glo.prototype.refresh =
     object.setupPostings();
     object.setupContacts();
     object.setupSchedules();
+    object.setupBlog();
+
 }
 
 
@@ -470,6 +486,10 @@ glo.prototype.setupPostings =
     
     emptyElement(postings);
 
+     var addButton = addInput(postings,'button','','Add posting','addPostingButton');
+
+
+    /*
     // add inputs
     var input = createAppendedChildToParent('table',postings);
     input.style.width = "100%";
@@ -500,6 +520,7 @@ glo.prototype.setupPostings =
     var td = createAppendedChildToParent('td',tr);
     td.appendChild(document.createTextNode('Source'));
     var sourceField = addInput(td,'text','','','postingSourceToAdd');
+    */
 
 
     // wire button
@@ -593,6 +614,36 @@ glo.prototype.setupContacts =
 }
 
 
+/*
+  Empty the tables of blog and rebuild them.
+*/
+glo.prototype.setupBlog = 
+    function setupBlog()
+{
+    var blog = $("#blog")[0]; // container div
+    
+    emptyElement(blog);
+
+    // add text fields
+    // blog.appendChild(document.createTextNode('Blog'));
+    var blogField = addInput(blog,'text','','','BlogToAdd');
+
+    // add button
+    var addButton = addInput(blog,'button','','Add Blog','addBlogButton');
+
+    // wire button
+    addButton.onclick = insertBlog.bind(this);
+
+    // insert empty results table
+    var table = createAppendedChildToParent('table',blog);
+    this.blog.table = table;
+    table.id = 'tableOfBlog';
+    table.className = 'io';
+
+    // fill results table
+    getStuff(this.blog);
+
+}
 
 
 /*
@@ -736,7 +787,7 @@ function displayTable(object)
     // console.log("input");
     // console.log(input);
 
-    // add headers
+    // add headers (for table)
     for (var i = 0; i < object.displayKeys.length; i++)
     {
 	var th = createAppendedChildToParent('th',tr);
@@ -756,8 +807,24 @@ function displayTable(object)
 	    if (isInArray(key, object.displayKeys))
 		{
 		    var td = createAppendedChildToParent('td',tr);
+
+
+		    // http://stackoverflow.com/questions/10888198/how-do-i-get-html-tags-inside-of-a-javascript-text-node
+
+		    // the following does not work 
+		    // if element is a link
+		    // --------------------------
+		    
+		    /*
 		    var content = document.createTextNode(contents[key]);
 		    td.appendChild(content);
+		    */
+
+		    // there's probably a way around using innerHTML
+		    // but this is quick and dirty for now
+		    
+		    td.innerHTML = contents[key];
+
 		    // next cell
 		}
 	}

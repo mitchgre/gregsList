@@ -68,3 +68,11 @@ function schedule(sid,name,description,location,contact,url,start,end)
 }
 
 
+function blog(sid,title,text)
+{
+    this.sid = sid || null;
+    this.title = title || null;
+    this.text = text || null;
+}
+
+

@@ -354,6 +354,102 @@ function getSchedules($user)
 }
 
 
+function getBlog($user)
+{
+    $ids = [];
+    $titles = [];
+    $texts = [];
+    
+    $mysqli = connectToDB();
+    
+// select notes_user.id, notes.text from notes_user inner join notes on notes_user.note = notes.id;
+    
+    $query = "select notes_user.id, notes.title, notes.text from notes_user ";
+    $query .= "inner join notes on notes_user.note = notes.id ";
+//    $query .= "inner join user on notes_user.user = user.id ";
+    $query .= "where user=$user ";
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id,$title,$text);
+            
+            while($statement->fetch())
+                {
+                    array_push($ids,$id);
+                    array_push($titles,$title);
+                    array_push($texts,$text);
+                }
+        }
+    mysqli_close($mysqli);
+    
+    // associate arrays
+    $blog = array
+        (
+            "ids" => $ids,
+            "titles" => $titles,
+            "texts" => $texts
+        );
+    
+    return $blog;
+}
+
+
+
+function getNotesOnGoal($user,$goalId)
+{
+    ;
+}
+
+function getNotesOnIndustry($user,$industryId)
+{
+    ;
+}
+
+
+function getNotesOnLocation($user,$locationId)
+{
+    ;
+}
+
+function getNotesOnContact($user,$contactId)
+{
+    ;
+}
+
+
+
+function getNotesOnPosting($userId,$postingId)
+{
+
+    $mysqli = connectToDB();
+
+    // container for noteIds
+    $noteIds = [];
+
+    $query  = "select notes_user.id from notes_posting_user ";
+    $query .= "inner join notes_user on notes_posting_user.note = notes_user.note ";
+    $query .= "where notes_posting_user.posting=".$postingId." and notes_user.user=".$userId;
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id);
+            
+            while($statement->fetch())
+                {
+                    array_push($noteIds,$id);
+                }
+        }
+    mysqli_close($mysqli);
+
+    return $noteIds;
+}
+
 
 
 /*==========================================================
@@ -476,7 +572,7 @@ function insertCompany($user,$companyName)
             if ($count > 0) // user already has a reference to company
                 {
                     mysqli_close($mysqli);
-                    echo json_encode(["ERROR: User $user is already tracking $companyName"]);
+                    echo json_encode("ERROR: User $user is already tracking $companyName");
                 }
             else // link user to company in user_companies
                 { 
@@ -541,7 +637,7 @@ function addCompany($companyName)
 function addUserCompany($user,$companyId)
 {
     
-    $query  = "insert into companies (user,company) ";
+    $query  = "insert into user_companies (user,company) ";
     $query .= "values ($user,$companyId) "; 
     return booleanReturn($query);
     
@@ -653,7 +749,8 @@ function addUserLocation($user,$locationName)
 function insertPosting($user)
 {
     $title = $_POST["title"];
-    $url = urldecode($_POST["url"]);
+    //$url = urldecode($_POST["url"]);
+    $url = $_POST["url"];
     $companyName = $_POST["company"];
     $locationName = $_POST["location"]; # string value needs to be converted to int
     $source = $_POST["source"];
@@ -668,32 +765,42 @@ function insertPosting($user)
     if (locationExists($locationName) != true)
         addLocation($locationName);
     
-    $locationId = getLocationId($locationName);
-
     // add locationId to user_locations if it doesn't already exist
     if ( userLocationExists($user,$locationId) !== true )
         {
-            return addUserLocation($user,$locationId);
+            // return addUserLocation($user,$locationId);
+            addUserLocation($user,$locationId);
         }
+
+    $locationId = getLocationId($locationName);
+
 
     // add $companyName to companies if it doesn't exist already
     if (companyIdExists($companyName) != true)
-        addCompany($companyName);
+        if ( addCompany($companyName) === false )
+            return "error adding company";
     
     $companyId = getCompanyId($companyName);
 
-    if ( userCompanyIdExists($user,$companyId) )
-        addUserCompany($user,$companyId);
+    if ( userCompanyIdExists($user,$companyId) === false )
+        if ( addUserCompany($user,$companyId) === false )
+            return "error adding user_company: $user, $companyId, $companyName";
     
     // check if $url is valid
     
     $query  = "insert into postings (title,url,company,location,source,user) ";
     $query .= "values(\"$title\", \"$url\", ";
     $query .= "$companyId, $locationId, \"$source\", $user)";
+
+
+    // return json_encode(preparedStatement($query));
+
+    // if (booleanReturn($query))
+    
     if (booleanReturn($query))
-        echo json_encode(true);
+        return true;
     else
-        echo "failed to add posting";
+        return "failed to add posting: " . $query;
     
 }
 
@@ -792,6 +899,8 @@ function insertSchedule($user)
 {
     // should error check that all post fields are set
 
+
+
     $name = $_POST["name"];
     $description = $_POST["description"];
     $contact = $_POST["contact"];
@@ -801,17 +910,34 @@ function insertSchedule($user)
     // $name,$description,$contact,$start,$end
     // add to schedules if it doesnt' exist already
     
+/*
     if ( scheduleExists($name,$description,$contact,$start,$end) !== true)
         if ( addSchedule($name,$description,$contact,$start,$end) !== true )
             return "error adding to schedules";
+*/  
+//    return addSchedule($name,$description,$contact,$start,$end);
     
-    // return addSchedule($name,$description,$contact,$start,$end);
+
+    if ( addSchedule($name,$description,$contact,$start,$end) )
+        {
+            $scheduleId = getScheduleId($name,$description,$contact,$start,$end);
+            
+            return $scheduleId;
     
-    $scheduleId = getScheduleId($name,$description,$contact,$start,$end);
+            $query  = "insert into user_schedule ";
+            $query .= "(user,schedule) ";
+            $query .= "values ( $user, $scheduleId) ";
+            
+            booleanReturn($query);
+        }
+    else 
+        return "error inserting schedule";
 
     // return "schedule id = " . $scheduleId;
 
     // add to user_schedules if it doesn't already exist
+
+    /*
     if ( userScheduleExists($user,$scheduleId) !== true)
         {
             // return "schedule $scheduleId exists";
@@ -826,16 +952,16 @@ function insertSchedule($user)
             return "existential problem. for $scheduleId";
         }
     
-
+    */
 }
 
 
 function getScheduleId($name,$description,$contact,$start,$end)
 {
-    $query  = "select id from  schedules ";
+    $query  = "select id from  schedule ";
     $query .= "where name = \"$name\" ";
     $query .= "and description = \"$description\" ";
-    $query .= "and contact = $contact ";
+    $query .= "and contact = \"$contact\" ";
     $query .= "and start =  \"$start\" ";
     $query .= "and end = \"$end\" ";
     
@@ -845,17 +971,92 @@ function getScheduleId($name,$description,$contact,$start,$end)
 
 function addSchedule($name,$description,$contact,$start,$end)
 {
-    $query  = "insert into schedules ";
+    $query  = "insert into schedule ";
     $query .= "(name,description,contact,start,end) ";
     $query .= "values ( \"$name\", ";
     $query .= " \"$description\", ";
-    $query .= " $contact, ";
+    $query .= " \"$contact\", ";
     $query .= " \"$start\", ";
     $query .= " \"$end\") ";
     
     //return $query;
     return booleanReturn($query);
 }
+
+
+function getBlogId($user,$title,$text)
+{
+    $query = "select id from notes ";
+    $query .= "where title=\"" . $title ."\"";
+    $query .= "and text=\"" . $text ."\" ";
+    
+    $noteId = reset(returnStuff($query));
+    //return "noteId = " . $noteId;
+    return $noteId;
+}
+
+
+function insertBlog($user)
+{
+    // get text from $_POST[]
+
+    $title = $_POST["title"];
+    $text = $_POST["text"];
+    
+    $query = "insert into notes (title,text) ";
+    $query .= "values (\"" . $title ."\",\"". $text ."\") ";
+
+    if ( booleanReturn($query) )
+        {
+            // get id of note that was just added.
+            $noteId = getBlogId($user,$title,$text);
+
+            // insert noteId and userId to notes_user
+            $query = "insert into notes_user (note,user) ";
+            $query .= "values (\"" . $noteId ."\",\"" . $user ."\") ";
+
+            if ( booleanReturn( $query ) )
+                // return true;
+                return $noteId;
+            else
+                return "Error inserting to notes_user";
+        }
+    else
+        return "Error inserting to notes.";
+
+    
+}
+
+function insertNotesGoalUser($noteId,$goalId,$userId)
+{
+    ;
+}
+
+function insertNotesCompanyUser($noteId,$companyId,$userId)
+{
+    ;
+}
+
+function insertNotesIndustryUser($noteId,$industryId,$userId)
+{
+    ;
+}
+
+
+function insertNotesPostingUser($noteId, $postingId, $userId)
+{
+    $query = "insert into notes_posting_user (note,posting,user) ";
+    $query .= "values (\"" . $noteId ."\",\"". $postingId ."\",\"".$userId."\") ";
+    
+    if ( booleanReturn($query) )
+        {
+            return true;
+        }
+    else
+        return "Error inserting to notes_posting_user.";         
+}
+
+
 
 
 
@@ -865,6 +1066,48 @@ function addSchedule($name,$description,$contact,$start,$end)
 /*==========================================================
         END INSERTERS, START REMOVERS
 ===========================================================*/
+
+
+function removeSchedule($user, $scheduleId)
+{
+    // userScheduleId is the id for user_schedules, not schedules
+    // if no one else is tracking this schedule, delete from schedule
+    // echo json_encode("trying to remove $scheduleId.");
+    // need to get schedule.id from this before deletion
+    // $query = "select schedule from user_schedule where =$scheduleId";
+    // $scheduleId = reset(returnStuff($query));
+    //echo json_encode("schedule id: " . $scheduleId);
+
+    // count how many users are tracking this schedule
+    $query  = "select count(users.id) from user_schedule ";
+    $query .= "inner join schedule on user_schedule.schedule = schedule.id ";
+    $query .= "inner join users on user_schedule.user = users.id ";
+    $query .= "where schedule.id = $scheduleId";
+    
+    $count = reset(returnStuff($query));
+    
+    // echo json_encode("$count users tracking this schedule.");
+
+    // remove first from user_schedule
+    $query = "delete from user_schedule where schedule = $scheduleId";
+    if ( preparedStatement($query) )
+        {
+            if ( $count < 2 )  // delete from schedule also
+                {
+                    $query = "delete from schedule where id = $scheduleId";
+                    return booleanReturn($query);
+                }
+            else
+                return true;
+        }
+    else
+        {
+            return "error deleting from user_schedule";
+        }
+        
+}
+
+
 
 function removeGoal($user,$userGoalId)
 {
