@@ -368,7 +368,8 @@ function popUpDialogForJobPosting(postingObject)
 		    // $(this).dialog('close');
 
 		    // open dialog showing all blog posts that link to this posting
-		    
+		    // postingPopUp.innerHTML = '';
+		    // emptyElement(postingPopUp);
 		},
 		"Add Note":function()
 		{
@@ -382,6 +383,7 @@ function popUpDialogForJobPosting(postingObject)
 		    // get sid of blog post
 
 		}
+		
 	    }
 	}
     )
@@ -603,7 +605,8 @@ function getPostingNotes(postingObject)
 
 		// get a reference to the popUp dialog window in DOM
 		var div = document.getElementById('popUpWindowForJobPosting');
-		
+		emptyElement(div);
+		console.log(div.innerHTML)
 
 		// callback should display a tableOfBlogs.		
 		// var tableTitle = '"tableOfBlogsOn'+postingObject.title+'"';
@@ -632,12 +635,12 @@ function getPostingNotes(postingObject)
 		    for ( var j = 0;  j < gregsList.blog.contents.length; j++ )
 		    {
 			// console.log("j="+j)
-			console.log(gregsList.blog.contents[j].sid);
+			// console.log(gregsList.blog.contents[j].sid);
 
 			if ( gregsList.blog.contents[j].sid ==  thisID  )
 			{
 			    // insert blog to DOM table
-			    console.log()
+			    console.log("got a hit")
 			    var tr = createAppendedChildToParent('tr',table);
 			    var td = createAppendedChildToParent('td',tr);
 			    td.innerHTML = gregsList.blog.contents[ j ].text;
