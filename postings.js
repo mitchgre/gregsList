@@ -382,6 +382,10 @@ function popUpDialogForJobPosting(postingObject)
 		    // open dialog for inserting a blog post
 		    // get sid of blog post
 
+		},
+		"Close":function()
+		{
+		    $(this).dialog('close');
 		}
 		
 	    }
@@ -571,32 +575,38 @@ function addPostingNote(postingObject)
 }
 
 
+function createPostingPopUpDiv(postingObject)
+{
+    var postingPopUp;
+    postingPopUp = document.createElement('div');
+    postingPopUp.id = 'popUpNotesOnPosting';
+    postingPopUp.title = postingObject.title + " Notes";
+    postingPopUp.style.overflow = "auto";
+    return postingPopUp;
+}
+
+function createPostingPopUpDivWrapper(postingObject)
+{
+    var postingPopUp;
+
+    if ( document.getElementById('popUpNotesOnPosting') === null ) // doesn't exist
+	postingPopUp = createPostingPopUpDiv(postingObject);
+    else
+	{
+	    postingPopUp = document.getElementById('popUpNotesOnPosting');  // get div
+	    postingPopUp.parentNode.removeChild(postingPopUp); // destroy div 
+	    postingPopUp = createPostingPopUpDiv(postingObject); // create div
+	}
+    return postingPopUp;
+}
+
 function getPostingNotes(postingObject)
 {
     // get the butler to give you all the notes on this posting
     console.log('gonna get them notes.');
     
     // use document create element
-    var postingPopUp;
-    if ( document.getElementById('popUpNotesOnPosting') === null ) // doesn't exist
-    {
-	// postingPopUp = '<div id="popUpNotesOnPosting" title="'+postingObject.title+'"Notes>';
-	postingPopUp = document.createElement('div');
-	postingPopUp.id = 'popUpNotesOnPosting';
-	postingPopUp.title = postingObject.title + " Notes";
-	// // postingPopUp += '<button type="button">Similar</button>'
-	// postingPopUp += '</div>';
-    }
-    else // div already exists. 
-    {
-	// this is an odd thing to do...
-	postingPopUp = document.getElementById('popUpNotesOnPosting');  // get div
-	postingPopUp.parentNode.removeChild(postingPopUp); // destroy div 
-	// rebuild div
-	postingPopUp = document.createElement('div');
-	postingPopUp.id = 'popUpNotesOnPosting';
-	postingPopUp.title = postingObject.title + " Notes";
-    }
+    var postingPopUp = createPostingPopUpDivWrapper(postingObject);
 
     // var postingPopUp = document.createElement('div');
     // postingPopUp.id = postingObject.title + 'Notes';
