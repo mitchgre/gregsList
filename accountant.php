@@ -1318,6 +1318,22 @@ function removePosting($user)
     booleanEcho($query);
 }
 
+function removeNoteUser($userId, $noteUserId)
+{
+    
+    $query  = "delete from notes_user where user = $userId and note = $noteId";
+    
+    booleanReturn($query);
+}
+
+
+function removeNote ($noteId)
+{
+    $query  = "delete from notes where note = $noteId";
+    
+    booleanReturn($query);   
+}
+
 
 
 
