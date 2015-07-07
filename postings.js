@@ -583,13 +583,21 @@ function getPostingNotes(postingObject)
 	// postingPopUp = '<div id="popUpNotesOnPosting" title="'+postingObject.title+'"Notes>';
 	postingPopUp = document.createElement('div');
 	postingPopUp.id = 'popUpNotesOnPosting';
-	postingPopUp.title = postingObject.title;
+	postingPopUp.title = postingObject.title + " Notes";
 	// // postingPopUp += '<button type="button">Similar</button>'
 	// postingPopUp += '</div>';
     }
-    else // div already exists
-	postingPopUp = document.getElementById('popUpNotesOnPosting');
-    
+    else // div already exists. 
+    {
+	// this is an odd thing to do...
+	postingPopUp = document.getElementById('popUpNotesOnPosting');  // get div
+	postingPopUp.parentNode.removeChild(postingPopUp); // destroy div 
+	// rebuild div
+	postingPopUp = document.createElement('div');
+	postingPopUp.id = 'popUpNotesOnPosting';
+	postingPopUp.title = postingObject.title + " Notes";
+    }
+
     // var postingPopUp = document.createElement('div');
     // postingPopUp.id = postingObject.title + 'Notes';
     // createAppendedChildToParent(postingPopUp);
