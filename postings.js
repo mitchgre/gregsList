@@ -581,7 +581,19 @@ function createPostingPopUpDiv(postingObject)
     postingPopUp = document.createElement('div');
     postingPopUp.id = 'popUpNotesOnPosting';
     postingPopUp.title = postingObject.title + " Notes";
-    postingPopUp.style.overflow = "auto";
+    /*
+    postingPopUp.style.width = "50%";
+    postingPopUp.style.height = "80%";
+    postingPopUp.style.overflow = "auto;"
+    */
+    console.log(postingPopUp);
+    // var postParent = postingPopUp.parentNode;
+    // console.log(postParent);
+    /*
+    postParent.setAttribute('style','width:50%');
+    postParent.setAttribute('style','height:80%');
+    postParent.setAttribute('style','overflow:auto');
+    */
     return postingPopUp;
 }
 
@@ -618,6 +630,8 @@ function getPostingNotes(postingObject)
     (
 	{
 	    modal:true,
+	    height: 0.7 * $(window).width(),  // "auto",
+	    width:"70%",
 	    buttons:
 	    {
 		"OK": function()
