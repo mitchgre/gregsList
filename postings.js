@@ -630,7 +630,7 @@ function getPostingNotes(postingObject)
     (
 	{
 	    modal:true,
-	    height: 0.7 * $(window).width(),  // "auto",
+	    height: 0.5 * $(window).width(),  // "auto",
 	    width:"70%",
 	    buttons:
 	    {
@@ -683,7 +683,8 @@ function getPostingNotes(postingObject)
 		var tableTitle = 'tableOfBlogsOnPosting';
 		var table = createAppendedChildToParent('table',div);
 		table.id = tableTitle;
-		table.border = '1';
+		// table.border = '1';
+		table.className = "io"; 
 		// $('#popUpWindowForJobPosting').append("<table id="+tableTitle+"></table>");
 
 		
