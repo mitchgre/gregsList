@@ -621,7 +621,7 @@ create table user_schedule(
       		  on delete set null on update cascade,
        foreign key (`schedule`) references schedule(id)
       		  on delete set null on update cascade
-);
+)engine=innodb;
 
 # base case
 insert into user_schedule (`user`,`schedule`)
