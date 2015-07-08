@@ -760,6 +760,8 @@ function insertPosting($user)
     $companyName = $_POST["company"];
     $locationName = $_POST["location"]; # string value needs to be converted to int
     $source = $_POST["source"];
+
+    $locationId = getLocationId($locationName);
     
     /*
       $string =  "received insertPosting request with $title, ";
@@ -778,7 +780,7 @@ function insertPosting($user)
             addUserLocation($user,$locationId);
         }
 
-    $locationId = getLocationId($locationName);
+
 
 
     // add $companyName to companies if it doesn't exist already
