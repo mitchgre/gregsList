@@ -397,6 +397,12 @@ function getBlog($user)
 }
 
 
+function getNoteIdFromUserNoteId($userId,$userNoteId)
+{
+    $query = "select note from notes_user where user=$userId and id=$userNoteId";
+    return reset(returnStuff($query));
+}
+
 
 function getNotesOnGoal($user,$goalId)
 {
@@ -754,6 +760,8 @@ function insertPosting($user)
     $companyName = $_POST["company"];
     $locationName = $_POST["location"]; # string value needs to be converted to int
     $source = $_POST["source"];
+
+    $locationId = getLocationId($locationName);
     
     /*
       $string =  "received insertPosting request with $title, ";
@@ -772,7 +780,7 @@ function insertPosting($user)
             addUserLocation($user,$locationId);
         }
 
-    $locationId = getLocationId($locationName);
+
 
 
     // add $companyName to companies if it doesn't exist already
@@ -1316,6 +1324,22 @@ function removePosting($user)
     $query  = "delete from postings where id = $id and user = $user";
     
     booleanEcho($query);
+}
+
+function removeNoteUser($userId, $noteUserId)
+{
+    
+    $query  = "delete from notes_user where id = $noteUserId";
+    
+    booleanReturn($query);
+}
+
+
+function removeNote ($noteId)
+{
+    $query  = "delete from notes where note = $noteId";
+    
+    booleanReturn($query);   
 }
 
 

@@ -234,6 +234,31 @@ if (isset($_POST['func']))
                 $scheduleId = $_POST["url"];  // scheduleID is stored here
                 echo json_encode(removeSchedule($user,$scheduleId));
             }
+        if ($func === "removeBlog")
+            {
+                $userNoteId = $_POST["url"];  
+                // need to get noteId from userNoteId
+
+                $noteId = getNoteIdFromUserNoteId($userNoteId);
+
+                if ( removeNoteUser($user,$userNoteId) === true )
+                    {
+                        if ( removeNote( $noteId ) === true )
+                            {
+                                echo json_encode(true);
+                            }
+                        else
+                            {
+                                echo json_encode("Error removing from notes.");
+                            }
+                    }
+                else
+                    {
+                        echo json_encode("Error removing from NoteUser.");
+                    }
+                    
+            }
+
 
         // updaters ===============================
         if ($func === "updateGoal")
