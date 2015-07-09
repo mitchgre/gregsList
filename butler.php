@@ -146,7 +146,12 @@ if (isset($_POST['func']))
 
         if ($func === "insertBlog")
             {
-                echo json_encode(insertBlog($user));
+                // need to error check $_POST
+                
+                $title = $_POST["title"];
+                $text = $_POST["text"];
+ 
+                echo json_encode(insertBlog($user,$title,$text));
             }
         if ($func === "insertNotesPostingUser")
             {

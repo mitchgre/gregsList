@@ -981,13 +981,22 @@ function getBlogId($user,$title,$text)
 }
 
 
-function insertBlog($user)
+function getCurrentDateTimeString ()
 {
-    // get text from $_POST[]
-
-    $title = $_POST["title"];
-    $text = $_POST["text"];
+    $currentTime = getdate();
     
+    $dateString = "$currentTime[year]-$currentTime[mon]-$currentTime[mday] $currentTime[hours]:$currentTime[minutes]:$currentTime[seconds]";
+
+    // $timeString = "$currentTime[hours]:$currentTIme[minutes]:$currentTime[seconds]";
+
+    // $thisTimeString = $dateString . " " . $timeString;
+
+    return $dateString;
+}
+
+function insertBlog($user,$title,$text)
+{
+
     $query = "insert into notes (title,text) ";
     $query .= "values (\"" . $title ."\",\"". $text ."\") ";
 
@@ -1002,13 +1011,13 @@ function insertBlog($user)
 
             if ( booleanReturn( $query ) )
                 {
-                    // insert a schedule event
-
-                    // get schedule event id
-
-                    // insert schedule id to user_schedule
+                    // get current time/date
+                    $thisTime = getCurrentDateTimeString();
                     
-                    // return true;
+                    // insert a schedule event
+                    insertSchedule($user, $title, "blog posting", null, $thisTime, $thisTime);
+                    // inserting the schedule event automatically adds an entry in user_schedule
+
                     return $noteId;
                 }
             else
