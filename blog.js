@@ -154,7 +154,8 @@ function giveBlogInsertionToButler(object,title,text,callback)
 		    // displayTable(object,[]);
 		    // getStuff(object);
 		    // object.parent.refresh();
-		    callback(object);
+		    // callback(object);
+		    console.log("got a number.");
 		}
 		else
 		{
