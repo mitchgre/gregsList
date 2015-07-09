@@ -81,7 +81,7 @@ function insertSchedule()
 				"description=" + description + ", " +
 				"contact=" + contact + ", " +
 				"start=" + start + ", " +
-				"end=" + end + ", " +
+				"end=" + end + ", " 
 				+ " to the butler."
 			       );
 
@@ -119,8 +119,8 @@ function insertSchedule()
 				contact:contact,
 				start:start,
 				end:end,
-				//func: "insertSchedule"
-				func: "addSchedule"
+				func: "insertSchedule"
+				// func: "addSchedule"
 			    },
 			    success: function(resp)
 			    {
@@ -137,7 +137,7 @@ function insertSchedule()
 				{
 				    console.log("removal failed");
 				}
-				// getStuff(object);
+				getStuff(object);  // what is object in this context?
 				object.parent.refresh();
 
 			    }	

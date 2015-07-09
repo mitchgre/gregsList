@@ -902,7 +902,7 @@ function addUserContact($user,$contactId)
 function insertSchedule($user,$name,$description,$contact,$start,$end)
 {    
     // addSchedule($name,$description,$contact,$start,$end)
-    if (addSchedule($name,$description,$contact,$start,$end) )
+    if ( addSchedule($name,$description,$contact,$start,$end) )
         {
             $scheduleId = getScheduleId(
                 $name,
