@@ -164,6 +164,8 @@ function fillSchedules(object,input)
 
     
     // erase object's contents and refill them from input
+    $('.fc-event').remove();  // remove from jQuery full calendar hopefully?
+    $('#calendar').fullCalendar('removeEvents');
     object.contents = [];
     var contents = object.contents;
 
@@ -191,7 +193,8 @@ function fillSchedules(object,input)
 						   url:url,
 						   start:start,
 						   end:end
-						  },true);// add to calendars
+						  },true);
+				    // copiedEventObject,false);// add to calendars
 	// update portlet 
 	$("#calendarPortlet").fullCalendar('renderEvent',{title:name,
 						   sid: id,
@@ -201,7 +204,8 @@ function fillSchedules(object,input)
 						   url:url,
 						   start:start,
 						   end:end
-						  },true);// add to calendars
+						  },true);
+					  // copiedEventObject,false);// add to calendars
 
 	displayTable(object);
 	displayEventPortlet(object);
