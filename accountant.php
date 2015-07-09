@@ -947,6 +947,9 @@ function getScheduleId($name,$description,$contact,$start,$end)
 }
 
 
+
+
+
 /*
   This function just adds to the schedule table.
   It doesn't worry about users or anything else.
@@ -998,8 +1001,16 @@ function insertBlog($user)
             $query .= "values (\"" . $noteId ."\",\"" . $user ."\") ";
 
             if ( booleanReturn( $query ) )
-                // return true;
-                return $noteId;
+                {
+                    // insert a schedule event
+
+                    // get schedule event id
+
+                    // insert schedule id to user_schedule
+                    
+                    // return true;
+                    return $noteId;
+                }
             else
                 return "Error inserting to notes_user";
         }
