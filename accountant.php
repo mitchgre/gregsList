@@ -896,71 +896,40 @@ function addUserContact($user,$contactId)
 
 
 
-
-
-
-
-
-
-
-function insertSchedule($user)
-{
-    // should error check that all post fields are set
-
-
-
-    $name = $_POST["name"];
-    $description = $_POST["description"];
-    $contact = $_POST["contact"];
-    $start = $_POST["start"];
-    $end = $_POST["end"];
-
-    // $name,$description,$contact,$start,$end
-    // add to schedules if it doesnt' exist already
-    
 /*
-    if ( scheduleExists($name,$description,$contact,$start,$end) !== true)
-        if ( addSchedule($name,$description,$contact,$start,$end) !== true )
-            return "error adding to schedules";
-*/  
-//    return addSchedule($name,$description,$contact,$start,$end);
-    
-
-    if ( addSchedule($name,$description,$contact,$start,$end) )
+  This function adds to the schedule table, but also to user_schedule.
+ */
+function insertSchedule($user,$name,$description,$contact,$start,$end)
+{    
+    // addSchedule($name,$description,$contact,$start,$end)
+    if (addSchedule($name,$description,$contact,$start,$end) )
         {
-            $scheduleId = getScheduleId($name,$description,$contact,$start,$end);
+            $scheduleId = getScheduleId(
+                $name,
+                $description,$contact,
+                $start,$end);  
             
-            return $scheduleId;
-    
-            $query  = "insert into user_schedule ";
-            $query .= "(user,schedule) ";
-            $query .= "values ( $user, $scheduleId) ";
-            
-            booleanReturn($query);
-        }
-    else 
-        return "error inserting schedule";
-
-    // return "schedule id = " . $scheduleId;
-
-    // add to user_schedules if it doesn't already exist
-
-    /*
-    if ( userScheduleExists($user,$scheduleId) !== true)
-        {
-            // return "schedule $scheduleId exists";
-            
-            if ( addUserSchedule($user,$scheduleId) !== true )
-                return "error adding to user_schedules";
+            if ( $scheduleId > 0 )
+                {
+                    // echo $scheduleId;
+                    // insert schedule id and user id to user_schedule
+                    
+                    $query  = "insert into user_schedule ";
+                    $query .= "(user,schedule) ";
+                    $query .= "values ( $user, ";
+                    $query .= "$scheduleId ) ";
+                    
+                    //return $query;
+                    return booleanReturn($query);
+                    
+                }
             else
-                return true;
+                return "error getting schedule id.";
+            
         }
     else
-        {
-            return "existential problem. for $scheduleId";
-        }
+        return "error inserting schedule.";
     
-    */
 }
 
 
@@ -977,6 +946,11 @@ function getScheduleId($name,$description,$contact,$start,$end)
     return reset(returnStuff($query));
 }
 
+
+/*
+  This function just adds to the schedule table.
+  It doesn't worry about users or anything else.
+ */
 function addSchedule($name,$description,$contact,$start,$end)
 {
     $query  = "insert into schedule ";

@@ -132,13 +132,14 @@ function insertSchedule()
 				{
 				    console.log("removal worked");
 				    // displayTable(object,[]);
-				    getStuff(object);
-				    object.parent.refresh();
 				}
 				else
 				{
 				    console.log("removal failed");
 				}
+				// getStuff(object);
+				object.parent.refresh();
+
 			    }	
 			}
 		    );
