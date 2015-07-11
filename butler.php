@@ -158,11 +158,12 @@ if (isset($_POST['func']))
                 // insertBlog, then insertNotesPostingUser
                 $title = $_POST["title"];
                 $text = $_POST["text"];
+                $postingId = $_POST["postingId"];
  
                 $noteId = insertBlog($user,$title,$text);
 
                 // $noteId = $_POST["noteId"];
-                $postingId = $_POST["postingId"];
+
 
                 
                 
