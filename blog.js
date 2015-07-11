@@ -161,6 +161,11 @@ function giveBlogInsertionToButler(object,title,text,callback)
 		{
 		    console.log("removal failed");
 		}
+		
+		getStuff(object);
+		object.parent.refresh();
+
+
 	    }	
 	}
     );
