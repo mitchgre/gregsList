@@ -29,7 +29,7 @@ function glo()  // gregsList Object
 	    editFunction: editGoal,
 	    updater: "updateGoal",
 	    destroyer: "removeGoal",
-	    displayKeys: ["value"]
+	    displayKeys: ["sid","value"]
 	};
     this.industries = 
 	{
@@ -44,7 +44,7 @@ function glo()  // gregsList Object
 	    editFunction: editIndustry,
 	    updater: "updateIndustry",
 	    destroyer: "removeIndustry",
-	    displayKeys: ["name"]
+	    displayKeys: ["sid","name"]
 	};
     this.postings = 
 	{
@@ -74,7 +74,7 @@ function glo()  // gregsList Object
 	    add: null,
 	    removeFunction: remover,
 	    destroyer: "removeCompany", // php function to remove
-	    displayKeys: ["name"] // values to display in table
+	    displayKeys: ["sid","name"] // values to display in table
 	};
     this.locations =
 	{
@@ -88,7 +88,7 @@ function glo()  // gregsList Object
 	    add: null,
 	    removeFunction: remover,
 	    destroyer: "removeLocation", // php function to remove
-	    displayKeys: ["name"] // values to display in table
+	    displayKeys: ["sid","name"] // values to display in table
 	};
     this.contacts =
 	{
@@ -104,7 +104,7 @@ function glo()  // gregsList Object
 	    updater: "updateContact",		// php function to update
 	    removeFunction: remover,
 	    destroyer: "removeContact", // php function to remove
-	    displayKeys: ["fname","lname","email","phone",
+	    displayKeys: ["sid","fname","lname","email","phone",
 			  "facebook","linkedin","github"] // values to display in table
 
 	};
@@ -119,7 +119,7 @@ function glo()  // gregsList Object
 	    display: displayTable,//displaySchedules,
 	    destroyer: "removeSchedule", // php function to remove
 	    table: $("#tableOfEvents")[0],
-	    displayKeys: ["name","description","start","end"],
+	    displayKeys: ["sid","name","description","start","end"],
 	    add: null
 	};
     this.blog =
@@ -133,7 +133,7 @@ function glo()  // gregsList Object
 	    display: displayTable,//displaySchedules,
 	    destroyer: "removeBlog", // php function to remove
 	    table: $("#tableOfBlogs")[0],
-	    displayKeys: ["text"],
+	    displayKeys: ["sid","text"],
 	    add: null
 	};
     this.login();
