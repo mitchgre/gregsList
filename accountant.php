@@ -800,13 +800,18 @@ function insertPosting($user)
     $query .= "values(\"$title\", \"$url\", ";
     $query .= "$companyId, $locationId, \"$source\", $user)";
 
-
-    // return json_encode(preparedStatement($query));
-
-    // if (booleanReturn($query))
     
     if (booleanReturn($query))
-        return true;
+        {
+            // get current time/date
+            $thisTime = getCurrentDateTimeString();
+            
+            // insert a schedule event
+            insertSchedule($user, $title, "job posting", null, $thisTime, $thisTime);
+            // inserting the schedule event automatically adds an entry in user_schedule
+            
+            return true;
+        }
     else
         return "failed to add posting: " . $query;
     
