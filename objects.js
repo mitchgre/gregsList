@@ -119,7 +119,7 @@ function glo()  // gregsList Object
 	    display: displayTable,//displaySchedules,
 	    destroyer: "removeSchedule", // php function to remove
 	    table: $("#tableOfEvents")[0],
-	    displayKeys: ["name","description","contact","start","end"],
+	    displayKeys: ["name","description","start","end"],
 	    add: null
 	};
     this.blog =
