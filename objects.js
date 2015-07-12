@@ -848,38 +848,50 @@ function displayTable(object)
 */
 function embelishTable(object)
 {
-    /*
+    
     console.log("embelishTable called on ");
     console.log(object);
     
     console.log("object's table is ");
     console.log(object.table);
-    */
+    
 
     var tableId = object.table.id;
 
 
+    console.log("tableId is " + tableId);
+
+
+
     // hide first children (headers and columns)   
-    $(tableId + " tr th:first-child").css("display","none");
-    $(tableId + " tr td:first-child").css("display","none");
+    $("#" + tableId + " tr th:first-child").css("display","none");
+    $("#" + tableId + " tr td:first-child").css("display","none");
     
 
 
     // add analytics to titles on click.  (This probably deserves its own function)
-    $("#tableOfPostings tr td:nth-child(2)")
+    $("#" + tableId + " tr td:nth-child(2)")
 
 	.click(
 	    function()
 	    {
 		// get posting object by sid (stored in hidden cell)		
 		var sid = $(this.previousSibling).text();	// get sid from DOM
+		
+		// need to generalize this
+		/*
 		var postingObject = getPostingFromSid(sid);		
-		console.log(postingObject);
-		
+		console.log(postingObject);		
 		popUpDialogForJobPosting(postingObject);
-		
+		*/
 
 	    }
 	);  // end click
 
 }
+
+function gregsListObjectById(sid,type)
+{
+}
+
+
