@@ -848,7 +848,9 @@ function displayTable(object)
 */
 function embelishTable(object,callback)
 {
-    
+
+    // debugging info
+    /*
     console.log("embelishTable called on ");
     console.log(object);
     
@@ -857,7 +859,7 @@ function embelishTable(object,callback)
     
     var tableId = object.table.id;
     console.log("tableId is " + tableId);
-
+    */
 
     // hide first children (headers and columns)   
     $("#" + tableId + " tr th:first-child").css("display","none");
@@ -872,13 +874,6 @@ function embelishTable(object,callback)
 	    {
 		// get posting object by sid (stored in hidden cell)		
 		var sid = $(this.previousSibling).text();	// get sid from DOM
-		
-		// need to generalize this
-		/*
-		var postingObject = getPostingFromSid(sid);		
-		console.log(postingObject);		
-		popUpDialogForJobPosting(postingObject);
-		*/
 
 		var specific = gregsListObjectById(sid,object.type);
 		console.log("got " + object.type + " object by ID");
