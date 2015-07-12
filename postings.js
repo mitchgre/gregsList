@@ -313,7 +313,7 @@ function fillPostings(object, input)
     displayTable(object);
     displayPostingsPortlet(object);
 
-    embelishTable();
+    embelishTable(object);
 }
 
 

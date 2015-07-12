@@ -843,7 +843,35 @@ function displayTable(object)
 }
 
 
-
-function embelishTable()
+/*
+  Adding clicks and storing SQL ids in DOM for arbitrary gregsList objects that can render as tables.
+*/
+function embelishTable(object)
 {
+
+    
+
+    // hide first children (headers and columns)   
+    $(object.table + " tr th:first-child").css("display","none");
+    $(object.table + " tr td:first-child").css("display","none");
+    
+
+
+    // add analytics to titles on click.  (This probably deserves its own function)
+    $("#tableOfPostings tr td:nth-child(2)")
+
+	.click(
+	    function()
+	    {
+		// get posting object by sid (stored in hidden cell)		
+		var sid = $(this.previousSibling).text();	// get sid from DOM
+		var postingObject = getPostingFromSid(sid);		
+		console.log(postingObject);
+		
+		popUpDialogForJobPosting(postingObject);
+		
+
+	    }
+	);  // end click
+
 }
