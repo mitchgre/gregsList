@@ -781,11 +781,8 @@ function displayTable(object)
     emptyElement(table);
     var tr = createAppendedChildToParent('tr',table);
 
-    console.log("from displayTable");
-    console.log(object);
-
-    // console.log("input");
-    // console.log(input);
+    // console.log("from displayTable");
+    // console.log(object);
 
     // add headers (for table)
     for (var i = 0; i < object.displayKeys.length; i++)
