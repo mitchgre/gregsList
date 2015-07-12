@@ -167,7 +167,11 @@ function fillGoals(object,input)
 
     displayTable(object);
     displayGoalsPortlet(object);
+    
+    embelishTable(object,null);
 }
+
+
 
 
 function displayGoalsPortlet(object)
