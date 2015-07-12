@@ -19,6 +19,7 @@ function fillBlog(object,input)
     displayTable(object);
     // displayGoalsPortlet(object);
 
+    embelishTable(object,null);
 }
 
 
