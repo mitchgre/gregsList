@@ -846,6 +846,7 @@ function displayTable(object)
 function embelishTable(object,callback)
 {
 
+    var tableId = object.table.id;
     // debugging info
     /*
     console.log("embelishTable called on ");
@@ -853,8 +854,7 @@ function embelishTable(object,callback)
     
     console.log("object's table is ");
     console.log(object.table);
-    
-    var tableId = object.table.id;
+        
     console.log("tableId is " + tableId);
     */
 
