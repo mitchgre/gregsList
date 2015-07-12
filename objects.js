@@ -848,12 +848,20 @@ function displayTable(object)
 */
 function embelishTable(object)
 {
-
+    /*
+    console.log("embelishTable called on ");
+    console.log(object);
     
+    console.log("object's table is ");
+    console.log(object.table);
+    */
+
+    var tableId = object.table.id;
+
 
     // hide first children (headers and columns)   
-    $(object.table + " tr th:first-child").css("display","none");
-    $(object.table + " tr td:first-child").css("display","none");
+    $(tableId + " tr th:first-child").css("display","none");
+    $(tableId + " tr td:first-child").css("display","none");
     
 
 
