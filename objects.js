@@ -842,3 +842,8 @@ function displayTable(object)
     }   
 }
 
+
+
+function embelishTable()
+{
+}
