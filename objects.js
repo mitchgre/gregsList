@@ -846,7 +846,7 @@ function displayTable(object)
 /*
   Adding clicks and storing SQL ids in DOM for arbitrary gregsList objects that can render as tables.
 */
-function embelishTable(object)
+function embelishTable(object,callback)
 {
     
     console.log("embelishTable called on ");
@@ -855,19 +855,14 @@ function embelishTable(object)
     console.log("object's table is ");
     console.log(object.table);
     
-
     var tableId = object.table.id;
-
-
     console.log("tableId is " + tableId);
-
 
 
     // hide first children (headers and columns)   
     $("#" + tableId + " tr th:first-child").css("display","none");
     $("#" + tableId + " tr td:first-child").css("display","none");
     
-
 
     // add analytics to titles on click.  (This probably deserves its own function)
     $("#" + tableId + " tr td:nth-child(2)")
@@ -885,13 +880,57 @@ function embelishTable(object)
 		popUpDialogForJobPosting(postingObject);
 		*/
 
+		var specific = gregsListObjectById(sid,object.type);
+		console.log("got " + object.type + " object by ID");
+		callback(specific);
+
 	    }
 	);  // end click
 
 }
 
+/*
+  There's probably a cleaner way to get objects by id.
+*/
 function gregsListObjectById(sid,type)
 {
+    console.log("searching for sid=" + sid);
+    
+    var object;
+
+
+    // get object from type
+    if (type === "goal")
+	object = gregsList.goals;
+    else if (type === "industry") 
+	object = gregsList.industries;
+    else if (type === "company") 
+	object = gregsList.companies;
+    else if (type === "location") 
+	object = gregsList.locations;
+    else if (type === "posting") 
+	object = gregsList.postings;
+    else if (type === "contact") 
+	object = gregsList.contacts;
+    else if (type === "schedule") 
+	object = gregsList.schedules;
+    else if (type === "blog") 
+	object = gregsList.blog;
+
+
+    // loop over object type
+    for ( var i = 0; i < object.contents.length; i++ )
+    {
+	
+	var specific = object.contents[i]; 
+	// console.log("posting["+i+"]="+posting.sid);
+	
+	if ( specific.sid == sid  )
+	{
+	    return specific;
+	}
+    }
+
 }
 
 
