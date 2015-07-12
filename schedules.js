@@ -158,11 +158,6 @@ function editSchedule()
 
 function fillSchedules(object,input)
 {
-    console.log("fill schedules");
-    console.log(object);
-
-
-    
     // erase object's contents and refill them from input
     $('.fc-event').remove();  // remove from jQuery full calendar hopefully?
     $('#calendar').fullCalendar('removeEvents');
@@ -209,6 +204,7 @@ function fillSchedules(object,input)
 
 	displayTable(object);
 	displayEventPortlet(object);
+	embelishTable(object,null);
     }
     
     // no user defined table here, need to push into calendar above

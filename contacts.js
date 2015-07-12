@@ -33,6 +33,7 @@ function fillContacts(object,input)
 
     displayTable(object);
     displayContactsPortlet(object);
+    embelishTable(object,null);
 }
 
 function displayContactsPortlet(object)
