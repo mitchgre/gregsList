@@ -23,52 +23,6 @@ function fillBlog(object,input)
 }
 
 
-/*
-  Mon Jul 06, 2015 16:01:15
-  This function is broken..
-
-  Maybe it should be deleted.
-*/	
-function getBlogId(object,title,text)
-{
-    $.ajax
-    (
-	{
-	    url: "butler.php",
-	    type: "post",
-	    dataType: "data",
-	    text:
-	    {
-		user: object.parent.user.name,
-		pass: object.parent.user.password,
-		//func: object.updater,
-		// sid: link,
-		title: title,
-		text: text,
-		func: "getBlogId"
-	    },
-	    success: function(resp)
-	    {
-		console.log(resp);
-		//				if (JSON.parse(resp) === true)
-		if (resp == "true" )
-		{
-		    console.log("got blog id");
-		    // displayTable(object,[]);
-		    // getStuff(object);
-		    // object.parent.refresh();
-		    return resp;
-		    // call back
-		}
-		else
-		{
-		    console.log("removal failed");
-		}
-	    }	
-	}
-    );    
-}
-
 
 function buildBlogFormString()
 {
