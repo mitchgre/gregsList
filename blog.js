@@ -163,7 +163,7 @@ function giveBlogInsertionToButler(object,title,text,callback)
 		    console.log("removal failed");
 		}
 		
-		getStuff(object);
+		// getStuff(object);
 		object.parent.refresh();
 
 
