@@ -73,7 +73,7 @@ function fillCompanies(object,input)
 
     displayTable(object);
     displayCompaniesPortlet(object);
-    embelishTable(object,null);
+    embelishTable(object,dialogObjectWrapper);
 }
 
 function displayCompaniesPortlet(object)

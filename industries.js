@@ -170,7 +170,7 @@ function fillIndustries(object,input)
     displayTable(object);
     displayIndustriesPortlet(object);
 
-    embelishTable(object,null);
+    embelishTable(object,dialogObjectWrapper);
 }
 
 function displayIndustriesPortlet(object)
