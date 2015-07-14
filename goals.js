@@ -168,7 +168,7 @@ function fillGoals(object,input)
     displayTable(object);
     displayGoalsPortlet(object);
     
-    embelishTable(object,null);
+    embelishTable(object,dialogObjectWrapper);
 }
 
 

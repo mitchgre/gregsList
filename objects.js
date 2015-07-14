@@ -875,7 +875,7 @@ function embelishTable(object,callback)
 
 		var specific = gregsListObjectById(sid,object.type);
 		console.log("got " + object.type + " object by ID");
-		callback(specific);
+		callback(specific,object.type);
 
 	    }
 	);  // end click
@@ -883,10 +883,30 @@ function embelishTable(object,callback)
 }
 
 // this might be too general unfortunately 
-function dialogObjectWrapper(object)
+function dialogObjectWrapper(object,type)
 {
+    /*
+    console.log(object);
+    console.log(object.type);
+    console.log(typeof object);
+    */
+
+    //var type = object.type;
+    var title;   
+
+    if ( type == "goal" )
+	title = object.value;
+    else if ( type ==  "industry"  )
+	title = object.name;
+    else if ( type == "company" )
+	title = object.name;
+    else if ( type == "location" )
+	title = object.name;
+
+    console.log("title="+title);
+
     // create a string to hold a div object
-    var innerDiv = '<div id="'+object.title+'-dialog" title="'+object.title+'">'; 
+    var innerDiv = '<div id="'+title+'-dialog" title="'+title+'">'; 
     innerDiv += '</div>';
 
     
