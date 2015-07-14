@@ -881,6 +881,13 @@ function embelishTable(object,callback)
 
 }
 
+
+function dialogWrapper()
+{
+}
+
+
+
 /*
   There's probably a cleaner way to get objects by id.
 */
