@@ -841,7 +841,8 @@ function displayTable(object)
 
 
 /*
-  Adding clicks and storing SQL ids in DOM for arbitrary gregsList objects that can render as tables.
+  Adding clicks and storing SQL ids in DOM for arbitrary gregsList
+  objects that can render as tables. 
 */
 function embelishTable(object,callback)
 {
@@ -881,9 +882,29 @@ function embelishTable(object,callback)
 
 }
 
-
-function dialogWrapper()
+// this might be too general unfortunately 
+function dialogObjectWrapper(object)
 {
+    // create a string to hold a div object
+    var innerDiv = '<div id="'+object.title+'-dialog" title="'+object.title+'">'; 
+    innerDiv += '</div>';
+
+    
+    $(innerDiv)
+    .dialog
+    (
+	{
+	    modal:true,
+	    buttons:
+	    {
+		"Close":function()
+		{
+		    removeElement(innerDiv);
+		    $(this).dialog('close');
+		}
+	    }
+	}
+    )
 }
 
 
