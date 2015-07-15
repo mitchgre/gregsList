@@ -488,41 +488,6 @@ glo.prototype.setupPostings =
 
      var addButton = addInput(postings,'button','','Add posting','addPostingButton');
 
-
-    /*
-    // add inputs
-    var input = createAppendedChildToParent('table',postings);
-    input.style.width = "100%";
-    input.style.tableLayout = "fixed";
-    var tr = createAppendedChildToParent('tr',input);
-
-    // add button
-    var td = createAppendedChildToParent('td',tr);
-    var addButton = addInput(td,'button','','Add posting','addPostingButton');
-
-    // add text fields
-    var td = createAppendedChildToParent('td',tr);
-    td.appendChild(document.createTextNode('Title'));
-    var titleField = addInput(td,'text','','','postingTitleToAdd');
- 
-    var td = createAppendedChildToParent('td',tr);
-    td.appendChild(document.createTextNode('Link'));
-    var linkField = addInput(td,'text','','','postingLinkToAdd');
-
-    var td = createAppendedChildToParent('td',tr);
-    td.appendChild(document.createTextNode('Company'));
-    var companyField = addInput(td,'text','','','postingCompanyToAdd');
-
-    var td = createAppendedChildToParent('td',tr);
-    td.appendChild(document.createTextNode('Location'));
-    var companyField = addInput(td,'text','','','postingLocationToAdd');
-
-    var td = createAppendedChildToParent('td',tr);
-    td.appendChild(document.createTextNode('Source'));
-    var sourceField = addInput(td,'text','','','postingSourceToAdd');
-    */
-
-
     // wire button
     addButton.onclick = insertPosting.bind(this);
 
