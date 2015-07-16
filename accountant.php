@@ -404,16 +404,16 @@ function getNoteIdFromUserNoteId($userId,$userNoteId)
 }
 
 
-function getNotesOnGoal($user,$goalId)
+function getNotesOnGoal($userId,$goalId)
 {
     $mysqli = connectToDB();
 
-    // container for noteIds
-    $noteIds = [];
+    // container for goalIds
+    $goalIds = [];
 
-    $query  = "select notes_user.id from notes_posting_user ";
-    $query .= "inner join notes_user on notes_posting_user.note = notes_user.note ";
-    $query .= "where notes_posting_user.posting=".$postingId." and notes_user.user=".$userId;
+    $query  = "select notes_user.id from notes_goal_user ";
+    $query .= "inner join notes_user on notes_goal_user.note = notes_user.note ";
+    $query .= "where notes_goal_user.goal=".$goalId." and notes_user.user=".$userId;
     
     if ($statement = $mysqli->prepare($query))
         {
@@ -424,12 +424,12 @@ function getNotesOnGoal($user,$goalId)
             
             while($statement->fetch())
                 {
-                    array_push($noteIds,$id);
+                    array_push($goalIds,$id);
                 }
         }
     mysqli_close($mysqli);
 
-    return $noteIds;
+    return $goalIds;
 
 }
 

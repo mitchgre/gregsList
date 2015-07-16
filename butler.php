@@ -95,6 +95,11 @@ if (isset($_POST['func']))
                 $postingId = $_POST['postingId'];
                 echo json_encode(getNotesOnPosting($user,$postingId));
             }
+        if ($func === "getNotesOnGoal")
+            {
+                $postingId = $_POST['goalId'];
+                echo json_encode(getNotesOnGoal($user,$goalId));
+            }
         // inserters ===============================
         if ($func === "insertGoal")
             {
