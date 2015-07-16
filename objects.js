@@ -874,20 +874,22 @@ function dialogObjectWrapper(object,type)
     var innerDiv = '<div id="'+title+'-dialog" title="'+title+'">'; 
     innerDiv += '</div>';
 
+    var objectButtons = 
+	{
+	    "Close":function()
+	    {
+		// removeElement(innerDiv);
+		$(this).dialog('close');
+	    }
+	}
+
     
     $(innerDiv)
     .dialog
     (
 	{
 	    modal:true,
-	    buttons:
-	    {
-		"Close":function()
-		{
-		    removeElement(innerDiv);
-		    $(this).dialog('close');
-		}
-	    }
+	    buttons: objectButtons
 	}
     )
 }
