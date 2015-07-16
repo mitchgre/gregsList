@@ -406,7 +406,31 @@ function getNoteIdFromUserNoteId($userId,$userNoteId)
 
 function getNotesOnGoal($user,$goalId)
 {
-    ;
+    $mysqli = connectToDB();
+
+    // container for noteIds
+    $noteIds = [];
+
+    $query  = "select notes_user.id from notes_posting_user ";
+    $query .= "inner join notes_user on notes_posting_user.note = notes_user.note ";
+    $query .= "where notes_posting_user.posting=".$postingId." and notes_user.user=".$userId;
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id);
+            
+            while($statement->fetch())
+                {
+                    array_push($noteIds,$id);
+                }
+        }
+    mysqli_close($mysqli);
+
+    return $noteIds;
+
 }
 
 function getNotesOnIndustry($user,$industryId)
@@ -1036,7 +1060,16 @@ function insertBlog($user,$title,$text)
 
 function insertNotesGoalUser($noteId,$goalId,$userId)
 {
-    ;
+    $query = "insert into notes_goal_user (note,goal,user)";
+    $query .= "values ($noteId, $goalId, $userId)";
+
+    if ( booleanReturn($query) )
+        {
+            return true;
+        }
+    else
+        return "Error inserting to notes_goal_user.";         
+
 }
 
 function insertNotesCompanyUser($noteId,$companyId,$userId)
