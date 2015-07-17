@@ -841,7 +841,7 @@ function embelishTable(object,callback)
 
 		var specific = gregsListObjectById(sid,object.type); // get sub object
 		console.log("got " + object.type + " object by ID");
-		callback(specific,object.type);
+		callback(specific, object.type, object.buttons);
 
 	    }
 	);  // end click
@@ -884,16 +884,22 @@ function dialogObjectWrapper(object,type,buttons)
     var innerDiv = '<div id="'+title+'-dialog" title="'+title+'">'; 
     innerDiv += '</div>';
 
-    var objectButtons = 
-	{
-	    "Close":function()
-	    {
-		// removeElement(innerDiv);
-		$(this).dialog('close');
-	    }
-	}
+    // initialize a local buttons container
+    var objectButtons = {};
+
 
     // concatenate buttons from object
+    // push all the parent object button types into the container
+    for ( var index in buttons  )
+	objectButtons[index] = buttons[index];
+
+    // add a close button
+    objectButtons["Close"] = function()
+    {
+	// removeElement(innerDiv);
+	$(this).dialog('close');
+    }
+
 
     
     $(innerDiv)
