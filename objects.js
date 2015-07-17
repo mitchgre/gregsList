@@ -839,7 +839,7 @@ function embelishTable(object,callback)
 		// get posting object by sid (stored in hidden cell)		
 		var sid = $(this.previousSibling).text();	// get sid from DOM
 
-		var specific = gregsListObjectById(sid,object.type);
+		var specific = gregsListObjectById(sid,object.type); // get sub object
 		console.log("got " + object.type + " object by ID");
 		callback(specific,object.type);
 
@@ -860,14 +860,23 @@ function dialogObjectWrapper(object,type,buttons)
     //var type = object.type;
     var title;   
 
+    // see classes.js for object definitions
     if ( type == "goal" )
+    {
 	title = object.value;
+    }
     else if ( type ==  "industry"  )
+    {
 	title = object.name;
+    }
     else if ( type == "company" )
+    {
 	title = object.name;
+    }
     else if ( type == "location" )
+    {
 	title = object.name;
+    }
 
     console.log("title="+title);
 
