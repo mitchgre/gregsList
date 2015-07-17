@@ -29,7 +29,8 @@ function glo()  // gregsList Object
 	    editFunction: editGoal,
 	    updater: "updateGoal",
 	    destroyer: "removeGoal",
-	    displayKeys: ["sid","value"]
+	    displayKeys: ["sid","value"],
+	    buttons: {"show notes":function(){},"add note":function(){} }
 	};
     this.industries = 
 	{
@@ -848,7 +849,7 @@ function embelishTable(object,callback)
 }
 
 // this might be too general unfortunately 
-function dialogObjectWrapper(object,type)
+function dialogObjectWrapper(object,type,buttons)
 {
     /*
     console.log(object);
@@ -882,6 +883,8 @@ function dialogObjectWrapper(object,type)
 		$(this).dialog('close');
 	    }
 	}
+
+    // concatenate buttons from object
 
     
     $(innerDiv)
