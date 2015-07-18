@@ -30,7 +30,7 @@ function glo()  // gregsList Object
 	    updater: "updateGoal",
 	    destroyer: "removeGoal",
 	    displayKeys: ["sid","value"],
-	    buttons: {"show notes":function(){},"add note":function(){} }
+	    buttons: {"show notes":function(){},"add note":function(){}, "show companies":function(){}, "show industries":function(){} }
 	};
     this.industries = 
 	{
