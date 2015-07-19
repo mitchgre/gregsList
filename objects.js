@@ -30,7 +30,9 @@ function glo()  // gregsList Object
 	    updater: "updateGoal",
 	    destroyer: "removeGoal",
 	    displayKeys: ["sid","value"],
-	    buttons: {"show notes":,"add note":function(){}, "show companies":function(){}, "show industries":function(){} }
+	    buttons: {"show notes":function()
+		      { showNotesOnObject(this)},
+		      "add note":function(){} }
 	};
     this.industries = 
 	{
@@ -962,4 +964,5 @@ function gregsListObjectById(sid,type)
 function showNotesOnObject(object)
 {
     // try to figure out object type
+    console.log(object);
 }
