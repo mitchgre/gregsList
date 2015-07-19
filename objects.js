@@ -958,4 +958,7 @@ function gregsListObjectById(sid,type)
 
 }
 
-
+// generic function to show notes about an object
+function showNotesOnObject(object)
+{
+}
