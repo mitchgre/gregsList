@@ -895,7 +895,7 @@ function dialogObjectWrapper2(object,type)
 		{
 		    console.log("add notes clicked");
 
-		    addObjectNote(object);
+		    addObjectNote(object,type);
 
 		    $(this).dialog('close');
 
@@ -1031,7 +1031,7 @@ function getObjectNotes(object,type,div)
 
 
 // object is from classes.js not objects.js
-function addObjectNote(object)
+function addObjectNote(object,type)
 {
     console.log('adding object notes');
     console.log(object);
@@ -1087,7 +1087,7 @@ function addObjectNote(object)
 			removeElement(toDestroy[i]);
 
 		    // givePostingNoteInsertionToButler(postingObject,title,text)
-		    insertObjectNote(object,title,text);
+		    insertObjectNote(object,type,title,text);
 
 		}
 	    }
@@ -1095,7 +1095,7 @@ function addObjectNote(object)
     );
 }
 
-function insertObjectNote (object,title,text)
+function insertObjectNote (object,type,title,text)
 {
     var putter; 
     // sort out putter functions by type
