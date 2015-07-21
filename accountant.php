@@ -433,7 +433,7 @@ function getNotesOnGoal($userId,$goalId)
 
 }
 
-function getNotesOnIndustry($user,$industryId)
+function getNotesOnIndustry($userId,$industryId)
 {
     $mysqli = connectToDB();
     
@@ -444,6 +444,8 @@ function getNotesOnIndustry($user,$industryId)
     $query .= "inner join notes_user on notes_industry_user.note = notes_user.note ";
     $query .= "where notes_industry_user.industry=".$industryId." and notes_user.user=".$userId;
     
+    //echo $query;
+
     if ($statement = $mysqli->prepare($query))
     {
         $statement->execute();
@@ -455,19 +457,16 @@ function getNotesOnIndustry($user,$industryId)
         {
             array_push($industryIds,$id);
         }
-    }
-    else
-    {
-        return "error getting industry ids";
-    }
-    mysqli_close($mysqli);
 
-    return $industryIds;
-
+        mysqli_close($mysqli);
+        
+        return $industryIds;
+    }
+ 
 }
 
 
-function getNotesOnCompany($user,$companyId)
+function getNotesOnCompany($userId,$companyId)
 {
     $mysqli = connectToDB();
     
@@ -497,7 +496,7 @@ function getNotesOnCompany($user,$companyId)
 }
 
 
-function getNotesOnLocation($user,$locationId)
+function getNotesOnLocation($userId,$locationId)
 {
     $mysqli = connectToDB();
     
@@ -526,7 +525,7 @@ function getNotesOnLocation($user,$locationId)
     
 }
 
-function getNotesOnContact($user,$contactId)
+function getNotesOnContact($userId,$contactId)
 {
     ;
 }
