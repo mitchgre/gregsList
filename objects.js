@@ -915,7 +915,9 @@ function getObjectNotes(object,type,div)
 {
     console.log('getting object notes');
     console.log(object);
+    // console.log(object.parent); // undefined
     console.log(type);
+
 }
 
 
