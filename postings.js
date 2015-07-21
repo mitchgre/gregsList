@@ -532,7 +532,7 @@ function getPostingNotes(postingObject,div)
 		table.id = tableTitle;
 		// table.border = '1';
 		table.className = "io"; 
-		// $('#popUpWindowForJobPosting').append("<table id="+tableTitle+"></table>");		
+		// $('#popUpWindowForJobPosting').append("<table id="+tableTitle+"></table>");
 		// loop over postingBlogIDs
 		console.log("looping over blog ids");
 		for ( var i = 0; i < postingBlogIDs.length; i++ )
@@ -567,7 +567,6 @@ function getPostingNotes(postingObject,div)
     ) // end ajax parameters
     
 }
-
 
 
 
