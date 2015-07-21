@@ -463,9 +463,63 @@ function getNotesOnIndustry($user,$industryId)
 }
 
 
+function getNotesOnCompany($user,$companyId)
+{
+    $mysqli = connectToDB();
+    
+    // container for goalIds
+    $companyIds = [];
+
+    $query  = "select notes_user.id from notes_company_user ";
+    $query .= "inner join notes_user on notes_company_user.note = notes_user.note ";
+    $query .= "where notes_company_user.company=".$companyId." and notes_user.user=".$userId;
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id);
+            
+            while($statement->fetch())
+                {
+                    array_push($companyIds,$id);
+                }
+        }
+    mysqli_close($mysqli);
+
+    return $companyIds;
+
+}
+
+
 function getNotesOnLocation($user,$locationId)
 {
-    ;
+    $mysqli = connectToDB();
+    
+    // container for goalIds
+    $locationIds = [];
+
+    $query  = "select notes_user.id from notes_location_user ";
+    $query .= "inner join notes_user on notes_location_user.note = notes_user.note ";
+    $query .= "where notes_location_user.location=".$locationId." and notes_user.user=".$userId;
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id);
+            
+            while($statement->fetch())
+                {
+                    array_push($locationIds,$id);
+                }
+        }
+    mysqli_close($mysqli);
+
+    return $locationIds;
+    
 }
 
 function getNotesOnContact($user,$contactId)

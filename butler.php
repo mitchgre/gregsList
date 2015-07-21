@@ -100,6 +100,16 @@ if (isset($_POST['func']))
                 $id = $_POST['id'];
                 echo json_encode(getNotesOnIndustry($user,$id));
             }
+        if ($func === "getNotesOnCompany")
+            {
+                $id = $_POST['id'];
+                echo json_encode(getNotesOnCompany($user,$id));
+            }
+        if ($func === "getNotesOnLocation")
+            {
+                $id = $_POST['id'];
+                echo json_encode(getNotesOnLocation($user,$id));
+            }
         if ($func === "getNotesOnPosting")
             {
                 $postingId = $_POST['id'];

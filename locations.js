@@ -69,7 +69,7 @@ function fillLocations(object,input)
 
     displayTable(object);
     displayLocationsPortlet(object);
-    embelishTable(object,dialogObjectWrapper);
+    embelishTable(object,dialogObjectWrapper2);
 }
 
 function displayLocationsPortlet(object)
