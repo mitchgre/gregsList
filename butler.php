@@ -90,15 +90,20 @@ if (isset($_POST['func']))
             {
                 echo json_encode(getBlog($user));
             }
-        if ($func === "getNotesOnPosting")
-            {
-                $postingId = $_POST['postingId'];
-                echo json_encode(getNotesOnPosting($user,$postingId));
-            }
         if ($func === "getNotesOnGoal")
             {
                 $goalId = $_POST['id'];
                 echo json_encode(getNotesOnGoal($user,$goalId));
+            }
+        if ($func === "getNotesOnIndustry")
+            {
+                $id = $_POST['id'];
+                echo json_encode(getNotesOnGoal($user,$id));
+            }
+        if ($func === "getNotesOnPosting")
+            {
+                $postingId = $_POST['postingId'];
+                echo json_encode(getNotesOnPosting($user,$postingId));
             }
         // inserters ===============================
         if ($func === "insertGoal")
