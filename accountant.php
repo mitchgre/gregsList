@@ -525,6 +525,7 @@ function getNotesOnLocation($userId,$locationId)
     
 }
 
+
 function getNotesOnContact($userId,$contactId)
 {
     ;
@@ -1184,7 +1185,7 @@ function insertNotesCompanyUser($noteId,$companyId,$userId)
 
 function insertNotesLocationUser($noteId,$locationId,$userId)
 {
-    $query = "insert into notes_location_user (note,location,user)";
+    $query = "insert into notes_location_user (note,location,user) ";
     $query .= "values ($noteId, $locationId, $userId)";
     
     if ( booleanReturn($query) )
@@ -1192,7 +1193,7 @@ function insertNotesLocationUser($noteId,$locationId,$userId)
             return true;
         }
     else
-        return "Error inserting to notes_location_user.";         
+        return "Error inserting to notes_location_user. ".$query;         
 
 }
 

@@ -108,7 +108,8 @@ if (isset($_POST['func']))
         if ($func === "getNotesOnLocation")
             {
                 $id = $_POST['id'];
-                echo json_encode(getNotesOnLocation($user,$id));
+                $locationId = getLocationIdFromUserLocationId($user,$id);
+                echo json_encode(getNotesOnLocation($user,$locationId));
             }
         if ($func === "getNotesOnPosting")
             {
@@ -218,10 +219,11 @@ if (isset($_POST['func']))
                 $title = $_POST["title"];
                 $text = $_POST["text"];
                 $id = $_POST["id"];
+                $locationId = getLocationIdFromUserLocationId($user,$id);
  
                 $noteId = insertBlog($user,$title,$text);
                 echo json_encode(
-                    insertNotesLocationUser($noteId,$id,$user));
+                    insertNotesLocationUser($noteId,$locationId,$user));
             }
         if ($func === "insertNotesPostingUser")
             {
