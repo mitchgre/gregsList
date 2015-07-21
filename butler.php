@@ -98,7 +98,7 @@ if (isset($_POST['func']))
         if ($func === "getNotesOnIndustry")
             {
                 $id = $_POST['id'];
-                echo json_encode(getNotesOnGoal($user,$id));
+                echo json_encode(getNotesOnIndustry($user,$id));
             }
         if ($func === "getNotesOnPosting")
             {

@@ -969,7 +969,7 @@ function getObjectNotes(object,type,div)
 		// (gregsList.blog.contents)
 		var postingBlogIDs = JSON.parse(resp);
 
-		console.log("got notes on posting " + object.sid);
+		console.log("got notes on " + type  + " " + object.sid);
 		console.log(resp);
 		console.log(JSON.parse(resp));
 
