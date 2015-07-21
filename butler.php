@@ -190,6 +190,39 @@ if (isset($_POST['func']))
                 echo json_encode(
                     insertNotesGoalUser($noteId,$id,$user));
             }
+        if ($func === "insertNotesIndustryUser")
+            {
+
+                $title = $_POST["title"];
+                $text = $_POST["text"];
+                $id = $_POST["id"];
+ 
+                $noteId = insertBlog($user,$title,$text);
+                echo json_encode(
+                    insertNotesIndustryUser($noteId,$id,$user));
+            }
+        if ($func === "insertNotesCompanyUser")
+            {
+
+                $title = $_POST["title"];
+                $text = $_POST["text"];
+                $id = $_POST["id"];
+ 
+                $noteId = insertBlog($user,$title,$text);
+                echo json_encode(
+                    insertNotesCompanyUser($noteId,$id,$user));
+            }
+        if ($func === "insertNotesLocationUser")
+            {
+
+                $title = $_POST["title"];
+                $text = $_POST["text"];
+                $id = $_POST["id"];
+ 
+                $noteId = insertBlog($user,$title,$text);
+                echo json_encode(
+                    insertNotesLocationUser($noteId,$id,$user));
+            }
         if ($func === "insertNotesPostingUser")
             {
                 // insertBlog, then insertNotesPostingUser

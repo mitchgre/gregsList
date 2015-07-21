@@ -36,12 +36,6 @@ function goal(sid,value)
 }
 
 
-goal.prototype.showGoalNotes = function showGoalNotes(div,sid)
-{
-    // take a goal id, get the note ids from ajax
-}
-
-
 function loc(sid,name)
 {
     this.sid = sid || null;

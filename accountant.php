@@ -445,17 +445,21 @@ function getNotesOnIndustry($user,$industryId)
     $query .= "where notes_industry_user.industry=".$industryId." and notes_user.user=".$userId;
     
     if ($statement = $mysqli->prepare($query))
+    {
+        $statement->execute();
+        
+        // bind results
+        $statement->bind_result($id);
+        
+        while($statement->fetch())
         {
-            $statement->execute();
-            
-            // bind results
-            $statement->bind_result($id);
-            
-            while($statement->fetch())
-                {
-                    array_push($industryIds,$id);
-                }
+            array_push($industryIds,$id);
         }
+    }
+    else
+    {
+        return "error getting industry ids";
+    }
     mysqli_close($mysqli);
 
     return $industryIds;
@@ -1150,15 +1154,49 @@ function insertNotesGoalUser($noteId,$goalId,$userId)
 
 }
 
-function insertNotesCompanyUser($noteId,$companyId,$userId)
-{
-    ;
-}
-
 function insertNotesIndustryUser($noteId,$industryId,$userId)
 {
-    ;
+    $query = "insert into notes_industry_user (note,industry,user)";
+    $query .= "values ($noteId, $industryId, $userId)";
+    
+    if ( booleanReturn($query) )
+        {
+            return true;
+        }
+    else
+        return "Error inserting to notes_industry_user.";         
+
 }
+
+
+function insertNotesCompanyUser($noteId,$companyId,$userId)
+{
+    $query = "insert into notes_company_user (note,company,user)";
+    $query .= "values ($noteId, $companyId, $userId)";
+    
+    if ( booleanReturn($query) )
+        {
+            return true;
+        }
+    else
+        return "Error inserting to notes_company_user.";         
+    
+}
+
+function insertNotesLocationUser($noteId,$locationId,$userId)
+{
+    $query = "insert into notes_location_user (note,location,user)";
+    $query .= "values ($noteId, $locationId, $userId)";
+    
+    if ( booleanReturn($query) )
+        {
+            return true;
+        }
+    else
+        return "Error inserting to notes_location_user.";         
+
+}
+
 
 
 function insertNotesPostingUser($noteId, $postingId, $userId)
