@@ -30,9 +30,6 @@ function glo()  // gregsList Object
 	    updater: "updateGoal",
 	    destroyer: "removeGoal",
 	    displayKeys: ["sid","value"],
-	    buttons: {"show notes":function()
-		      { showNotesOnObject(parent)},
-		      "add note":function(){} }
 	};
     this.industries = 
 	{
@@ -843,7 +840,7 @@ function embelishTable(object,callback)
 
 		var specific = gregsListObjectById(sid,object.type); // get sub object
 		console.log("got " + object.type + " object by ID");
-		callback(specific, object.type, object.buttons);
+		callback(specific, object.type);
 
 	    }
 	);  // end click
@@ -851,7 +848,7 @@ function embelishTable(object,callback)
 }
 
 // this might be too general unfortunately 
-function dialogObjectWrapper(object,type,buttons)
+function dialogObjectWrapper(object,type)
 {
     /*
     console.log(object);
@@ -892,8 +889,12 @@ function dialogObjectWrapper(object,type,buttons)
 
     // concatenate buttons from object
     // push all the parent object button types into the container
-    for ( var index in buttons  )
-	objectButtons[index] = buttons[index];
+    for ( var index in object.buttons  )
+    {
+	objectButtons[index] = object.buttons[index];
+	console.log('objectButtons: '+index);
+	console.log(objectButtons[index]);
+    }
 
     // add a close button
     objectButtons["Close"] = function()
@@ -902,7 +903,7 @@ function dialogObjectWrapper(object,type,buttons)
 	$(this).dialog('close');
     }
 
-
+    
     
     $(innerDiv)
     .dialog
@@ -961,8 +962,14 @@ function gregsListObjectById(sid,type)
 }
 
 // generic function to show notes about an object
+// as of Mon Jul 20, 2015 18:10:02 this is too difficult
+// will only work with specifics
+
+// glo.prototype.showNotesOnObject = 
 function showNotesOnObject(object)
 {
+    console.log('showing notes on object');
     // try to figure out object type
-    console.log(object.goals);
+    console.log(object);
+    console.log(object.type);
 }

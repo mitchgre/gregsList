@@ -23,8 +23,23 @@ function industry(sid,name)
 
 function goal(sid,value)
 {
+    this.self = this;
     this.sid = sid || null;
     this.value = value || null;
+    this.buttons = 
+	{
+	    "show notes":function()
+	    { 
+		this.showGoalNotes();
+	    },
+	    "add note":function(){} 
+	};
+}
+
+
+goal.prototype.showGoalNotes = function showGoalNotes(div,sid)
+{
+    // take a goal id, get the note ids from ajax
 }
 
 
