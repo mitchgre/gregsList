@@ -368,54 +368,6 @@ function popUpDialogForJobPosting(postingObject)
 }
 
 
-function joinBlogToPosting( blogId , postingId )
-{
-    // just send this to the butler and let PHP do the lifting
-    console.log("joining blogId:")
-    console.log(blogId);
-    console.log("with posting ID:");
-    console.log(postingId);
-
-    $.ajax
-    (
-	{
-	    url: "butler.php",
-	    type: "post",
-	    dataType: "text",
-	    data:
-	    {
-		user: gregsList.user.name,
-		pass: gregsList.user.password,
-		func: "insertNotesPostingUser",
-		noteId: blogId,
-		postingId: postingId
-	    },
-	    success: function(resp)
-	    {
-		if (resp !== '')
-		{					
-		    console.log(JSON.parse(resp));
-		    if (JSON.parse(resp) === true)
-		    {
-			console.log("input worked");
-			// displayTable(object,[]);
-			// getStuff(object.parent);
-			object.parent.refresh();
-		    }
-		    else
-		    {
-			console.log("input failed");
-		    }
-		    
-		}
-		else
-		    console.log('empty response');
-		
-	    } // end success func
-	} // end ajax json
-    ) // end ajax parameters
-}
-
 
 
 function givePostingNoteInsertionToButler(object,title,text,callback)
