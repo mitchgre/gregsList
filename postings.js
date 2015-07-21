@@ -334,13 +334,15 @@ function popUpDialogForJobPosting(postingObject)
     (
 	{
 	    modal:true,
+	    height: 0.5 * $(window).width(),  // "auto",
+	    width:"70%",
 	    buttons:
 	    {
 		"Show Notes": function()
 		{
 		    console.log("show notes clicked");
 
-		    getPostingNotes(postingObject);
+		    getPostingNotes(postingObject,postingPopUp);
 
 		    // $(this).dialog('close');
 		    
@@ -541,19 +543,19 @@ function createPostingPopUpDivWrapper(postingObject)
     return postingPopUp;
 }
 
-function getPostingNotes(postingObject)
+function getPostingNotes(postingObject,div)
 {
     // get the butler to give you all the notes on this posting
     console.log('gonna get them notes.');
     
     // use document create element
-    var postingPopUp = createPostingPopUpDivWrapper(postingObject);
+    // var postingPopUp = createPostingPopUpDivWrapper(postingObject);
 
     // var postingPopUp = document.createElement('div');
     // postingPopUp.id = postingObject.title + 'Notes';
     // createAppendedChildToParent(postingPopUp);
-
-
+    
+    /*
     $(postingPopUp)
 	.dialog
     (
@@ -571,7 +573,7 @@ function getPostingNotes(postingObject)
 	    }
 	}
     );
-
+    */
 
 
     
@@ -603,7 +605,7 @@ function getPostingNotes(postingObject)
 
 		// get a reference to the popUp dialog window in DOM
 		// var div = document.getElementById(postingPopUp.id);
-		var div = document.getElementById("popUpNotesOnPosting");
+		// var div = document.getElementById("popUpNotesOnPosting");
 		emptyElement(div);
 		console.log(div.innerHTML)
 
