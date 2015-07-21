@@ -1036,23 +1036,8 @@ function addObjectNote(object)
     console.log('adding object notes');
     console.log(object);
 
-
-function addPostingNote(postingObject)
-{
-    // postingObject is a specific post.
-    // console.log("postingObject=");
-    // console.log(postingObject);
-
-    console.log("addPostingNote called.");
-    
-    // Mon Jul 06, 2015 15:32:03
-    // copy a lot of functionality from insertBlog.
-    // couldn't get it to work as a composition, but a decomposition might be easier.
-
-
     // build form 
     var string = buildBlogFormString();
-
 
     $(string).dialog
     (
@@ -1073,7 +1058,7 @@ function addPostingNote(postingObject)
 		{
 		    $(this).dialog("close")
 		},
-		"Update":function()
+		"Insert":function()
 		{
 		    // get values from form
 		    var title = $("#blogUpdateEmbedTitle")[0].value;
@@ -1110,8 +1095,59 @@ function addPostingNote(postingObject)
     );
 }
 
-function insertObjectNote ()
+function insertObjectNote (object,title,text)
 {
+    var putter; 
+    // sort out putter functions by type
+    // see classes.js for object definitions
+    if ( type == "goal" )
+    {
+	putter = 'insertNotesGoalUser';
+    }
+    else if ( type ==  "industry"  )
+    {
+	putter = 'insertNotesIndustryUser';
+    }
+    else if ( type == "company" )
+    {
+	putter = 'insertNotesCompanyUser';
+    }
+    else if ( type == "location" )
+    {
+	putter = 'insertNotesLocationUser';
+    }
+    else if ( type == "posting" )
+    {
+	putter = 'insertNotesPostingUser';
+    }
+    
+    console.log(putter);
+    
+
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		user: gregsList.user.name,
+		pass: gregsList.user.password,
+		func: putter,
+		// sid: link,
+		title: title,
+		text: text,
+		id: object.sid,
+		// func: "insertNotesPostingUser"
+	    },
+	    success: function(resp)
+	    {
+		console.log(resp);
+		gregsList.refresh();
+	    }	
+	}
+    );
 }
 
 
