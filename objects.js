@@ -847,6 +847,52 @@ function embelishTable(object,callback)
 
 }
 
+// object are those from class.js, not objects.js
+function dialogObjectWrapper2(object)
+{
+    var title = object.title;
+    // build up a dialog string
+
+    var popUp;
+    popUp = document.createElement('div');
+    popUp.id = 'popUpNotes';
+    popUp.title = object.title + " Notes";
+    
+    
+    $(popUp)
+	.dialog
+    (
+	{
+	    modal:true,
+	    height: 0.5 * $(window).width(),  // "auto",
+	    width:"70%",
+	    buttons:
+	    {
+		"Add Note":function()
+		{
+		    console.log("add notes clicked");
+
+		    addObjectNote(postingObject);
+
+		    $(this).dialog('close');
+
+		    // open dialog for inserting a blog post
+		    // get sid of blog post
+
+		},
+		"Close":function()
+		{
+		    $(this).dialog('close');
+		}
+		
+	    }
+	}
+    ); // end .dialog
+    getPostingNotes(object,popUp);
+
+}
+
+
 // this might be too general unfortunately 
 function dialogObjectWrapper(object,type)
 {
