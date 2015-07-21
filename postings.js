@@ -278,7 +278,6 @@ function editPosting()
 */
 function fillPostings(object, input)
 {
-
     console.log("object");
     console.log(object);
     
@@ -573,24 +572,6 @@ function getPostingNotes(postingObject,div)
 }
 
 
-
-function getPostingFromSid(sid)
-{
-    console.log("searching for sid=" + sid);
-
-    // loop over postings
-    for ( var i = 0; i < gregsList.postings.contents.length; i++ )
-    {
-	
-	var posting = gregsList.postings.contents[i]; 
-	// console.log("posting["+i+"]="+posting.sid);
-	
-	if ( posting.sid == sid  )
-	{
-	    return posting;
-	}
-    }
-}
 
 
 
