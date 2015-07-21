@@ -311,48 +311,6 @@ function fillPostings(object, input)
 
 
 
-function popUpDialogForJobPosting(postingObject)
-{
-    var postTitle = postingObject.title;
-    // build up a dialog string
-
-    var postingPopUp;
-    postingPopUp = document.createElement('div');
-    postingPopUp.id = 'popUpNotesOnPosting';
-    postingPopUp.title = postingObject.title + " Notes";
-    
-    
-    $(postingPopUp)
-	.dialog
-    (
-	{
-	    modal:true,
-	    height: 0.5 * $(window).width(),  // "auto",
-	    width:"70%",
-	    buttons:
-	    {
-		"Add Note":function()
-		{
-		    console.log("add notes clicked");
-
-		    addPostingNote(postingObject);
-
-		    $(this).dialog('close');
-
-		    // open dialog for inserting a blog post
-		    // get sid of blog post
-
-		},
-		"Close":function()
-		{
-		    $(this).dialog('close');
-		}
-		
-	    }
-	}
-    ); // end .dialog
-    getPostingNotes(postingObject,postingPopUp);
-}
 
 
 
@@ -489,85 +447,6 @@ function addPostingNote(postingObject)
 
 
 
-function getPostingNotes(postingObject,div)
-{
-    // get the butler to give you all the notes on this posting
-    console.log('gonna get them notes.');
-       
-    // expect an array of sIDs corresponding to the blogIds.
-    $.ajax
-    (
-	{
-	    url: "butler.php",
-	    type: "post",
-	    dataType: "text",
-	    data:
-	    {
-		user: gregsList.user.name,
-		pass: gregsList.user.password,
-		func: "getNotesOnPosting",
-		postingId: postingObject.sid
-	    },
-	    success: function(resp)
-	    {
-		// resp contains an array of ints (sIDs to blog postings)
-		// the blog texts should already be loaded in javascript memory. 
-		// (gregsList.blog.contents)
-		var postingBlogIDs = JSON.parse(resp);
-
-		console.log("got notes on posting " + postingObject.sid);
-		console.log(resp);
-		console.log(JSON.parse(resp));
-
-
-		// get a reference to the popUp dialog window in DOM
-		// var div = document.getElementById(postingPopUp.id);
-		// var div = document.getElementById("popUpNotesOnPosting");
-		emptyElement(div);
-		console.log(div.innerHTML)
-
-		// callback should display a tableOfBlogs.		
-		// var tableTitle = '"tableOfBlogsOn'+postingObject.title+'"';
-		var tableTitle = 'tableOfBlogsOnPosting';
-		var table = createAppendedChildToParent('table',div);
-		table.id = tableTitle;
-		// table.border = '1';
-		table.className = "io"; 
-		// $('#popUpWindowForJobPosting').append("<table id="+tableTitle+"></table>");
-		// loop over postingBlogIDs
-		console.log("looping over blog ids");
-		for ( var i = 0; i < postingBlogIDs.length; i++ )
-		{
-		    
-		    var thisID = postingBlogIDs[i];
-		    // console.log("i="+i);
-		    console.log("thisID="+thisID);
-		    // var tr = createAppendedChildToParent(tr,table);
-		    // tr.innerHTML = gregsList.blog.contents[thisID].text;
-
-
-		    
-		    // loop over gregsList.blog.contents
-		    for ( var j = 0;  j < gregsList.blog.contents.length; j++ )
-		    {
-			// console.log("j="+j)
-			// console.log(gregsList.blog.contents[j].sid);
-
-			if ( gregsList.blog.contents[j].sid ==  thisID  )
-			{
-			    // insert blog to DOM table
-			    console.log("got a hit")
-			    var tr = createAppendedChildToParent('tr',table);
-			    var td = createAppendedChildToParent('td',tr);
-			    td.innerHTML = gregsList.blog.contents[ j ].text;
-			}
-		    }
-		}
-	    } // end success func
-	} // end ajax json
-    ) // end ajax parameters
-    
-}
 
 
 
