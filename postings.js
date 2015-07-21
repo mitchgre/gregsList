@@ -281,13 +281,6 @@ function fillPostings(object, input)
 
     console.log("object");
     console.log(object);
-
-    //console.log("input keys");
-    // console.log(input);
-    //console.log(JSON.parse(Object.keys(input)));
-
-    
-
     
     // erase object's contents and refill them from input
     object.contents = [];
