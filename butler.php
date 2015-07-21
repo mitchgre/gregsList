@@ -115,6 +115,12 @@ if (isset($_POST['func']))
                 $postingId = $_POST['id'];
                 echo json_encode(getNotesOnPosting($user,$postingId));
             }
+        if ($func === "getNotesOnContact")
+            {
+                $id = $_POST['id'];
+                echo json_encode(getNotesOnContact($user,$id));
+            }
+
         // inserters ===============================
         if ($func === "insertGoal")
             {

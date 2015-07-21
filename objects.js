@@ -1035,6 +1035,83 @@ function addObjectNote(object)
 {
     console.log('adding object notes');
     console.log(object);
+
+
+function addPostingNote(postingObject)
+{
+    // postingObject is a specific post.
+    // console.log("postingObject=");
+    // console.log(postingObject);
+
+    console.log("addPostingNote called.");
+    
+    // Mon Jul 06, 2015 15:32:03
+    // copy a lot of functionality from insertBlog.
+    // couldn't get it to work as a composition, but a decomposition might be easier.
+
+
+    // build form 
+    var string = buildBlogFormString();
+
+
+    $(string).dialog
+    (
+	{
+	    width: "80%",
+	    //height: "80%",
+	    height: 400,
+	    
+	    open: function()
+	    {
+		fixBlogUpdaterDialogCSS();
+	    },
+
+	    modal:true, 
+	    buttons:
+	    {
+		Cancel: function() 
+		{
+		    $(this).dialog("close")
+		},
+		"Update":function()
+		{
+		    // get values from form
+		    var title = $("#blogUpdateEmbedTitle")[0].value;
+		    var text = $("#blogPostContentsToAdd")[0].value;
+
+		    // display what we're doing
+		    console.log("sending " + 
+				"title=" + title + ", " +
+				"text=" + text + ", " +
+				" to the butler."
+			       );
+
+		    
+		    // give values to butler
+		    
+		    $(this).dialog("close");
+		    // emptyElement($("#scheduleUpdater")[0]);
+		    var toDestroy = 
+			[
+			    "blogPostContentsToAdd",
+			    "blogDialogAddTable",
+			    "blogUpdater"
+			];
+
+		    for (var i=0; i < toDestroy.length; i++)
+			removeElement(toDestroy[i]);
+
+		    // givePostingNoteInsertionToButler(postingObject,title,text)
+		    insertObjectNote(object,title,text);
+
+		}
+	    }
+	}
+    );
+}
+
+function insertObjectNote ()
+{
 }
 
 
