@@ -869,6 +869,10 @@ function dialogObjectWrapper2(object,type)
     {
 	title = object.name;
     }
+    else if ( type == "posting" )
+    {
+	title = object.title;
+    }
 
     console.log("title="+title);
 

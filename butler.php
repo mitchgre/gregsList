@@ -102,7 +102,7 @@ if (isset($_POST['func']))
             }
         if ($func === "getNotesOnPosting")
             {
-                $postingId = $_POST['postingId'];
+                $postingId = $_POST['id'];
                 echo json_encode(getNotesOnPosting($user,$postingId));
             }
         // inserters ===============================
