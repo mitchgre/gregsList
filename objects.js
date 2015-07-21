@@ -848,15 +848,34 @@ function embelishTable(object,callback)
 }
 
 // object are those from class.js, not objects.js
-function dialogObjectWrapper2(object)
+function dialogObjectWrapper2(object,type)
 {
-    var title = object.title;
-    // build up a dialog string
+    var title;   
+
+    // see classes.js for object definitions
+    if ( type == "goal" )
+    {
+	title = object.value;
+    }
+    else if ( type ==  "industry"  )
+    {
+	title = object.name;
+    }
+    else if ( type == "company" )
+    {
+	title = object.name;
+    }
+    else if ( type == "location" )
+    {
+	title = object.name;
+    }
+
+    console.log("title="+title);
 
     var popUp;
     popUp = document.createElement('div');
     popUp.id = 'popUpNotes';
-    popUp.title = object.title + " Notes";
+    popUp.title = title + " Notes";
     
     
     $(popUp)
@@ -872,12 +891,9 @@ function dialogObjectWrapper2(object)
 		{
 		    console.log("add notes clicked");
 
-		    addObjectNote(postingObject);
+		    // addObjectNote(object);
 
 		    $(this).dialog('close');
-
-		    // open dialog for inserting a blog post
-		    // get sid of blog post
 
 		},
 		"Close":function()
@@ -888,7 +904,8 @@ function dialogObjectWrapper2(object)
 	    }
 	}
     ); // end .dialog
-    getPostingNotes(object,popUp);
+
+    // getObjectNotes(object,popUp);
 
 }
 
