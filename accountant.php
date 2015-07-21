@@ -435,7 +435,31 @@ function getNotesOnGoal($userId,$goalId)
 
 function getNotesOnIndustry($user,$industryId)
 {
-    ;
+    $mysqli = connectToDB();
+    
+    // container for goalIds
+    $industryIds = [];
+
+    $query  = "select notes_user.id from notes_industry_user ";
+    $query .= "inner join notes_user on notes_industry_user.note = notes_user.note ";
+    $query .= "where notes_industry_user.industry=".$industryId." and notes_user.user=".$userId;
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id);
+            
+            while($statement->fetch())
+                {
+                    array_push($industryIds,$id);
+                }
+        }
+    mysqli_close($mysqli);
+
+    return $industryIds;
+
 }
 
 
