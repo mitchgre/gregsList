@@ -23,7 +23,6 @@ function industry(sid,name)
 
 function goal(sid,value)
 {
-    this.self = this;
     this.sid = sid || null;
     this.value = value || null;
     this.buttons = 
