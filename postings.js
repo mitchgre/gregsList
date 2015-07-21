@@ -338,6 +338,7 @@ function popUpDialogForJobPosting(postingObject)
 	    width:"70%",
 	    buttons:
 	    {
+		/*
 		"Show Notes": function()
 		{
 		    console.log("show notes clicked");
@@ -350,6 +351,7 @@ function popUpDialogForJobPosting(postingObject)
 		    // postingPopUp.innerHTML = '';
 		    // emptyElement(postingPopUp);
 		},
+		*/
 		"Add Note":function()
 		{
 		    console.log("add notes clicked");
@@ -369,7 +371,8 @@ function popUpDialogForJobPosting(postingObject)
 		
 	    }
 	}
-    )
+    ); // end .dialog
+    getPostingNotes(postingObject,postingPopUp);
 }
 
 
@@ -506,77 +509,12 @@ function addPostingNote(postingObject)
 }
 
 
-function createPostingPopUpDiv(postingObject)
-{
-    var postingPopUp;
-    postingPopUp = document.createElement('div');
-    postingPopUp.id = 'popUpNotesOnPosting';
-    postingPopUp.title = postingObject.title + " Notes";
-    /*
-    postingPopUp.style.width = "50%";
-    postingPopUp.style.height = "80%";
-    postingPopUp.style.overflow = "auto;"
-    */
-    console.log(postingPopUp);
-    // var postParent = postingPopUp.parentNode;
-    // console.log(postParent);
-    /*
-    postParent.setAttribute('style','width:50%');
-    postParent.setAttribute('style','height:80%');
-    postParent.setAttribute('style','overflow:auto');
-    */
-    return postingPopUp;
-}
-
-function createPostingPopUpDivWrapper(postingObject)
-{
-    var postingPopUp;
-
-    if ( document.getElementById('popUpNotesOnPosting') === null ) // doesn't exist
-	postingPopUp = createPostingPopUpDiv(postingObject);
-    else
-	{
-	    postingPopUp = document.getElementById('popUpNotesOnPosting');  // get div
-	    postingPopUp.parentNode.removeChild(postingPopUp); // destroy div 
-	    postingPopUp = createPostingPopUpDiv(postingObject); // create div
-	}
-    return postingPopUp;
-}
 
 function getPostingNotes(postingObject,div)
 {
     // get the butler to give you all the notes on this posting
     console.log('gonna get them notes.');
-    
-    // use document create element
-    // var postingPopUp = createPostingPopUpDivWrapper(postingObject);
-
-    // var postingPopUp = document.createElement('div');
-    // postingPopUp.id = postingObject.title + 'Notes';
-    // createAppendedChildToParent(postingPopUp);
-    
-    /*
-    $(postingPopUp)
-	.dialog
-    (
-	{
-	    modal:true,
-	    height: 0.5 * $(window).width(),  // "auto",
-	    width:"70%",
-	    buttons:
-	    {
-		"OK": function()
-		{
-		    emptyElement(postingPopUp);
-		    $(this).dialog('close');
-		}
-	    }
-	}
-    );
-    */
-
-
-    
+       
     // expect an array of sIDs corresponding to the blogIds.
     $.ajax
     (
