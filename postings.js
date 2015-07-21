@@ -322,9 +322,12 @@ function popUpDialogForJobPosting(postingObject)
 {
     var postTitle = postingObject.title;
     // build up a dialog string
-    var postingPopUp = '<div id="popUpWindowForJobPosting" title="'+postTitle+'">';
-    //postingPopUp += '<button type="button">Similar</button>'
-    postingPopUp += '</div>';
+
+    var postingPopUp;
+    postingPopUp = document.createElement('div');
+    postingPopUp.id = 'popUpNotesOnPosting';
+    postingPopUp.title = postingObject.title + " Notes";
+    
     
     $(postingPopUp)
 	.dialog
