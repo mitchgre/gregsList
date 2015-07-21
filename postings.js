@@ -338,20 +338,6 @@ function popUpDialogForJobPosting(postingObject)
 	    width:"70%",
 	    buttons:
 	    {
-		/*
-		"Show Notes": function()
-		{
-		    console.log("show notes clicked");
-
-		    getPostingNotes(postingObject,postingPopUp);
-
-		    // $(this).dialog('close');
-		    
-		    // open dialog showing all blog posts that link to this posting
-		    // postingPopUp.innerHTML = '';
-		    // emptyElement(postingPopUp);
-		},
-		*/
 		"Add Note":function()
 		{
 		    console.log("add notes clicked");
