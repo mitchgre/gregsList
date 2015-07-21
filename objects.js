@@ -905,21 +905,25 @@ function dialogObjectWrapper2(object,type)
 	}
     ); // end .dialog
 
-    getObjectNotes(object,popUp);
+    getObjectNotes(object,type,popUp);
 
 }
 
 
+// object is from classes.js not objects.js
+function getObjectNotes(object,type,div)
+{
+    console.log('getting object notes');
+    console.log(object);
+    console.log(type);
+}
+
+
+
+// object is from classes.js not objects.js
 function addObjectNote(object)
 {
     console.log('adding object notes');
-    console.log(object);
-}
-
-// object is from classes.js not objects.js
-function getObjectNotes(object,div)
-{
-    console.log('getting object notes');
     console.log(object);
 }
 
