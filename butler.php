@@ -179,6 +179,17 @@ if (isset($_POST['func']))
  
                 echo json_encode(insertBlog($user,$title,$text));
             }
+        if ($func === "insertNotesGoalUser")
+            {
+
+                $title = $_POST["title"];
+                $text = $_POST["text"];
+                $id = $_POST["id"];
+ 
+                $noteId = insertBlog($user,$title,$text);
+                echo json_encode(
+                    insertNotesGoalUser($noteId,$id,$user));
+            }
         if ($func === "insertNotesPostingUser")
             {
                 // insertBlog, then insertNotesPostingUser
