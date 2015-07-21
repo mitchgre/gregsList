@@ -891,7 +891,7 @@ function dialogObjectWrapper2(object,type)
 		{
 		    console.log("add notes clicked");
 
-		    // addObjectNote(object);
+		    addObjectNote(object);
 
 		    $(this).dialog('close');
 
@@ -905,8 +905,22 @@ function dialogObjectWrapper2(object,type)
 	}
     ); // end .dialog
 
-    // getObjectNotes(object,popUp);
+    getObjectNotes(object,popUp);
 
+}
+
+
+function addObjectNote(object)
+{
+    console.log('adding object notes');
+    console.log(object);
+}
+
+// object is from classes.js not objects.js
+function getObjectNotes(object,div)
+{
+    console.log('getting object notes');
+    console.log(object);
 }
 
 
