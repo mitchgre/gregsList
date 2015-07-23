@@ -1,4 +1,9 @@
 
+function scrapePostings()
+{
+    console.log("scraping postings.");
+    console.log(this);
+}
 
 
 function insertPosting()

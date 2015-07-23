@@ -493,6 +493,7 @@ glo.prototype.setupPostings =
     addButton.onclick = insertPosting.bind(this);
 
     // wire scrapeButton
+    scrapeButton.onclick = scrapePostings.bind(this);
 
     // insert empty results table
     var table = createAppendedChildToParent('table',postings);
