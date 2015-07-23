@@ -1,8 +1,13 @@
 
 function scrapePostings()
 {
+    // startup messages
     console.log("scraping postings.");
     console.log(this);
+
+    // open input dialog 
+ 
+    // get results from ajax
 }
 
 
