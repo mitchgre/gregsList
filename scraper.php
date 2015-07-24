@@ -37,7 +37,8 @@ function get_second_table($text)
 {
     // get td with id "resultsCol"
    
-    $sd = scrape_between($sc, "<td id=\"resultsCol\">","<div class=\"related_searches\">");
+    $sd = scrape_between($text, "<td id=\"resultsCol\">","<div class=\"related_searches\">");
+    return $sd;
 }
 
 
