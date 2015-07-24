@@ -1,4 +1,19 @@
 
+function sendScraperRequest ()
+{
+    /*
+      $.ajax()
+      {
+      
+      }
+     */
+}
+
+function openScraperDialog()
+{
+}
+
+
 function scrapePostings()
 {
     // startup messages
@@ -6,8 +21,10 @@ function scrapePostings()
     console.log(this);
 
     // open input dialog 
- 
+    openScraperDialog();
+
     // get results from ajax
+    sendScraperRequest();
 }
 
 
