@@ -52,8 +52,33 @@ function scrapePostings($url)
     // loop over $scraping pulling all titles, links, locations somehow.
     // breaking this down:
 
-    // $body = scrape_between( $page, "<body>", "</body>" );
-    $postings = get_second_table($page);
+    // filter page down to the relevant table
+    $page = get_second_table($page);
+
+    // explode on anchors
+    /*
+      example:
+
+<a
+rel="nofollow"
+href="/rc/clk?jk=c23a6d772a159c96" target="_blank"
+onmousedown="return rclk(this,jobmap[0],0);"
+onclick="return rclk(this,jobmap[0],true,0);"
+itemprop="title"
+title="Software Engineer - New Grad - 2016"
+class="turnstileLink"
+data-tn-element="jobTitle"><b>Software</b> Engineer - New Grad - 2016</a>
+
+     */
+    $anchor = "<a\nrel=\"nofollow\""; 
+
+    /*
+      // $link = ;
+      // $title = ;
+      // $company = ;
+      // $location = ;
+      // $description = ;
+     */
 
     return $postings;
 }
