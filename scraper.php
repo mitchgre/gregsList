@@ -38,10 +38,14 @@ function scrapePostings($url)
 {
     $postings = [];     // empty array
 
-    $scraping = curl( $url );   // get all html
+    $page = curl( $url );   // get all html
     
-    // loop over $scraping pulling all titles.
-    // ?
+    // loop over $scraping pulling all titles, links, locations somehow.
+    // breaking this down:
+
+    $body = scrape_between( $page, "<body>", "</body>" );
+    
+    $postings = $body;
 
     return $postings;
 }
