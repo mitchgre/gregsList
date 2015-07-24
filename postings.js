@@ -11,6 +11,11 @@ function sendScraperRequest ()
 
 function openScraperDialog()
 {
+    /*
+      $.dialog()
+      {
+      }
+     */
 }
 
 
