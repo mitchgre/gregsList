@@ -35,6 +35,9 @@ function scrape_between($data, $start, $end){
 // get 2nd table
 function get_second_table($text)
 {
+    // get td with id "resultsCol"
+   
+    $sd = scrape_between($sc, "<td id=\"resultsCol\">","<div class=\"related_searches\">");
 }
 
 
@@ -48,9 +51,8 @@ function scrapePostings($url)
     // loop over $scraping pulling all titles, links, locations somehow.
     // breaking this down:
 
-    $body = scrape_between( $page, "<body>", "</body>" );
-    
-    $postings = $body;
+    // $body = scrape_between( $page, "<body>", "</body>" );
+    $postings = get_second_table($url);
 
     return $postings;
 }
