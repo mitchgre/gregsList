@@ -53,7 +53,7 @@ function scrapePostings($url)
     // breaking this down:
 
     // $body = scrape_between( $page, "<body>", "</body>" );
-    $postings = get_second_table($url);
+    $postings = get_second_table($page);
 
     return $postings;
 }
