@@ -32,6 +32,11 @@ function scrape_between($data, $start, $end){
     return $data;   // Returning the scraped data from the function
 }
 
+// get 2nd table
+function get_second_table($text)
+{
+}
+
 
 // get an associative array
 function scrapePostings($url)
