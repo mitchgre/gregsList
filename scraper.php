@@ -94,17 +94,20 @@ data-tn-element="jobTitle"><b>Software</b> Engineer - New Grad - 2016</a>
      */
     $anchor = "<a\nrel=\"nofollow\""; 
 
-    /*
-      // $link = ;
-      // $title = ;
-      // $company = ;
-      // $location = ;
-      // $description = ;
-     */
+  
     
     // $postings = $page;
     // get anchors 
     $pieces = explode($anchor, $page);
+ 
+
+    $link = getScrapedLink();
+    $title = getScrapedTitle();
+    $company = getScrapedCompany();
+    $location = getScrapedLocation();
+    $description = getScrapedDescription();
+
+
     $postings = $pieces;
     return $postings;
 }
