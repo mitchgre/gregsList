@@ -76,7 +76,13 @@ function getScrapedCompany($noise)
 
 function getScrapedLocation($noise)
 {
-    $location = "location";
+    // $location = "location";
+    
+    $location = scrape_between(
+        $noise,
+        "itemscope itemtype=\"http://schema.org/Postaladdress\"><span itemprop=\"addressLocality\">",
+        "<");
+
     return $location;
 
 }
