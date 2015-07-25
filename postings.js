@@ -9,13 +9,39 @@ function sendScraperRequest ()
      */
 }
 
+function getIndeedScraperDialogString()
+{
+    // create and return a string of html
+    var string  = '<div id="indeedScraperDialog" title="indeedScraperDialog">';
+    string += '<table>';
+
+    string += '</table></div>';
+
+    return string;
+}
+
 function openScraperDialog()
 {
-    /*
-      $.dialog()
-      {
-      }
-     */
+    // get dialog string
+    var scraperDialogString = getIndeedScraperDialogString()
+    ;
+    
+    $(scraperDialogString).dialog(
+    {
+	modal:true,
+	buttons:
+	{
+	    Cancel: function() 
+	    {
+		$(this).dialog("close")
+	    },
+	    "Scrape":function()
+	    {
+		;
+	    }
+	}
+    });
+    
 }
 
 
