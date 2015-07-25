@@ -57,7 +57,8 @@ function getScrapedLink($noise)
 
 function getScrapedTitle($noise)
 {
-    $title = "title";
+    // $title = "title";
+    $title = scrape_between($noise,"title=\"","\"");
     return $title;
 
 }
@@ -148,5 +149,7 @@ data-tn-element="jobTitle"><b>Software</b> Engineer - New Grad - 2016</a>
 
     return $postings;
 }
+
+
 
 ?>
