@@ -42,6 +42,28 @@ function get_second_table($text)
 }
 
 
+
+function getScrapedLink()
+{
+}
+
+function getScrapedTitle()
+{
+}
+
+function getScrapedCompany()
+{
+}
+
+function getScrapedLocation()
+{
+}
+
+function getScrapedDescription()
+{
+}
+
+
 // get an associative array
 function scrapePostings($url)
 {
