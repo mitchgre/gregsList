@@ -43,34 +43,40 @@ function get_second_table($text)
 
 
 
-function getScrapedLink()
+function getScrapedLink($noise)
 {
-    $link = "link";
+    // base link
+    $link = "http://indeed.com";
+
+    // get secondary component from noise
+    $scraping = scrape_between($noise,"href=\"","\"");
+    $link .= $scraping;
+
     return $link;
 }
 
-function getScrapedTitle()
+function getScrapedTitle($noise)
 {
     $title = "title";
     return $title;
 
 }
 
-function getScrapedCompany()
+function getScrapedCompany($noise)
 {
     $company = "company";
     return $company;
 
 }
 
-function getScrapedLocation()
+function getScrapedLocation($noise)
 {
     $location = "location";
     return $location;
 
 }
 
-function getScrapedDescription()
+function getScrapedDescription($noise)
 {
     $description = "description";
     return $description;
