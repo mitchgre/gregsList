@@ -1,0 +1,2025 @@
+
+** Sat Jun 27, 2015 10:45:41 revisiting
+   Added a new folder for documentation.
+
+   I think this is a decent base to work from, but I'm missing a list
+   of what's working and what's not.
+
+   (wish i knew how to remap keys on an android keyboard)
+
+
+   
+   
+** Sat Jun 27, 2015 10:47:19 not working [1/4]
+ - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+   - need to get graphical calendar open for events to refresh automatically
+   - this is of course a new problem.
+ - [ ] tables overlapping in events  [[file:schedules.js]]
+   [[file:index.html]] [[file:index.css]]
+ - [ ] urls in postings [[file:postings.js]]
+ - [ ] addresses in contacts
+** Sun Jun 28, 2015 11:19:37 not working [4/7]
+ - [ ] tables overlapping in events  [[file:schedules.js]]
+   [[file:index.html]] [[file:index.css]]
+
+ - [ ] addresses in contacts
+
+ - [ ] link goals, companies, contacts, industries...
+
+ - [X] urls in postings [[file:postings.js]]
+
+ - [X] date picker
+
+ - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+   - need to get graphical calendar open for events to refresh automatically
+   - this is of course a new problem.
+
+ - [X] removing events [[file:schedules.js]]
+   - Sun Jun 28, 2015 13:01:15
+   - This actually had nothing to do with schedules.js
+   - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+
+** Sun Jun 28, 2015 22:34:57 continuing  problems [6/15]   
+
+ - [ ] editing locations doesn't work
+
+ - [ ] editing events doesn't work
+
+ - [ ] add options to group, order and filter tables
+
+ - [ ] link goals, companies, contacts, industries...
+   - missing notes sections under postings - missing links to schedule
+   - how to link companies to industries?
+     - schema allows for this, but need to set it up somehow in UI
+     - svg/raphael is one possible solution, d3 is a more complex possibility
+     - canvas is yet a more complex possibility
+
+     - using accordions, clicking on a location could open more divs
+       showing number of postings, number of companies, number of
+       industries, etc. Clicking the number of postings would show
+       the results, etc.
+
+     - similarly, clicking on an industry could show number of
+       companies, number of locations, etc.
+
+ - [ ] addresses in contacts
+   - again dialog boxes would be a good way to go here
+   - [[file:objects.js::function%20setupContacts()][file:objects.js::function setupContacts()]]
+
+ - [ ] tables overlapping boundaries in events,contacts,etc  [[file:schedules.js]]
+   [[file:index.html]] [[file:index.css]]
+
+   - a good fix for this might be to use a jquery dialog box to
+     display more info about the event.
+   - preferably the dialog box will automatically add links to the urls
+
+   - *Actually, to fix the overlapping displays, an accordion is a*
+     *better approach.*
+
+ - [ ] full calendar events don't link to event table
+
+ - [ ] add installation notes
+
+ - [ ] add web scraping functionality
+
+ - [X] adding postings doesn't automatically enter companies
+   - [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+
+ - [X] automatic links in job posting entries
+   - change input boxes to jquery dialogs
+   - [[file:objects.js::function%20setupPostings%20][file:objects.js::function setupPostings ]]
+   - [[file:postings.js::function%20insertPosting][file:postings.js::function insertPosting]]
+
+
+ - [X] urls in postings [[file:postings.js]]
+   - this fix doesn't work in win8 chrome, but works in ubuntu chrome for some reason.
+
+ - [X] date picker
+
+ - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+   - need to get graphical calendar open for events to refresh automatically
+   - this is of course a new problem.
+
+ - [X] removing events [[file:schedules.js]]
+   - Sun Jun 28, 2015 13:01:15
+   - This actually had nothing to do with schedules.js
+   - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+
+
+** Tue Jun 30, 2015 10:11:53 continuing  problems [7/20]   
+
+ - [ ] notes have no interface
+
+ - [ ] add jquery tabs for resumes, blogs, and cover letters
+   - [[file:objects.js]]
+   - [[file:index.js]]
+   - [[file:index.html]]
+   - how do you switch between tabs?
+
+ - [ ] link goals, companies, contacts, industries...
+   - missing notes sections under postings - missing links to schedule
+   - how to link companies to industries?
+     - schema allows for (some of) this, but need to set it up somehow in UI
+     - svg/raphael is one possible solution, d3 is a more complex possibility
+     - canvas is yet a more complex possibility
+
+     - using accordions, clicking on a location could open more divs
+       showing number of postings, number of companies, number of
+       industries, etc. Clicking the number of postings would show
+       the results, etc.
+
+     - similarly, clicking on an industry could show number of
+       companies, number of locations, etc.
+
+ - [ ] editing locations doesn't work
+
+ - [ ] editing events doesn't work
+
+ - [ ] add options to group, order and filter tables
+
+ - [ ] svg interface doesn't exist yet
+
+ - [ ] localize foreign javascript code
+
+ - [ ] addresses in contacts
+   - again dialog boxes would be a good way to go here
+   - [[file:objects.js::function%20setupContacts()][file:objects.js::function setupContacts()]]
+
+ - [ ] tables overlapping boundaries in events,contacts,etc  [[file:schedules.js]]
+   [[file:index.html]] [[file:index.css]]
+
+   - a good fix for this might be to use a jquery dialog box to
+     display more info about the event.
+   - preferably the dialog box will automatically add links to the urls
+
+   - *Actually, to fix the overlapping displays, an accordion is a*
+     *better approach.*
+
+ - [ ] full calendar events don't link to event table
+
+ - [ ] add installation notes
+
+ - [ ] add web scraping functionality
+
+   - http://simplehtmldom.sourceforge.net/
+   - http://www.crummy.com/software/BeautifulSoup/
+
+ - [X] notes don't exist in sql
+   - added notes to schema.
+   - notes have no interface yet
+
+ - [X] adding postings doesn't automatically enter companies
+   - [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+
+ - [X] automatic links in job posting entries
+   - change input boxes to jquery dialogs
+   - [[file:objects.js::function%20setupPostings%20][file:objects.js::function setupPostings ]]
+   - [[file:postings.js::function%20insertPosting][file:postings.js::function insertPosting]]
+
+
+ - [X] urls in postings [[file:postings.js]]
+   - this fix doesn't work in win8 chrome, but works in ubuntu chrome for some reason.
+
+ - [X] date picker
+
+ - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+   - need to get graphical calendar open for events to refresh automatically
+   - this is of course a new problem.
+
+ - [X] removing events [[file:schedules.js]]
+   - Sun Jun 28, 2015 13:01:15
+   - This actually had nothing to do with schedules.js
+   - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+** Wed Jul 01, 2015 11:39:31 continuing  problems
+*** p1 [0/11]
+
+  - [ ] add web scraping functionality
+
+    - http://simplehtmldom.sourceforge.net/
+    - http://www.crummy.com/software/BeautifulSoup/
+    - basically, all I'm looking for is to populate fields for data
+      storage, not crawl the web
+    - need to sandbox this issue - probably in
+      [[file:/cf/home/notes/php/sketches/]] somewhere
+
+  - [ ] notes have no interface
+
+  - [ ] schedules need to be decomposed in sql
+
+  - [ ] contacts need to be decomposed in sql
+
+  - [ ] link goals, companies, contacts, industries
+
+    - missing notes sections under postings - missing links to schedule
+    - how to link companies to industries?
+      - schema allows for (some of) this, but need to set it up somehow in UI
+      - svg/raphael is one possible solution, d3 is a more complex possibility
+      - canvas is yet a more complex possibility
+
+      - using accordions, clicking on a location could open more divs
+       	showing number of postings, number of companies, number of
+       	industries, etc. Clicking the number of postings would show
+       	the results, etc.
+
+      - similarly, clicking on an industry could show number of
+       	companies, number of locations, etc.
+
+
+  - [ ] need to give clearer deadlines
+
+  - [ ] add options to group, order and filter tables
+    - this probably means that displayTable needs to be altered
+
+  - [ ] localize foreign javascript code
+
+  - [ ] addresses in contacts
+    - again dialog boxes would be a good way to go here
+    - [[file:objects.js::function%20setupContacts()][file:objects.js::function setupContacts()]]
+
+  - [ ] tables overlapping boundaries in events,contacts,etc  [[file:schedules.js]]
+    [[file:index.html]] [[file:index.css]]
+
+    - a good fix for this might be to use a jquery dialog box to
+      display more info about the event.
+    - preferably the dialog box will automatically add links to the urls
+
+    - *Actually, to fix the overlapping displays, an accordion is a*
+      *better approach.*
+
+  - [ ] full calendar events don't link to event table
+
+*** p2 [0/6]
+  - [ ] editing locations doesn't work
+  - [ ] make things searchable (seo)?
+  - [ ] editing events doesn't work  
+  - [ ] svg interface doesn't exist yet
+  - [ ] add installation notes
+  - [ ] optionally link to google docs, facebook, twitter, etc
+    - google around for some sort of broadcaster that does this
+
+*** completed [8/8]
+  - [X] add jquery tabs for resumes, blogs, and cover letters
+    - [[file:objects.js]]
+    - [[file:index.js]] (done)
+    - [[file:index.html]]
+    - how do you switch between tabs?
+
+  - [X] notes don't exist in sql
+    - added notes to schema.
+    - notes have no interface yet
+
+  - [X] adding postings doesn't automatically enter companies
+    - [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+
+  - [X] automatic links in job posting entries
+    - change input boxes to jquery dialogs
+    - [[file:objects.js::function%20setupPostings%20][file:objects.js::function setupPostings ]]
+    - [[file:postings.js::function%20insertPosting][file:postings.js::function insertPosting]]
+
+
+  - [X] urls in postings [[file:postings.js]]
+    - this fix doesn't work in win8 chrome, but works in ubuntu chrome for some reason.
+
+  - [X] date picker?
+
+  - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+    - need to get graphical calendar open for events to refresh automatically
+    - this is of course a new problem.
+
+  - [X] removing events [[file:schedules.js]]
+    - Sun Jun 28, 2015 13:01:15
+    - This actually had nothing to do with schedules.js
+    - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+** Wed Jul 01, 2015 16:17:37 [[file:logs/2015-07-01.org]] why oo might be useful here
+
+   PHP is OO for a reason right?  Maybe I could simplify a lot of
+   things by just making this code base OO.  
+
+   That's a somewhat large endeavor though.  
+   
+   [[file:automaton.php]]
+
+
+** Thu Jul 02, 2015 10:32:51
+*** figured out how to link between jquery tabs - but this didn't make it into code yet
+*** 13:56:58 just gotta get joins working to add notes.
+   This will probably grow beyond proportion which really means that
+   'displayTable' will have to be altered,
+
+** Fri Jul 03, 2015 08:47:34  For now I just want to get notes to display
+   This is going to take some fanagaling.  It won't work right
+   away.   Just gotta take small steps in the right direction. 
+
+   +Add sample user_note.+
+
+   Add getter for user_notes tables in accountant
+   Add javascript object for blogs.  [[file:classes.js]]  [[file:objects.js]]
+
+   
+** Sat Jul 04, 2015 08:22:14 link notes to postings, scape postings 
+** Sun Jul 05, 2015 12:54:16 started UI for posting notes, need to fill in gaps
+*** continuing problems
+**** p1 [1/11]
+
+   - [X] notes have no interface
+     - Sun Jul 05, 2015 12:57:29 started this awhile ago, but it needs
+       a lot of polish.
+     - started with [[file:postings.js::function%20fillPostings][file:postings.js::function fillPostings]].
+     - After the displayTable call, I added a new jQuery .click()
+       function which is added to each of the first table cells (via
+       a css selector).
+
+     - Somehow I need to figure out how to get the posting object in
+       javascript based on this info
+     - break this popup code out into a couple more functions:
+       embelishTable, getPostingFromArray.  There could be duplicate
+       titles, so this (titles) isn't the best thing to work with
+
+
+   - [ ] add web scraping functionality
+     - Sun Jul 05, 2015 13:06:39 this might be too slow to be useful
+     - Can make it optional in UI
+
+     - http://simplehtmldom.sourceforge.net/
+     - http://www.crummy.com/software/BeautifulSoup/
+     - basically, all I'm looking for is to populate fields for data
+       storage, not crawl the web
+     - need to sandbox this issue - probably in
+       [[file:/cf/home/notes/php/sketches/]] somewhere
+
+   - [ ] schedules need to be decomposed in sql
+
+   - [ ] contacts need to be decomposed in sql
+
+   - [ ] link goals, companies, contacts, industries
+
+     - missing notes sections under postings - missing links to schedule
+     - how to link companies to industries?
+       - schema allows for (some of) this, but need to set it up somehow in UI
+       - svg/raphael is one possible solution, d3 is a more complex possibility
+       - canvas is yet a more complex possibility
+
+       - using accordions, clicking on a location could open more divs
+       	 showing number of postings, number of companies, number of
+       	 industries, etc. Clicking the number of postings would show
+       	 the results, etc.
+
+       - similarly, clicking on an industry could show number of
+       	 companies, number of locations, etc.
+
+
+   - [ ] need to give clearer deadlines
+
+   - [ ] add options to group, order and filter tables
+     - this probably means that displayTable needs to be altered
+
+   - [ ] localize foreign javascript code
+
+   - [ ] addresses in contacts
+     - again dialog boxes would be a good way to go here
+     - [[file:objects.js::function%20setupContacts()][file:objects.js::function setupContacts()]]
+
+   - [ ] tables overlapping boundaries in events,contacts,etc  [[file:schedules.js]]
+     [[file:index.html]] [[file:index.css]]
+
+     - a good fix for this might be to use a jquery dialog box to
+       display more info about the event.
+     - preferably the dialog box will automatically add links to the urls
+
+     - *Actually, to fix the overlapping displays, an accordion is a*
+       *better approach.*
+
+   - [ ] full calendar events don't link to event table
+     
+**** p2 [0/6]
+   - [ ] editing locations doesn't work
+   - [ ] make things searchable (seo)?
+   - [ ] editing events doesn't work  
+   - [ ] svg interface doesn't exist yet
+   - [ ] add installation notes
+   - [ ] optionally link to google docs, facebook, twitter, etc
+     - google around for some sort of broadcaster that does this
+
+**** completed [8/8]
+   - [X] add jquery tabs for resumes, blogs, and cover letters
+     - [[file:objects.js]]
+     - [[file:index.js]] (done)
+     - [[file:index.html]]
+     - how do you switch between tabs?
+
+   - [X] notes don't exist in sql
+     - added notes to schema.
+     - notes have no interface yet
+
+   - [X] adding postings doesn't automatically enter companies
+     - [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+
+   - [X] automatic links in job posting entries
+     - change input boxes to jquery dialogs
+     - [[file:objects.js::function%20setupPostings%20][file:objects.js::function setupPostings ]]
+     - [[file:postings.js::function%20insertPosting][file:postings.js::function insertPosting]]
+
+
+   - [X] urls in postings [[file:postings.js]]
+     - this fix doesn't work in win8 chrome, but works in ubuntu chrome for some reason.
+
+   - [X] date picker?
+
+   - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+     - need to get graphical calendar open for events to refresh automatically
+     - this is of course a new problem.
+
+   - [X] removing events [[file:schedules.js]]
+     - Sun Jun 28, 2015 13:01:15
+     - This actually had nothing to do with schedules.js
+     - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+
+** Mon Jul 06, 2015 09:34:28 almost able to link postings and blogs.
+*** should be able to get this working today
+*** might be able to get started on crude web scraper
+*** email isn't going to happen on n900t, but maybe on egil
+*** continuing problems
+**** p1 [1/12]
+
+   - [ ] linking notes to postings
+
+     - [[file:accountant.php]]
+     - [[file:postings.js]]
+     - [[file:blog.js]]
+
+   - [ ] add web scraping functionality
+     - Sun Jul 05, 2015 13:06:39 this might be too slow to be useful
+     - Can make it optional in UI
+
+     - http://simplehtmldom.sourceforge.net/
+     - http://www.crummy.com/software/BeautifulSoup/
+     - basically, all I'm looking for is to populate fields for data
+       storage, not crawl the web
+     - need to sandbox this issue - probably in
+       [[file:/cf/home/notes/php/sketches/]] somewhere
+
+   - [ ] schedules need to be decomposed in sql
+
+   - [ ] contacts need to be decomposed in sql
+
+   - [ ] link goals, companies, contacts, industries
+
+     - missing notes sections under postings - missing links to schedule
+     - how to link companies to industries?
+       - schema allows for (some of) this, but need to set it up somehow in UI
+       - svg/raphael is one possible solution, d3 is a more complex possibility
+       - canvas is yet a more complex possibility
+
+       - using accordions, clicking on a location could open more divs
+       	 showing number of postings, number of companies, number of
+       	 industries, etc. Clicking the number of postings would show
+       	 the results, etc.
+
+       - similarly, clicking on an industry could show number of
+       	 companies, number of locations, etc.
+
+
+   - [ ] need to give clearer deadlines
+
+   - [ ] add options to group, order and filter tables
+     - this probably means that displayTable needs to be altered
+
+   - [ ] localize foreign javascript code
+
+   - [ ] addresses in contacts
+     - again dialog boxes would be a good way to go here
+     - [[file:objects.js::function%20setupContacts()][file:objects.js::function setupContacts()]]
+
+   - [ ] tables overlapping boundaries in events,contacts,etc  [[file:schedules.js]]
+     [[file:index.html]] [[file:index.css]]
+
+     - a good fix for this might be to use a jquery dialog box to
+       display more info about the event.
+     - preferably the dialog box will automatically add links to the urls
+
+     - *Actually, to fix the overlapping displays, an accordion is a*
+       *better approach.*
+
+   - [ ] full calendar events don't link to event table
+
+
+   - [X] notes have no interface
+     - Sun Jul 05, 2015 12:57:29 started this awhile ago, but it needs
+       a lot of polish.
+     - started with [[file:postings.js::function%20fillPostings][file:postings.js::function fillPostings]].
+     - After the displayTable call, I added a new jQuery .click()
+       function which is added to each of the first table cells (via
+       a css selector).
+
+     - (DONE) Somehow I need to figure out how to get the posting object in
+       javascript based on this info
+
+     - (DONE) break this popup code out into a couple more functions:
+       embelishTable, getPostingFromArray.  There could be duplicate
+       titles, so this (titles) isn't the best thing to work with
+
+
+
+     
+**** p2 [0/6]
+   - [ ] editing locations doesn't work
+   - [ ] make things searchable (seo)?
+   - [ ] editing events doesn't work  
+   - [ ] svg interface doesn't exist yet
+   - [ ] add installation notes
+   - [ ] optionally link to google docs, facebook, twitter, etc
+     - google around for some sort of broadcaster that does this
+
+**** completed [8/8]
+   - [X] add jquery tabs for resumes, blogs, and cover letters
+     - [[file:objects.js]]
+     - [[file:index.js]] (done)
+     - [[file:index.html]]
+     - how do you switch between tabs?
+
+   - [X] notes don't exist in sql
+     - added notes to schema.
+     - notes have no interface yet
+
+   - [X] adding postings doesn't automatically enter companies
+     - [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+
+   - [X] automatic links in job posting entries
+     - change input boxes to jquery dialogs
+     - [[file:objects.js::function%20setupPostings%20][file:objects.js::function setupPostings ]]
+     - [[file:postings.js::function%20insertPosting][file:postings.js::function insertPosting]]
+
+
+   - [X] urls in postings [[file:postings.js]]
+     - this fix doesn't work in win8 chrome, but works in ubuntu chrome for some reason.
+
+   - [X] date picker?
+
+   - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+     - need to get graphical calendar open for events to refresh automatically
+     - this is of course a new problem.
+
+   - [X] removing events [[file:schedules.js]]
+     - Sun Jun 28, 2015 13:01:15
+     - This actually had nothing to do with schedules.js
+     - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+
+** Mon Jul 06, 2015 20:17:12 links work, but refreshes are broken [[file:postings.js::function%20getPostingNotes][file:postings.js::function getPostingNotes]]
+** Tue Jul 07, 2015 08:12:45 displays are broken in javascript  [[file:postings.js::function%20getPostingNotes][file:postings.js::function getPostingNotes]]
+** Tue Jul 07, 2015 10:50:37 fixed display problem (sorta).  Need to work on web scraping and further joins
+*** start web scraping in php  [[file:engineer.php]]  [[file:butler.php]]  [[file:accountant.php]]
+    
+** Tue Jul 07, 2015 16:41:49 incorporate raphael.js [[file:index.html]] [[file:/usr/local/apache/htdocs/howto/index.html]]
+   
+** Tue Jul 07, 2015 18:15:22 join notes,postings with events
+** Wed Jul 08, 2015 16:31:35 still working on joining notes with events
+  [[file:accountant.php]] [[file:butler.php]]
+
+*** continuing problems
+**** p1 [2/16]
+
+   - [ ] remove middle dialog when showing notes in postings.
+
+   - [ ] Adding any posting should automatically insert an event into events.
+
+   - [ ] remove schedule fields in javascript first, then SQL
+     - description
+     - contact
+
+   - [ ] add more relational tables to schedule idea:  [[file:schemaUpdate.20150708.sql]] [0/2]
+     - [ ] user_schedule_notes
+     - [ ] user_schedule_companies
+     - [ ] user_schedule_goals
+     - [ ] user_schedule_contacts
+     - [ ] user_schedule_location
+
+   - [ ] link goals, companies, contacts, industries
+
+     - schema allows for (some of) this, but need to set it up somehow in UI
+     - svg/raphael is one possible solution, d3 is a more complex possibility
+     - canvas is yet a more complex possibility
+
+     - using accordions, clicking on a location could open more divs
+       showing number of postings, number of companies, number of
+       industries, etc. Clicking the number of postings would show
+       the results, etc.
+
+     - similarly, clicking on an industry could show number of
+       companies, number of locations, etc.
+
+   - [ ] add web scraping functionality
+     - Sun Jul 05, 2015 13:06:39 this might be too slow to be useful
+     - Can make it optional in UI
+
+     - http://simplehtmldom.sourceforge.net/
+     - http://www.crummy.com/software/BeautifulSoup/
+     - basically, all I'm looking for is to populate fields for data
+       storage, not crawl the web
+     - need to sandbox this issue - probably in
+       [[file:/cf/home/notes/php/sketches/]] somewhere
+
+   - [ ] schedules need to be decomposed in sql
+
+   - [ ] contacts need to be decomposed in sql
+
+   - [ ] need to give clearer deadlines
+
+   - [ ] add options to group, order and filter tables
+     - this probably means that displayTable needs to be altered
+
+   - [X] linking notes to postings
+     - [[file:accountant.php]]
+     - [[file:postings.js]]
+     - [[file:blog.js]]
+
+   - [ ] localize foreign javascript code
+     - I mean store the files locally instead of using a Content Delivery Network
+
+   - [ ] addresses in contacts
+     - again dialog boxes would be a good way to go here
+     - [[file:objects.js::function%20setupContacts()][file:objects.js::function setupContacts()]]
+
+   - [ ] tables overlapping boundaries in events,contacts,etc  [[file:schedules.js]]
+     [[file:index.html]] [[file:index.css]]
+
+     - a good fix for this might be to use a jquery dialog box to
+       display more info about the event.
+     - preferably the dialog box will automatically add links to the urls
+
+     - *Actually, to fix the overlapping displays, an accordion is a*
+       *better approach.*
+
+   - [ ] full calendar events don't link to event table
+
+
+   - [X] notes have no interface
+     - Sun Jul 05, 2015 12:57:29 started this awhile ago, but it needs
+       a lot of polish.
+     - started with [[file:postings.js::function%20fillPostings][file:postings.js::function fillPostings]].
+     - After the displayTable call, I added a new jQuery .click()
+       function which is added to each of the first table cells (via
+       a css selector).
+
+     - (DONE) Somehow I need to figure out how to get the posting object in
+       javascript based on this info
+
+     - (DONE) break this popup code out into a couple more functions:
+       embelishTable, getPostingFromArray.  There could be duplicate
+       titles, so this (titles) isn't the best thing to work with
+
+
+
+     
+**** p2 [0/6]
+   - [ ] editing locations doesn't work
+   - [ ] make things searchable (seo)?
+   - [ ] editing events doesn't work  
+   - [ ] svg interface doesn't exist yet
+   - [ ] add installation notes
+   - [ ] optionally link to google docs, facebook, twitter, etc
+     - google around for some sort of broadcaster that does this
+
+**** completed [8/8]
+   - [X] add jquery tabs for resumes, blogs, and cover letters
+     - [[file:objects.js]]
+     - [[file:index.js]] (done)
+     - [[file:index.html]]
+     - how do you switch between tabs?
+
+   - [X] notes don't exist in sql
+     - added notes to schema.
+     - notes have no interface yet
+
+   - [X] adding postings doesn't automatically enter companies
+     - [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+
+   - [X] automatic links in job posting entries
+     - change input boxes to jquery dialogs
+     - [[file:objects.js::function%20setupPostings%20][file:objects.js::function setupPostings ]]
+     - [[file:postings.js::function%20insertPosting][file:postings.js::function insertPosting]]
+
+
+   - [X] urls in postings [[file:postings.js]]
+     - this fix doesn't work in win8 chrome, but works in ubuntu chrome for some reason.
+
+   - [X] date picker?
+
+   - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+     - need to get graphical calendar open for events to refresh automatically
+     - this is of course a new problem.
+
+   - [X] removing events [[file:schedules.js]]
+     - Sun Jun 28, 2015 13:01:15
+     - This actually had nothing to do with schedules.js
+     - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+
+
+** Wed Jul 08, 2015 21:06:21 rethinking workflow
+   Don't really need to store joins in a table, that might just make
+   things needlessly complex. 
+
+   [[file:schemaUpdate.20150708.sql]]
+
+   
+drop table if exists user_schedule_notes;
+
+create table user_schedule_notes (
+	id int primary key unique auto_increment,
+	`user_schedule_id` int,
+	`notes_user_id` int,
+	foreign key (`user_schedule_id`) references user_schedule.id
+		on delete set null on update cascade,
+	foreign key (`notes_user_id`) references notes_user.id
+		on delete set null on update cascade
+)engine=innodb;      
+
+
+
+ Instead of making a table like above, the result can be stored in
+ PHP instead of SQL.  Not sure what the pros and cons are in the big
+ picture, but one pro is that SQL tables don't need to be created.
+
+ The idea is to store a join between user_schedule.ids and
+ notes_user.ids.
+
+ Queries:
+
+ select note from note_user where user=1;
+
+ Wed Jul 08, 2015 21:32:09 
+ Rethinking this, it's probably a lot easier to use a table....
+
+ The table above still won't build however.
+
+** Thu Jul 09, 2015 09:26:53 
+*** Thu Jul 09, 2015 12:28:38 still working on inserting schedules when blogs are inserted
+
+    The basic idea got a little lost in some skirmishes this
+    morning.  
+    
+    What I'm trying to accomplish is inserting an event in SQL
+    every time a blog post is inserted.  
+
+    That's only part of the problem really, but it's the most
+    immediate thing. 
+
+    So [[file:blog.js::function%20giveBlogInsertionToButler(][insertBlog]] in javascript calls [[file:accountant.php::function%20insertBlog][insertBlog]] in PHP.   The PHP
+    function should then call another function that will insert an
+    event - ([[file:accountant.php::function%20insertSchedule][insertSchedule]]) in PHP.  
+
+    The middle man function should get the current date/time
+    somehow.  
+
+    That's what I was working on earlier.  I needed to test if the
+    schedule table in SQL can handle the result of PHP's getdate()
+    function. http://php.net/manual/en/function.getdate.php
+
+    [[file:logs/2015-07-09-Get-DateString-From-PHP.org]]
+
+
+    Here's how to get the string as:  "2015-7-9"
+
+
+    $thisTime = getdate();
+    $thisTimeString = "$thisTime[year]-$thisTime[mon]-$thisTime[mday]";
+
+    Now the test is to see if mysql will accept this string as
+    valid.  
+
+    Note that I'm also missing the time of day in this string format..  
+
+
+*** continuing problems
+**** p1 [2/16]
+
+   - [-] add more relational tables to schedule idea:  [[file:schemaUpdate.20150708.sql]] [1/5]
+     - [X] user_schedule_notes
+       - need to test that this works
+       - need to wire this up to insertPosting function in PHP or SQL
+       - the issue of getting a datetime string is non-trivial.
+
+       - Thu Jul 09, 2015 09:49:11
+	 - +schedules.js insertSchedule currently calls addSchedule in
+           butler.php, not insertSchedule in accountant.php+
+	 - Thu Jul 09, 2015 12:23:00 resolved this
+
+     - [ ] user_schedule_companies
+     - [ ] user_schedule_goals
+     - [ ] user_schedule_contacts
+     - [ ] user_schedule_location
+
+   - [ ] Adding any posting should automatically insert an event into events.
+
+   - [ ] remove middle dialog when showing notes in postings.
+
+   - [ ] remove schedule fields in javascript first, then SQL
+     - description
+     - contact
+
+   - [ ] link goals, companies, contacts, industries
+
+     - schema allows for (some of) this, but need to set it up somehow in UI
+     - svg/raphael is one possible solution, d3 is a more complex possibility
+     - canvas is yet a more complex possibility
+
+     - using accordions, clicking on a location could open more divs
+       showing number of postings, number of companies, number of
+       industries, etc. Clicking the number of postings would show
+       the results, etc.
+
+     - similarly, clicking on an industry could show number of
+       companies, number of locations, etc.
+
+   - [ ] add web scraping functionality
+     - Sun Jul 05, 2015 13:06:39 this might be too slow to be useful
+     - Can make it optional in UI
+
+     - http://simplehtmldom.sourceforge.net/
+     - http://www.crummy.com/software/BeautifulSoup/
+     - basically, all I'm looking for is to populate fields for data
+       storage, not crawl the web
+     - need to sandbox this issue - probably in
+       [[file:/cf/home/notes/php/sketches/]] somewhere
+
+   - [ ] schedules need to be decomposed in sql
+
+   - [ ] contacts need to be decomposed in sql
+
+   - [ ] need to give clearer deadlines
+
+   - [ ] add options to group, order and filter tables
+     - this probably means that displayTable needs to be altered
+
+   - [X] linking notes to postings
+     - [[file:accountant.php]]
+     - [[file:postings.js]]
+     - [[file:blog.js]]
+
+   - [ ] localize foreign javascript code
+     - I mean store the files locally instead of using a Content Delivery Network
+
+   - [ ] addresses in contacts
+     - again dialog boxes would be a good way to go here
+     - [[file:objects.js::function%20setupContacts()][file:objects.js::function setupContacts()]]
+
+   - [ ] tables overlapping boundaries in events,contacts,etc  [[file:schedules.js]]
+     [[file:index.html]] [[file:index.css]]
+
+     - a good fix for this might be to use a jquery dialog box to
+       display more info about the event.
+     - preferably the dialog box will automatically add links to the urls
+
+     - *Actually, to fix the overlapping displays, an accordion is a*
+       *better approach.*
+
+   - [ ] full calendar events don't link to event table
+
+
+   - [X] notes have no interface
+     - Sun Jul 05, 2015 12:57:29 started this awhile ago, but it needs
+       a lot of polish.
+     - started with [[file:postings.js::function%20fillPostings][file:postings.js::function fillPostings]].
+     - After the displayTable call, I added a new jQuery .click()
+       function which is added to each of the first table cells (via
+       a css selector).
+
+     - (DONE) Somehow I need to figure out how to get the posting object in
+       javascript based on this info
+
+     - (DONE) break this popup code out into a couple more functions:
+       embelishTable, getPostingFromArray.  There could be duplicate
+       titles, so this (titles) isn't the best thing to work with
+
+
+
+     
+**** p2 [0/6]
+   - [ ] editing locations doesn't work
+   - [ ] make things searchable (seo)?
+   - [ ] editing events doesn't work  
+   - [ ] svg interface doesn't exist yet
+   - [ ] add installation notes
+   - [ ] optionally link to google docs, facebook, twitter, etc
+     - google around for some sort of broadcaster that does this
+
+**** completed [8/8]
+   - [X] add jquery tabs for resumes, blogs, and cover letters
+     - [[file:objects.js]]
+     - [[file:index.js]] (done)
+     - [[file:index.html]]
+     - how do you switch between tabs?
+
+   - [X] notes don't exist in sql
+     - added notes to schema.
+     - notes have no interface yet
+
+   - [X] adding postings doesn't automatically enter companies
+     - [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+
+   - [X] automatic links in job posting entries
+     - change input boxes to jquery dialogs
+     - [[file:objects.js::function%20setupPostings%20][file:objects.js::function setupPostings ]]
+     - [[file:postings.js::function%20insertPosting][file:postings.js::function insertPosting]]
+
+
+   - [X] urls in postings [[file:postings.js]]
+     - this fix doesn't work in win8 chrome, but works in ubuntu chrome for some reason.
+
+   - [X] date picker?
+
+   - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+     - need to get graphical calendar open for events to refresh automatically
+     - this is of course a new problem.
+
+   - [X] removing events [[file:schedules.js]]
+     - Sun Jun 28, 2015 13:01:15
+     - This actually had nothing to do with schedules.js
+     - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+
+** Fri Jul 10, 2015 11:11:21 continuing problems
+*** thoughts on the event - note - posting system
+    This probably deserves an object in php, and maybe one in
+    javascript. 
+
+    That's going to require a pretty major redesign however, which
+    I'm not sure if I'm up to.
+
+    Wish I had a way to estimate time costs for something like this,
+    that would be very beneficial on multiple fronts.  
+
+    Meanwhile, I want to keep up my coding streak.  So where do I dig
+    in?
+
+
+    [[file:butler.php]]
+
+    [[file:accountant.php]]
+
+    [[file:schedules.js]] 
+
+
+    Fri Jul 10, 2015 11:51:32
+    Inserting a note on a posting doesn't work completely.  Empty
+    text shows up in both blog and event html. 
+
+
+    From [[file:/usr/local/apache/logs/error_log]]
+
+[Fri Jul 10 11:58:53.883872 2015] [:error] [pid 14560:tid 2906649696] [client 192.168.42.220:57492] PHP Warning:  Missing argument 2 for insertBlog(), called in /usr/local/apache/htdocs/gregsList/butler.php on line 160 and defined in /usr/local/apache/htdocs/gregsList/accountant.php on line 997, referer: http://192.168.42.129/gregsList/
+[Fri Jul 10 11:58:53.884066 2015] [:error] [pid 14560:tid 2906649696] [client 192.168.42.220:57492] PHP Warning:  Missing argument 3 for insertBlog(), called in /usr/local/apache/htdocs/gregsList/butler.php on line 160 and defined in /usr/local/apache/htdocs/gregsList/accountant.php on line 997, referer: http://192.168.42.129/gregsList/
+[Fri Jul 10 11:58:53.884173 2015] [:error] [pid 14560:tid 2906649696] [client 192.168.42.220:57492] PHP Notice:  Undefined variable: title in /usr/local/apache/htdocs/gregsList/accountant.php on line 1001, referer: http://192.168.42.129/gregsList/
+[Fri Jul 10 11:58:53.884273 2015] [:error] [pid 14560:tid 2906649696] [client 192.168.42.220:57492] PHP Notice:  Undefined variable: text in /usr/local/apache/htdocs/gregsList/accountant.php on line 1001, referer: http://192.168.42.129/gregsList/
+[Fri Jul 10 11:58:53.905315 2015] [:error] [pid 14560:tid 2906649696] [client 192.168.42.220:57492] PHP Notice:  Undefined variable: title in /usr/local/apache/htdocs/gregsList/accountant.php on line 1006, referer: http://192.168.42.129/gregsList/
+[Fri Jul 10 11:58:53.905459 2015] [:error] [pid 14560:tid 2906649696] [client 192.168.42.220:57492] PHP Notice:  Undefined variable: text in /usr/local/apache/htdocs/gregsList/accountant.php on line 1006, referer: http://192.168.42.129/gregsList/
+[Fri Jul 10 11:58:53.927388 2015] [:error] [pid 14560:tid 2906649696] [client 192.168.42.220:57492] PHP Warning:  getdate(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected the timezone 'UTC' for now, but please set date.timezone to select your timezone. in /usr/local/apache/htdocs/gregsList/accountant.php on line 986, referer: http://192.168.42.129/gregsList/
+[Fri Jul 10 11:58:53.927608 2015] [:error] [pid 14560:tid 2906649696] [client 192.168.42.220:57492] PHP Notice:  Undefined variable: title in /usr/local/apache/htdocs/gregsList/accountant.php on line 1018, referer: http://192.168.42.129/gregsList/
+** Sat Jul 11, 2015 08:53:01 continuing problems
+*** status check 1
+    Got blogs to insert schedule events properly, but only when
+    they're linked to postings?
+
+    No, but they only update the user_schedule table when they're
+    linked to postings?  That seems to be true.
+
+    Investigating.  
+
+    [[file:schedules.js]]  (nothing here)
+
+    [[file:blog.js]] ( not sure, the problem is here somewhere )
+	The giveBlogInsertionToButler function wasn't refreshing
+	things.
+
+	This flow sucks because now inserting notes on postings will
+	refresh twice, but 
+		1. Maybe the HTTP protocol caching will minimize that
+		2. At least it works as opposed to before. 
+
+*** status check 2
+ Still missing notes on goals, industries and companies.
+
+ Still missing automatic event insertion on adding postings, goals,
+ etc... (The only thing it works on is blogs).
+
+ This is what I'm going to work on now.  
+
+ [[file:schedules.js]]   Actually, this is mostly done through
+
+ [[file:accountant.php]] 
+
+ A question to ask is 'why does this work for blogs, but not
+ postings?'  [[file:blog.js]]
+
+ Sat Jul 11, 2015 10:14:20
+ added call to insertSchedule from insertPosting() in PHP.  This
+ joins postings and schedules in the display, but it doesn't join
+ them in SQL.  
+
+ Do I need to do that?  I think I'll probably want to.
+
+ What's the next thing to work on though?   I think I probably want
+ to join goals, industries and companies first.  
+
+ Also probably want to add SQL ids to hidden cells in tables to
+ accomplish this.  I think I started doing this with [[file:postings.js::function%20embelishTable][file:postings.js::function embelishTable]]
+
+
+ Sat Jul 11, 2015 12:59:18 the goal is to generalize embelishTable for an arbitrary object so that sql ids will be stored in DOM.
+3
+ If it's possible to store objects in DOM without embelishTable, that might be better.  Harder, but better.
+
+ How is embelishTable called?
+ 
+*** status check 3 
+    In the process of trying to store SQL ids in the DOM, I noticed
+    that there should be a unique key in user_locations so they don't
+    duplicate. 
+** Sat Jul 11, 2015 21:47:47  [[file:logs/2015-07-11-unsolved-sql-unique-constraint.org][trouble adding unique constraint to user_companies]]
+*** continuing problems
+**** p1 [2/16]
+
+   - [-] add more relational tables to schedule idea:  [[file:schemaUpdate.20150708.sql]] [1/6]
+     - [X] user_schedule_notes
+       - need to test that this works
+       - need to wire this up to insertPosting function in PHP or SQL
+       - the issue of getting a datetime string is non-trivial.
+
+       - Thu Jul 09, 2015 09:49:11
+	 - +schedules.js insertSchedule currently calls addSchedule in
+           butler.php, not insertSchedule in accountant.php+
+	 - Thu Jul 09, 2015 12:23:00 resolved this
+
+     - [ ] user_schedule_companies
+     - [ ] user_schedule_goals
+     - [ ] user_schedule_contacts
+     - [ ] user_schedule_location
+     - [ ] user_schedule_postings
+
+   - [ ] Adding any posting should automatically insert an event into events.
+
+   - [ ] remove middle dialog when showing notes in postings.
+
+   - [ ] remove schedule fields in javascript first, then SQL
+     - description
+     - contact
+
+   - [ ] link goals, companies, contacts, industries
+
+     - schema allows for (some of) this, but need to set it up somehow in UI
+     - svg/raphael is one possible solution, d3 is a more complex possibility
+     - canvas is yet a more complex possibility
+
+     - using accordions, clicking on a location could open more divs
+       showing number of postings, number of companies, number of
+       industries, etc. Clicking the number of postings would show
+       the results, etc.
+
+     - similarly, clicking on an industry could show number of
+       companies, number of locations, etc.
+
+   - [ ] add web scraping functionality
+     - Sun Jul 05, 2015 13:06:39 this might be too slow to be useful
+     - Can make it optional in UI
+
+     - http://simplehtmldom.sourceforge.net/
+     - http://www.crummy.com/software/BeautifulSoup/
+     - basically, all I'm looking for is to populate fields for data
+       storage, not crawl the web
+     - need to sandbox this issue - probably in
+       [[file:/cf/home/notes/php/sketches/]] somewhere
+
+   - [ ] schedules need to be decomposed in sql
+
+   - [ ] contacts need to be decomposed in sql
+
+   - [ ] need to give clearer deadlines
+
+   - [ ] add options to group, order and filter tables
+     - this probably means that displayTable needs to be altered
+
+   - [X] linking notes to postings
+     - [[file:accountant.php]]
+     - [[file:postings.js]]
+     - [[file:blog.js]]
+
+   - [ ] localize foreign javascript code
+     - I mean store the files locally instead of using a Content Delivery Network
+
+   - [ ] addresses in contacts
+     - again dialog boxes would be a good way to go here
+     - [[file:objects.js::function%20setupContacts()][file:objects.js::function setupContacts()]]
+
+   - [ ] tables overlapping boundaries in events,contacts,etc  [[file:schedules.js]]
+     [[file:index.html]] [[file:index.css]]
+
+     - a good fix for this might be to use a jquery dialog box to
+       display more info about the event.
+     - preferably the dialog box will automatically add links to the urls
+
+     - *Actually, to fix the overlapping displays, an accordion is a*
+       *better approach.*
+
+   - [ ] full calendar events don't link to event table
+
+
+   - [X] notes have no interface
+     - Sun Jul 05, 2015 12:57:29 started this awhile ago, but it needs
+       a lot of polish.
+     - started with [[file:postings.js::function%20fillPostings][file:postings.js::function fillPostings]].
+     - After the displayTable call, I added a new jQuery .click()
+       function which is added to each of the first table cells (via
+       a css selector).
+
+     - (DONE) Somehow I need to figure out how to get the posting object in
+       javascript based on this info
+
+     - (DONE) break this popup code out into a couple more functions:
+       embelishTable, getPostingFromArray.  There could be duplicate
+       titles, so this (titles) isn't the best thing to work with
+
+
+
+     
+**** p2 [0/6]
+   - [ ] editing locations doesn't work
+   - [ ] make things searchable (seo)?
+   - [ ] editing events doesn't work  
+   - [ ] svg interface doesn't exist yet
+   - [ ] add installation notes
+   - [ ] optionally link to google docs, facebook, twitter, etc
+     - google around for some sort of broadcaster that does this
+
+**** completed [8/8]
+   - [X] add jquery tabs for resumes, blogs, and cover letters
+     - [[file:objects.js]]
+     - [[file:index.js]] (done)
+     - [[file:index.html]]
+     - how do you switch between tabs?
+
+   - [X] notes don't exist in sql
+     - added notes to schema.
+     - notes have no interface yet
+
+   - [X] adding postings doesn't automatically enter companies
+     - [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+
+   - [X] automatic links in job posting entries
+     - change input boxes to jquery dialogs
+     - [[file:objects.js::function%20setupPostings%20][file:objects.js::function setupPostings ]]
+     - [[file:postings.js::function%20insertPosting][file:postings.js::function insertPosting]]
+
+
+   - [X] urls in postings [[file:postings.js]]
+     - this fix doesn't work in win8 chrome, but works in ubuntu chrome for some reason.
+
+   - [X] date picker?
+
+   - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+     - need to get graphical calendar open for events to refresh automatically
+     - this is of course a new problem.
+
+   - [X] removing events [[file:schedules.js]]
+     - Sun Jun 28, 2015 13:01:15
+     - This actually had nothing to do with schedules.js
+     - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+** Sun Jul 12, 2015 11:16:15 keeping on
+*** status check 1 --- MAKE SQL IDS HIDDEN, ADD BUTTON TO HIDE/SHOW
+
+    Use this as a model.  
+    [[file:postings.js::function%20embelishTable][file:postings.js::function embelishTable]]
+
+    Try to put it in [[file:objects.js]]
+
+    Sun Jul 12, 2015 11:32:10
+    Testing generalization 0.  Trouble is that the main container
+    class holds table names by their first element in the array.
+
+    $("#tableName")[0];
+
+    Running this through jQuery gives a DOM element I think.  
+    
+    I just need need the selector, not the DOM element. 
+
+    Do I even want to go over why I've stored the first element?
+
+    No.  Maybe later thanks.
+
+    You can get the id from the element by just selecting it's id. 
+
+    var tableName = $("#tableName")[0];
+    var idString = tableName.id;
+
+
+    Sun Jul 12, 2015 12:34:16
+    Generalized embelishTable function.  Will extend this to filler
+    functions for other objects.  
+
+    [[file:goals.js::function%20fillGoals][file:goals.js::function fillGoals]]
+
+    [[file:industries.js::function%20fillIndustries][file:industries.js::function fillIndustries]]
+
+    [[file:/usr/local/apache/htdocs/gregsList/companies.js::function%20fillCompanies][file:/usr/local/apache/htdocs/gregsList/companies.js::function fillCompanies]]
+
+    [[file:locations.js::function%20fillLocations][file:locations.js::function fillLocations]]
+    
+    [[file:contacts.js::function%20fillContacts][file:contacts.js::function fillContacts]]
+
+    [[file:schedules.js::function%20fillSchedules][file:schedules.js::function fillSchedules]]
+
+    [[file:blog.js::function%20fillBlog][file:blog.js::function fillBlog]]
+
+*** continuing problems
+**** p1 [2/16]
+
+   - [-] add more relational tables to schedule idea:  [[file:schemaUpdate.20150708.sql]] [1/6]
+     - [X] user_schedule_notes
+       - need to test that this works
+       - need to wire this up to insertPosting function in PHP or SQL
+       - the issue of getting a datetime string is non-trivial.
+
+       - Thu Jul 09, 2015 09:49:11
+	 - +schedules.js insertSchedule currently calls addSchedule in
+           butler.php, not insertSchedule in accountant.php+
+	 - Thu Jul 09, 2015 12:23:00 resolved this
+
+     - [ ] user_schedule_companies
+     - [ ] user_schedule_goals
+     - [ ] user_schedule_contacts
+     - [ ] user_schedule_location
+     - [ ] user_schedule_postings
+
+   - [ ] Adding any posting should automatically insert an event into events.
+
+   - [ ] remove middle dialog when showing notes in postings.
+
+   - [ ] remove schedule fields in javascript first, then SQL
+     - description
+     - contact
+
+   - [ ] link goals, companies, contacts, industries
+
+     - schema allows for (some of) this, but need to set it up somehow in UI
+     - svg/raphael is one possible solution, d3 is a more complex possibility
+     - canvas is yet a more complex possibility
+
+     - using accordions, clicking on a location could open more divs
+       showing number of postings, number of companies, number of
+       industries, etc. Clicking the number of postings would show
+       the results, etc.
+
+     - similarly, clicking on an industry could show number of
+       companies, number of locations, etc.
+
+   - [ ] add web scraping functionality
+     - Sun Jul 05, 2015 13:06:39 this might be too slow to be useful
+     - Can make it optional in UI
+
+     - http://simplehtmldom.sourceforge.net/
+     - http://www.crummy.com/software/BeautifulSoup/
+     - basically, all I'm looking for is to populate fields for data
+       storage, not crawl the web
+     - need to sandbox this issue - probably in
+       [[file:/cf/home/notes/php/sketches/]] somewhere
+
+   - [ ] schedules need to be decomposed in sql
+
+   - [ ] contacts need to be decomposed in sql
+
+   - [ ] need to give clearer deadlines
+
+   - [ ] add options to group, order and filter tables
+     - this probably means that displayTable needs to be altered
+
+   - [X] linking notes to postings
+     - [[file:accountant.php]]
+     - [[file:postings.js]]
+     - [[file:blog.js]]
+
+   - [ ] localize foreign javascript code
+     - I mean store the files locally instead of using a Content Delivery Network
+
+   - [ ] addresses in contacts
+     - again dialog boxes would be a good way to go here
+     - [[file:objects.js::function%20setupContacts()][file:objects.js::function setupContacts()]]
+
+   - [ ] tables overlapping boundaries in events,contacts,etc  [[file:schedules.js]]
+     [[file:index.html]] [[file:index.css]]
+
+     - a good fix for this might be to use a jquery dialog box to
+       display more info about the event.
+     - preferably the dialog box will automatically add links to the urls
+
+     - *Actually, to fix the overlapping displays, an accordion is a*
+       *better approach.*
+
+   - [ ] full calendar events don't link to event table
+
+
+   - [X] notes have no interface
+     - Sun Jul 05, 2015 12:57:29 started this awhile ago, but it needs
+       a lot of polish.
+     - started with [[file:postings.js::function%20fillPostings][file:postings.js::function fillPostings]].
+     - After the displayTable call, I added a new jQuery .click()
+       function which is added to each of the first table cells (via
+       a css selector).
+
+     - (DONE) Somehow I need to figure out how to get the posting object in
+       javascript based on this info
+
+     - (DONE) break this popup code out into a couple more functions:
+       embelishTable, getPostingFromArray.  There could be duplicate
+       titles, so this (titles) isn't the best thing to work with
+
+
+
+     
+**** p2 [0/6]
+   - [ ] editing locations doesn't work
+   - [ ] make things searchable (seo)?
+   - [ ] editing events doesn't work  
+   - [ ] svg interface doesn't exist yet
+   - [ ] add installation notes
+   - [ ] optionally link to google docs, facebook, twitter, etc
+     - google around for some sort of broadcaster that does this
+
+**** completed [8/8]
+   - [X] add jquery tabs for resumes, blogs, and cover letters
+     - [[file:objects.js]]
+     - [[file:index.js]] (done)
+     - [[file:index.html]]
+     - how do you switch between tabs?
+
+   - [X] notes don't exist in sql
+     - added notes to schema.
+     - notes have no interface yet
+
+   - [X] adding postings doesn't automatically enter companies
+     - [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+
+   - [X] automatic links in job posting entries
+     - change input boxes to jquery dialogs
+     - [[file:objects.js::function%20setupPostings%20][file:objects.js::function setupPostings ]]
+     - [[file:postings.js::function%20insertPosting][file:postings.js::function insertPosting]]
+
+
+   - [X] urls in postings [[file:postings.js]]
+     - this fix doesn't work in win8 chrome, but works in ubuntu chrome for some reason.
+
+   - [X] date picker?
+
+   - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+     - need to get graphical calendar open for events to refresh automatically
+     - this is of course a new problem.
+
+   - [X] removing events [[file:schedules.js]]
+     - Sun Jun 28, 2015 13:01:15
+     - This actually had nothing to do with schedules.js
+     - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+** Mon Jul 13, 2015 15:47:51
+*** trying to speed things up by reducing ajax calls
+
+  I think there are numerous duplicate calls to the server.  
+
+  Might be wrong, but taking a look today. 
+
+*** need to add events and notes to goals, companies, industries.
+
+Mon Jul 13, 2015 23:00:03
+	check [[file:postings.js][postings.js ]] for examples.
+	
+	Need to get some sleep tonight.  Focus on family.  
+** Tue Jul 14, 2015 10:24:00
+*** fill in embelishTables.  Start with [[file:goals.js]]
+
+    Tue Jul 14, 2015 10:33:17
+    Missing callback functions.  Would prefer to generalize rather
+    than write specifics.  
+
+    Grep for embelishTable() calls.  Strip nulls. 
+
+files=*.js; for f in $files; do ls $f; cat $f | grep -n embeli; done
+blog.js
+22:    embelishTable(object,null);
+classes.js
+companies.js [[file:companies.js::embelishTable]]
+76:    embelishTable(object,null);
+contacts.js [[file:contacts.js::embelishTable]]
+36:    embelishTable(object,null);
+goals.js [[file:goals.js::embelishTable]]
+171:    embelishTable(object,null);
+index.js/
+industries.js [[file:industries.js::embelishTable]]
+173:    embelishTable(object,null);
+locations.js [[file:locations.js::embelishTable]]
+72:    embelishTable(object,null);
+objects.js
+846:function embelishTable(object,callback)
+852:    console.log("embelishTable called on ");
+postings.js
+316:    embelishTable(object,popUpDialogForJobPosting);
+schedules.js
+207:	embelishTable(object,null);
+utilities.js
+
+
+   embelishTable takes a callback function.  
+
+** Wed Jul 15, 2015 10:11:46
+*** try adding notes to goals
+** Wed Jul 15, 2015 21:42:53 decompose locations.  Look how other people have done this
+*** continuing problems
+**** p1 [5/16]
+
+   - [-] add more relational tables to schedule idea:  [[file:schemaUpdate.20150708.sql]] [1/6]
+     - [X] user_schedule_notes
+       - need to test that this works
+       - need to wire this up to insertPosting function in PHP or SQL
+       - the issue of getting a datetime string is non-trivial.
+
+       - Thu Jul 09, 2015 09:49:11
+	 - +schedules.js insertSchedule currently calls addSchedule in
+           butler.php, not insertSchedule in accountant.php+
+	 - Thu Jul 09, 2015 12:23:00 resolved this
+       - Thu Jul 16, 2015 10:40:50  Where is this?
+
+     - [ ] user_schedule_companies
+     - [ ] user_schedule_goals
+     - [ ] user_schedule_contacts
+     - [ ] user_schedule_location
+     - [ ] user_schedule_postings
+
+   - [ ] remove middle dialog when showing notes in postings.
+
+   - [X] remove schedule fields in javascript first, then SQL
+     - description
+     - contact
+
+   - [ ] link goals, companies, contacts, industries
+
+     - schema allows for (some of) this, but need to set it up somehow in UI
+     - svg/raphael is one possible solution, d3 is a more complex possibility
+     - canvas is yet a more complex possibility
+
+     - using accordions, clicking on a location could open more divs
+       showing number of postings, number of companies, number of
+       industries, etc. Clicking the number of postings would show
+       the results, etc.
+
+     - similarly, clicking on an industry could show number of
+       companies, number of locations, etc.
+
+   - [ ] add web scraping functionality
+     - Sun Jul 05, 2015 13:06:39 this might be too slow to be useful
+     - Can make it optional in UI
+
+     - http://simplehtmldom.sourceforge.net/
+     - http://www.crummy.com/software/BeautifulSoup/
+     - basically, all I'm looking for is to populate fields for data
+       storage, not crawl the web
+     - need to sandbox this issue - probably in
+       [[file:/cf/home/notes/php/sketches/]] somewhere
+
+   - [ ] schedules need to be decomposed in sql
+
+   - [X] Adding any posting should automatically insert an event into events.
+
+   - [ ] contacts need to be decomposed in sql
+
+   - [ ] need to give clearer deadlines
+
+   - [ ] add options to group, order and filter tables
+     - this probably means that displayTable needs to be altered
+
+   - [X] linking notes to postings
+     - [[file:accountant.php]]
+     - [[file:postings.js]]
+     - [[file:blog.js]]
+
+   - [X] localize foreign javascript code
+     - I mean store the files locally instead of using a Content Delivery Network
+
+   - [ ] addresses in contacts
+     - again dialog boxes would be a good way to go here
+     - [[file:objects.js::function%20setupContacts()][file:objects.js::function setupContacts()]]
+
+   - [ ] tables overlapping boundaries in events,contacts,etc  [[file:schedules.js]]
+     [[file:index.html]] [[file:index.css]]
+
+     - a good fix for this might be to use a jquery dialog box to
+       display more info about the event.
+     - preferably the dialog box will automatically add links to the urls
+
+     - *Actually, to fix the overlapping displays, an accordion is a*
+       *better approach.*
+
+   - [ ] full calendar events don't link to event table
+
+
+   - [X] notes have no interface
+     - Sun Jul 05, 2015 12:57:29 started this awhile ago, but it needs
+       a lot of polish.
+     - started with [[file:postings.js::function%20fillPostings][file:postings.js::function fillPostings]].
+     - After the displayTable call, I added a new jQuery .click()
+       function which is added to each of the first table cells (via
+       a css selector).
+
+     - (DONE) Somehow I need to figure out how to get the posting object in
+       javascript based on this info
+
+     - (DONE) break this popup code out into a couple more functions:
+       embelishTable, getPostingFromArray.  There could be duplicate
+       titles, so this (titles) isn't the best thing to work with
+
+
+     
+**** p2 [0/7]
+   - [ ] editing locations doesn't work
+   - [ ] make things searchable (seo)?
+   - [ ] editing events doesn't work  
+   - [ ] svg interface doesn't exist yet
+   - [ ] add installation notes
+   - [ ] optionally link to google docs, facebook, twitter, etc
+     - google around for some sort of broadcaster that does this
+   - [ ] decompose locations
+     - google how wikipedia, mapquest, google, etc does this
+     - maybe jesse knows?
+
+**** completed [8/8]
+   - [X] add jquery tabs for resumes, blogs, and cover letters
+     - [[file:objects.js]]
+     - [[file:index.js]] (done)
+     - [[file:index.html]]
+     - how do you switch between tabs?
+
+   - [X] notes don't exist in sql
+     - added notes to schema.
+     - notes have no interface yet
+
+   - [X] adding postings doesn't automatically enter companies
+     - [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+
+   - [X] automatic links in job posting entries
+     - change input boxes to jquery dialogs
+     - [[file:objects.js::function%20setupPostings%20][file:objects.js::function setupPostings ]]
+     - [[file:postings.js::function%20insertPosting][file:postings.js::function insertPosting]]
+
+
+   - [X] urls in postings [[file:postings.js]]
+     - this fix doesn't work in win8 chrome, but works in ubuntu chrome for some reason.
+
+   - [X] date picker?
+
+   - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+     - need to get graphical calendar open for events to refresh automatically
+     - this is of course a new problem.
+
+   - [X] removing events [[file:schedules.js]]
+     - Sun Jun 28, 2015 13:01:15
+     - This actually had nothing to do with schedules.js
+     - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+
+** Wed Jul 15, 2015 23:29:27 back to adding notes to goals [[file:goals.js::embelish]]
+  How does [[file:postings.js::embelish][postings]] do it?
+
+      								    -> [[file:postings.js::function%20createPostingPopUpDiv][createPostingPopUpDiv]]
+								->  [[file:postings.js::function%20createPostingPopUpDivWrapper][createPostingPopUpDivWrapper]]
+								[[file:postings.js::function%20getPostingNotes][getPostingNotes]]
+                                                             /  
+  [[file:postings.js::function%20fillPostings][fillPostings]]  -> [[file:objects.js::function%20embelishTable][embelishTable]] -> [[file:postings.js::function%20popUpDialogForJobPosting][popUpDialogForJobPosting]]  
+                                                             \  
+								[[file:postings.js::function%20addPostingNote][addPostingNote]] 
+								->  [[file:postings.js::function%20givePostingNoteInsertionToButler][givePostingNoteInsertionToButler]]
+
+   Thu Jul 16, 2015 10:42:47
+   That's bizzare as shit, but it's going to take some work to make
+   anything worthwhile out of it. 
+
+   
+** Thu Jul 16, 2015 09:40:22 still trying to add goal notes
+
+*** Got stuck on how to generalize the dialog creation.
+
+http://stackoverflow.com/questions/6021107/can-i-dynamically-add-buttons-to-a-jquery-ui-dialog-box
+
+   Looks like some answers are in the link above. 
+
+    var myButtons = {
+                "Save": function () {
+                    //some junk logic removed
+                },
+                "Cancel": function () {
+                    $(this).dialog("close");
+                }
+            };
+
+            if(ID == 0) {
+                myButtons["Delete"] = function() {
+                    // Delete logic here.
+                }
+            }
+
+            $('#EditTour').dialog('option', 'buttons', myButtons);
+        
+
+
+	    So where does this go?  [[file:objects.js::function%20dialogObjectWrapper][file:objects.js::function dialogObjectWrapper]]
+
+*** Thu Jul 16, 2015 20:37:46 How can I construct button combo pairs, pass the to the dialog wrapper?
+
+
+	
+http://www.electrictoolbox.com/loop-key-value-pairs-associative-array-javascript/
+If we had the following array defined in Javascript:
+
+var items = {
+  "foo" : 123456,
+  "bar" : 789012,
+  "baz" : 345678,
+  "bat" : 901234
+};
+
+we could loop through the array and display the index and then the value like so:
+
+for(var index in items) {
+  document.write( index + " : " + items[index] + "<br />");
+}
+
+This would display the following:
+
+foo : 123456
+bar : 789012
+baz : 345678
+bat : 901234
+
+
+
+Por exemplo:
+
+    var items = {
+  "foo" : function(){console.log("foo bar")},
+  "bar" : function(){console.log("bar bar")},
+  "baz" : function(){console.log("baz bar")},
+  "bat" : function(){console.log("bat bar")},
+};
+
+
+*** Fri Jul 17, 2015 07:24:54 searching for dialogObjectWrapper calls
+
+files=*.js; for f in $files; do ls $f; cat $f | grep -n dialogObjectWrapper; done
+blog.js
+classes.js
+companies.js
+76:    embelishTable(object,dialogObjectWrapper);
+contacts.js
+goals.js
+171:    embelishTable(object,dialogObjectWrapper);
+index.js
+industries.js
+173:    embelishTable(object,dialogObjectWrapper);
+locations.js
+72:    embelishTable(object,dialogObjectWrapper);
+objects.js
+851:function dialogObjectWrapper(object,type,buttons)
+postings.js
+schedules.js
+utilities.js
+
+
+   As shown above, dialogObjectWrapper is called without supplied parameters.  
+
+   I have options, which take time to reflect on.    I can build the
+   buttons directly into the object  [[file:objects.js::function%20glo][file:objects.js::function glo]] or
+   I can build them directly into their filler methods.
+   [[file:goals.js::function%20fillGoals][file:goals.js::function fillGoals]]
+
+
+   The question is:  "which is easier to understand and maintain?"
+
+   
+*** Fri Jul 17, 2015 08:08:21 got a crude generalization going.  Want to solidify it for goals.js
+
+*** Sun Jul 19, 2015 15:03:00 looking at it again
+
+[[file:goals.js::function%20fillGoals][file:goals.js::function fillGoals]]  calls embelishTable -> dialogObjectWrapper
+
+[[file:objects.js::function%20dialogObjectWrapper][file:objects.js::function dialogObjectWrapper]] buttons are passed here,
+but functions are not defined.
+
+Need a general function to get notes on a goalId
+[[file:objects.js::function%20showNotesOnObject][file:objects.js::function showNotesOnObject]]
+
+Sun Jul 19, 2015 19:36:39
+js object isn't getting passed, only dom object.
+
+hand tracing: [[file:objects.js]]
+*** Mon Jul 20, 2015 17:42:06 and again,
+** Tue Jul 21, 2015 10:04:18 got goal notes working.  Need to think about next steps.
+
+Web scraping is a big thing that I'd like to implement.  I'm still a
+bit unsure how to do that.  
+
+I think scraping indeed is probably a good way to start.  At least
+just to get a feel for how to scrape things with PHP.  
+
+
+Another idea is to try to display things with d3 and/or raphael.
+That's a tricky step.  
+
+I'm currently stuck on how to pan and zoom things.  
+
+Really got a good chunk of things done yesterday, and that's going to
+be tough to match today.  But I might be able to do it. 
+
+Ultimately, I want to push more data in here, and it's already
+getting quite slow, so a rate limiter might be useful.  
+
+Filtering results is another key area to work on.
+
+Quick Summary:
+
+1. Filtering Results
+2. Use SVG instead of tables
+3. Scrape things automatically.
+
+Some additional things of top of head:
+
+1. Promises might speed things up
+2. google docs integration (for resume, cover letters)
+3. plug into oAuth for authentication
+4. separate job scraper
+5. get resumes working with realtime api [[file:/cf/home/notes/javascript/google/google-javascript.org::*%20Tue%20Jul%2021,%202015%2012:59:16%20looking%20into%20realtime%20api%20%20][file:/cf/home/notes/javascript/google/google-javascript.org::* Tue Jul 21, 2015 12:59:16 looking into realtime api  ]]
+
+The last list of issues I had was [[*%20Wed%20Jul%2015,%202015%2021:42:53%20decompose%20locations.%20%20Look%20how%20other%20people%20have%20done%20this][* Wed Jul 15, 2015 21:42:53 decompose locations.  Look how other people have done this]]
+
+
+*** continuing problems
+**** p1 [5/16]
+
+   - [-] add more relational tables to schedule idea:  [[file:schemaUpdate.20150708.sql]] [1/6]
+     - [X] user_schedule_notes
+       - need to test that this works
+       - need to wire this up to insertPosting function in PHP or SQL
+       - the issue of getting a datetime string is non-trivial.
+
+       - Thu Jul 09, 2015 09:49:11
+	 - +schedules.js insertSchedule currently calls addSchedule in
+           butler.php, not insertSchedule in accountant.php+
+	 - Thu Jul 09, 2015 12:23:00 resolved this
+       - Thu Jul 16, 2015 10:40:50  Where is this?
+
+     - [ ] user_schedule_companies
+       - insertCompany adds an entry to userSchedule?
+     - [ ] user_schedule_goals
+     - [ ] user_schedule_contacts
+     - [ ] user_schedule_location
+     - [ ] user_schedule_postings
+
+   - [ ] remove middle dialog when showing notes in postings.
+
+   - [X] remove schedule fields in javascript first, then SQL
+     - description
+     - contact
+
+   - [ ] link goals, companies, contacts, industries
+
+     - schema allows for (some of) this, but need to set it up somehow in UI
+     - svg/raphael is one possible solution, d3 is a more complex possibility
+     - canvas is yet a more complex possibility
+
+     - using accordions, clicking on a location could open more divs
+       showing number of postings, number of companies, number of
+       industries, etc. Clicking the number of postings would show
+       the results, etc.
+
+     - similarly, clicking on an industry could show number of
+       companies, number of locations, etc.
+
+   - [ ] add web scraping functionality
+     - Sun Jul 05, 2015 13:06:39 this might be too slow to be useful
+     - Can make it optional in UI
+
+     - http://simplehtmldom.sourceforge.net/
+     - http://www.crummy.com/software/BeautifulSoup/
+     - basically, all I'm looking for is to populate fields for data
+       storage, not crawl the web
+     - need to sandbox this issue - probably in
+       [[file:/cf/home/notes/php/sketches/]] somewhere
+
+   - [ ] schedules need to be decomposed in sql
+
+   - [X] Adding any posting should automatically insert an event into events.
+
+   - [ ] contacts need to be decomposed in sql
+
+   - [ ] need to give clearer deadlines
+
+   - [ ] add options to group, order and filter tables
+     - this probably means that displayTable needs to be altered
+
+   - [X] linking notes to postings
+     - [[file:accountant.php]]
+     - [[file:postings.js]]
+     - [[file:blog.js]]
+
+   - [X] localize foreign javascript code
+     - I mean store the files locally instead of using a Content Delivery Network
+
+   - [ ] addresses in contacts
+     - again dialog boxes would be a good way to go here
+     - [[file:objects.js::function%20setupContacts()][file:objects.js::function setupContacts()]]
+
+   - [ ] tables overlapping boundaries in events,contacts,etc  [[file:schedules.js]]
+     [[file:index.html]] [[file:index.css]]
+
+     - a good fix for this might be to use a jquery dialog box to
+       display more info about the event.
+     - preferably the dialog box will automatically add links to the urls
+
+     - *Actually, to fix the overlapping displays, an accordion is a*
+       *better approach.*
+
+   - [ ] full calendar events don't link to event table
+
+
+   - [X] notes have no interface
+     - Sun Jul 05, 2015 12:57:29 started this awhile ago, but it needs
+       a lot of polish.
+     - started with [[file:postings.js::function%20fillPostings][file:postings.js::function fillPostings]].
+     - After the displayTable call, I added a new jQuery .click()
+       function which is added to each of the first table cells (via
+       a css selector).
+
+     - (DONE) Somehow I need to figure out how to get the posting object in
+       javascript based on this info
+
+     - (DONE) break this popup code out into a couple more functions:
+       embelishTable, getPostingFromArray.  There could be duplicate
+       titles, so this (titles) isn't the best thing to work with
+
+
+     
+**** p2 [0/7]
+   - [ ] editing locations doesn't work
+   - [ ] make things searchable (seo)?
+   - [ ] editing events doesn't work  
+   - [ ] svg interface doesn't exist yet
+   - [ ] add installation notes
+   - [ ] optionally link to google docs, facebook, twitter, etc
+     - google around for some sort of broadcaster that does this
+   - [ ] decompose locations
+     - google how wikipedia, mapquest, google, etc does this
+     - maybe jesse knows?
+
+**** completed [8/8]
+   - [X] add jquery tabs for resumes, blogs, and cover letters
+     - [[file:objects.js]]
+     - [[file:index.js]] (done)
+     - [[file:index.html]]
+     - how do you switch between tabs?
+
+   - [X] notes don't exist in sql
+     - added notes to schema.
+     - notes have no interface yet
+
+   - [X] adding postings doesn't automatically enter companies
+     - [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+
+   - [X] automatic links in job posting entries
+     - change input boxes to jquery dialogs
+     - [[file:objects.js::function%20setupPostings%20][file:objects.js::function setupPostings ]]
+     - [[file:postings.js::function%20insertPosting][file:postings.js::function insertPosting]]
+
+
+   - [X] urls in postings [[file:postings.js]]
+     - this fix doesn't work in win8 chrome, but works in ubuntu chrome for some reason.
+
+   - [X] date picker?
+
+   - [X] adding events [[file:schedules.js]] [[file:butler.php]]
+     - need to get graphical calendar open for events to refresh automatically
+     - this is of course a new problem.
+
+   - [X] removing events [[file:schedules.js]]
+     - Sun Jun 28, 2015 13:01:15
+     - This actually had nothing to do with schedules.js
+     - Everything was in [[file:objects.js][objects.js]], [[file:accountant.php][accountant.php]] and [[file:butler.php][butler.php]].
+
+** Tue Jul 21, 2015 23:10:47 tag current state as v1.  Start a new v2.
+** Wed Jul 22, 2015 11:16:32 start a local scraper [[file:/cf/home/notes/php/php.org::*%20Wed%20Jul%2022,%202015%2011:22:34%20working%20through%20a%20random%20example][scraping journal]]
+*** Wed Jul 22, 2015 19:47:19 scraper01 works [[file:/cf/home/notes/php/sketches/web-scraping/ward/scraper-01.php]]
+*** Lost a bunch of log notes.  Here's what I was able to recover.
+    file:logs/gregsList-2015-07-23.org]]  This one didn't really go anywhere, I got distracted. (but updated)
+
+Fri Jul 24, 2015 09:04:59 
+	So I'm just picking up where I left off.   I got it to dump
+	html into the console as expected.  
+
+	What I want though, is an array of job titles, an array of
+	locations and an array of links all mapped together into a
+	nice hash table.
+
+	There might be some other useful data also, but this is
+	really the meat and potatoes.
+
+[[file:logs/gregsList-2015-07-23.org::*%20Fri%20Jul%2024,%202015%2009:29:59%20Doesn't%20work.%20%20Reasoning][file:logs/gregsList-2015-07-23.org::* Fri Jul 24, 2015 09:29:59 Doesn't work.  Reasoning]]
+
+	I think it doesn't work because there is no string "<body>"
+	in the html.  It's more like "<body data-tn-originlogtype=\"jobsearch\"
+	data-tn-originlogid=\"19r0dng0hbqh7esa\" ... you get the picture right?
+
+	So I've gotta work around that.
+
+	I could the string between "<body" and ">".  That might give some
+	useful info.  But it seems tedious.  There might be a better way,
+	so I'm going to think about it for a min.
+
+	All of the job postings are in the second "<table>".
+
+	Unfortunately, it's not just a "<table>". It's 
+
+	"<table cellpadding=\"0\" cellspacing=\"0\" border=\"0\">"
+	"</table>"
+
+	(I think).  
+
+	So can I pull that big chunk?  Maybe I can try.  
+	The problem is that it's not in the first table, but the
+	second.
+	
+	http://www.tizag.com/phpT/php-string-explode.php
+
+	Looking back at scrape_between(), it's just getting
+	substrings.  Unfortunately, I never got good at these in PHP,
+	but now's just as good a time as any.  
+
+        |-----------------------------------+-----------------------------------------------------|
+        | data = stristr(data,start)        | http://php.net/manual/en/function.stristr.php       |
+        |                                   | returns all of haystack starting from and including |
+        |                                   | the first occurrence of needle to the end.          |
+        |                                   |                                                     |
+        |                                   | You can also use this to get the data from the      |
+        |                                   | begining of the string up to and excluding needle.  |
+        |                                   |                                                     |
+        |                                   | This is done via the optional 3rd parameter         |
+        |-----------------------------------+-----------------------------------------------------|
+        | from = substr(data, strlen(start) |                                                     |
+        |                                   |                                                     |
+        |-----------------------------------+-----------------------------------------------------|
+        | stop = stripos(data,end)          |                                                     |
+        |                                   |                                                     |
+        |                                   |                                                     |
+        |-----------------------------------+-----------------------------------------------------|
+        | data = substr(data,0,stop)        |                                                     |
+        |                                   |                                                     |
+        |-----------------------------------+-----------------------------------------------------|
+
+	Fri Jul 24, 2015 10:27:53
+	So that's a little bit intimidating for some reason.  I
+	really just want to hack something out, but it might be
+	beneficial to sand box this issue.  I've actually got a few
+	sandbox situations to work directly with. 
+
+	On the other hand, PHP is an interpreted language, so it
+	ought to be relatively easy to just try hacking this out. 
+
+	Fri Jul 24, 2015 10:30:47 A few more thoughts:
+	What's the big difference between the 'i' functions and those
+	without?  Is this the case in C also?
+
+	Fri Jul 24, 2015 10:34:34
+	From http://php.net/manual/en/function.stristr.php, the 'i'
+	indicates that it's case insensitive.  
+	
+	Might it be easier to work with the higher priority targets
+	first? I don't know.
+
+	Fri Jul 24, 2015 14:43:51
+	Here's a working result
+	[[file:logs/gregsList-2015-07-23.org::*%20Fri%20Jul%2024,%202015%2014:43:34%20working%20result][file:logs/gregsList-2015-07-23.org::* Fri Jul 24, 2015 14:43:34 working result]]
+
+	Fri Jul 24, 2015 16:05:25
+
+	Here's what I'd like to separate explosions on.
+
+	<a
+rel="nofollow"
+href="/rc/clk?jk=c23a6d772a159c96" target="_blank"
+onmousedown="return rclk(this,jobmap[0],0);"
+onclick="return rclk(this,jobmap[0],true,0);"
+itemprop="title"
+title="Software Engineer - New Grad - 2016"
+
+
+	Basically, this just means:
+	<a
+rel="nofollow"
+
+
+
+** Thu Jul 23, 2015 09:07:29 considering adding job boards into sql
+   This is kind of a big deal because it's going to require a few more tables.
+
+   [[file:schemaUpdate.20150721.sql]]
+
+   Thu Jul 23, 2015 17:26:30
+   Probably want to push this to back burner.
+
