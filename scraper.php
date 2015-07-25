@@ -45,22 +45,36 @@ function get_second_table($text)
 
 function getScrapedLink()
 {
+    $link = "link";
+    return $link;
 }
 
 function getScrapedTitle()
 {
+    $title = "title";
+    return $title;
+
 }
 
 function getScrapedCompany()
 {
+    $company = "company";
+    return $company;
+
 }
 
 function getScrapedLocation()
 {
+    $location = "location";
+    return $location;
+
 }
 
 function getScrapedDescription()
 {
+    $description = "description";
+    return $description;
+
 }
 
 
@@ -97,18 +111,35 @@ data-tn-element="jobTitle"><b>Software</b> Engineer - New Grad - 2016</a>
   
     
     // $postings = $page;
-    // get anchors 
+    // explode page by anchors 
     $pieces = explode($anchor, $page);
  
+  
 
-    $link = getScrapedLink();
-    $title = getScrapedTitle();
-    $company = getScrapedCompany();
-    $location = getScrapedLocation();
-    $description = getScrapedDescription();
+    // loop over pieces
+    for ( $i = 0; $i < count( $pieces ); $i++ )
+    {
+        $piece = $pieces[$i];
+        $link = getScrapedLink($piece);
+        $title = getScrapedTitle($piece);
+        $company = getScrapedCompany($piece);
+        $location = getScrapedLocation($piece);
+        $description = getScrapedDescription($piece);
+        
+        // compose the singular posting
+        $posting = array(
+            "link" => $link,
+            "title" => $title,
+            "company" => $company,
+            "location" => $location,
+            "description" => $description
+        );
+
+        // push the singular posting into the plural
+        array_push($postings,$posting);
+    }
 
 
-    $postings = $pieces;
     return $postings;
 }
 
