@@ -65,8 +65,12 @@ function getScrapedTitle($noise)
 
 function getScrapedCompany($noise)
 {
-    $company = "company";
-    return $company;
+    // $company = "company";
+    $companyName = scrape_between(
+        $noise,
+        "<span class=company itemprop=\"hiringOrganization\" itemtype=\"http://schema.org/Organization\"><span itemprop=\"name\">",
+        "</span>");
+    return $companyName;
 
 }
 
