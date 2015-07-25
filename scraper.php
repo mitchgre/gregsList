@@ -89,7 +89,13 @@ function getScrapedLocation($noise)
 
 function getScrapedDescription($noise)
 {
-    $description = "description";
+    // $description = "description";
+
+    $description = scrape_between(
+        $noise,
+        "<span class=summary itemprop=\"description\">",
+        "</span>");
+
     return $description;
 
 }
