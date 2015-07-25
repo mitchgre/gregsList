@@ -79,7 +79,9 @@ data-tn-element="jobTitle"><b>Software</b> Engineer - New Grad - 2016</a>
       // $location = ;
       // $description = ;
      */
-
+    
+    // get anchors 
+    $pieces = explode($anchor, $page);
     return $postings;
 }
 
