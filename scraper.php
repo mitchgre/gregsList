@@ -80,8 +80,10 @@ data-tn-element="jobTitle"><b>Software</b> Engineer - New Grad - 2016</a>
       // $description = ;
      */
     
+    // $postings = $page;
     // get anchors 
     $pieces = explode($anchor, $page);
+    $postings = $pieces;
     return $postings;
 }
 
