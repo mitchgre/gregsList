@@ -2023,3 +2023,12 @@ rel="nofollow"
    Thu Jul 23, 2015 17:26:30
    Probably want to push this to back burner.
 
+** Sat Jul 25, 2015 21:38:27 scraper is getting closer.
+
+	Works on gs2, but not n900t or egil.
+	
+	Tomorrow, I can get a good comparison of shell logs.
+
+	egil fails on getting the second table for some reason.
+
+	
