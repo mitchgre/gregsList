@@ -3740,8 +3740,7 @@ postings.js (line 48)
 postings.js (line 49)
 
 ***** Sun Jul 26, 2015 11:04:41 conclusions
-      11:06:19
-      Things got really strange here.  
+****** 11:06:19 Things got really strange here.
 
       Unlike previously, the arrays are fetched properly from ajax on
       egil and gs2, but they don't work on n900t.  
@@ -3751,7 +3750,7 @@ postings.js (line 49)
 
       WTF?
 
-      11:12:18
+****** 11:12:18 permissions
       I'm thinking this is probably due to a UNIX permissions thing.
       It doesn't explain at all why things would work on AJAX and not
       CLI however. 
@@ -3768,7 +3767,7 @@ postings.js (line 49)
       best due to the excellent battery life on armhf as opposed to
       x86.   
 
-      11:18:37
+****** 11:18:37 Who is the apache user?
       The obvious thing to try is the permissions on n900t.  
 
       Since I built this apache from source, things are different
@@ -3809,8 +3808,9 @@ www-data 27611 17687  0 11:05 ?        00:00:00 /usr/sbin/apache2 -k start
 	So it looks like the default user is 'daemon' when apache is
 	built from source.
 
-	
+	This is different from ubuntu.
 
+****** 11:47:48 Make the handrolled apache match ubuntu's default
 
 
 *** test2 curl() function
