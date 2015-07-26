@@ -3813,6 +3813,10 @@ www-data 27611 17687  0 11:05 ?        00:00:00 /usr/sbin/apache2 -k start
 ****** 11:47:48 Make the handrolled apache match ubuntu's default
 
 
+****** 11:57:46 curiouser and curiouser
+       Just tried the ajax again, and it doesn't work on any of the
+       three platforms.  
+
 *** test2 curl() function
 ***** gregsList-2015-07-26-n900t.org 
 ****** Sun Jul 26, 2015 10:26:00 test n900t curl function 
