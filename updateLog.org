@@ -3756,6 +3756,20 @@ postings.js (line 49)
       It doesn't explain at all why things would work on AJAX and not
       CLI however. 
 
+      So I could try working through the remaining 2 tests I'd
+      established earlier, (anchors and explosions) for the CLI.  
+
+      But there's really no point in doing that other than as a
+      mental exercise.  Except that I developed most of this code
+      directly on x86 - where it worked at the time but now doesn't! 
+      
+      Things work in AJAX everywhere they're supposed to with the
+      exception of n900t, but that's where I'd really like it to work
+      best due to the excellent battery life on armhf as opposed to
+      x86.   
+
+      
+
 
 *** test2 curl() function
 ***** gregsList-2015-07-26-n900t.org 
