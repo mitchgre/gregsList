@@ -1,6 +1,11 @@
 
-function sendScraperRequest ()
+function sendScraperRequest (divId)
 {
+    // Overview:
+    // send request to scraper.
+    // scraper should send back an array of json objects.
+    // can either dump the objects to the dom, store them in db, or javascript.
+
     /*
       $.ajax()
       {
@@ -9,10 +14,10 @@ function sendScraperRequest ()
      */
 }
 
-function getIndeedScraperDialogString()
+function getIndeedScraperDialogString(divId)
 {
     // create and return a string of html
-    var string  = '<div id="indeedScraperDialog" title="indeedScraperDialog">';
+    var string  = '<div id="'+divId+'" title="'+divId+'">';
     string += '<table>';
 
     string += '</table></div>';
@@ -23,8 +28,8 @@ function getIndeedScraperDialogString()
 function openScraperDialog()
 {
     // get dialog string
-    var scraperDialogString = getIndeedScraperDialogString()
-    ;
+    var divId = 'scraperDialog';
+    var scraperDialogString = getIndeedScraperDialogString(divId);
     
     $(scraperDialogString).dialog(
     {
@@ -33,11 +38,12 @@ function openScraperDialog()
 	{
 	    Cancel: function() 
 	    {
-		$(this).dialog("close")
+		$(this).dialog("close");
 	    },
 	    "Scrape":function()
 	    {
-		;
+		// get postings from scraper, store them in div
+		sendScraperRequest(divId);
 	    }
 	}
     });
@@ -55,7 +61,7 @@ function scrapePostings()
     openScraperDialog();
 
     // get results from ajax
-    sendScraperRequest();
+    // sendScraperRequest();
 }
 
 
