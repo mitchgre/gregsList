@@ -66,7 +66,7 @@ function returnStuff($query)
  */
 function connectToDB()
 {
-    $config = parse_ini_file('/root/config.ini');
+    $config = parse_ini_file('/var/www/config.ini');
 
     $mysqli = new mysqli($config['sqlhostname'], $config['sqlusername'], $config['sqlpassword'], "gregsList");
 
