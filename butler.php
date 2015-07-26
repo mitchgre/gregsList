@@ -16,6 +16,7 @@
 require "./engineer.php"; // utitlity functions
 require "./concierge.php"; // guest registry functions
 require "./accountant.php"; // guest record functions
+require "./scraper.php"; // ...
 
 
 /*
@@ -321,6 +322,12 @@ if (isset($_POST['func']))
                 echo json_encode(updateContact($user));  
             }
 
+        // scraping stuff  ===============================
+        if ($func === "scrapePostings")
+        {
+            $url = $_POST['url'];
+            echo json_encode(scrapePostings($url));
+        }
     }
 }
 

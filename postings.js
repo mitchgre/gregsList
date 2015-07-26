@@ -1,17 +1,52 @@
 
-function sendScraperRequest (divId)
+function sendScraperRequest (divId,url)
 {
     // Overview:
     // send request to scraper.
     // scraper should send back an array of json objects.
-    // can either dump the objects to the dom, store them in db, or javascript.
-
-    /*
-      $.ajax()
-      {
-      
-      }
-     */
+    // can either dump the objects to the dom, store them in db, or javascript.    
+      $.ajax
+      (
+	  {
+	      url:"butler.php",
+	      type: "post",
+	      dataType: "text",
+	      data:
+	      {
+		  user:gregsList.user.name,
+		  pass:gregsList.user.password,
+		  func: "scrapePostings",
+		  // url: url,// encodeURIComponent(url),
+		  url: encodeURIComponent(url)
+	      },
+	      success: function(resp)
+	      {
+		  if (resp !== '')
+		  {					
+		      console.log(JSON.parse(resp));
+		      if (JSON.parse(resp) === true)
+		      {
+			  console.log("input worked");
+			  // displayTable(object,[]);
+			  // getStuff(object.parent);
+			  // object.parent.refresh();
+		      }
+		      else
+		      {
+			  console.log("input failed");
+		      }
+		      
+		  }
+		  else
+		      console.log('empty response');
+		  // 
+		  // clear text fields
+		  
+		  
+	      } // end success func
+	  } // end ajax json
+      ); // end ajax function
+	      	  
 }
 
 function getIndeedScraperDialogString(divId)
@@ -30,6 +65,10 @@ function openScraperDialog()
     // get dialog string
     var divId = 'scraperDialog';
     var scraperDialogString = getIndeedScraperDialogString(divId);
+    var url;
+    url = "http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=75&start=0";
+    console.log('scraping url:');
+    console.log(url);
     
     $(scraperDialogString).dialog(
     {
@@ -43,7 +82,7 @@ function openScraperDialog()
 	    "Scrape":function()
 	    {
 		// get postings from scraper, store them in div
-		sendScraperRequest(divId);
+		sendScraperRequest(divId,url);
 	    }
 	}
     });
