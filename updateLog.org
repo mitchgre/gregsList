@@ -2032,3 +2032,1355 @@ rel="nofollow"
 	egil fails on getting the second table for some reason.
 
 	
+** Sun Jul 26, 2015 10:15:47 trying to figure out cross-platform inconsistencies in php-curl 
+*** test1 scrapePostings function
+<?php
+
+// Defining the basic cURL function
+function curl($url) {
+    // Assigning cURL options to an array
+    $options = Array(
+        CURLOPT_RETURNTRANSFER => TRUE,  // Setting cURL's option to return the webpage data
+        CURLOPT_FOLLOWLOCATION => TRUE,  // Setting cURL to follow 'location' HTTP headers
+        CURLOPT_AUTOREFERER => TRUE, // Automatically set the referer where following 'location' HTTP headers
+        CURLOPT_CONNECTTIMEOUT => 120,   // Setting the amount of time (in seconds) before the request times out
+        CURLOPT_TIMEOUT => 120,  // Setting the maximum amount of time for cURL to execute queries
+        CURLOPT_MAXREDIRS => 10, // Setting the maximum number of redirections to follow
+        CURLOPT_USERAGENT => "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1a2pre) Gecko/2008073000 Shredder/3.0a2pre ThunderBrowse/3.2.1.8",  // Setting the useragent
+        CURLOPT_URL => $url, // Setting cURL's URL option with the $url variable passed into the function
+    );
+    
+    $ch = curl_init();  // Initialising cURL 
+    // echo $ch;
+    curl_setopt_array($ch, $options);   // Setting cURL's options using the previously assigned array data in $options
+    $data = curl_exec($ch); // Executing the cURL request and assigning the returned data to the $data variable
+    curl_close($ch);    // Closing cURL 
+    return $data;   // Returning the data from the function 
+}
+
+
+
+// Defining the basic scraping function
+function scrape_between($data, $start, $end){
+    $data = stristr($data, $start); // Stripping all data from before $start
+    $data = substr($data, strlen($start));  // Stripping $start
+    $stop = stripos($data, $end);   // Getting the position of the $end of the data to scrape
+    $data = substr($data, 0, $stop);    // Stripping all data from after and including the $end of the data to scrape
+    return $data;   // Returning the scraped data from the function
+}
+
+// get 2nd table
+function get_second_table($text)
+{
+    // get td with id "resultsCol"
+   
+    $sd = scrape_between($text, "<td id=\"resultsCol\">","<div class=\"related_searches\">");
+    return $sd;
+}
+
+
+
+function getScrapedLink($noise)
+{
+    // base link
+    $link = "http://indeed.com";
+
+    // get secondary component from noise
+    $scraping = scrape_between($noise,"href=\"","\"");
+    $link .= $scraping;
+
+    return $link;
+}
+
+function getScrapedTitle($noise)
+{
+    // $title = "title";
+    $title = scrape_between($noise,"title=\"","\"");
+    return $title;
+
+}
+
+function getScrapedCompany($noise)
+{
+    // $company = "company";
+    $companyName = scrape_between(
+        $noise,
+        "<span class=company itemprop=\"hiringOrganization\" itemtype=\"http://schema.org/Organization\"><span itemprop=\"name\">",
+        "</span>");
+    return $companyName;
+
+}
+
+function getScrapedLocation($noise)
+{
+    // $location = "location";
+    
+    $location = scrape_between(
+        $noise,
+        "itemscope itemtype=\"http://schema.org/Postaladdress\"><span itemprop=\"addressLocality\">",
+        "<");
+
+    return $location;
+
+}
+
+function getScrapedDescription($noise)
+{
+    // $description = "description";
+
+    $description = scrape_between(
+        $noise,
+        "<span class=summary itemprop=\"description\">",
+        "</span>");
+
+    return $description;
+
+}
+
+
+// get an associative array
+function scrapePostings($url)
+{
+
+    //echo yo mama;
+    $postings = [];     // empty array
+
+    $page = curl( $url );   // get all html
+
+    // return $page;
+    
+    // loop over $scraping pulling all titles, links, locations somehow.
+    // breaking this down:
+
+    // filter page down to the relevant table
+    $page = get_second_table($page);
+
+    // explode on anchors
+    /*
+      example:
+
+<a
+rel="nofollow"
+href="/rc/clk?jk=c23a6d772a159c96" target="_blank"
+onmousedown="return rclk(this,jobmap[0],0);"
+onclick="return rclk(this,jobmap[0],true,0);"
+itemprop="title"
+title="Software Engineer - New Grad - 2016"
+class="turnstileLink"
+data-tn-element="jobTitle"><b>Software</b> Engineer - New Grad - 2016</a>
+
+     */
+    $anchor = "<a\nrel=\"nofollow\""; 
+
+  
+    
+    // $postings = $page;
+    // explode page by anchors 
+    $pieces = explode($anchor, $page);
+ 
+  
+
+    // loop over pieces
+    for ( $i = 0; $i < count( $pieces ); $i++ )
+    {
+        $piece = $pieces[$i];
+        $link = getScrapedLink($piece);
+        $title = getScrapedTitle($piece);
+        $company = getScrapedCompany($piece);
+        $location = getScrapedLocation($piece);
+        $description = getScrapedDescription($piece);
+        
+        // compose the singular posting
+        $posting = array(
+            "link" => $link,
+            "title" => $title,
+            "company" => $company,
+            "location" => $location,
+            "description" => $description
+        );
+
+        // push the singular posting into the plural
+        array_push($postings,$posting);
+    }
+
+
+    return $postings;
+}
+
+
+
+?>
+
+*** gregsList-2015-07-26-n900t.org 
+**** Sun Jul 26, 2015 10:04:50 start
+
+root@gspu:/n900t/usr/local/apache/htdocs/gregsList# git pull
+remote: Counting objects: 9, done.        
+remote: Compressing objects: 100% (6/6), done.        
+remote: Total 9 (delta 6), reused 6 (delta 3), pack-reused 0        
+Unpacking objects: 100% (9/9), done.
+From https://github.com/mitchgre/gregsList
+   07a5704..4127c84  master     -> origin/master
+Updating 07a5704..4127c84
+error: Your local changes to the following files would be overwritten by merge:
+	scraper.php
+Please, commit your changes or stash them before you can merge.
+Aborting
+root@gspu:/n900t/usr/local/apache/htdocs/gregsList# git stash
+Saved working directory and index state WIP on master: 07a5704 added missing jquery.min.js lib.
+HEAD is now at 07a5704 added missing jquery.min.js lib.
+root@gspu:/n900t/usr/local/apache/htdocs/gregsList# git pull
+Updating 07a5704..4127c84
+Fast-forward
+ engineer.php | 2 +-
+ scraper.php  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+root@gspu:/n900t/usr/local/apache/htdocs/gregsList# ls /n900t/var/
+backups  cache  lib  local  lock  log  mail  opt  run  spool  tmp  www
+root@gspu:/n900t/usr/local/apache/htdocs/gregsList# ls /n900t/var/www/
+html
+root@gspu:/n900t/usr/local/apache/htdocs/gregsList# cp config.ini /n900t/var/www/
+root@gspu:/n900t/usr/local/apache/htdocs/gregsList# git pull
+remote: Counting objects: 3, done.        
+remote: Compressing objects: 100% (3/3), done.        
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0        
+Unpacking objects: 100% (3/3), done.
+From https://github.com/mitchgre/gregsList
+   4127c84..aecaf63  master     -> origin/master
+Updating 4127c84..aecaf63
+Fast-forward
+ updateLog.org | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+**** Sun Jul 26, 2015 10:07:13 test scrapePostings
+root@gspu:/n900t/usr/local/apache/htdocs/gregsList# php -a
+Interactive mode enabled
+
+php > require('scraper.php');
+php > print_r( scrapePostings("http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=100&start=0") );
+Array
+(
+    [0] => Array
+        (
+            [link] => http://indeed.com/promo/prime
+            [title] => Software Developer
+            [company] => 
+            [location] => 
+            [description] => 
+        )
+
+    [1] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=bc5aacc1283474b2
+            [title] => Software Engineer
+            [company] => Google
+            [location] => San Francisco, CA
+            [description] => 
+Design, develop, test, deploy, maintain and improve <b>software</b>. Java, C/C++, C#, Objective C, Python, JavaScript, or Go....
+        )
+
+    [2] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=1d10e28cd0c2d679
+            [title] => Software Engineer in Test
+            [company] => Google
+            [location] => San Francisco, CA
+            [description] => 
+Google <b>Software</b> Engineers in Test are focused on the hardest, most interesting aspects of delivering high quality <b>software</b>....
+        )
+
+    [3] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=118ecb4e7785697a
+            [title] => Front End Software Engineer
+            [company] => Google
+            [location] => San Francisco, CA
+            [description] => 
+Significant experience developing user-facing <b>software</b>. Experience engineering <b>software</b> systems of medium-to-large scope and complexity....
+        )
+
+    [4] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=ffe8ebdbb2f4ed1d
+            [title] => Software Engineer, Web
+            [company] => VEVO
+            [location] => San Francisco, CA
+            [description] => 
+1-3 years of experience in <b>software</b> development. As a <b>Software</b> Engineer on the Web team at Vevo, you’ll have the opportunity to develop features that will reach...
+        )
+
+    [5] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=c1b6acf48143ce9b
+            [title] => Software Engineer
+            [company] => Thumbtack
+            [location] => San Francisco, CA
+            [description] => 
+In any case, as a <b>software</b> engineer, it always means managing complexity through thoughtful <b>software</b> design to ensure we can grow and scale our product without...
+        )
+
+    [6] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=7bfdbbbd17b10b19
+            [title] => Software Developer
+            [company] => EducationSuperHighway
+            [location] => San Francisco, CA
+            [description] => 
+That is why you became a <b>software</b> <b>developer</b>, but your desire to solve problems goes past <b>software</b> development....
+        )
+
+    [7] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=366278a07af152a3
+            [title] => Full-time/New Grad Software Engineer - Upcoming or Recent Grads Only
+            [company] => Transmosis
+            [location] => San Francisco, CA
+            [description] => 
+C/C++, Java, Python, JavaScript/AJAX, Mobile <b>Software</b> Development (iOS, Android). Knowledge of the <b>software</b> development lifecycle....
+        )
+
+    [8] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=a4a7f137c5a9707d
+            [title] => Software Engineer Intern
+            [company] => InMobi
+            [location] => San Francisco, CA
+            [description] => 
+With offices on five continents, InMobi provides advertisers, publishers and <b>developers</b> with a uniquely global solution for advertising....
+        )
+
+    [9] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=154bc1438e79170e
+            [title] => Entry Level Software Quality Analyst
+            [company] => AMG TECHNOLOGY
+            [location] => Berkeley, CA 94701
+            [description] => 
+Behind every great <b>software</b> <b>developer</b> is an equally great tester. Design test plans, scenarios, scripts, or procedures Documenting <b>software</b> defects, using a bug...
+        )
+
+    [10] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=bdbd800bfafb9ca8
+            [title] => Software Engineer, Ads
+            [company] => Samba TV
+            [location] => San Francisco, CA
+            [description] => 
+Build robust, high-volume production <b>software</b>. Experience building high-performance, large-scale server applications and reliable <b>software</b>....
+        )
+
+    [11] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=a1aeb840dda9e074
+            [title] => Software Engineer
+            [company] => Pinterest
+            [location] => San Francisco, CA
+            [description] => 
+Aptitude for JavaScript, CSS, C++, HTML, Python, Java, Go–we use a variety of programming languages and tools....
+        )
+
+    [12] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=ba4faeac65f1d90f
+            [title] => Software Engineer
+            [company] => 6sense
+            [location] => San Francisco, CA
+            [description] => 
+Role: Software Engineer ---------------------------- Role Description ---------------- This is a role for data geeks and those who get excited about
+        )
+
+    [13] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=456270818c93cd0c
+            [title] => Software Engineer - Supply
+            [company] => Uber
+            [location] => San Francisco, CA
+            [description] => 
+Strong <b>software</b> development skills &amp; willing to take on new challenges. The Supply team at Uber is one of the fastest growing, most critical teams focused on...
+        )
+
+    [14] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=41ac4b943b8a89c7
+            [title] => Senior Windows Developer
+            [company] => OneLogin
+            [location] => San Francisco, CA
+            [description] => 
+The core of our solution is RoR, with Java, Node.js and .NET for various components. You must be very comfortable with the Microsoft technology stack ( .NET )...
+        )
+
+    [15] => Array
+        (
+            [link] => http://indeed.com/cmp/HealthExpense/jobs/Backend-Parser-Developer-e2863c3fd4567f80?r=1
+            [title] => Backend Parser Developer
+            [company] => HealthExpense
+            [location] => San Mateo County, CA
+            [description] => 
+(Senior, Level II) (Middleware <b>Developer</b>). Strong background in <b>software</b> development lifecycle; Are you an ascending *Backend Parser <b>Developer</b>*....
+        )
+
+    [16] => Array
+        (
+            [link] => http://indeed.com/cmp/Pluggedin-Technologies/jobs/Application-Developer-0df1f73b79197396?r=1
+            [title] => Application Developer
+            [company] => Pluggedin Technologies
+            [location] => San Francisco, CA
+            [description] => 
+Experience with browser <b>developer</b> tools like Firebug. Knowledge and experience with Java, node.js, Javascript, C, C++, AngularJS, vert.x, HTML5, MySQL....
+        )
+
+    [17] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=d2e0a70efe13cf91
+            [title] => Java Developer
+            [company] => Cognizant
+            [location] => San Francisco, CA
+            [description] => 
+Java Backend <b>Developer</b>. Candidate should be hands on in java, able to contribute individually and. Cognizant is seeking an experienced....
+        )
+
+    [18] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=368a4222f372e345
+            [title] => Software Engineer - Desktop Applications
+            [company] => FiveStars
+            [location] => San Francisco, CA
+            [description] => 
+As part of that, you’ll be exposed to a wide range of technology challenges including <b>software</b> architecture, embedded JavaScript UX, implementing data storage...
+        )
+
+    [19] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=a2252f6d9bbeaf51
+            [title] => Associate Software Engineer
+            [company] => Salesforce
+            [location] => San Francisco, CA
+            [description] => 
+Associate <b>Software</b> Engineer, Infrastructure. Familiarity with crash-only and recovery-oriented <b>software</b> design....
+        )
+
+    [20] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=2dc4973936cbc316
+            [title] => Software Engineer
+            [company] => Yelp
+            [location] => San Francisco, CA
+            [description] => 
+Python, java, javascript, C++, etc... Work closely with <b>developers</b> in design, design review, and code review for web features &amp; service architecture....
+        )
+
+    [21] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=4977a5c4e4586973
+            [title] => Software Engineer (Full Time / Intern)
+            [company] => Tachyon Nexus, Inc.
+            [location] => San Francisco Bay Area, CA
+            [description] => 
+We are a team of explorers, athletes, risk-takers, inquirers, and technophiles from UC Berkeley, Google, CMU, VMWare, Stanford, Facebook, Yahoo! etc. Join us
+        )
+
+    [22] => Array
+        (
+            [link] => http://indeed.com/cmp/HealthExpense/jobs/API-Engineer-a7a82c159c33a12f?r=1
+            [title] => API Engineer
+            [company] => HealthExpense
+            [location] => San Mateo County, CA
+            [description] => 
+Strong background in <b>software</b> development lifecycle; Experience in the delivery of healthcare or financial backend <b>software</b> systems;...
+        )
+
+    [23] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=c79db25505aab516
+            [title] => Associate Software Engineer
+            [company] => Tapjoy
+            [location] => San Francisco, CA 94104 
+            [description] => 
+Understanding of <b>software</b> development life cycle. Tapjoy is seeking an Associate Data Science Engineer....
+        )
+
+    [24] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=65782c6c37c09d4d
+            [title] => Software Engineer, Mobile Applications (Android)
+            [company] => Google
+            [location] => San Francisco, CA
+            [description] => 
+As an Android <b>Developer</b>, you will develop applications primarily in Java and using the Android SDK. Develop Android mobile applications in Java....
+        )
+
+    [25] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=7cf61846d54b4301
+            [title] => Software Engineer, Mobile Web
+            [company] => Vungle
+            [location] => San Francisco, CA
+            [description] => 
+Proven <b>software</b> development experience; Vungle is the way <b>developers</b> put video ads in their apps. How to fundamentally change the mobile advertising industry so...
+        )
+
+    [26] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=5a4dafc46aba16ef
+            [title] => Associate Software Engineer
+            [company] => Model Metrics
+            [location] => San Francisco, CA
+            [description] => 
+Associate <b>Software</b> Engineer, Infrastructure. Familiarity with crash-only and recovery-oriented <b>software</b> design....
+        )
+
+    [27] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=e0fd341e693ff8f1
+            [title] => Software Engineer
+            [company] => Cozymeal
+            [location] => San Francisco, CA
+            [description] => 
+Cozymeal is a game-changing startup based in San Francisco that is revolutionizing the way we experience and enjoy food. Think of us as the Airbnb for food or
+        )
+
+    [28] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=e9ed7a314a5d445f
+            [title] => Software Development Engineer
+            [company] => A2Z Development Center, Inc.
+            [location] => San Francisco, CA
+            [description] => 
+Amazon Music is looking for a talented <b>software</b> <b>developer</b> to join us in revolutionizing the digital music customer experience....
+        )
+
+    [29] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=079b1b789c0af293
+            [title] => Software Engineer
+            [company] => Adobe
+            [location] => San Francisco, CA
+            [description] => 
+<b>Software</b> architecture, design and development of high performance server side Java and Javascript code. 2-5 years of <b>software</b> engineering experience having...
+        )
+
+    [30] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=8230e8c9a0c73b42
+            [title] => Software Engineer - Front End
+            [company] => Switch Communications
+            [location] => San Francisco, CA 94111 
+            [description] => 
+A solid foundation in computer science, with strong competencies in data structures, algorithms, and <b>software</b> design....
+        )
+
+    [31] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=a7c0e582b8bffda5
+            [title] => Software Engineer
+            [company] => Nitrous
+            [location] => San Francisco, CA
+            [description] => 
+Nitrous.IO <b>software</b> engineers are responsible for driving the user experience and performance of our web and desktop applications....
+        )
+
+    [32] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=be1986b296fcd65d
+            [title] => Software Engineer
+            [company] => Intelligrated, Inc.
+            [location] => Emeryville, CA
+            [description] => 
+The <b>Software</b> Engineer creates <b>software</b> solutions by analyzing, designing, devleoping, implementing and maintaining Java based components and interfaces in a...
+        )
+
+    [33] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=fdf7593860f36a72
+            [title] => Software Engineer
+            [company] => Patreon
+            [location] => San Francisco, CA
+            [description] => 
+Who you are: * You are the puzzlemaster! Ok, maybe not the puzzlemaster, but you understand complex problems and how to tackle them. You communicate well
+        )
+
+    [34] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=cce8a588b1c7d75b
+            [title] => Software Engineer, Data
+            [company] => Samba TV
+            [location] => San Francisco, CA
+            [description] => 
+Build robust, high-volume production <b>software</b>. Experience building high-performance, large-scale server applications and reliable <b>software</b>....
+        )
+
+    [35] => Array
+        (
+            [link] => http://indeed.com/cmp/Gigster/jobs/Software-Engineer-ebfa656c77109a34?r=1
+            [title] => Software Engineer (Mobile/Web)
+            [company] => Gigster
+            [location] => San Francisco, CA
+            [description] => 
+We do this through intelligent <b>software</b> and a curated freelance network of <b>software</b> engineers, product managers and designers....
+        )
+
+    [36] => Array
+        (
+            [link] => http://indeed.com/cmp/Vertisystem/jobs/Senior-Android-Software-Engineer-010bf5500d1c41dd?r=1
+            [title] => Senior Android Software Engineer
+            [company] => Vertisystem
+            [location] => San Francisco, CA
+            [description] => 
+Android <b>Software</b> Engineer*. 8 - 10 years of <b>software</b> development experience. In-depth knowledge of Java. One of our direct clients is looking for “ *Android...
+        )
+
+    [37] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=87067b6392dc4279
+            [title] => Java Software Engineer
+            [company] => drawbridge
+            [location] => San Mateo, CA
+            [description] => 
+Write APIs for Campaign Management and Reporting in Java. Follow REST standards for building new APIs using open source frameworks like Spring and Hibernate....
+        )
+
+    [38] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=478e8ebad374ecce
+            [title] => Software Engineer, Developer Infrastructure
+            [company] => Airbnb
+            [location] => San Francisco, CA
+            [description] => 
+Why is <b>Developer</b> Infrastructure important at Airbnb? A Vagrant-based <b>developer</b> environment deployed for all engineers at Airbnb....
+        )
+
+    [39] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=d18a5f85bd725b64
+            [title] => Java Jedi
+            [company] => Avenue Code
+            [location] => San Francisco, CA 94104 
+            [description] => 
+The ideal candidate will have strong hands-on core Java and Java Web programming skills, excellent problem solving and design skills and ability to lead a small...
+        )
+
+    [40] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=7019ebbc67c872c8
+            [title] => Full-Stack Developer
+            [company] => Entelo
+            [location] => San Francisco, CA
+            [description] => 
+Entelo is looking for strong generalist <b>developers</b>, capable of working on diverse aspects of our web application....
+        )
+
+    [41] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=21a9e677432291fc
+            [title] => Software Engineer - Front End
+            [company] => StyleSeat
+            [location] => San Francisco, CA 94107 
+            [description] => 
+<b>Software</b> Engineer - Front End. StyleSeat is the leading marketplace &amp; platform for service providers in the $78 billion beauty and wellness industry....
+        )
+
+    [42] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=e05dc7334a97993b
+            [title] => Java Developer - Sustaining Engineering
+            [company] => Certain, Inc.
+            [location] => San Francisco, CA
+            [description] => 
+5+ years of experience as a <b>Software</b> <b>Developer</b> for large scale Consumer or B2B SaaS products. Provide solutions for support reported <b>Software</b> defects and...
+        )
+
+    [43] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=6192a5bb986a896c
+            [title] => Software Engineer - Location Search
+            [company] => Uber
+            [location] => San Francisco, CA
+            [description] => 
+Strong programming and algorithmic skills (we mainly use Java &amp; Python). You should have opinions on constructing <b>software</b> systems and good knowledge of the...
+        )
+
+    [44] => Array
+        (
+            [link] => http://indeed.com/cmp/Capilton-Inc/jobs/Java-Developer-e8bdfa89ce91b47a?r=1
+            [title] => Java Developer
+            [company] => Capilton Inc
+            [location] => San Francisco, CA
+            [description] => 
+Strong experience with Java, J2EE web application design, development of servlets, Java Server Pages, JSTL and good understanding of MVC framework and...
+        )
+
+    [45] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=c6e3093464f210ae
+            [title] => Embedded Software Developer
+            [company] => GenapSys, Inc.
+            [location] => Redwood City, CA
+            [description] => 
+The Embedded <b>Software</b> <b>Developer</b> will report to the <b>Software</b> Engineering Lead, and perform duties as an individual contributor, as well as a team member, with...
+        )
+
+    [46] => Array
+        (
+            [link] => http://indeed.com/cmp/Diva-Networks,-Inc./jobs/Software-Engineer-0ccd96e5b9891461?r=1
+            [title] => Software Engineer - Elixir/Erlang
+            [company] => Diva Networks, Inc.
+            [location] => San Francisco, CA
+            [description] => 
+We are building a team of <b>software</b> engineers who can solve challenging design and optimization problems while simultaneously innovating, ideating and creating....
+        )
+
+    [47] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=944ee53cb42dc4c7
+            [title] => Software Engineer - Data and Analytics
+            [company] => FiveStars
+            [location] => San Francisco, CA
+            [description] => 
+FiveStars is the fastest growing company in customer loyalty and marketing automation for local businesses. Launched out of Y-Combinator three years ago to
+        )
+
+    [48] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=0121f424eba98aa7
+            [title] => Software Developer
+            [company] => Transmosis
+            [location] => Burlingame, CA
+            [description] => 
+Our <b>Software</b> <b>Developers</b> are working on development of all of our current industry leading products and services....
+        )
+
+    [49] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=878f9c3883955ac1
+            [title] => Software Engineer
+            [company] => The Weather Channel
+            [location] => San Francisco, CA
+            [description] => 
+Meteorologist, <b>Developer</b>, Cloud, <b>Software</b> Engineer, Computer Science, Science, Technology, Engineering....
+        )
+
+    [50] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=61983503033e7e6b
+            [title] => Software Engineer
+            [company] => Silicon Valley Bank
+            [location] => San Francisco, CA 94105 
+            [description] => 
+Do you want to be a part of a new Agile team being assembled to build a brand-new web, mobile and api digital banking platform from the ground up, using the...
+        )
+
+    [51] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=f3649ab6b3cc5010
+            [title] => Software Engineer CCE, Storage
+            [company] => Cloudera
+            [location] => San Francisco, CA
+            [description] => 
+<b>Software</b> development experience with a highly-scalable, distributed, large multi-node environment. 2+ years years relevant Java/C++ system <b>software</b> industry...
+        )
+
+    [52] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=11695aef61f1b78a
+            [title] => Software Engineer - Web Team
+            [company] => Zoosk
+            [location] => San Francisco, CA
+            [description] => 
+<b>Software</b> Engineer - Web Team. Zoosk is looking for <b>Software</b> Engineers who are passionate about developing scalable, consumer-facing web applications....
+        )
+
+    [53] => Array
+        (
+            [link] => http://indeed.com/cmp/Silver-Oak-Technologies/jobs/Software-Developer-d1e8d51d742cc8e0?r=1
+            [title] => Software Developer
+            [company] => Silver Oak Technologies, LLC.
+            [location] => San Francisco Bay Area, CA
+            [description] => 
+We are looking for a Java UI <b>developer</b> with Java Background (Struts , JSF or similar) and javascript experience....
+        )
+
+    [54] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=4fb4996377faef32
+            [title] => Intern/Co-op 2D Concept Artist, Fall 2015
+            [company] => Zynga
+            [location] => San Francisco, CA
+            [description] => 
+Outstanding skills in Photoshop, Painter or comparable 2D <b>software</b> packages. Zynga is a leading <b>developer</b> of the world's most popular social games....
+        )
+
+    [55] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=21ce7f1db7801606
+            [title] => Software Engineer, Web Applications
+            [company] => Zephyr Health
+            [location] => San Francisco, CA 94104 
+            [description] => 
+About Us: Zephyr Health has created the only Data Intelligence solution built specifically for pharmaceutical, biotech and medical device companies. We
+        )
+
+    [56] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=4d6370e9f27a551f
+            [title] => Software Engineer
+            [company] => HID Global
+            [location] => San Francisco Bay Area, CA
+            [description] => 
+The individual should have strong background of <b>software</b> application architecture and design. Position is for a seasoned <b>software</b> engineer responsible for...
+        )
+
+    [57] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=1edce76ed39f83b8
+            [title] => Software Engineer
+            [company] => Moody's Corporation
+            [location] => San Francisco, CA
+            [description] => 
+C++, JAVA, C#. Preferred 1-2 years of experience in building <b>software</b> processes/applications. This position is primarily for an application development &amp;...
+        )
+
+    [58] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=047ee79081cd2dac
+            [title] => Software Engineer - New Grads
+            [company] => flickr
+            [location] => San Francisco, CA
+            [description] => 
+Strong <b>Software</b> Engineering experience. E.g. PHP, Python, Java, C++. Flickr is looking to hire wicked smart and hard-working <b>software</b> engineers – new college...
+        )
+
+    [59] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=9deb8ffc81e51f2f
+            [title] => Software Engineer
+            [company] => Lending Club
+            [location] => San Francisco, CA
+            [description] => 
+<b>Software</b> Engineer, Req#1296/A110. Improve and maintain existing software; Minimum 2 years of experience with Java and J2EE/JEE....
+        )
+
+    [60] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=ab34b51d271ff9fc
+            [title] => Software Engineer, Discovery
+            [company] => Pinterest
+            [location] => San Francisco, CA
+            [description] => 
+Pinterest's mission is to connect Pinners across the world with inspiring content that unlocks their inner creativity. In order to achieve our mission, we can
+        )
+
+    [61] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=b929cedab5cff83e
+            [title] => Software Developer
+            [company] => LePort Schools
+            [location] => San Francisco, CA
+            [description] => 
+Our <b>software</b> is being built to power LePort Schools' carefully-sequenced, individualized approach to education....
+        )
+
+    [62] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=05d98269a315f2fd
+            [title] => Software Engineer
+            [company] => Indiegogo
+            [location] => San Francisco, CA
+            [description] => 
+About the <b>Software</b> Engineer role. Production expertise with Ruby on Rails [preferred], Python, PHP, Java, JavaScript, or your favorite modern stack....
+        )
+
+    [63] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=18f6ff9d9bd75bd3
+            [title] => UI / UX Software Engineer
+            [company] => Propeller Health
+            [location] => San Francisco, CA
+            [description] => 
+Minimum of 5 years building and shipping <b>software</b> in multiple contexts. High intellect and ability to solve challenging <b>software</b> problems in new domains with...
+        )
+
+    [64] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=9ba37806985b2a49
+            [title] => Software Engineer
+            [company] => OPSWAT
+            [location] => San Francisco, CA
+            [description] => 
+Join an existing agile team as a <b>software</b> <b>developer</b>. Some exposure to other languages such as Java, C#, Perl, Javascript....
+        )
+
+    [65] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=ff5c6fd72fc48d07
+            [title] => Software Engineer, Recent grad
+            [company] => Cisco Meraki
+            [location] => San Francisco, CA
+            [description] => 
+We are looking to hire recent university graduates as full-time <b>software</b> <b>developers</b> for teams working on distributed back-end systems, device drivers, mobile...
+        )
+
+    [66] => Array
+        (
+            [link] => http://indeed.com/cmp/Talentburst-Inc.,/jobs/Software-Engineer-4edf1269ba645a29?r=1
+            [title] => Software Engineer
+            [company] => Talentburst Inc.,
+            [location] => Foster City, CA
+            [description] => 
+Strong development in Java, Spring, Web Services (SOAP or REST) and some Jenkins or other CI Tools experience. Foster City, CA*....
+        )
+
+    [67] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=703b68603667446a
+            [title] => Software Engineer, Docker Engine
+            [company] => Docker
+            [location] => San Francisco, CA
+            [description] => 
+Rapid understanding of any existing <b>software</b> architecture, and an ability to propose, design, and implement new ones....
+        )
+
+    [68] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=d1476d604dd96d30
+            [title] => SOFTWARE ENGINEER
+            [company] => Academia
+            [location] => San Francisco, CA
+            [description] => 
+Academia.edu is disrupting the $10B 100-year old scientific publishing industry, accelerating the speed by which papers are peer reviewed and published. The
+        )
+
+    [69] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=f95f450a4331cf36
+            [title] => Software Engineer, Minecraft
+            [company] => Kickback
+            [location] => San Francisco, CA
+            [description] => 
+Come work with us on our Minecraft integration for Kickback and change gaming forever. Work on projects that revolve around building modular game modes, admin
+        )
+
+    [70] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=6a021397c31c0885
+            [title] => Software Engineer - New Grad
+            [company] => Yelp
+            [location] => San Francisco, CA
+            [description] => 
+Expertise in Python, Java, or C++. We have a scrappy team of <b>software</b> engineers here at Yelp and we need more!...
+        )
+
+    [71] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=9666779b843dfd23
+            [title] => Software Engineer
+            [company] => Expedia Local Expert
+            [location] => San Francisco, CA
+            [description] => 
+<b>Software</b> Engineer - Scala/Java. Mentor junior <b>software</b> engineers and manage contractors. Scala, Java, C++/C#, JavaScript....
+        )
+
+    [72] => Array
+        (
+            [link] => http://indeed.com/cmp/SYNTEL/jobs/Software-Engineer-Entry-Level-91ead401120e6619?r=1
+            [title] => Software Engineer – Entry Level - Java
+            [company] => SYNTEL
+            [location] => San Francisco, CA
+            [description] => 
+<b>Software</b> Engineer – Entry Level - Java*. We are hiring *Entry level - <b>Software</b> Engineer - Java*. Deliver <b>software</b> development improvements....
+        )
+
+    [73] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=8d39d9508e3e458c
+            [title] => Software Developer 3
+            [company] => Oracle
+            [location] => Redwood Shores, CA
+            [description] => 
+Provide technical leadership to other <b>software</b> <b>developers</b>. As a member of the <b>software</b> engineering division, you will assist in defining and developing <b>software</b>...
+        )
+
+    [74] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=8d4fd8f2503fdde9
+            [title] => Java Backend Developer
+            [company] => Cognizant
+            [location] => San Francisco, CA
+            [description] => 
+Java Backend <b>Developer</b>. Candidate should be hands on in java, able to contribute individually and. Cognizant is seeking an experienced....
+        )
+
+    [75] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=add596d9c45d47ec
+            [title] => SOFTWARE ENGINEER
+            [company] => Smule
+            [location] => San Francisco, CA
+            [description] => 
+Smule is looking for an audio engineer! First and foremost, you will be making the members of our community sound as stellar as possible whether they are
+        )
+
+    [76] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=359353e8a33e1003
+            [title] => Software Engineer
+            [company] => Neohire Inc.
+            [location] => San Francisco, CA
+            [description] => 
+You’re a self-starter, ready to hit the ground running - but comfortable iterating and ideating in a group setting. Clear communication is key, as you will be
+        )
+
+    [77] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=f1946584d47f87c5
+            [title] => Software Engineer, Switching &amp; Appliance Firmware
+            [company] => Cisco Meraki
+            [location] => San Francisco, CA
+            [description] => 
+The firmware team develops the <b>software</b> that runs on our networking gear. We focus on simplicity over bell and whistles, and leverage data from thousands of...
+        )
+
+    [78] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=2310e8ac6830ee35
+            [title] => Software Engineer, Wireless Firmware
+            [company] => Cisco Meraki
+            [location] => San Francisco, CA
+            [description] => 
+The firmware team develops the <b>software</b> that runs on our networking gear. We focus on simplicity over bell and whistles, and leverage data from thousands of...
+        )
+
+    [79] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=7d8bd2ce6e8bc55b
+            [title] => Software Developer, Web Applications
+            [company] => Ancestry
+            [location] => San Francisco, CA
+            [description] => 
+As a <b>software</b> <b>developer</b> at Ancestry, you will help build our web site where millions of members discover, share and preserve their family history....
+        )
+
+    [80] => Array
+        (
+            [link] => http://indeed.com/cmp/Bulwan/jobs/Front-End-Developer-f2f513e19e096488?r=1
+            [title] => Front End Developer
+            [company] => Bulwan
+            [location] => San Francisco, CA
+            [description] => 
+++ Experience using versioning <b>software</b> such as Github. We are currently looking for a front end <b>developer</b> for an exciting opportunity to build the web app from...
+        )
+
+    [81] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=d098b3da2f8a8acf
+            [title] => Software Developer 2 (Synthetic Biology Informatics) (multiple openings)
+            [company] => Lawrence Berkeley National Laboratory
+            [location] => Berkeley, CA
+            [description] => 
+This full-stack <b>developer</b> will work with scientists and <b>software</b> <b>developers</b> to create and support web-based graphical user interfaces, biological design...
+        )
+
+    [82] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=f50265338db1452a
+            [title] => Software Engineer, Data Warehousing
+            [company] => Clearslide Inc.
+            [location] => San Francisco, CA
+            [description] => 
+The <b>Software</b> Engineer, Data Warehousing will build the data infrastructure to support ClearSlide’s explosive growth....
+        )
+
+    [83] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=0c6040673410ac9a
+            [title] => ShopStyle Software Engineer - Catalog
+            [company] => POPSUGAR
+            [location] => San Francisco, CA 94104 
+            [description] => 
+Minimum 2 years core Java programming experience. ShopStyle, the leading product search engine, is looking for an ambitious <b>Software</b> Engineer to help build out...
+        )
+
+    [84] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=d4618a8ffc0f6bc4
+            [title] => Software Engineer - Back End
+            [company] => StyleSeat
+            [location] => San Francisco, CA 94107 
+            [description] => 
+<b>Software</b> Engineer - Back End. 3+ years of development with Python, Django or Java. StyleSeat is the leading marketplace &amp; platform for service providers in the ...
+        )
+
+    [85] => Array
+        (
+            [link] => http://indeed.com/cmp/Terrace-Software,-Inc./jobs/Software-Developer-1a955ecb10d1bdec?r=1
+            [title] => Software Developer / Trainee – UI/UX Focus
+            [company] => Terrace <b>Software</b>, Inc.
+            [location] => San Francisco, CA 94105 
+            [description] => 
+Terrace <b>Software</b>, Inc. <b>Software</b> development activities including:. We have listed a number of the activities you can expect as a <b>Software</b> <b>Developer</b>....
+        )
+
+    [86] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=8764142de80082e6
+            [title] => Lead Software Developer
+            [company] => ThoughtWorks
+            [location] => San Francisco, CA
+            [description] => 
+As a Lead <b>Software</b> <b>Developer</b> at ThoughtWorks, here's ​what you can do​:. Development and delivery experience​with some combination of Java, .NET, Ruby,...
+        )
+
+    [87] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=3f9895f3494deedc
+            [title] => Software Developer
+            [company] => IBM
+            [location] => Emeryville, CA
+            [description] => 
+IBM seeks to hire a <b>Software</b> <b>Developer</b> to join the BigFix Development Team. This position offers the opportunity to work in a close-knit team of <b>developers</b> with...
+        )
+
+    [88] => Array
+        (
+            [link] => http://indeed.com/cmp/Kevala,-Inc./jobs/Front-End-Developer-524d8008f798daa3?r=1
+            [title] => Front End Developer
+            [company] => Kevala, Inc.
+            [location] => San Francisco, CA
+            [description] => 
+Familiarity with Asana, and other collaboration and project management <b>software</b>. Experience designing mobile apps, <b>developer</b> apps, mapping/geospatial apps....
+        )
+
+    [89] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=f414e4c64a3420c8
+            [title] => Full Stack Software Engineer
+            [company] => Docker
+            [location] => San Francisco, CA
+            [description] => 
+Expert level programming skill in one of the modern languages - Java, Python, Go. Docker is an open platform for <b>developers</b> and system administrators to build,...
+        )
+
+    [90] => Array
+        (
+            [link] => http://indeed.com/cmp/HealthExpense/jobs/Software-Quality-Assurance-Engineer-ecda3b33d7ac399f?r=1
+            [title] => Software Quality Assurance Engineer
+            [company] => HealthExpense
+            [location] => San Mateo County, CA
+            [description] => 
+Strong background in <b>software</b> development lifecycle; We need a <b>Software</b> Quality Assurance Engineer to work collaboratively with <b>software</b> engineering and...
+        )
+
+    [91] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=d0a7824c71d793aa
+            [title] => Front End Engineer
+            [company] => Prosper
+            [location] => San Francisco, CA
+            [description] => 
+Collaborates with other <b>developers</b> and designers to build medium to large scale projects. This candidate is an accomplished well-rounded front end <b>developer</b>,...
+        )
+
+    [92] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=77b98214474b3ad0
+            [title] => Software Engineer III
+            [company] => Walmart eCommerce
+            [location] => San Bruno, CA
+            [description] => 
+<b>Software</b> Engineer III. Demonstrates up-to-date expertise in <b>Software</b> Engineering and applies this to the development, execution, and improvement of action plans...
+        )
+
+    [93] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=c5d11fc3a8d2a702
+            [title] => Software Engineer
+            [company] => Coinbase
+            [location] => San Francisco, CA
+            [description] => 
+In case you are wondering what technologies we use at Coinbase, we’re built using a combination of Ruby, Node.js, PostgreSQL, MongoDB, Redis, Objective-C (for...
+        )
+
+    [94] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=92d78656636c8806
+            [title] => Junior Software Engineer
+            [company] => OPSWAT
+            [location] => San Francisco, CA
+            [description] => 
+Prior experience with a security <b>software</b> vendor. Knowledge of technologies such as git, Jira, Teamcity, Ruby, Php, Java, Visual Studio, Xcode, clang/llvm, bash...
+        )
+
+    [95] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=539eb019ff63d498
+            [title] => Software Engineer III
+            [company] => Walmart
+            [location] => San Bruno, CA
+            [description] => 
+<b>Software</b> Engineer III. Demonstrates up-to-date expertise in <b>Software</b> Engineering and applies this to the development, execution, and improvement of action plans...
+        )
+
+    [96] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=8f586482ed831dc9
+            [title] => Software Design Engineer in Test
+            [company] => B Squared
+            [location] => San Mateo, CA
+            [description] => 
+The ideal <b>Software</b> Design Engineer in Test will have strong coding skills, experience writing testing <b>software</b>, a foundation in SQL, strong mathematics skills,...
+        )
+
+    [97] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=c1ebfed8ae4da827
+            [title] => Security Engineer - Penetration Testing, Web/Mobile Security
+            [company] => Credit Karma
+            [location] => San Francisco, CA
+            [description] => 
+Knowledge of Secure <b>Software</b> Development Life Cycle (S-SDLC). Experience with Objective-C (iOS), Java (Android), PHP, Ruby, C, ARM assembly and x86 assembly....
+        )
+
+    [98] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=45f363c6c04c35e6
+            [title] => Software Engineer - Back-End
+            [company] => Yelp
+            [location] => San Francisco, CA
+            [description] => 
+Active contributor to open source <b>software</b>. Python, Ruby, Java, Objective-C, C++, etc. It ain't easy running a site with 117M+ users and 47.3M+ reviews, but we...
+        )
+
+    [99] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=eabece42f1ec2622
+            [title] => Software Engineer
+            [company] => Nomis Solutions
+            [location] => San Bruno, CA
+            [description] => 
+Design and implement cutting-edge <b>software</b> and modify existing <b>software</b> to add features, build web services, with focus on scalability, modularity and user...
+        )
+
+    [100] => Array
+        (
+            [link] => http://indeed.com/rc/clk?jk=6e6c09ee674608b7
+            [title] => Software Engineer - HR Technology
+            [company] => Yelp
+            [location] => San Francisco, CA
+            [description] => 
+Python, Java, .Net, C++, etc. Yelp is looking for a <b>software</b> engineer superstar to join the HR Tech team in our San Francisco office....
+        )
+
+)
+**** Sun Jul 26, 2015 10:08:38 CONCLUSION: scraper works on cli
+php > root@gspu:/n900t/usr/local/apache/htdocs/gregsList# 
+
+*** gregsList-2015-07-26-egil.org
+**** Sun Jul 26, 2015 10:05:13 start
+root@gspu:/var/www/html/gregsList# ls /egil/
+root@gspu:/var/www/html/gregsList# sshfs -o reconnect  -C -o workaround=all 104.236.46.167:/ /egil/
+root@104.236.46.167's password: 
+root@gspu:/var/www/html/gregsList# ls /egil/
+bin   dev   initrd.img      lib64       mnt   root  srv  usr      vmlinuz.old
+boot  etc   initrd.img.old  lost+found  opt   run   sys  var
+cf    home  lib             media       proc  sbin  tmp  vmlinuz
+root@gspu:/var/www/html/gregsList# cd /egil/var/www/html/gregsList/
+root@gspu:/egil/var/www/html/gregsList# ls
+accountant.php   existentialist.php                  postings.js
+blog.js          foreign                             README.md
+butler.php       goals.js                            schedules.js
+classes.js       gregsList.db.2015-07-13.backup.sql  schema.sql
+companies.js     index.css                           schemaUpdate.20150630.sql
+concierge.php    index.html                          schemaUpdate.20150708.sql
+config.ini~      index.js                            schemaUpdate.20150721.sql
+contacts.js      industries.js                       scraper.php
+credentials.ini  locations.js                        updateLog.org
+engineer.php     objects.js                          utilities.js
+root@gspu:/egil/var/www/html/gregsList# git pull
+remote: Counting objects: 3, done.        
+remote: Compressing objects: 100% (1/1), done.        
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0        
+Unpacking objects: 100% (3/3), done.
+From https://github.com/mitchgre/gregsList
+   4127c84..aecaf63  master     -> origin/master
+Updating 4127c84..aecaf63
+Fast-forward
+ updateLog.org | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+**** Sun Jul 26, 2015 10:09:53 test scrapePostings 
+root@gspu:/egil/var/www/html/gregsList# php -a
+Interactive mode enabled
+
+php > require('scraper.php');
+php > print_r( scrapePostings("http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=100&start=0") );
+Array
+(
+    [0] => Array
+        (
+            [link] => http://indeed.com
+            [title] => 
+            [company] => 
+            [location] => 
+            [description] => 
+        )
+
+)
+**** Sun Jul 26, 2015 10:10:57 CONCLUSION: scraper does NOT work on cli.  WHy?
+php > 
+*** gregsList-2015-07-26-gs2.org
+**** Sun Jul 26, 2015 10:05:02 start
+root@gspu:/var/www/html/gregsList# gitk&
+[1] 25893
+root@gspu:/var/www/html/gregsList# git add -u 
+[1]+  Done                    gitk
+root@gspu:/var/www/html/gregsList# git commit -m "trying to sync up updateLogs.  This is why I didn't want to add them to the repo."
+[master aecaf63] trying to sync up updateLogs.  This is why I didn't want to add them to the repo.
+ 1 file changed, 9 insertions(+)
+root@gspu:/var/www/html/gregsList# git push
+warning: push.default is unset; its implicit value is changing in
+Git 2.0 from 'matching' to 'simple'. To squelch this message
+and maintain the current behavior after the default changes, use:
+
+  git config --global push.default matching
+
+To squelch this message and adopt the new behavior now, use:
+
+  git config --global push.default simple
+
+When push.default is set to 'matching', git will push local branches
+to the remote branches that already exist with the same name.
+
+In Git 2.0, Git will default to the more conservative 'simple'
+behavior, which only pushes the current branch to the corresponding
+remote branch that 'git pull' uses to update the current branch.
+
+See 'git help config' and search for 'push.default' for further information.
+(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
+'current' instead of 'simple' if you sometimes use older versions of Git)
+
+Username for 'https://github.com': radiochickenwax
+Password for 'https://radiochickenwax@github.com': 
+Counting objects: 7, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.<
+Writing objects: 100% (3/3), 515 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (To https://github.com/mitchgre/gregsList
+   4127c84..aecaf63  master -> master
+**** Sun Jul 26, 2015 10:11:57 test scrapePostings (I'm sure this works on gs2)   
+root@gspu:/var/www/html/gregsList# php -a
+Interactive mode enabled
+
+php > require('scraper.php');
+php > print_r( scrapePostings("http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=100&start=0") );
+Array
+(
+    [0] => Array
+        (
+            [link] => http://indeed.com
+            [title] => 
+            [company] => 
+            [location] => 
+            [description] => 
+        )
+
+)
+**** Sun Jul 26, 2015 10:12:54 CONCLUSION:  scraper does NOT work on cli!  (I thought it would!)
+php > 
