@@ -111,7 +111,7 @@ function scrapePostings($url)
 
     $page = curl( $url );   // get all html
 
-    return $page;
+    // return $page;
     
     // loop over $scraping pulling all titles, links, locations somehow.
     // breaking this down:
