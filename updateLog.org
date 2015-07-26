@@ -3768,7 +3768,49 @@ postings.js (line 49)
       best due to the excellent battery life on armhf as opposed to
       x86.   
 
-      
+      11:18:37
+      The obvious thing to try is the permissions on n900t.  
+
+      Since I built this apache from source, things are different
+      from the ubuntu defaults where there's a www-data group and
+      user - i.e. apache runs as the www-data user.  Who is the
+      apache user when apache is built from source?
+
+      http://serverfault.com/questions/125865/finding-out-what-user-apache-is-running-as
+      http://ubuntuforums.org/showthread.php?t=1293508
+
+
+      ps aux | egrep '(apache|httpd)
+
+
+		N900t:
+ps aux | egrep '(apache|httpd)'
+root     10175  0.0  0.2  21304  7272 ?        Ss   Jul09   3:00 /usr/local/apache/bin/httpd -k start
+root     17898  0.0  0.0   3316   652 pts/9    S+   11:22   0:00 egrep (apache|httpd)
+daemon   18413  0.1  0.4 254112 11980 ?        Sl   Jul25   1:03 /usr/local/apache/bin/httpd -k start
+daemon   18414  0.1  0.4 256868 12804 ?        Sl   Jul25   1:03 /usr/local/apache/bin/httpd -k start
+daemon   18416  0.1  0.7 264960 20304 ?        Sl   Jul25   1:04 /usr/local/apache/bin/httpd -k start
+daemon   18524  0.1  0.9 270684 26128 ?        Sl   Jul25   1:03 /usr/local/apache/bin/httpd -k start
+
+		GS2
+root     17687     1  0 Jul25 ?        00:00:01 /usr/sbin/apache2 -k start
+www-data 23481 17687  0 Jul25 ?        00:00:00 /usr/sbin/apache2 -k start
+www-data 23482 17687  0 Jul25 ?        00:00:00 /usr/sbin/apache2 -k start
+www-data 23948 17687  0 Jul25 ?        00:00:00 /usr/sbin/apache2 -k start
+www-data 23984 17687  0 Jul25 ?        00:00:00 /usr/sbin/apache2 -k start
+www-data 23985 17687  0 Jul25 ?        00:00:00 /usr/sbin/apache2 -k start
+www-data 23986 17687  0 Jul25 ?        00:00:00 /usr/sbin/apache2 -k start
+www-data 23990 17687  0 Jul25 ?        00:00:00 /usr/sbin/apache2 -k start
+www-data 24044 17687  0 Jul25 ?        00:00:00 /usr/sbin/apache2 -k start
+www-data 24150 17687  0 Jul25 ?        00:00:00 /usr/sbin/apache2 -k start
+www-data 27611 17687  0 11:05 ?        00:00:00 /usr/sbin/apache2 -k start
+
+
+	So it looks like the default user is 'daemon' when apache is
+	built from source.
+
+	
+
 
 
 *** test2 curl() function
