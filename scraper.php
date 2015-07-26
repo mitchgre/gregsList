@@ -117,7 +117,7 @@ function scrapePostings($url)
     // breaking this down:
 
     // filter page down to the relevant table
-    $page = get_second_table($page);
+    // $page = get_second_table($page);
 
     // explode on anchors
     /*
