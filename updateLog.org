@@ -3814,8 +3814,22 @@ www-data 27611 17687  0 11:05 ?        00:00:00 /usr/sbin/apache2 -k start
 
 
 ****** 11:57:46 curiouser and curiouser
-       Just tried the ajax again, and it doesn't work on any of the
-       three platforms.  
+
+******* sub thought
+       	Just tried the ajax again, and it doesn't work on any of the
+       	three platforms.  
+
+******* 12:08:31 tried again, and AJAX works intermittently on egil and gs2
+******* 12:09:11 corollary
+	Note that while I was running the first CLI tests above, I
+	was doing so using gs2's php-cli not the native ones one each
+	platform. 
+
+	So that's a big step.  Getting it to work natively on each
+	platform. 
+	
+
+
 
 *** test2 curl() function
 ***** gregsList-2015-07-26-n900t.org 
