@@ -2035,6 +2035,17 @@ rel="nofollow"
 ** Sun Jul 26, 2015 10:15:47 trying to figure out cross-platform inconsistencies in php-curl 
 *** test1 scrapePostings function
 **** notes
+
+
+     For some reason, the function works in cli on n900t - armhf, compiled
+     from source, but it doesn't work on egil or gs2 - ubuntu 14.04.  
+
+     Prior tests showed stranger results.
+
+     The function worked on gs2 from ajax, but not n900t or egil.  
+
+     I've updated the code since then, so I'll have to test again.
+
 **** source to test
 <?php
 
@@ -2213,7 +2224,7 @@ data-tn-element="jobTitle"><b>Software</b> Engineer - New Grad - 2016</a>
 
 ?>
 
-**** results
+**** Sun Jul 26, 2015 11:00:25 cli results
 ***** gregsList-2015-07-26-n900t.org 
 ****** Sun Jul 26, 2015 10:04:50 start
 
@@ -3387,6 +3398,359 @@ Array
 )
 ****** Sun Jul 26, 2015 10:12:54 CONCLUSION:  scraper does NOT work on cli!  (I thought it would!)
 php > 
+**** Sun Jul 26, 2015 11:00:30 ajax results
+***** Sun Jul 26, 2015 11:04:54 data
+****** Sun Jul 26, 2015 11:02:28 n900t firebug console dump
+
+
+http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=100&start=0
+postings.js (line 77)
+POST http://192.168.42.129/gregsList/butler.php
+	
+200 OK
+		50ms	
+jquery-....min.js (line 4)
+got a response from scraper
+postings.js (line 48)
+[Object { link="http://indeed.com",  title=false,  company=false,  more...}]
+postings.js (line 49)
+
+(expanding object)
+			
+company
+	
+	false
+description
+	
+	false
+link
+	
+	"http://indeed.com"
+location
+	
+	false
+title
+	
+	false
+****** Sun Jul 26, 2015 11:04:20 egil firebug console dump
+
+attempting login
+objects.js (line 199)
+username: mitchell
+objects.js (line 200)
+password: 1234
+objects.js (line 201)
+POST http://radiochickenwax.org/gregsList/butler.php
+	
+200 OK
+		140ms	
+jquery-....min.js (line 4)
+(an empty string)
+objects.js (line 248)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="goal",  more...}
+objects.js (line 704)
+POST http://radiochickenwax.org/gregsList/butler.php
+	
+200 OK
+		98ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="industry",  more...}
+objects.js (line 704)
+POST http://radiochickenwax.org/gregsList/butler.php
+	
+200 OK
+		96ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="company",  more...}
+objects.js (line 704)
+POST http://radiochickenwax.org/gregsList/butler.php
+	
+200 OK
+		98ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="location",  more...}
+objects.js (line 704)
+POST http://radiochickenwax.org/gregsList/butler.php
+	
+200 OK
+		97ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="posting",  more...}
+objects.js (line 704)
+POST http://radiochickenwax.org/gregsList/butler.php
+	
+200 OK
+		118ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="contact",  more...}
+objects.js (line 704)
+POST http://radiochickenwax.org/gregsList/butler.php
+	
+200 OK
+		101ms	
+jquery-....min.js (line 4)
+from setupSchedule: object=
+objects.js (line 313)
+Object { parent=glo,  contents=[0],  type="schedule",  more...}
+objects.js (line 314)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="schedule",  more...}
+objects.js (line 704)
+POST http://radiochickenwax.org/gregsList/butler.php
+	
+200 OK
+		102ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="blog",  more...}
+objects.js (line 704)
+POST http://radiochickenwax.org/gregsList/butler.php
+	
+200 OK
+		390ms	
+jquery-....min.js (line 4)
+got stuff!
+objects.js (line 728)
+Object { ids=[6],  values=[6]}
+objects.js (line 729)
+got stuff!
+objects.js (line 728)
+Object { ids=[3],  names=[3]}
+objects.js (line 729)
+fill industries
+industries.js (line 150)
+Object { parent=glo,  contents=[0],  type="industry",  more...}
+industries.js (line 151)
+got stuff!
+objects.js (line 728)
+Object { ids=[16],  names=[16]}
+objects.js (line 729)
+got stuff!
+objects.js (line 728)
+Object { ids=[3],  names=[3]}
+objects.js (line 729)
+got stuff!
+objects.js (line 728)
+Object { ids=[3],  fnames=[3],  lnames=[3],  more...}
+objects.js (line 729)
+object
+contacts.js (line 8)
+Object { parent=glo,  contents=[3],  type="contact",  more...}
+contacts.js (line 9)
+got stuff!
+objects.js (line 728)
+Object { ids=[2],  titles=[2],  urls=[2],  more...}
+objects.js (line 729)
+object
+postings.js (line 390)
+Object { parent=glo,  contents=[2],  type="posting",  more...}
+postings.js (line 391)
+got stuff!
+objects.js (line 728)
+Object { ids=[1],  names=[1],  descriptions=[1],  more...}
+objects.js (line 729)
+got stuff!
+objects.js (line 728)
+Object { ids=[2],  titles=[2],  texts=[2]}
+objects.js (line 729)
+scraping postings.
+postings.js (line 102)
+glo { user={...},  goals={...},  industries={...},  more...}
+postings.js (line 103)
+scraping url:
+postings.js (line 76)
+http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=100&start=0
+postings.js (line 77)
+POST http://radiochickenwax.org/gregsList/butler.php
+	
+200 OK
+		640ms	
+jquery-....min.js (line 4)
+got a response from scraper
+postings.js (line 48)
+[Object { link="http://indeed.com/promo/resume",  title=false,  company=false,  more...}, Object { link="http://indeed.com/rc/clk?jk=bc5aacc1283474b2",  title="Software Engineer",  company="Google",  more...}, Object { link="http://indeed.com/rc/clk?jk=1d10e28cd0c2d679",  title="Software Engineer in Test",  company="Google",  more...}, Object { link="http://indeed.com/rc/clk?jk=118ecb4e7785697a",  title="Front End Software Engineer",  company="Google",  more...}, Object { link="http://indeed.com/rc/clk?jk=ffe8ebdbb2f4ed1d",  title="Software Engineer, Web",  company="VEVO",  more...}, Object { link="http://indeed.com/rc/clk?jk=c1b6acf48143ce9b",  title="Software Engineer",  company="Thumbtack",  more...}, Object { link="http://indeed.com/rc/clk?jk=7bfdbbbd17b10b19",  title="Software Developer",  company="EducationSuperHighway",  more...}, Object { link="http://indeed.com/rc/clk?jk=366278a07af152a3",  title="Full-time/New Grad Softw...ng or Recent Grads Only",  company="Transmosis",  more...}, Object { link="http://indeed.com/rc/clk?jk=a4a7f137c5a9707d",  title="Software Engineer Intern",  company="InMobi",  more...}, Object { link="http://indeed.com/rc/clk?jk=154bc1438e79170e",  title="Entry Level Software Quality Analyst",  company="AMG TECHNOLOGY",  more...}, Object { link="http://indeed.com/rc/clk?jk=bdbd800bfafb9ca8",  title="Software Engineer, Ads",  company="Samba TV",  more...}, Object { link="http://indeed.com/rc/clk?jk=a1aeb840dda9e074",  title="Software Engineer",  company="Pinterest",  more...}, Object { link="http://indeed.com/rc/clk?jk=ba4faeac65f1d90f",  title="Software Engineer",  company="6sense",  more...}, Object { link="http://indeed.com/rc/clk?jk=456270818c93cd0c",  title="Software Engineer - Supply",  company="Uber",  more...}, Object { link="http://indeed.com/rc/clk?jk=41ac4b943b8a89c7",  title="Senior Windows Developer",  company="OneLogin",  more...}, Object { link="http://indeed.com/cmp/He...er-e2863c3fd4567f80?r=1",  title="Backend Parser Developer",  company="HealthExpense",  more...}, Object { link="http://indeed.com/cmp/Pl...er-0df1f73b79197396?r=1",  title="Application Developer",  company="Pluggedin Technologies",  more...}, Object { link="http://indeed.com/rc/clk?jk=d2e0a70efe13cf91",  title="Java Developer",  company="Cognizant",  more...}, Object { link="http://indeed.com/rc/clk?jk=368a4222f372e345",  title="Software Engineer - Desktop Applications",  company="FiveStars",  more...}, Object { link="http://indeed.com/rc/clk?jk=a2252f6d9bbeaf51",  title="Associate Software Engineer",  company="Salesforce",  more...}, Object { link="http://indeed.com/rc/clk?jk=2dc4973936cbc316",  title="Software Engineer",  company="Yelp",  more...}, Object { link="http://indeed.com/rc/clk?jk=4977a5c4e4586973",  title="Software Engineer (Full Time / Intern)",  company="Tachyon Nexus, Inc.",  more...}, Object { link="http://indeed.com/cmp/He...er-a7a82c159c33a12f?r=1",  title="API Engineer",  company="HealthExpense",  more...}, Object { link="http://indeed.com/rc/clk?jk=c79db25505aab516",  title="Associate Software Engineer",  company="Tapjoy",  more...}, Object { link="http://indeed.com/rc/clk?jk=65782c6c37c09d4d",  title="Software Engineer, Mobile Applications (Android)",  company="Google",  more...}, Object { link="http://indeed.com/rc/clk?jk=7cf61846d54b4301",  title="Software Engineer, Mobile Web",  company="Vungle",  more...}, Object { link="http://indeed.com/rc/clk?jk=5a4dafc46aba16ef",  title="Associate Software Engineer",  company="Model Metrics",  more...}, Object { link="http://indeed.com/rc/clk?jk=e0fd341e693ff8f1",  title="Software Engineer",  company="Cozymeal",  more...}, Object { link="http://indeed.com/rc/clk?jk=e9ed7a314a5d445f",  title="Software Development Engineer",  company="A2Z Development Center, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=079b1b789c0af293",  title="Software Engineer",  company="Adobe",  more...}, Object { link="http://indeed.com/rc/clk?jk=8230e8c9a0c73b42",  title="Software Engineer - Front End",  company="Switch Communications",  more...}, Object { link="http://indeed.com/rc/clk?jk=a7c0e582b8bffda5",  title="Software Engineer",  company="Nitrous",  more...}, Object { link="http://indeed.com/rc/clk?jk=be1986b296fcd65d",  title="Software Engineer",  company="Intelligrated, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=fdf7593860f36a72",  title="Software Engineer",  company="Patreon",  more...}, Object { link="http://indeed.com/rc/clk?jk=cce8a588b1c7d75b",  title="Software Engineer, Data",  company="Samba TV",  more...}, Object { link="http://indeed.com/cmp/Gi...er-ebfa656c77109a34?r=1",  title="Software Engineer (Mobile/Web)",  company="Gigster",  more...}, Object { link="http://indeed.com/cmp/Ve...er-010bf5500d1c41dd?r=1",  title="Senior Android Software Engineer",  company="Vertisystem",  more...}, Object { link="http://indeed.com/rc/clk?jk=87067b6392dc4279",  title="Java Software Engineer",  company="drawbridge",  more...}, Object { link="http://indeed.com/rc/clk?jk=478e8ebad374ecce",  title="Software Engineer, Developer Infrastructure",  company="Airbnb",  more...}, Object { link="http://indeed.com/rc/clk?jk=d18a5f85bd725b64",  title="Java Jedi",  company="Avenue Code",  more...}, Object { link="http://indeed.com/rc/clk?jk=7019ebbc67c872c8",  title="Full-Stack Developer",  company="Entelo",  more...}, Object { link="http://indeed.com/rc/clk?jk=21a9e677432291fc",  title="Software Engineer - Front End",  company="StyleSeat",  more...}, Object { link="http://indeed.com/rc/clk?jk=e05dc7334a97993b",  title="Java Developer - Sustaining Engineering",  company="Certain, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=6192a5bb986a896c",  title="Software Engineer - Location Search",  company="Uber",  more...}, Object { link="http://indeed.com/cmp/Ca...er-e8bdfa89ce91b47a?r=1",  title="Java Developer",  company="Capilton Inc",  more...}, Object { link="http://indeed.com/rc/clk?jk=c6e3093464f210ae",  title="Embedded Software Developer",  company="GenapSys, Inc.",  more...}, Object { link="http://indeed.com/cmp/Di...er-0ccd96e5b9891461?r=1",  title="Software Engineer - Elixir/Erlang",  company="Diva Networks, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=944ee53cb42dc4c7",  title="Software Engineer - Data and Analytics",  company="FiveStars",  more...}, Object { link="http://indeed.com/rc/clk?jk=0121f424eba98aa7",  title="Software Developer",  company="Transmosis",  more...}, Object { link="http://indeed.com/rc/clk?jk=878f9c3883955ac1",  title="Software Engineer",  company="The Weather Channel",  more...}, Object { link="http://indeed.com/rc/clk?jk=61983503033e7e6b",  title="Software Engineer",  company="Silicon Valley Bank",  more...}, Object { link="http://indeed.com/rc/clk?jk=f3649ab6b3cc5010",  title="Software Engineer CCE, Storage",  company="Cloudera",  more...}, Object { link="http://indeed.com/rc/clk?jk=11695aef61f1b78a",  title="Software Engineer - Web Team",  company="Zoosk",  more...}, Object { link="http://indeed.com/cmp/Si...er-d1e8d51d742cc8e0?r=1",  title="Software Developer",  company="Silver Oak Technologies, LLC.",  more...}, Object { link="http://indeed.com/rc/clk?jk=4fb4996377faef32",  title="Intern/Co-op 2D Concept Artist, Fall 2015",  company="Zynga",  more...}, Object { link="http://indeed.com/rc/clk?jk=21ce7f1db7801606",  title="Software Engineer, Web Applications",  company="Zephyr Health",  more...}, Object { link="http://indeed.com/rc/clk?jk=4d6370e9f27a551f",  title="Software Engineer",  company="HID Global",  more...}, Object { link="http://indeed.com/rc/clk?jk=1edce76ed39f83b8",  title="Software Engineer",  company="Moody's Corporation",  more...}, Object { link="http://indeed.com/rc/clk?jk=047ee79081cd2dac",  title="Software Engineer - New Grads",  company="flickr",  more...}, Object { link="http://indeed.com/rc/clk?jk=9deb8ffc81e51f2f",  title="Software Engineer",  company="Lending Club",  more...}, Object { link="http://indeed.com/rc/clk?jk=ab34b51d271ff9fc",  title="Software Engineer, Discovery",  company="Pinterest",  more...}, Object { link="http://indeed.com/rc/clk?jk=b929cedab5cff83e",  title="Software Developer",  company="LePort Schools",  more...}, Object { link="http://indeed.com/rc/clk?jk=05d98269a315f2fd",  title="Software Engineer",  company="Indiegogo",  more...}, Object { link="http://indeed.com/rc/clk?jk=18f6ff9d9bd75bd3",  title="UI / UX Software Engineer",  company="Propeller Health",  more...}, Object { link="http://indeed.com/rc/clk?jk=9ba37806985b2a49",  title="Software Engineer",  company="OPSWAT",  more...}, Object { link="http://indeed.com/rc/clk?jk=ff5c6fd72fc48d07",  title="Software Engineer, Recent grad",  company="Cisco Meraki",  more...}, Object { link="http://indeed.com/cmp/Ta...er-4edf1269ba645a29?r=1",  title="Software Engineer",  company="Talentburst Inc.,",  more...}, Object { link="http://indeed.com/rc/clk?jk=703b68603667446a",  title="Software Engineer, Docker Engine",  company="Docker",  more...}, Object { link="http://indeed.com/rc/clk?jk=d1476d604dd96d30",  title="SOFTWARE ENGINEER",  company="Academia",  more...}, Object { link="http://indeed.com/rc/clk?jk=f95f450a4331cf36",  title="Software Engineer, Minecraft",  company="Kickback",  more...}, Object { link="http://indeed.com/rc/clk?jk=6a021397c31c0885",  title="Software Engineer - New Grad",  company="Yelp",  more...}, Object { link="http://indeed.com/rc/clk?jk=9666779b843dfd23",  title="Software Engineer",  company="Expedia Local Expert",  more...}, Object { link="http://indeed.com/cmp/SY...el-91ead401120e6619?r=1",  title="Software Engineer – Entry Level - Java",  company="SYNTEL",  more...}, Object { link="http://indeed.com/rc/clk?jk=8d39d9508e3e458c",  title="Software Developer 3",  company="Oracle",  more...}, Object { link="http://indeed.com/rc/clk?jk=8d4fd8f2503fdde9",  title="Java Backend Developer",  company="Cognizant",  more...}, Object { link="http://indeed.com/rc/clk?jk=add596d9c45d47ec",  title="SOFTWARE ENGINEER",  company="Smule",  more...}, Object { link="http://indeed.com/rc/clk?jk=359353e8a33e1003",  title="Software Engineer",  company="Neohire Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=f1946584d47f87c5",  title="Software Engineer, Switc...amp; Appliance Firmware",  company="Cisco Meraki",  more...}, Object { link="http://indeed.com/rc/clk?jk=2310e8ac6830ee35",  title="Software Engineer, Wireless Firmware",  company="Cisco Meraki",  more...}, Object { link="http://indeed.com/rc/clk?jk=7d8bd2ce6e8bc55b",  title="Software Developer, Web Applications",  company="Ancestry",  more...}, Object { link="http://indeed.com/cmp/Bu...er-f2f513e19e096488?r=1",  title="Front End Developer",  company="Bulwan",  more...}, Object { link="http://indeed.com/rc/clk?jk=d098b3da2f8a8acf",  title="Software Developer 2 (Sy...cs) (multiple openings)",  company="Lawrence Berkeley National Laboratory",  more...}, Object { link="http://indeed.com/rc/clk?jk=f50265338db1452a",  title="Software Engineer, Data Warehousing",  company="Clearslide Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=0c6040673410ac9a",  title="ShopStyle Software Engineer - Catalog",  company="POPSUGAR",  more...}, Object { link="http://indeed.com/rc/clk?jk=d4618a8ffc0f6bc4",  title="Software Engineer - Back End",  company="StyleSeat",  more...}, Object { link="http://indeed.com/cmp/Te...er-1a955ecb10d1bdec?r=1",  title="Software Developer / Trainee – UI/UX Focus",  company="Terrace <b>Software</b>, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=8764142de80082e6",  title="Lead Software Developer",  company="ThoughtWorks",  more...}, Object { link="http://indeed.com/rc/clk?jk=3f9895f3494deedc",  title="Software Developer",  company="IBM",  more...}, Object { link="http://indeed.com/cmp/Ke...er-524d8008f798daa3?r=1",  title="Front End Developer",  company="Kevala, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=f414e4c64a3420c8",  title="Full Stack Software Engineer",  company="Docker",  more...}, Object { link="http://indeed.com/cmp/He...er-ecda3b33d7ac399f?r=1",  title="Software Quality Assurance Engineer",  company="HealthExpense",  more...}, Object { link="http://indeed.com/rc/clk?jk=d0a7824c71d793aa",  title="Front End Engineer",  company="Prosper",  more...}, Object { link="http://indeed.com/rc/clk?jk=77b98214474b3ad0",  title="Software Engineer III",  company="Walmart eCommerce",  more...}, Object { link="http://indeed.com/rc/clk?jk=c5d11fc3a8d2a702",  title="Software Engineer",  company="Coinbase",  more...}, Object { link="http://indeed.com/rc/clk?jk=92d78656636c8806",  title="Junior Software Engineer",  company="OPSWAT",  more...}, Object { link="http://indeed.com/rc/clk?jk=539eb019ff63d498",  title="Software Engineer III",  company="Walmart",  more...}, Object { link="http://indeed.com/rc/clk?jk=8f586482ed831dc9",  title="Software Design Engineer in Test",  company="B Squared",  more...}, Object { link="http://indeed.com/rc/clk?jk=c1ebfed8ae4da827",  title="Security Engineer - Pene...ng, Web/Mobile Security",  company="Credit Karma",  more...}, Object { link="http://indeed.com/rc/clk?jk=45f363c6c04c35e6",  title="Software Engineer - Back-End",  company="Yelp",  more...}, Object { link="http://indeed.com/rc/clk?jk=eabece42f1ec2622",  title="Software Engineer",  company="Nomis Solutions",  more...}, Object { link="http://indeed.com/rc/clk?jk=6e6c09ee674608b7",  title="Software Engineer - HR Technology",  company="Yelp",  more...}]
+postings.js (line 49)
+
+
+****** Sun Jul 26, 2015 11:05:15 gs2 firebug console dump
+
+attempting login
+objects.js (line 199)
+username: mitchell
+objects.js (line 200)
+password: 1234
+objects.js (line 201)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		4ms	
+jquery-....min.js (line 4)
+(an empty string)
+objects.js (line 248)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="goal",  more...}
+objects.js (line 704)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		2ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="industry",  more...}
+objects.js (line 704)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		2ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="company",  more...}
+objects.js (line 704)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		2ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="location",  more...}
+objects.js (line 704)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		3ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="posting",  more...}
+objects.js (line 704)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		4ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="contact",  more...}
+objects.js (line 704)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		2ms	
+jquery-....min.js (line 4)
+from setupSchedule: object=
+objects.js (line 313)
+Object { parent=glo,  contents=[0],  type="schedule",  more...}
+objects.js (line 314)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="schedule",  more...}
+objects.js (line 704)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		2ms	
+jquery-....min.js (line 4)
+getting for 
+objects.js (line 703)
+Object { parent=glo,  contents=[0],  type="blog",  more...}
+objects.js (line 704)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		2ms	
+jquery-....min.js (line 4)
+got stuff!
+objects.js (line 728)
+Object { ids=[6],  values=[6]}
+objects.js (line 729)
+got stuff!
+objects.js (line 728)
+Object { ids=[3],  names=[3]}
+objects.js (line 729)
+fill industries
+industries.js (line 150)
+Object { parent=glo,  contents=[0],  type="industry",  more...}
+industries.js (line 151)
+got stuff!
+objects.js (line 728)
+Object { ids=[16],  names=[16]}
+objects.js (line 729)
+got stuff!
+objects.js (line 728)
+Object { ids=[3],  names=[3]}
+objects.js (line 729)
+got stuff!
+objects.js (line 728)
+Object { ids=[2],  titles=[2],  urls=[2],  more...}
+objects.js (line 729)
+object
+postings.js (line 390)
+Object { parent=glo,  contents=[2],  type="posting",  more...}
+postings.js (line 391)
+got stuff!
+objects.js (line 728)
+Object { ids=[3],  fnames=[3],  lnames=[3],  more...}
+objects.js (line 729)
+object
+contacts.js (line 8)
+Object { parent=glo,  contents=[3],  type="contact",  more...}
+contacts.js (line 9)
+got stuff!
+objects.js (line 728)
+Object { ids=[2],  names=[2],  descriptions=[2],  more...}
+objects.js (line 729)
+got stuff!
+objects.js (line 728)
+Object { ids=[0],  titles=[0],  texts=[0]}
+objects.js (line 729)
+scraping postings.
+postings.js (line 102)
+glo { user={...},  goals={...},  industries={...},  more...}
+postings.js (line 103)
+scraping url:
+postings.js (line 76)
+http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=100&start=0
+postings.js (line 77)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		4.48s	
+jquery-....min.js (line 4)
+got a response from scraper
+postings.js (line 48)
+[Object { link="http://indeed.com/promo/resume",  title="Software Developer",  company=false,  more...}, Object { link="http://indeed.com/rc/clk?jk=bc5aacc1283474b2",  title="Software Engineer",  company="Google",  more...}, Object { link="http://indeed.com/rc/clk?jk=1d10e28cd0c2d679",  title="Software Engineer in Test",  company="Google",  more...}, Object { link="http://indeed.com/rc/clk?jk=118ecb4e7785697a",  title="Front End Software Engineer",  company="Google",  more...}, Object { link="http://indeed.com/rc/clk?jk=ffe8ebdbb2f4ed1d",  title="Software Engineer, Web",  company="VEVO",  more...}, Object { link="http://indeed.com/rc/clk?jk=c1b6acf48143ce9b",  title="Software Engineer",  company="Thumbtack",  more...}, Object { link="http://indeed.com/rc/clk?jk=7bfdbbbd17b10b19",  title="Software Developer",  company="EducationSuperHighway",  more...}, Object { link="http://indeed.com/rc/clk?jk=366278a07af152a3",  title="Full-time/New Grad Softw...ng or Recent Grads Only",  company="Transmosis",  more...}, Object { link="http://indeed.com/rc/clk?jk=a4a7f137c5a9707d",  title="Software Engineer Intern",  company="InMobi",  more...}, Object { link="http://indeed.com/rc/clk?jk=154bc1438e79170e",  title="Entry Level Software Quality Analyst",  company="AMG TECHNOLOGY",  more...}, Object { link="http://indeed.com/rc/clk?jk=bdbd800bfafb9ca8",  title="Software Engineer, Ads",  company="Samba TV",  more...}, Object { link="http://indeed.com/rc/clk?jk=a1aeb840dda9e074",  title="Software Engineer",  company="Pinterest",  more...}, Object { link="http://indeed.com/rc/clk?jk=ba4faeac65f1d90f",  title="Software Engineer",  company="6sense",  more...}, Object { link="http://indeed.com/rc/clk?jk=456270818c93cd0c",  title="Software Engineer - Supply",  company="Uber",  more...}, Object { link="http://indeed.com/rc/clk?jk=41ac4b943b8a89c7",  title="Senior Windows Developer",  company="OneLogin",  more...}, Object { link="http://indeed.com/cmp/He...er-e2863c3fd4567f80?r=1",  title="Backend Parser Developer",  company="HealthExpense",  more...}, Object { link="http://indeed.com/cmp/Pl...er-0df1f73b79197396?r=1",  title="Application Developer",  company="Pluggedin Technologies",  more...}, Object { link="http://indeed.com/rc/clk?jk=d2e0a70efe13cf91",  title="Java Developer",  company="Cognizant",  more...}, Object { link="http://indeed.com/rc/clk?jk=368a4222f372e345",  title="Software Engineer - Desktop Applications",  company="FiveStars",  more...}, Object { link="http://indeed.com/rc/clk?jk=a2252f6d9bbeaf51",  title="Associate Software Engineer",  company="Salesforce",  more...}, Object { link="http://indeed.com/rc/clk?jk=2dc4973936cbc316",  title="Software Engineer",  company="Yelp",  more...}, Object { link="http://indeed.com/rc/clk?jk=4977a5c4e4586973",  title="Software Engineer (Full Time / Intern)",  company="Tachyon Nexus, Inc.",  more...}, Object { link="http://indeed.com/cmp/He...er-a7a82c159c33a12f?r=1",  title="API Engineer",  company="HealthExpense",  more...}, Object { link="http://indeed.com/rc/clk?jk=c79db25505aab516",  title="Associate Software Engineer",  company="Tapjoy",  more...}, Object { link="http://indeed.com/rc/clk?jk=65782c6c37c09d4d",  title="Software Engineer, Mobile Applications (Android)",  company="Google",  more...}, Object { link="http://indeed.com/rc/clk?jk=7cf61846d54b4301",  title="Software Engineer, Mobile Web",  company="Vungle",  more...}, Object { link="http://indeed.com/rc/clk?jk=5a4dafc46aba16ef",  title="Associate Software Engineer",  company="Model Metrics",  more...}, Object { link="http://indeed.com/rc/clk?jk=e0fd341e693ff8f1",  title="Software Engineer",  company="Cozymeal",  more...}, Object { link="http://indeed.com/rc/clk?jk=e9ed7a314a5d445f",  title="Software Development Engineer",  company="A2Z Development Center, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=079b1b789c0af293",  title="Software Engineer",  company="Adobe",  more...}, Object { link="http://indeed.com/rc/clk?jk=8230e8c9a0c73b42",  title="Software Engineer - Front End",  company="Switch Communications",  more...}, Object { link="http://indeed.com/rc/clk?jk=a7c0e582b8bffda5",  title="Software Engineer",  company="Nitrous",  more...}, Object { link="http://indeed.com/rc/clk?jk=be1986b296fcd65d",  title="Software Engineer",  company="Intelligrated, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=fdf7593860f36a72",  title="Software Engineer",  company="Patreon",  more...}, Object { link="http://indeed.com/rc/clk?jk=cce8a588b1c7d75b",  title="Software Engineer, Data",  company="Samba TV",  more...}, Object { link="http://indeed.com/cmp/Gi...er-ebfa656c77109a34?r=1",  title="Software Engineer (Mobile/Web)",  company="Gigster",  more...}, Object { link="http://indeed.com/cmp/Ve...er-010bf5500d1c41dd?r=1",  title="Senior Android Software Engineer",  company="Vertisystem",  more...}, Object { link="http://indeed.com/rc/clk?jk=87067b6392dc4279",  title="Java Software Engineer",  company="drawbridge",  more...}, Object { link="http://indeed.com/rc/clk?jk=478e8ebad374ecce",  title="Software Engineer, Developer Infrastructure",  company="Airbnb",  more...}, Object { link="http://indeed.com/rc/clk?jk=d18a5f85bd725b64",  title="Java Jedi",  company="Avenue Code",  more...}, Object { link="http://indeed.com/rc/clk?jk=7019ebbc67c872c8",  title="Full-Stack Developer",  company="Entelo",  more...}, Object { link="http://indeed.com/rc/clk?jk=21a9e677432291fc",  title="Software Engineer - Front End",  company="StyleSeat",  more...}, Object { link="http://indeed.com/rc/clk?jk=e05dc7334a97993b",  title="Java Developer - Sustaining Engineering",  company="Certain, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=6192a5bb986a896c",  title="Software Engineer - Location Search",  company="Uber",  more...}, Object { link="http://indeed.com/cmp/Ca...er-e8bdfa89ce91b47a?r=1",  title="Java Developer",  company="Capilton Inc",  more...}, Object { link="http://indeed.com/rc/clk?jk=c6e3093464f210ae",  title="Embedded Software Developer",  company="GenapSys, Inc.",  more...}, Object { link="http://indeed.com/cmp/Di...er-0ccd96e5b9891461?r=1",  title="Software Engineer - Elixir/Erlang",  company="Diva Networks, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=944ee53cb42dc4c7",  title="Software Engineer - Data and Analytics",  company="FiveStars",  more...}, Object { link="http://indeed.com/rc/clk?jk=0121f424eba98aa7",  title="Software Developer",  company="Transmosis",  more...}, Object { link="http://indeed.com/rc/clk?jk=878f9c3883955ac1",  title="Software Engineer",  company="The Weather Channel",  more...}, Object { link="http://indeed.com/rc/clk?jk=61983503033e7e6b",  title="Software Engineer",  company="Silicon Valley Bank",  more...}, Object { link="http://indeed.com/rc/clk?jk=f3649ab6b3cc5010",  title="Software Engineer CCE, Storage",  company="Cloudera",  more...}, Object { link="http://indeed.com/rc/clk?jk=11695aef61f1b78a",  title="Software Engineer - Web Team",  company="Zoosk",  more...}, Object { link="http://indeed.com/cmp/Si...er-d1e8d51d742cc8e0?r=1",  title="Software Developer",  company="Silver Oak Technologies, LLC.",  more...}, Object { link="http://indeed.com/rc/clk?jk=4fb4996377faef32",  title="Intern/Co-op 2D Concept Artist, Fall 2015",  company="Zynga",  more...}, Object { link="http://indeed.com/rc/clk?jk=21ce7f1db7801606",  title="Software Engineer, Web Applications",  company="Zephyr Health",  more...}, Object { link="http://indeed.com/rc/clk?jk=4d6370e9f27a551f",  title="Software Engineer",  company="HID Global",  more...}, Object { link="http://indeed.com/rc/clk?jk=1edce76ed39f83b8",  title="Software Engineer",  company="Moody's Corporation",  more...}, Object { link="http://indeed.com/rc/clk?jk=047ee79081cd2dac",  title="Software Engineer - New Grads",  company="flickr",  more...}, Object { link="http://indeed.com/rc/clk?jk=9deb8ffc81e51f2f",  title="Software Engineer",  company="Lending Club",  more...}, Object { link="http://indeed.com/rc/clk?jk=ab34b51d271ff9fc",  title="Software Engineer, Discovery",  company="Pinterest",  more...}, Object { link="http://indeed.com/rc/clk?jk=b929cedab5cff83e",  title="Software Developer",  company="LePort Schools",  more...}, Object { link="http://indeed.com/rc/clk?jk=05d98269a315f2fd",  title="Software Engineer",  company="Indiegogo",  more...}, Object { link="http://indeed.com/rc/clk?jk=18f6ff9d9bd75bd3",  title="UI / UX Software Engineer",  company="Propeller Health",  more...}, Object { link="http://indeed.com/rc/clk?jk=9ba37806985b2a49",  title="Software Engineer",  company="OPSWAT",  more...}, Object { link="http://indeed.com/rc/clk?jk=ff5c6fd72fc48d07",  title="Software Engineer, Recent grad",  company="Cisco Meraki",  more...}, Object { link="http://indeed.com/cmp/Ta...er-4edf1269ba645a29?r=1",  title="Software Engineer",  company="Talentburst Inc.,",  more...}, Object { link="http://indeed.com/rc/clk?jk=703b68603667446a",  title="Software Engineer, Docker Engine",  company="Docker",  more...}, Object { link="http://indeed.com/rc/clk?jk=d1476d604dd96d30",  title="SOFTWARE ENGINEER",  company="Academia",  more...}, Object { link="http://indeed.com/rc/clk?jk=f95f450a4331cf36",  title="Software Engineer, Minecraft",  company="Kickback",  more...}, Object { link="http://indeed.com/rc/clk?jk=6a021397c31c0885",  title="Software Engineer - New Grad",  company="Yelp",  more...}, Object { link="http://indeed.com/rc/clk?jk=9666779b843dfd23",  title="Software Engineer",  company="Expedia Local Expert",  more...}, Object { link="http://indeed.com/cmp/SY...el-91ead401120e6619?r=1",  title="Software Engineer – Entry Level - Java",  company="SYNTEL",  more...}, Object { link="http://indeed.com/rc/clk?jk=8d39d9508e3e458c",  title="Software Developer 3",  company="Oracle",  more...}, Object { link="http://indeed.com/rc/clk?jk=8d4fd8f2503fdde9",  title="Java Backend Developer",  company="Cognizant",  more...}, Object { link="http://indeed.com/rc/clk?jk=add596d9c45d47ec",  title="SOFTWARE ENGINEER",  company="Smule",  more...}, Object { link="http://indeed.com/rc/clk?jk=359353e8a33e1003",  title="Software Engineer",  company="Neohire Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=f1946584d47f87c5",  title="Software Engineer, Switc...amp; Appliance Firmware",  company="Cisco Meraki",  more...}, Object { link="http://indeed.com/rc/clk?jk=2310e8ac6830ee35",  title="Software Engineer, Wireless Firmware",  company="Cisco Meraki",  more...}, Object { link="http://indeed.com/rc/clk?jk=7d8bd2ce6e8bc55b",  title="Software Developer, Web Applications",  company="Ancestry",  more...}, Object { link="http://indeed.com/cmp/Bu...er-f2f513e19e096488?r=1",  title="Front End Developer",  company="Bulwan",  more...}, Object { link="http://indeed.com/rc/clk?jk=d098b3da2f8a8acf",  title="Software Developer 2 (Sy...cs) (multiple openings)",  company="Lawrence Berkeley National Laboratory",  more...}, Object { link="http://indeed.com/rc/clk?jk=f50265338db1452a",  title="Software Engineer, Data Warehousing",  company="Clearslide Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=0c6040673410ac9a",  title="ShopStyle Software Engineer - Catalog",  company="POPSUGAR",  more...}, Object { link="http://indeed.com/rc/clk?jk=d4618a8ffc0f6bc4",  title="Software Engineer - Back End",  company="StyleSeat",  more...}, Object { link="http://indeed.com/cmp/Te...er-1a955ecb10d1bdec?r=1",  title="Software Developer / Trainee – UI/UX Focus",  company="Terrace <b>Software</b>, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=8764142de80082e6",  title="Lead Software Developer",  company="ThoughtWorks",  more...}, Object { link="http://indeed.com/rc/clk?jk=3f9895f3494deedc",  title="Software Developer",  company="IBM",  more...}, Object { link="http://indeed.com/cmp/Ke...er-524d8008f798daa3?r=1",  title="Front End Developer",  company="Kevala, Inc.",  more...}, Object { link="http://indeed.com/rc/clk?jk=f414e4c64a3420c8",  title="Full Stack Software Engineer",  company="Docker",  more...}, Object { link="http://indeed.com/cmp/He...er-ecda3b33d7ac399f?r=1",  title="Software Quality Assurance Engineer",  company="HealthExpense",  more...}, Object { link="http://indeed.com/rc/clk?jk=d0a7824c71d793aa",  title="Front End Engineer",  company="Prosper",  more...}, Object { link="http://indeed.com/rc/clk?jk=77b98214474b3ad0",  title="Software Engineer III",  company="Walmart eCommerce",  more...}, Object { link="http://indeed.com/rc/clk?jk=c5d11fc3a8d2a702",  title="Software Engineer",  company="Coinbase",  more...}, Object { link="http://indeed.com/rc/clk?jk=92d78656636c8806",  title="Junior Software Engineer",  company="OPSWAT",  more...}, Object { link="http://indeed.com/rc/clk?jk=539eb019ff63d498",  title="Software Engineer III",  company="Walmart",  more...}, Object { link="http://indeed.com/rc/clk?jk=8f586482ed831dc9",  title="Software Design Engineer in Test",  company="B Squared",  more...}, Object { link="http://indeed.com/rc/clk?jk=c1ebfed8ae4da827",  title="Security Engineer - Pene...ng, Web/Mobile Security",  company="Credit Karma",  more...}, Object { link="http://indeed.com/rc/clk?jk=45f363c6c04c35e6",  title="Software Engineer - Back-End",  company="Yelp",  more...}, Object { link="http://indeed.com/rc/clk?jk=eabece42f1ec2622",  title="Software Engineer",  company="Nomis Solutions",  more...}, Object { link="http://indeed.com/rc/clk?jk=6e6c09ee674608b7",  title="Software Engineer - HR Technology",  company="Yelp",  more...}]
+postings.js (line 49)
+
+***** Sun Jul 26, 2015 11:04:41 conclusions
+      11:06:19
+      Things got really strange here.  
+
+      Unlike previously, the arrays are fetched properly from ajax on
+      egil and gs2, but they don't work on n900t.  
+
+      Conversely, the arrays are fetched properly from cli on n900t,
+      but not on egil or gs2.  
+
+      WTF?
+
 *** test2 curl() function
 ***** gregsList-2015-07-26-n900t.org 
 ****** Sun Jul 26, 2015 10:26:00 test n900t curl function 
