@@ -3751,6 +3751,12 @@ postings.js (line 49)
 
       WTF?
 
+      11:12:18
+      I'm thinking this is probably due to a UNIX permissions thing.
+      It doesn't explain at all why things would work on AJAX and not
+      CLI however. 
+
+
 *** test2 curl() function
 ***** gregsList-2015-07-26-n900t.org 
 ****** Sun Jul 26, 2015 10:26:00 test n900t curl function 
