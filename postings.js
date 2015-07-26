@@ -16,14 +16,16 @@ function sendScraperRequest (divId,url)
 		  user:gregsList.user.name,
 		  pass:gregsList.user.password,
 		  func: "scrapePostings",
-		  // url: url,// encodeURIComponent(url),
-		  url: encodeURIComponent(url)
+		  url: url// encodeURIComponent(url),
+		  // url: encodeURIComponent(url)
 	      },
 	      success: function(resp)
 	      {
+		  /*
 		  if (resp !== '')
 		  {					
 		      console.log(JSON.parse(resp));
+		    
 		      if (JSON.parse(resp) === true)
 		      {
 			  console.log("input worked");
@@ -37,11 +39,14 @@ function sendScraperRequest (divId,url)
 		      }
 		      
 		  }
+
 		  else
 		      console.log('empty response');
 		  // 
 		  // clear text fields
-		  
+		  */
+		  console.log('got a response from scraper');
+		  console.log(JSON.parse(resp));
 		  
 	      } // end success func
 	  } // end ajax json
@@ -66,7 +71,8 @@ function openScraperDialog()
     var divId = 'scraperDialog';
     var scraperDialogString = getIndeedScraperDialogString(divId);
     var url;
-    url = "http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=75&start=0";
+    // url = "http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=75&start=0";
+    url = "http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=100&start=0";
     console.log('scraping url:');
     console.log(url);
     

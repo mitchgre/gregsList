@@ -325,8 +325,11 @@ if (isset($_POST['func']))
         // scraping stuff  ===============================
         if ($func === "scrapePostings")
         {
+            // $url = urldecode( $_POST['url'] );
             $url = $_POST['url'];
-            echo json_encode(scrapePostings($url));
+            // echo json_encode($url);
+            $postings = scrapePostings($url);
+            echo json_encode($postings);
         }
     }
 }

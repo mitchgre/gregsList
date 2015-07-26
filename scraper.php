@@ -15,6 +15,7 @@ function curl($url) {
     );
     
     $ch = curl_init();  // Initialising cURL 
+    // echo $ch;
     curl_setopt_array($ch, $options);   // Setting cURL's options using the previously assigned array data in $options
     $data = curl_exec($ch); // Executing the cURL request and assigning the returned data to the $data variable
     curl_close($ch);    // Closing cURL 
@@ -104,9 +105,13 @@ function getScrapedDescription($noise)
 // get an associative array
 function scrapePostings($url)
 {
+
+    //echo yo mama;
     $postings = [];     // empty array
 
     $page = curl( $url );   // get all html
+
+    return $page;
     
     // loop over $scraping pulling all titles, links, locations somehow.
     // breaking this down:
