@@ -163,6 +163,9 @@ data-tn-element="jobTitle"><b>Software</b> Engineer - New Grad - 2016</a>
             "description" => $description
         );
 
+        // insert directly into db?  Leave it up to upstream.
+        
+
         // push the singular posting into the plural
         array_push($postings,$posting);
     }

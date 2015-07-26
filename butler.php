@@ -147,6 +147,14 @@ if (isset($_POST['func']))
             }
         if ($func === "insertPosting")
             {
+                $title = $_POST["title"];
+                //$url = urldecode($_POST["url"]);
+                $url = $_POST["url"];
+                $companyName = $_POST["company"];
+                $locationName = $_POST["location"]; # string value needs to be converted to int
+                $source = $_POST["source"];
+
+
                 echo json_encode(insertPosting($user));
             }
         if ($func === "insertContact")

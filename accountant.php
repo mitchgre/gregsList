@@ -858,14 +858,8 @@ function addUserLocation($user,$locationName)
 
 
 
-function insertPosting($user)
+function insertPosting($user,$title,$url,$companyName,$locationName,$source)
 {
-    $title = $_POST["title"];
-    //$url = urldecode($_POST["url"]);
-    $url = $_POST["url"];
-    $companyName = $_POST["company"];
-    $locationName = $_POST["location"]; # string value needs to be converted to int
-    $source = $_POST["source"];
 
     $locationId = getLocationId($locationName);
     
