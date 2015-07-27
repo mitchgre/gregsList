@@ -429,6 +429,10 @@ create table user_postings(
               on delete set null on update cascade
 )engine=innodb;
 
+
+insert into user_postings (user,posting)
+ values (1,1),(1,2),(1,3),(2,4),(2,5);
+
 /*
 # insert some base case postings
 insert into `postings` (`user`,`title`,`url`,`company`,`location`,`source`)

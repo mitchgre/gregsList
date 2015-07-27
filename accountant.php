@@ -195,6 +195,10 @@ function getPostings($user)
     
     // $query = "select id,title,url,location,company,source from postings where user=$user ";
     
+    // need to get id, title, url, location, company, source
+
+    $query = "select id,title,url,location,company,source from postings where user=$user ";
+
     if ($statement = $mysqli->prepare($query))
     {
         $statement->execute();
