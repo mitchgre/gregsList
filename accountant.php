@@ -193,7 +193,7 @@ function getPostings($user)
     
     $mysqli = connectToDB();
     
-    $query = "select id,title,url,location,company,source from postings where user=$user ";
+    // $query = "select id,title,url,location,company,source from postings where user=$user ";
     
     if ($statement = $mysqli->prepare($query))
     {
