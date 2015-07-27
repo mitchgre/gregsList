@@ -898,6 +898,8 @@ function addUserLocation($user,$locationName)
 // return jobBoard id if it exists, false otherwise
 function jobBoardExists($name)
 {
+    $query = "select id from jobBoards where name = ".$name;
+    return reset(returnStuff($query));
 }
 
 
