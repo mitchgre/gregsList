@@ -894,6 +894,18 @@ function addUserLocation($user,$locationName)
 }
 */
 
+function insertJobBoard($name)
+{
+}
+
+function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
+{
+}
+
+
+function insertUserPosting($user,$posting)
+{
+}
 
 
 
