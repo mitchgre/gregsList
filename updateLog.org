@@ -27555,3 +27555,8 @@ create table user_companies(
   12:29:26
   Running SQL tests.  This give some errors. 
 
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key (`source`) references jobBoards(id)
+       	       on delete set nul' at line 13
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')engine=innodb' at line 10
+
+  Can't quite tell where this is. 
