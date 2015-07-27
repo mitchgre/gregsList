@@ -27488,3 +27488,13 @@ create table user_companies(
 	Added a unique combo on user_locations table.  I think (hope)
 	that wraps up the unique key problem.
     
+** Mon Jul 27, 2015 10:38:12 next steps to be determined.
+  So I think I solved the unique key problem.
+
+  Adding filters is probably really important.  I'm not sure how else
+  to speed up the load time.  
+
+  As things stand, the page takes several seconds to load when there
+  is lots of data, but it's almost instantaneous when there is not a
+  lot of data.  
+  
