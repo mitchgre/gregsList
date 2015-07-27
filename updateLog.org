@@ -27552,3 +27552,6 @@ create table user_companies(
   Need to test this in SQL and PHP now.  Probably will need to
   rewrite a fair amount of PHP. 
 
+  12:29:26
+  Running SQL tests.  This give some errors. 
+
