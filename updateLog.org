@@ -27543,3 +27543,12 @@ create table user_companies(
 
   Now must work on decomposing postings table.  I fear the difficulty
   of this, but I need to work it through.
+
+
+  Mon Jul 27, 2015 12:26:40
+  Decomposed postings table into postings, jobBoards, and
+  user_postings. 
+  
+  Need to test this in SQL and PHP now.  Probably will need to
+  rewrite a fair amount of PHP. 
+
