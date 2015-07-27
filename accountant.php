@@ -894,6 +894,11 @@ function addUserLocation($user,$locationName)
 }
 */
 
+
+function jobBoardExists($name)
+{
+}
+
 function insertJobBoard($name)
 {
 }
