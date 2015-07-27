@@ -195,38 +195,42 @@ function getPostings($user)
     $query = "select id,title,url,location,company,source from postings where user=$user ";
     
     if ($statement = $mysqli->prepare($query))
+    {
+        $statement->execute();
+        
+        // bind results
+        $statement->bind_result($id,$title,$url,$locationId,$companyId,$source);
+        
+        while($statement->fetch())
         {
-            $statement->execute();
-            
-            // bind results
-            $statement->bind_result($id,$title,$url,$locationId,$companyId,$source);
-            
-            while($statement->fetch())
-                {
-                    array_push($ids,$id);
-                    array_push($titles,$title);
-                    array_push($urls,$url);
-                    $locationName = getLocationName($locationId);
-                    array_push($locations,$locationName); 
-                    $companyName = getCompanyName($companyId);
-                    array_push($companies,$companyName); # will need to edit this
-                    array_push($sources,$source);
-                }
+            array_push($ids,$id);
+            array_push($titles,$title);
+            array_push($urls,$url);
+            $locationName = getLocationName($locationId);
+            array_push($locations,$locationName); 
+            $companyName = getCompanyName($companyId);
+            array_push($companies,$companyName); # will need to edit this
+            array_push($sources,$source);
         }
-    mysqli_close($mysqli);
-    
-    // associate arrays
-    $postings = array
-        (
-            "ids" => $ids,
-            "titles" => $titles,
-            "urls" => $urls,
-            "locations" => $locations,
-            "companies" => $companies,
-            "sources" => $sources
-        );
-    
-    echo json_encode($postings);
+        mysqli_close($mysqli);
+        
+        // associate arrays
+        $postings = array
+                  (
+                      "ids" => $ids,
+                      "titles" => $titles,
+                      "urls" => $urls,
+                      "locations" => $locations,
+                      "companies" => $companies,
+                      "sources" => $sources
+                  );
+        
+        return $postings;
+    }
+    else
+    {
+        return "error getting postings.";
+    }
 }
 
 
