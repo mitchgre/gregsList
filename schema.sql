@@ -31,6 +31,8 @@ drop table if exists notes_user;
 # update 2015-07-08
 drop table if exists user_schedule_notes;
 
+# update 2015-07-21
+drop table if exists notes_location_user;
 
 
 # table to contain users of gregsList
@@ -735,6 +737,22 @@ create table user_schedule_notes (
 		on delete set null on update cascade,
 	foreign key (`notes_user_id`) references notes_user(id)
 		on delete set null on update cascade
+)engine=innodb;      
+
+
+
+create table notes_location_user (
+	id int primary key unique auto_increment,
+	`note` int,
+	`location` int,
+	`user` int,
+	foreign key (`note`) references notes(id)
+		on delete set null on update cascade,
+	foreign key (`location`) references locations(id)
+		on delete set null on update cascade,
+       foreign key (user) references users(id)
+       	       on delete set null on update cascade
+
 )engine=innodb;      
 
 
