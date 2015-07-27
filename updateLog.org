@@ -27479,5 +27479,10 @@ create table user_companies(
 	That didn't give any errors, and the table is created.  But
 	does it work?  Have to test it with scraper.
 
+	Mon Jul 27, 2015 10:29:28
+	That seems to resolve the duplicate company problem.  Have to
+	decide how to add console logs if possible.
+
+ 
     Trying to find a reference.   
     
