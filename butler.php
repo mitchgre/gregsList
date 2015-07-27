@@ -155,7 +155,7 @@ if (isset($_POST['func']))
                 $source = $_POST["source"];
 
 
-                echo json_encode(insertPosting($user));
+                echo json_encode(insertPosting($user,$title,$url,$companyName,$locationName,$source));
             }
         if ($func === "insertContact")
             {
@@ -335,8 +335,24 @@ if (isset($_POST['func']))
         {
             // $url = urldecode( $_POST['url'] );
             $url = $_POST['url'];
+
+
             // echo json_encode($url);
             $postings = scrapePostings($url);
+
+            // push into db.
+            for ( $i = 0; $i < count( $postings ); $i++)
+            {
+                $posting = $postings[ $i ];
+                
+                insertPosting($user,
+                              $posting["title"],
+                              $posting["link"],
+                              $posting["company"],
+                              $posting["location"],
+                              "indeed.com");
+            }
+
             echo json_encode($postings);
         }
     }
