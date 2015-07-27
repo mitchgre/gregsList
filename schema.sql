@@ -412,7 +412,7 @@ insert into `postings` (`title`,`url`,`company`,`location`,`source`)
        "Software Engineer Intern-Computer Vision and Machine Learning", # title
        "https://alliancedata.taleo.net/careersection/epsilon/jobdetail.ftl?job=85205&src=JB-10160", # url
        28, # companyId
-       8, # locationId
+       7, # locationId
        1 # jobBoardId
        );
 
