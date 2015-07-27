@@ -27394,10 +27394,12 @@ root@gspu:/var/www/html/gregsList#
  far. Might want to walk through things to see if I can speed this up
  somehow.  It's supposed to be asynchronous after all. 
 ** Mon Jul 27, 2015 08:55:13 as planned.  
-   First thing to do is try re-working the schema to add unique keys.
+*** First thing to do is try re-working the schema to add unique keys.
 
-   [[file:schema.sql]]
+    [[file:schema.sql]]
 
-   I'd also like to merge all of the updates. 
+    I'd also like to merge all of the updates.  (done)
 
-   
+*** Mon Jul 27, 2015 10:18:11 adding unique keys is proving difficult.
+    Can't seem to find this info in the manual.
+    
