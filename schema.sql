@@ -300,6 +300,7 @@ create table user_locations(
       `user` int, # references users.id,
       `location` int, # references locations.id
       `motivation` int, #
+       unique key combo (`user`, `location`),
       foreign key (`user`) references users(id)
       		  on delete set null on update cascade,
       foreign key (`location`) references locations(id)

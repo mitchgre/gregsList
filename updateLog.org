@@ -27484,5 +27484,7 @@ create table user_companies(
 	decide how to add console logs if possible.
 
  
-    Trying to find a reference.   
+	Mon Jul 27, 2015 10:36:37
+	Added a unique combo on user_locations table.  I think (hope)
+	that wraps up the unique key problem.
     
