@@ -27591,3 +27591,8 @@ create table postings(
 )engine=innodb;
 
 	The foreign keys aren't getting added properly.
+
+
+	Mon Jul 27, 2015 14:38:27
+	Got postings table decomposed and recomposed properly it
+	seems.  Why was I doing that again?
