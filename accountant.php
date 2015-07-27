@@ -198,8 +198,15 @@ function getPostings($user)
     // need to get id, title, url, location, company, source
     
     // select postings.id, postings.title, postings.url, locations.name as location, companies.name as company, jobBoards.name as source from user_postings inner join postings on user_postings.posting = postings.id inner join locations on postings.location=locations.id inner join companies on postings.company = companies.id inner join jobBoards on postings.source = jobBoards.id;
-
-    $query = "select id,title,url,location,company,source from postings where user=$user ";
+    
+    //      ;
+    $query  = "select postings.id, postings.title, postings.url, locations.name as location, ";
+    $query .= "companies.name as company, jobBoards.name as source from user_postings ";
+    $query .= "inner join postings on user_postings.posting = postings.id ";
+    $query .= "inner join locations on postings.location=locations.id ";
+    $query .= "inner join companies on postings.company = companies.id ";
+    $query .= "inner join jobBoards on postings.source = jobBoards.id ";
+    $query .= "where user = $user";
 
     if ($statement = $mysqli->prepare($query))
     {
