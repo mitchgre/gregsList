@@ -377,17 +377,15 @@ insert into `postings` (`title`,`url`,`company`,`location`,`source`)
        );
 
 
-
-
 create table user_postings(
        id int primary key unique auto_increment,
        `user` int,
        `posting` int,
-       unique key combo (`user`, `posting`), 
+       unique key uniqueUserPostings (`user`, `posting`), 
        foreign key (`user`) references users(id)
               on delete set null on update cascade,
        foreign key (`posting`) references postings(id)
-              on delete set null on update cascade,       
+              on delete set null on update cascade
 )engine=innodb;
 
 /*
