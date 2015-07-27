@@ -27393,3 +27393,11 @@ root@gspu:/var/www/html/gregsList#
  elements in an AJAX array evidently slows my javascript down too
  far. Might want to walk through things to see if I can speed this up
  somehow.  It's supposed to be asynchronous after all. 
+** Mon Jul 27, 2015 08:55:13 as planned.  
+   First thing to do is try re-working the schema to add unique keys.
+
+   [[file:schema.sql]]
+
+   I'd also like to merge all of the updates. 
+
+   
