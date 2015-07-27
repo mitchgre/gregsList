@@ -369,39 +369,39 @@ create table postings(
 insert into `postings` (`title`,`url`,`company`,`location`,`source`)
        values
        ( #1
-       "Software Engineer / Application Developer",
-       "http://www.indeed.com/cmp/The-Carney-Group/jobs/Software-Engineer-Application-Developer-b67c029e9687804f",
-       20,
-       4,
-       1 # "http://indeed.com"
+       "Software Engineer / Application Developer", # title
+       "http://www.indeed.com/cmp/The-Carney-Group/jobs/Software-Engineer-Application-Developer-b67c029e9687804f", # url
+       20, # companyId
+       4, # location
+       1 # jobBoard
        ),
        ( #2
-       "IT Support Engineer II",
-       "https://us-amazon.icims.com/jobs/309767/it-support-engineer-ii/job?mode=job&iis=Indeed&iisn=Indeed+%28Free+Posting%29&mobile=false&width=1455&height=1200&bga=true&needsRedirect=false&jan1offset=-420&jun1offset=-420",
-       19,
-       5,
-       1
+       "IT Support Engineer II", #title
+       "https://us-amazon.icims.com/jobs/309767/it-support-engineer-ii/job?mode=job&iis=Indeed&iisn=Indeed+%28Free+Posting%29&mobile=false&width=1455&height=1200&bga=true&needsRedirect=false&jan1offset=-420&jun1offset=-420", # url
+       19, # companyId
+       5, # locationId
+       1 # jobBoardId
        ),
        ( #3
-       "Computer Engineer",
-       "http://www.infinera.com/career/ourjobs.html?nl=1&jvi=oxTv0fwF,Job&jvs=Indeed&jvk=Job",
-       26,
-       6,
-       1
+       "Computer Engineer", #title
+       "http://www.infinera.com/career/ourjobs.html?nl=1&jvi=oxTv0fwF,Job&jvs=Indeed&jvk=Job", # url
+       26, # companyId
+       6, # locationId
+       1 # jobBoardId
        ),
        ( #4
-       "Summer 2015 Intern - Software Engineer",
-       "http://www.indeed.com/viewjob?jk=42c7d94ab47fda67&q=intern+computer+science&l=san+francisco&tk=19ge8en191d3i0qb&from=web&advn=641811570115501&sjdu=ME_qcF1gz2XOe_-MpbFh208rDrQtJktyve_qLEqEOHE&pub=pub-indeed",
-       27,
-       7,
-       1
+       "Summer 2015 Intern - Software Engineer", # title
+       "http://www.indeed.com/viewjob?jk=42c7d94ab47fda67&q=intern+computer+science&l=san+francisco&tk=19ge8en191d3i0qb&from=web&advn=641811570115501&sjdu=ME_qcF1gz2XOe_-MpbFh208rDrQtJktyve_qLEqEOHE&pub=pub-indeed", # url
+       27, # companyId
+       7, # locationId
+       1 # jobBoardId
        ),
        ( #5
-       "Software Engineer Intern-Computer Vision and Machine Learning",
-       "https://alliancedata.taleo.net/careersection/epsilon/jobdetail.ftl?job=85205&src=JB-10160",
-       28,
-       8,
-       1
+       "Software Engineer Intern-Computer Vision and Machine Learning", # title
+       "https://alliancedata.taleo.net/careersection/epsilon/jobdetail.ftl?job=85205&src=JB-10160", # url
+       28, # companyId
+       8, # locationId
+       1 # jobBoardId
        );
 
 
