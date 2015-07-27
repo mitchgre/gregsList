@@ -895,27 +895,37 @@ function addUserLocation($user,$locationName)
 */
 
 
+// return jobBoard id if it exists, false otherwise
 function jobBoardExists($name)
 {
 }
 
+
 function insertJobBoard($name)
 {
+
 }
 
 function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
 {
+    // just insert directly.
 }
 
 
-function insertUserPosting($user,$posting)
-{
-}
 
-
+// return postingId if posting exists, false otherwise
 function postingExists($title,$url,$companyId,$locationId,$sourceId)
 {
 }
+
+
+function insertUserPosting($userId,$postingId)
+{
+    // verify user exists
+    // verify posting exists
+}
+
+
 
 function insertPosting($user,$title,$url,$companyName,$locationName,$source)
 {
