@@ -27596,3 +27596,11 @@ create table postings(
 	Mon Jul 27, 2015 14:38:27
 	Got postings table decomposed and recomposed properly it
 	seems.  Why was I doing that again?
+
+	Mon Jul 27, 2015 14:41:34
+	I was doing that because things weren't inserting properly
+	from the scraper.  
+
+	Now all that work that was just done to decompose the
+	postings table in SQL breaks the insertPosting() function in
+	PHP which needs to be reworked.  
