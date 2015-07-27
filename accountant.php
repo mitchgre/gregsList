@@ -918,12 +918,6 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
 {
 
     $locationId = getLocationId($locationName);
-   
-    /*
-      $string =  "received insertPosting request with $title, ";
-      $string .= "$url, $companyName, $locationName, $source, $user";
-      echo json_encode($string);
-    */
     
     // if location doesn't exist in locations table yet, add it
     if (locationExists($locationName) != true)
