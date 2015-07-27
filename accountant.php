@@ -901,16 +901,18 @@ function addUserLocation($user,$locationName)
 function jobBoardExists($name)
 {
     $query = "select count(id) from jobBoards where name = \"".$name."\"";
-    $count = reset(returnStuff($query));
-    if ($count > 0)
-        return true;
-    return "error: ".$query;
+    return reset(returnStuff($query));
 }
 
 
 function insertJobBoard($name)
 {
-
+    if ( !jobBoardExists($name) )
+    {
+        $query = "";
+    }
+    else
+        return "jobBoard $name already exists.";
 }
 
 function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
