@@ -328,7 +328,7 @@ create table company_locations(
 
 # add base cases for company locations
 
-
+# base jobBoards
 create table jobBoards(
        id int primary key unique auto_increment,
        name varchar(255),
@@ -341,22 +341,32 @@ create table postings(
        id int primary key unique auto_increment,
        title varchar(255),
        url varchar(255),
-       `user` int,
        company int, #references companies.id,
        location int, #references location.id,
-
        `source` varchar(255),   # this should reference a new table instead?
-       foreign key (`user`) references users(id)
-              on delete set null on update cascade,
+       unique key combo (url), 
        foreign key (`company`) references companies(id)
        	       on delete set null on update cascade,
        foreign key (`location`) references locations(id)
+       	       on delete set null on update cascade
+       foreign key (`source`) references jobBoards(id)
        	       on delete set null on update cascade
 )engine=innodb;
 # notes:
 # couldn't separate postings from user.  It was too complicated to
 # figure out how to remove postings if they weren't tied to a user id.
+# Mon Jul 27, 2015 12:16:36 doing it now months later... grr...
 
+create table user_postings(
+       id int primary key unique auto_increment,
+       `user` int,
+       `posting` int,
+       unique key combo (`user`, `posting`), 
+       foreign key (`user`) references users(id)
+              on delete set null on update cascade,
+       foreign key (`posting`) references postings(id)
+              on delete set null on update cascade,       
+)engine=innodb;
 
 /*
 # insert some base case postings
