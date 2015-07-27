@@ -365,6 +365,20 @@ create table postings(
 # figure out how to remove postings if they weren't tied to a user id.
 # Mon Jul 27, 2015 12:16:36 doing it now months later... grr...
 
+# base cases
+insert into `postings` (`title`,`url`,`company`,`location`,`source`)
+       values
+       (
+       "Software Engineer / Application Developer",
+       "http://www.indeed.com/cmp/The-Carney-Group/jobs/Software-Engineer-Application-Developer-b67c029e9687804f",
+       20,
+       4,
+       1 # "http://indeed.com"
+       ),
+
+
+
+
 create table user_postings(
        id int primary key unique auto_increment,
        `user` int,
