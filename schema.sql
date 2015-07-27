@@ -51,9 +51,8 @@ insert into `pass` (`user`,`word`)
 drop table if exists companies;
 create table companies(
        id int primary key auto_increment,
-       name varchar(255) unique
-       # hiring_activity int,  # use joins here instead
-       # url text
+       name varchar(255),
+       unique key name (name) 
 ) engine=innodb;
 
 # add some base case companies
