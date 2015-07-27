@@ -57,7 +57,7 @@ function returnStuff($query)
    else
        {
            mysqli_close($mysqli);
-           return [false];
+           return false;
        }
 }
 
