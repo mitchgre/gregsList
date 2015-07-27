@@ -27508,4 +27508,9 @@ create table user_companies(
   in 'San Francisco, CA' with a cap of 100 postings.  For some
   reason, I was only able to scrape 76 postings out of the 100. 
 
-  
+  Mon Jul 27, 2015 10:49:29
+  So that somewhat settles the matter for me at present, my
+  javascript is definitely sub-par and way too slow,  That really
+  shouldn't be a big surprise.
+
+  But the question remains; how do I fix this? 
