@@ -27498,3 +27498,5 @@ create table user_companies(
   is lots of data, but it's almost instantaneous when there is not a
   lot of data.  
   
+  Chrome developer tools attributed a lot of this to scripting, but
+  I'm not convinced it's not transport issues. 
