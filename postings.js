@@ -399,7 +399,7 @@ function fillPostings(object, input)
     {
 	var id = input.ids[i];
 	var title = input.titles[i];
-	var url = input.urls[i];
+	var url = "<a href=\""+input.urls[i]+"\">link</a>";
 	var location = input.locations[i];
 	var company = input.companies[i];
 	var source = input.sources[i];
