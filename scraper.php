@@ -156,7 +156,7 @@ data-tn-element="jobTitle"><b>Software</b> Engineer - New Grad - 2016</a>
         
         // compose the singular posting
         $posting = array(
-            "link" => "<a href=\"".$link."\">link</a>",
+            "link" =>  $link, // utf8_encode("<a href=\"".$link."\">link</a>"), // 
             "title" => $title,
             "company" => $company,
             "location" => $location,

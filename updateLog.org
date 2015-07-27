@@ -27533,3 +27533,7 @@ create table user_companies(
   (As an aside, I had a problem inserting links in the scraper - see
   the recent git commits - it may be evident (to myself at least)
   what I'm trying to say here.) 
+
+  Mon Jul 27, 2015 11:57:55
+  Can't get links from scraper to save properly for the life of me.
+  Kinda lost.   Will try to fix it client side.
