@@ -152,6 +152,7 @@ function getLocations($user)
     $query .= "inner join locations on user_locations.location = locations.id ";
     $query .= "inner join users on users.id = user_locations.user ";
     $query .= "where user=$user ";
+    $query .= "group by name ";
     
     if ($statement = $mysqli->prepare($query))
         {
