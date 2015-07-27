@@ -374,7 +374,7 @@ insert into `postings` (`title`,`url`,`company`,`location`,`source`)
        20,
        4,
        1 # "http://indeed.com"
-       ),
+       );
 
 
 
