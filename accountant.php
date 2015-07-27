@@ -895,11 +895,16 @@ function addUserLocation($user,$locationName)
 */
 
 
-// return jobBoard id if it exists, false otherwise
+// return jobBoard id if it exists, false otherwise?
+// that's proving to be too difficult!
+// so just return true or false based on count
 function jobBoardExists($name)
 {
-    $query = "select id from jobBoards where name = ".$name;
-    return reset(returnStuff($query));
+    $query = "select count(id) from jobBoards where name = \"".$name."\"";
+    $count = reset(returnStuff($query));
+    if ($count > 0)
+        return true;
+    return "error: ".$query;
 }
 
 
