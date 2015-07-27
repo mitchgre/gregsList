@@ -27500,3 +27500,12 @@ create table user_companies(
   
   Chrome developer tools attributed a lot of this to scripting, but
   I'm not convinced it's not transport issues. 
+
+  Just tested bigGuy with firefox.  It only took 37 ms to process the
+  post request for 76 postings.  
+
+  'bigGuy' is a scraping of indeed postings for 'software developer'
+  in 'San Francisco, CA' with a cap of 100 postings.  For some
+  reason, I was only able to scrape 76 postings out of the 100. 
+
+  
