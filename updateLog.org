@@ -27515,4 +27515,21 @@ create table user_companies(
 
   But the question remains; how do I fix this? 
 
-  
+  Mon Jul 27, 2015 11:21:19
+  Couldn't really solve the question I just posed earlier.  Instead I
+  decided to work on the scraper.  
+
+  What's interesting now is that postings can't work simultaneously.
+
+  This means that if I scrape 75 postings for user 'bigGuy', then
+  those postings can't be scraped again.  Also, there's a strict 1-1
+  relationship between postings and users - when in reality, I should
+  have broken up postings so that multiple users can share the same
+  posting.  
+
+  That's something of a big problem with the schema, and I probably
+  need to fix that ASAP. 
+
+  (As an aside, I had a problem inserting links in the scraper - see
+  the recent git commits - it may be evident (to myself at least)
+  what I'm trying to say here.) 
