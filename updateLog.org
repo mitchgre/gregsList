@@ -27537,3 +27537,9 @@ create table user_companies(
   Mon Jul 27, 2015 11:57:55
   Can't get links from scraper to save properly for the life of me.
   Kinda lost.   Will try to fix it client side.
+
+  Mon Jul 27, 2015 12:10:52
+  Got it fixed client side.
+
+  Now must work on decomposing postings table.  I fear the difficulty
+  of this, but I need to work it through.
