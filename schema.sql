@@ -21,8 +21,8 @@ drop table if exists industries;
 # table to contain users of gregsList
 create table `users`(
        id int primary key unique auto_increment,
-       `name` varchar(255) not null,
-       unique key `name` `name` 
+       name varchar(255) not null,
+       unique key name (name) 
 )engine=innodb;
 
 
