@@ -213,7 +213,8 @@ function getPostings($user)
         $statement->execute();
         
         // bind results
-        $statement->bind_result($id,$title,$url,$locationId,$companyId,$source);
+        // $statement->bind_result($id,$title,$url,$locationId,$companyId,$source);
+        $statement->bind_result($id,$title,$url,$location,$company,$source);
         
         while($statement->fetch())
         {
@@ -226,10 +227,12 @@ function getPostings($user)
             array_push($ids,$id);
             array_push($titles,utf8_encode($title));
             array_push($urls,$url);
-            $locationName = getLocationName($locationId);
-            array_push($locations,$locationName); 
-            $companyName = getCompanyName($companyId);
-            array_push($companies,utf8_encode($companyName)); # will need to edit this
+            // $locationName = getLocationName($locationId);
+            // array_push($locations,$locationName); 
+            array_push($locations,$location); 
+            // $companyName = getCompanyName($companyId);
+            // array_push($companies,utf8_encode($companyName)); # will need to edit this
+            array_push($companies,utf8_encode($company)); # will need to edit this
             array_push($sources,$source);
         }
         mysqli_close($mysqli);
