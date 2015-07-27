@@ -196,6 +196,8 @@ function getPostings($user)
     // $query = "select id,title,url,location,company,source from postings where user=$user ";
     
     // need to get id, title, url, location, company, source
+    
+    // select * from user_postings inner join postings on user_postings.posting = postings.id inner join locations on postings.location=locations.id inner join companies on postings.company = companies.id inner join jobBoards on postings.source = jobBoards.id;
 
     $query = "select id,title,url,location,company,source from postings where user=$user ";
 
