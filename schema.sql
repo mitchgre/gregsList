@@ -28,6 +28,9 @@ drop table if exists notes_contact_user;
 drop table if exists notes_event_user;
 drop table if exists notes_user;
 
+# update 2015-07-08
+drop table if exists user_schedule_notes;
+
 
 
 # table to contain users of gregsList
@@ -721,6 +724,18 @@ create table notes_user (
        	       on delete set null on update cascade
 )engine=innodb;
 
+
+
+
+create table user_schedule_notes (
+	id int primary key unique auto_increment,
+	`user_schedule_id` int,
+	`notes_user_id` int,
+	foreign key (`user_schedule_id`) references user_schedule(id)
+		on delete set null on update cascade,
+	foreign key (`notes_user_id`) references notes_user(id)
+		on delete set null on update cascade
+)engine=innodb;      
 
 
 # Need to add sections for resumes and cover letters here.
