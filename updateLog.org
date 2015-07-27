@@ -27402,4 +27402,61 @@ root@gspu:/var/www/html/gregsList#
 
 *** Mon Jul 27, 2015 10:18:11 adding unique keys is proving difficult.
     Can't seem to find this info in the manual.
+
+    The goal is to keep the multiple key combinations of user and
+    companies unique in the table named user_companies.
+
+
+    This is what I currently have:
+
+# contains relations between users and companies
+create table user_companies(
+       id int primary key unique auto_increment,
+       `user` int, # references users.id,
+       company int, # references companies.id
+       motivation int,
+       # need to add unique key here somehow.
+       unique key name (name),
+       foreign key (`user`) references users(id)
+       	       on delete set null on update cascade,
+       foreign key (`company`) references companies(id)
+       	       on delete set null on update cascade
+)engine=innodb;
+
+	Need to add a unique key on the two foreign keys.
+
+	A couple weeks ago I tried: 
+
+	alter table  user_companies add unique (user,company);
+	ERROR 1062 (23000): Duplicate entry '1-71' for key 'user'
+
+	Which resulted in ERROR 1062.  Maybe this won't happen when
+	the table is created fresh though.
+
+
+# contains relations between users and companies
+create table user_companies(
+       id int primary key unique auto_increment,
+       `user` int, # references users.id,
+       company int, # references companies.id
+       motivation int,
+       # need to add unique key here somehow.
+       foreign key (`user`) references users(id)
+       	       on delete set null on update cascade,
+       foreign key (`company`) references companies(id)
+       	       on delete set null on update cascade
+       unique key combo (`user`, `company`),
+)engine=innodb;
+
+
+	Mon Jul 27, 2015 10:23:43
+	Nope.
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'unique key combo (`user`, `company`),
+)engine=innodb' at line 11
+ERROR 1146 (42S02): Table 'gregsList.user_companies' doesn't exist
+
+
+
+    Trying to find a reference.   
     

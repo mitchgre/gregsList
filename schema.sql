@@ -112,6 +112,7 @@ create table user_companies(
        company int, # references companies.id
        motivation int,
        # need to add unique key here somehow.
+       unique key combo (`user`, `company`),
        foreign key (`user`) references users(id)
        	       on delete set null on update cascade,
        foreign key (`company`) references companies(id)
