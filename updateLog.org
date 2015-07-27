@@ -27370,5 +27370,5 @@ _comscore.push({ c1: "2", c2: "6486505", c4:"www.indeed.com/jobs", c15:"19r5njn3
 ****** Sun Jul 26, 2015 10:47:41 CONCLUSION:  curl works
 
 root@gspu:/var/www/html/gregsList# 
-*** test3 anchors
-*** test4 explosion
+*** test3 anchors (not done)
+*** test4 explosion (not done)

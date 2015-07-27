@@ -183,12 +183,12 @@ function getLocations($user)
 function getPostings($user)
 {
     // $postings = []; // return json object:  
-    $ids = [];
-    $titles = [];
-    $urls = [];
-    $locations = [];
-    $companies = [];
-    $sources = [];
+    $ids = array();
+    $titles = array();
+    $urls = array();
+    $locations = array();
+    $companies = array();
+    $sources = array();
     
     $mysqli = connectToDB();
     
@@ -203,26 +203,44 @@ function getPostings($user)
         
         while($statement->fetch())
         {
+            // echo "id: $id \n";
+            // echo "title: $title \n";
+            // echo "url: $url \n";
+            // echo "location: $location \n";
+            // echo "company: $company \n";
+
             array_push($ids,$id);
-            array_push($titles,$title);
+            array_push($titles,utf8_encode($title));
             array_push($urls,$url);
             $locationName = getLocationName($locationId);
             array_push($locations,$locationName); 
             $companyName = getCompanyName($companyId);
-            array_push($companies,$companyName); # will need to edit this
+            array_push($companies,utf8_encode($companyName)); # will need to edit this
             array_push($sources,$source);
         }
         mysqli_close($mysqli);
-        
+               
+        // echo json_encode($ids);
+
         // associate arrays
         $postings = array
                   (
+                      /*
+                      "ids" => json_encode($ids),
+                      "titles" => json_encode($titles),
+                      "urls" => json_encode($urls),
+                      "locations" => json_encode($locations),
+                      "companies" => json_encode($companies),
+                      "sources" => json_encode($sources)
+                      */
+                      
                       "ids" => $ids,
                       "titles" => $titles,
                       "urls" => $urls,
                       "locations" => $locations,
                       "companies" => $companies,
                       "sources" => $sources
+                      
                   );
         
         return $postings;
@@ -866,7 +884,7 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
 {
 
     $locationId = getLocationId($locationName);
-    
+   
     /*
       $string =  "received insertPosting request with $title, ";
       $string .= "$url, $companyName, $locationName, $source, $user";
@@ -884,7 +902,7 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
             addUserLocation($user,$locationId);
         }
 
-
+    $locationId = getLocationId($locationName);
 
 
     // add $companyName to companies if it doesn't exist already

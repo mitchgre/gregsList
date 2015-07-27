@@ -12,6 +12,10 @@
 
  */
 
+ini_set('memory_limit','-1');
+set_time_limit(0);
+
+
 //require "./credentials.php";
 require "./engineer.php"; // utitlity functions
 require "./concierge.php"; // guest registry functions
@@ -64,7 +68,7 @@ if (isset($_POST['func']))
             }
         if ($func === "getPostings")
             {
-                getPostings($user);
+                echo json_encode( getPostings($user) );
             }
         if ($func === "getContacts")
             {

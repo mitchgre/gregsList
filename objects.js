@@ -700,7 +700,8 @@ function remover(e)
 */
 function getStuff(object)
 {
-    console.log("getting for ");
+    console.log("getting "+object.type+"s");
+
     console.log(object);
 
     // console.log(callback);
@@ -715,7 +716,7 @@ function getStuff(object)
 	    url: "butler.php",
 	    type: "post",
 	    //dataType: "text",
-	    dataType: "json",
+	     dataType: "json",
 	    data:
 	    {
 		// getter: true
@@ -725,7 +726,7 @@ function getStuff(object)
 	    },
 	    success: function(resp)
 	    {
-		console.log("got stuff!");
+		console.log("got "+object.type+"s");
 		console.log(resp);
 		//console.log(object);
 		//callback(object, JSON.parse(resp));
