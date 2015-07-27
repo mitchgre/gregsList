@@ -329,6 +329,12 @@ create table company_locations(
 # add base cases for company locations
 
 
+create table jobBoards(
+       id int primary key unique auto_increment,
+       name varchar(255),
+       unique key name (name)
+)engine=innodb;
+
 
 # contains job postings
 create table postings(
@@ -338,6 +344,7 @@ create table postings(
        `user` int,
        company int, #references companies.id,
        location int, #references location.id,
+
        `source` varchar(255),   # this should reference a new table instead?
        foreign key (`user`) references users(id)
               on delete set null on update cascade,
@@ -351,6 +358,7 @@ create table postings(
 # figure out how to remove postings if they weren't tied to a user id.
 
 
+/*
 # insert some base case postings
 insert into `postings` (`user`,`title`,`url`,`company`,`location`,`source`)
        values
@@ -389,7 +397,7 @@ insert into `postings` (`user`,`title`,`url`,`company`,`location`,`source`)
        8,
        "indeed.com"
        );
-
+*/
 
 
 
