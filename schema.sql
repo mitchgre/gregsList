@@ -352,11 +352,13 @@ create table postings(
        `url` varchar(255),
        `company` int, # references companies.id,
        `location` int, # references locations.id
+       `source` int,
        foreign key (`company`) references companies(id)
       		  on delete set null on update cascade,
        foreign key (`location`) references locations(id)
-      		  on delete set null on update cascade
-       
+      		  on delete set null on update cascade,
+       foreign key (`source`) references jobBoards(id)
+      		  on delete set null on update cascade       
 )engine=innodb;
 # notes:
 # couldn't separate postings from user.  It was too complicated to
