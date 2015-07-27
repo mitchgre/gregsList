@@ -140,7 +140,7 @@ if (isset($_POST['func']))
             }
         if ($func === "insertCompany")
             {
-                $url = urldecode($_POST["url"]);
+                // $url = urldecode($_POST["url"]);
                 $companyName = $_POST["company"];
                 insertCompany($user,$companyName);
             }
