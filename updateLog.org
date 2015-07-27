@@ -27559,4 +27559,33 @@ ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that 
        	       on delete set nul' at line 13
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')engine=innodb' at line 10
 
-  Can't quite tell where this is. 
+  Can't quite tell where this is.  I just end up counting lines and
+  comparing them to queries.
+
+  12:34:56
+  After doing the above I traced the first errors:
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key (`source`) references jobBoards(id)
+       	       on delete set nul' at line 13
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')engine=innodb' at line 10
+
+
+	This corresponds to 
+
+# contains job postings
+create table postings(
+       id int primary key unique auto_increment,
+       title varchar(255),
+       url varchar(255),
+       company int, #references companies.id,
+       location int, #references location.id,
+       `source` varchar(255),   # this should reference a new table instead?
+       unique key combo (url), 
+       foreign key (`company`) references companies(id)
+       	       on delete set null on update cascade,
+       foreign key (`location`) references locations(id)
+       	       on delete set null on update cascade
+       foreign key (`source`) references jobBoards(id)
+       	       on delete set null on update cascade
+)engine=innodb;
+

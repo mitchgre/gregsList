@@ -288,8 +288,8 @@ insert into locations (name)
 	("Bethlehem, PA"),
 	("US-PA-Breinigsville"),
 	("Allentown, PA"),
-	("San Francisco"),
-	("K6-San Francisco - Spear St ");
+	("San Francisco, CA");
+
 
 
 
@@ -332,9 +332,19 @@ create table company_locations(
 create table jobBoards(
        id int primary key unique auto_increment,
        name varchar(255),
-       unique key name (name)
+       unique key uniqueName (name)
 )engine=innodb;
 
+
+# add base cases for jobBoards
+
+insert into jobBoards (name)
+ values 
+ ("http://indeed.com"),
+ ("http://careerbuilder.com"),
+ ("http://monster.com"),
+ ("http://linkedin.com"),
+ ("http://glassdoor.com");
 
 # contains job postings
 create table postings(
