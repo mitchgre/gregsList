@@ -27573,6 +27573,7 @@ ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that 
 	This corresponds to 
 
 # contains job postings
+
 create table postings(
        id int primary key unique auto_increment,
        title varchar(255),
@@ -27589,3 +27590,4 @@ create table postings(
        	       on delete set null on update cascade
 )engine=innodb;
 
+	The foreign keys aren't getting added properly.

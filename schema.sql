@@ -339,12 +339,12 @@ create table jobBoards(
 # add base cases for jobBoards
 
 insert into jobBoards (name)
- values 
+ values (
  ("http://indeed.com"),
  ("http://careerbuilder.com"),
  ("http://monster.com"),
  ("http://linkedin.com"),
- ("http://glassdoor.com");
+ ("http://glassdoor.com"));
 
 # contains job postings
 create table postings(
