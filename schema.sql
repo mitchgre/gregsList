@@ -349,17 +349,14 @@ insert into jobBoards (name)
 create table postings(
        id int primary key unique auto_increment,
        title varchar(255),
-       url varchar(255),
-       company int, #references companies.id,
-       location int, #references location.id,
-       `source` varchar(255),   # this should reference a new table instead?
-       unique key combo (url), 
+       `url` varchar(255),
+       `company` int, # references companies.id,
+       `location` int, # references locations.id
        foreign key (`company`) references companies(id)
-       	       on delete set null on update cascade,
+      		  on delete set null on update cascade,
        foreign key (`location`) references locations(id)
-       	       on delete set null on update cascade
-       foreign key (`source`) references jobBoards(id)
-       	       on delete set null on update cascade
+      		  on delete set null on update cascade
+       
 )engine=innodb;
 # notes:
 # couldn't separate postings from user.  It was too complicated to
