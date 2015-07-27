@@ -27456,7 +27456,28 @@ ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that 
 )engine=innodb' at line 11
 ERROR 1146 (42S02): Table 'gregsList.user_companies' doesn't exist
 
+	Mon Jul 27, 2015 10:25:08
+	Trying switching the order up.  I'm not confident this will
+	work, but we'll see.
 
+
+# contains relations between users and companies
+create table user_companies(
+       id int primary key unique auto_increment,
+       `user` int, # references users.id,
+       company int, # references companies.id
+       motivation int,
+       # need to add unique key here somehow.
+       unique key combo (`user`, `company`),
+       foreign key (`user`) references users(id)
+       	       on delete set null on update cascade,
+       foreign key (`company`) references companies(id)
+       	       on delete set null on update cascade
+)engine=innodb;
+
+	Mon Jul 27, 2015 10:26:14
+	That didn't give any errors, and the table is created.  But
+	does it work?  Have to test it with scraper.
 
     Trying to find a reference.   
     
