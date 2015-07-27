@@ -27372,3 +27372,24 @@ _comscore.push({ c1: "2", c2: "6486505", c4:"www.indeed.com/jobs", c15:"19r5njn3
 root@gspu:/var/www/html/gregsList# 
 *** test3 anchors (not done)
 *** test4 explosion (not done)
+** Sun Jul 26, 2015 20:43:30 got scraper mostly working on gs2
+ Running out of steam for the day though.
+
+ http://dev.mysql.com/doc/refman/5.6/en/constraint-primary-key.html
+
+ One of the more interesting things about getting it working is that
+ I'm able to see just how poorly formatted my schema is. 
+
+ There's lots of duplicates since unique keys don't seem to be
+ working.  (see link above).  
+
+ So tomorrow I can try to rebuild the database with scrapings and
+ unique keys.   
+
+ I also need to add a trigger to refresh things when calling the
+ scraper. 
+
+ I also need to add filters and default lengths, since having 100
+ elements in an AJAX array evidently slows my javascript down too
+ far. Might want to walk through things to see if I can speed this up
+ somehow.  It's supposed to be asynchronous after all. 
