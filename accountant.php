@@ -913,6 +913,9 @@ function insertUserPosting($user,$posting)
 }
 
 
+function postingExists($title,$url,$companyId,$locationId,$sourceId)
+{
+}
 
 function insertPosting($user,$title,$url,$companyName,$locationName,$source)
 {
