@@ -27655,3 +27655,7 @@ create table postings(
    element array, then just get the whole thing in SQL, load it up in
    PHP, store elements 50-100 in a new array and send the result back
    to javascript.  
+
+   So, that's a good start there.  Maybe have a default limit of 50
+   at a time.  I wish there was some way to quantify that value since
+   50 is quite an arbitrary number. 
