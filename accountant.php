@@ -907,14 +907,15 @@ function jobBoardExists($name)
 
 function insertJobBoard($name)
 {
-    if ( jobBoardExists($name) )
+    if ( jobBoardExists($name) == 0)
     {
         $query  = "insert into jobBoards (name) ";
-        $query .=$name;
-        return reset(returnStuff($query));
+        $query .= "values (\"$name\")";
+        $value = booleanReturn($query);
+        return $value;
     }
     else
-        return "jobBoard $name already exists.";
+        return "jobBoard \"$name\" already exists.";
 }
 
 function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
