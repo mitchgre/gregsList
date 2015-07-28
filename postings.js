@@ -59,7 +59,8 @@ function getIndeedScraperDialogString(divId)
     // create and return a string of html
     var string  = '<div id="'+divId+'" title="'+divId+'">';
     string += '<table>';
-
+    string += '<tr><td>Keyword:  <input id="scraperKeyword"></td></tr>';
+    string += '<tr><td>Location:  <input id="scraperLocation"></td></tr>';
     string += '</table></div>';
 
     return string;
@@ -70,9 +71,9 @@ function openScraperDialog()
     // get dialog string
     var divId = 'scraperDialog';
     var scraperDialogString = getIndeedScraperDialogString(divId);
-    var url;
+    var url = "http://www.indeed.com/jobs?q=";
     // url = "http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=75&start=0";
-    url = "http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=100&start=0";
+    // url = "http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=100&start=0";
     console.log('scraping url:');
     console.log(url);
     

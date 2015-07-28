@@ -27623,4 +27623,6 @@ create table postings(
 	Will work on different scraper settings tomorrow.
 
 ** Tue Jul 28, 2015 08:27:39 working on scraper today
-   
+   Want to be able to pass locations through AJAX.
+
+   Where is this currently being done?  [[file:postings.js::function%20openScraperDialog][file:postings.js::function openScraperDialog]]
