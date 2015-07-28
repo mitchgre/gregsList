@@ -27615,3 +27615,7 @@ create table postings(
 	Mon Jul 27, 2015 21:05:37
 	Got insertPosting() working.  Might have fixed javascript.
 	removePosting() and editPosting() are probably also broken. 
+
+	Mon Jul 27, 2015 21:11:58
+	Scraper works.  removePosting() works.  editPosting()
+	probably doesn't work.  Need to sleep. 
