@@ -27621,3 +27621,6 @@ create table postings(
 	probably doesn't work.  Need to sleep. 
 
 	Will work on different scraper settings tomorrow.
+
+** Tue Jul 28, 2015 08:27:39 working on scraper today
+   
