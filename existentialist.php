@@ -39,7 +39,7 @@ function usernameExists($username)
 
 
 
-function companyIdExists($companyName)
+function companyNameExists($companyName)
 {
     $query  = "select count(id) from companies ";
     $query .= "where name=\"$companyName\"";
@@ -47,9 +47,22 @@ function companyIdExists($companyName)
     $count = reset(returnStuff($query));
 
     if ( $count > 0 )
-        return true;
-    return false;
+        return 1;
+    return 0;
 }
+
+
+function companyIdExists($companyId)
+{
+    $query  = "select count(id) from companies where id = $companyId ";
+    $count = reset(returnStuff($query));
+    if ( $count > 0 )
+        return 1;
+    else
+        return 0;
+}
+
+
 
 function userCompanyIdExists($user,$companyId)
 {
@@ -63,6 +76,18 @@ function userCompanyIdExists($user,$companyId)
         return true;
     return false;
 }
+
+
+function locationIdExists($locationId)
+{
+    $query  = "select count(id) from locations where id = $locationId ";
+    $count = reset(returnStuff($query));
+    if ( $count > 0 )
+        return true;
+    else
+        return false;
+}
+
 
 
 

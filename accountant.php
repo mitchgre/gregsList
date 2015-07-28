@@ -920,7 +920,15 @@ function insertJobBoard($name)
 
 function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
 {
+    // verify that $companyId, $locationId, $sourceId all exist
+
     // just insert directly.
+    
+    $query  = "insert into jobBoards (name) ";
+    $query .= "values (\"$name\")";
+    $value = booleanReturn($query);
+    return $value;
+
 }
 
 
@@ -959,7 +967,7 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
 
 
     // add $companyName to companies if it doesn't exist already
-    if (companyIdExists($companyName) != true)
+    if (companyNameExists($companyName) != true)
         if ( addCompany($companyName) === false )
             return "error adding company";
     
@@ -1697,7 +1705,7 @@ function updatePosting($user)
 
     // if location doesn't exist yet for user, add it
 
-    if (companyIdExists($companyName) != true)
+    if (companyNameExists($companyName) != true)
         addCompany($companyName);
 
     $companyId = getCompanyId($companyName);
