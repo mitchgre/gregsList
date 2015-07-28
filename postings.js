@@ -82,7 +82,7 @@ function getScraperParameters()
     url += keyword;					// append replaced string to url
 
     url += "&l=";					// append location flag
-    var location = $("#scraperKeyword")[0].value;	// get value from input box
+    var location = $("#scraperLocation")[0].value;	// get value from input box
     location = location.replace(/ /g,"+");		// replace ' ' chars with '+' throughout entire string
     url += location;					// append replaced string to url
     
