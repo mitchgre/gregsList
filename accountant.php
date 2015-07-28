@@ -790,8 +790,7 @@ function addUserCompany($user,$companyId)
     
     $query  = "insert into user_companies (user,company) ";
     $query .= "values ($user,$companyId) "; 
-    return booleanReturn($query);
-    
+    return booleanReturn($query);    
 }
 
 
@@ -898,9 +897,15 @@ function addUserLocation($user,$locationName)
 // return jobBoard id if it exists, false otherwise?
 // that's proving to be too difficult!
 // so just return true or false based on count
-function jobBoardExists($name)
+function jobBoardNameExists($name)
 {
     $query = "select count(id) from jobBoards where name = \"".$name."\"";
+    return reset(returnStuff($query));
+}
+
+function jobBoardIdExists($id)
+{
+    $query = "select count(id) from jobBoards where id = $id";
     return reset(returnStuff($query));
 }
 
@@ -913,7 +918,7 @@ function getJobBoardId($name)
 
 function insertJobBoard($name)
 {
-    if ( jobBoardExists($name) == 0)
+    if ( jobBoardNameExists($name) == 0)
     {
         $query  = "insert into jobBoards (name) ";
         $query .= "values (\"$name\")";
@@ -924,6 +929,8 @@ function insertJobBoard($name)
         return "jobBoard \"$name\" already exists.";
 }
 
+
+// bare posting.
 function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
 {
     // verify that $companyId, $locationId, $sourceId all exist
@@ -934,7 +941,7 @@ function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
     if ( locationIdExists($locationId) == 0 )
         return "location $locationId does not exist";
 
-    if ( jobBoardExists($sourceId) == 0 )
+    if ( jobBoardIdExists($sourceId) < 1 )
         return "jobBoard $sourceId does not exist";
 
 
@@ -950,6 +957,19 @@ function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
 }
 
 
+function getPostingId($title,$url,$companyId,$locationId,$sourceId)
+{
+    $query  = "select id from postings ";
+    $query .= "where title=\"$title\" and ";
+    $query .= "url=\"$url\" and ";
+    $query .= "company=$companyId and ";
+    $query .= "location=$locationId and ";
+    $query .= "source=$sourceId ";
+
+    return reset(returnStuff($query));
+
+}
+
 
 function insertUserPosting($userId,$postingId)
 {
@@ -957,13 +977,13 @@ function insertUserPosting($userId,$postingId)
     
     // verify posting exists
     if ( postingIdExists($postingId) == 0 )
-        return "postingId $postingId does not exist."
+        return "postingId $postingId does not exist.";
 
     $query  = "insert into user_postings (user,posting) "; 
     $query .= "values ($userId,$postingId) ";
 
     $value = booleanReturn($query);
-    if ( $value = 1 )
+    if ( $value == 1 )
         return 1;
     return 0;
 }
@@ -996,8 +1016,8 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
     
     $companyId = getCompanyId($companyName);
 
-    if ( userCompanyIdExists($user,$companyId) === false )
-        if ( addUserCompany($user,$companyId) === false )
+    if ( userCompanyIdExists($user,$companyId) < 1 )
+        if ( addUserCompany($user,$companyId) == false )
             return "error adding user_company: $user, $companyId, $companyName";
     
     // check if $url is valid
@@ -1008,14 +1028,21 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
     $query .= "$companyId, $locationId, \"$source\", $user)";
     */
 
+    if ( jobBoardNameExists( $source ) < 1)
+        if ( insertJobBoard( $source ) != true )
+            return "error inserting jobBoard \"$source\"";
+    
+    $sourceId = getJobBoardId($source);
+
+
     // fixing it.
     $barePosting = insertBarePosting($title,$url,$companyId,$locationId,$sourceId);
  
    
     // if (booleanReturn($query))
-    if ( $barePostingId == 1 )
+    if ( $barePosting == 1 )
         {
-
+            $postingId = getPostingId($title,$url,$companyId,$locationId,$sourceId);
             $userPosting = insertUserPosting($user,$postingId);
             
             if ( $userPosting == 1)
@@ -1036,7 +1063,7 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
             }
         }
     else
-        return "failed to add posting: " . $query;
+        return "failed to add bare posting: $barePosting" ;
     
 }
 

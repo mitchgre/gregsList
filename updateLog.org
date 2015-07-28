@@ -27604,3 +27604,10 @@ create table postings(
 	Now all that work that was just done to decompose the
 	postings table in SQL breaks the insertPosting() function in
 	PHP which needs to be reworked.  
+
+
+	Mon Jul 27, 2015 20:27:03
+	I've fleshed out the insertPosting() function which calls a
+	lot of other functions.  
+
+	Not sure if I have the energy to test it.  

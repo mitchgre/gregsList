@@ -99,14 +99,17 @@ function postingExists($title,$url,$companyId,$locationId,$sourceId)
 function userCompanyIdExists($user,$companyId)
 {
     $query  = "select count(id) from user_companies ";
-    $query .= "where company = $companyId";
+    $query .= "where company = $companyId ";
     $query .= "and user = $user";
 
-    $count = reset(returnStuff($query));
+    // $count = reset(returnStuff($query));
+    return reset(returnStuff($query));
 
-    if ( $count > 0 )
-        return true;
-    return false;
+    /*
+      if ( $count > 0 )
+        return 1;
+    return 0;
+    */
 }
 
 
