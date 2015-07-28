@@ -27659,3 +27659,8 @@ create table postings(
    So, that's a good start there.  Maybe have a default limit of 50
    at a time.  I wish there was some way to quantify that value since
    50 is quite an arbitrary number. 
+
+   Tue Jul 28, 2015 12:40:01
+   Looked over database after scraping about 600 postings.   There are
+   twice as many results in the db than I thought.   Evidently I need
+   to look over unique keys again in the schema when I get a chance. 
