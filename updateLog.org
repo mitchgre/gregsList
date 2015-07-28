@@ -27648,3 +27648,10 @@ create table postings(
    thinking that perhaps I need to just start over from scratch on
    the javascript.   That would be a good exercise if nothing else,
    but I don't have that kind of time. 
+
+   Tue Jul 28, 2015 11:56:19
+   To limit the AJAX traffic, it might be a good idea to do so with
+   PHP.   For example, say you want to get elements 50-100 of a 5,000
+   element array, then just get the whole thing in SQL, load it up in
+   PHP, store elements 50-100 in a new array and send the result back
+   to javascript.  

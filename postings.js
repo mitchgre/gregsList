@@ -111,8 +111,15 @@ function openScraperDialog()
 	    "Scrape":function()
 	    {
 		var url = getScraperParameters();
-
+		// remove input boxes
+		
+		var toDestroy = ["scraperLocation","scraperKeyword","scraperDialog"];
+		
+		for (var i=0; i < toDestroy.length; i++)
+		    removeElement(toDestroy[i]);
+		
 		// get postings from scraper, store them in div
+		$(this).dialog("close");
 		sendScraperRequest(divId,url);
 	    }
 	}
