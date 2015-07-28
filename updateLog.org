@@ -27631,3 +27631,13 @@ create table postings(
    Okay, I'm now able to scrape different keywords and locations, 
    but that just slows things down even more.  I really need to
    reduce the data in the browser somehow. 
+
+
+   Tue Jul 28, 2015 09:48:10
+   The question is how do I reduce data?  The most obvious thing I
+   can think of is just limiting the array sizes, and sending counts
+   to show where the user is in the data.
+
+   For example:  results 1-50 of 2,746.  Basically, with my current
+   data structures, I don't think I can really support 50 results at
+   a time.  
