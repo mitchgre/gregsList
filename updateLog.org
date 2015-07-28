@@ -27619,3 +27619,5 @@ create table postings(
 	Mon Jul 27, 2015 21:11:58
 	Scraper works.  removePosting() works.  editPosting()
 	probably doesn't work.  Need to sleep. 
+
+	Will work on different scraper settings tomorrow.
