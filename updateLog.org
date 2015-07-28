@@ -27626,3 +27626,8 @@ create table postings(
    Want to be able to pass locations through AJAX.
 
    Where is this currently being done?  [[file:postings.js::function%20openScraperDialog][file:postings.js::function openScraperDialog]]
+
+   Tue Jul 28, 2015 09:30:55
+   Okay, I'm now able to scrape different keywords and locations, 
+   but that just slows things down even more.  I really need to
+   reduce the data in the browser somehow. 
