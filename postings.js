@@ -78,10 +78,16 @@ function getScraperParameters()
     var url = "http://www.indeed.com/jobs?q=";
     // url += $("#scraperKeyword")[0].value;		// need to replace all spaces in the string with plus signs
     var keyword = $("#scraperKeyword")[0].value;	// get value from input box
-    keyword = keyword.replace(/ /g,"+");		// replace ' ' chars with '+';
+    keyword = keyword.replace(/ /g,"+");		// replace ' ' chars with '+' throughout entire string
     url += keyword;					// append replaced string to url
+
     url += "&l=";					// append location flag
+    var location = $("#scraperKeyword")[0].value;	// get value from input box
+    location = location.replace(/ /g,"+");		// replace ' ' chars with '+' throughout entire string
+    url += location;					// append replaced string to url
     
+    url += "&limit=100";				// hardcode limit for now.
+
     console.log('scraping url:');
     console.log(url);
     return url;

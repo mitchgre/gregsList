@@ -98,7 +98,3 @@ function appendListToString(string,list)
     return string;
 }
 
-
-function replaceAllChars(string,from,to)
-{
-}
