@@ -66,16 +66,29 @@ function getIndeedScraperDialogString(divId)
     return string;
 }
 
+
+
+function getScraperParameters()
+{
+    // sample url.
+    // url = "http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=75&start=0";
+    // url = "http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=100&start=0";
+    // get url from dialog
+
+    var url = "http://www.indeed.com/jobs?q=";
+    url += $("#scraperKeyword")[0].value;
+    url += "&l=";
+    
+    console.log('scraping url:');
+    console.log(url);
+    return url;
+}
+
 function openScraperDialog()
 {
     // get dialog string
     var divId = 'scraperDialog';
     var scraperDialogString = getIndeedScraperDialogString(divId);
-    var url = "http://www.indeed.com/jobs?q=";
-    // url = "http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=75&start=0";
-    // url = "http://www.indeed.com/jobs?q=software+developer&l=San+Francisco,+CA&limit=100&start=0";
-    console.log('scraping url:');
-    console.log(url);
     
     $(scraperDialogString).dialog(
     {
@@ -88,6 +101,8 @@ function openScraperDialog()
 	    },
 	    "Scrape":function()
 	    {
+		var url = getScraperParameters();
+
 		// get postings from scraper, store them in div
 		sendScraperRequest(divId,url);
 	    }

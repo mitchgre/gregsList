@@ -79,3 +79,21 @@ function getMonthName(date)
     var m = new month();
     return m.names[date.getMonth()];
 }
+
+// http://stackoverflow.com/questions/650022/how-do-i-split-a-string-with-multiple-separators-in-javascript
+function splitStringSpacesCommas(string)
+{
+    // [\s,] => space, comma
+    return string.split(/[\s,]+/);
+}
+
+/*
+  Given a base string and a list of strings,
+  append each string in the list to the base string. 
+*/
+function appendListToString(string,list)
+{
+    for (var i = 0; i < list.length; i++)
+	string += list[i];
+    return string;
+}
