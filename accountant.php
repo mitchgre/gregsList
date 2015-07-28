@@ -905,6 +905,12 @@ function jobBoardExists($name)
 }
 
 
+function getJobBoardId($name)
+{
+    $query = "select id from jobBoards where name = \"".$name."\"";
+    return reset(returnStuff($query));
+}
+
 function insertJobBoard($name)
 {
     if ( jobBoardExists($name) == 0)
@@ -921,27 +927,29 @@ function insertJobBoard($name)
 function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
 {
     // verify that $companyId, $locationId, $sourceId all exist
-
-    // just insert directly.
     
+    /*
     $query  = "insert into jobBoards (name) ";
     $query .= "values (\"$name\")";
     $value = booleanReturn($query);
     return $value;
+    */
 
+    $query  = "insert into postings (title,url,company,location,source) ";
+    $query .= "values (\"$title\",\"$url\",$companyId,$locationId,$sourceId) ";
+    // just insert directly.
+
+    $value = booleanReturn($query);
+
+    return $value;
 }
 
-
-
-// return postingId if posting exists, false otherwise
-function postingExists($title,$url,$companyId,$locationId,$sourceId)
-{
-}
 
 
 function insertUserPosting($userId,$postingId)
 {
     // verify user exists
+    
     // verify posting exists
 }
 
