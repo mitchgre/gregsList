@@ -62,6 +62,20 @@ function companyIdExists($companyId)
         return 0;
 }
 
+
+
+function postingIdExists($postingId)
+{
+    $query  = "select count(id) from postings where id = $postingId ";
+    $count = reset(returnStuff($query));
+    if ( $count > 0 )
+        return 1;
+    else
+        return 0;
+}
+
+
+
 // return postingId if posting exists, false otherwise
 function postingExists($title,$url,$companyId,$locationId,$sourceId)
 {

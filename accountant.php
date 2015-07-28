@@ -928,20 +928,25 @@ function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
 {
     // verify that $companyId, $locationId, $sourceId all exist
     
-    /*
-    $query  = "insert into jobBoards (name) ";
-    $query .= "values (\"$name\")";
-    $value = booleanReturn($query);
-    return $value;
-    */
+    if ( companyIdExists($companyId) == 0 )
+        return "company $companyId does not exist";
+
+    if ( locationIdExists($locationId) == 0 )
+        return "location $locationId does not exist";
+
+    if ( jobBoardExists($sourceId) == 0 )
+        return "jobBoard $sourceId does not exist";
+
 
     $query  = "insert into postings (title,url,company,location,source) ";
     $query .= "values (\"$title\",\"$url\",$companyId,$locationId,$sourceId) ";
-    // just insert directly.
 
     $value = booleanReturn($query);
+    
+    if ( $value == 1)
+        return 1;
 
-    return $value;
+    return 0;
 }
 
 
@@ -951,6 +956,16 @@ function insertUserPosting($userId,$postingId)
     // verify user exists
     
     // verify posting exists
+    if ( postingIdExists($postingId) == 0 )
+        return "postingId $postingId does not exist."
+
+    $query  = "insert into user_postings (user,posting) "; 
+    $query .= "values ($userId,$postingId) ";
+
+    $value = booleanReturn($query);
+    if ( $value = 1 )
+        return 1;
+    return 0;
 }
 
 
@@ -992,17 +1007,33 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
     $query .= "values(\"$title\", \"$url\", ";
     $query .= "$companyId, $locationId, \"$source\", $user)";
     */
-    
-    if (booleanReturn($query))
+
+    // fixing it.
+    $barePosting = insertBarePosting($title,$url,$companyId,$locationId,$sourceId);
+ 
+   
+    // if (booleanReturn($query))
+    if ( $barePostingId == 1 )
         {
-            // get current time/date
-            $thisTime = getCurrentDateTimeString();
+
+            $userPosting = insertUserPosting($user,$postingId);
             
-            // insert a schedule event
-            insertSchedule($user, $title, "job posting", null, $thisTime, $thisTime);
-            // inserting the schedule event automatically adds an entry in user_schedule
-            
-            return true;
+            if ( $userPosting == 1)
+            {
+                
+                // get current time/date
+                $thisTime = getCurrentDateTimeString();
+                
+                // insert a schedule event
+                insertSchedule($user, $title, "job posting", null, $thisTime, $thisTime);
+                // inserting the schedule event automatically adds an entry in user_schedule
+                
+                return true;
+            }
+            else
+            {
+                return "error inserting user_posting.";
+            }
         }
     else
         return "failed to add posting: " . $query;
