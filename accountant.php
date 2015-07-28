@@ -1613,7 +1613,7 @@ function removePosting($user)
     // $url = htmlspecialchars_decode($_POST["url"]);
     $id = $_POST["url"];
     
-    $query  = "delete from postings where id = $id and user = $user";
+    $query  = "delete from postings where id = $id";
     
     booleanEcho($query);
 }
