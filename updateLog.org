@@ -27611,3 +27611,7 @@ create table postings(
 	lot of other functions.  
 
 	Not sure if I have the energy to test it.  
+
+	Mon Jul 27, 2015 21:05:37
+	Got insertPosting() working.  Might have fixed javascript.
+	removePosting() and editPosting() are probably also broken. 

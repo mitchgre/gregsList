@@ -157,8 +157,8 @@ function insertPosting()
 		    // get values from form
 		    var title = $("#embedTitle")[0].value;
 
-		    var url = '<a href = \\"' + $("#embedURL")[0].value + '\\">link</a>';
-		    //var url = $("#embedURL")[0].value;
+		    // var url = '<a href = \\"' + $("#embedURL")[0].value + '\\">link</a>';
+		    var url = $("#embedURL")[0].value;
 
 		    // instead of using a string, try creating an element,
 		    // and embedding the url in element 
