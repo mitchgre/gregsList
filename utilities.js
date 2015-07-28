@@ -97,3 +97,8 @@ function appendListToString(string,list)
 	string += list[i];
     return string;
 }
+
+
+function replaceAllChars(string,from,to)
+{
+}

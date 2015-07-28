@@ -76,8 +76,11 @@ function getScraperParameters()
     // get url from dialog
 
     var url = "http://www.indeed.com/jobs?q=";
-    url += $("#scraperKeyword")[0].value;
-    url += "&l=";
+    // url += $("#scraperKeyword")[0].value;		// need to replace all spaces in the string with plus signs
+    var keyword = $("#scraperKeyword")[0].value;	// get value from input box
+    keyword = keyword.replace(/ /g,"+");		// replace ' ' chars with '+';
+    url += keyword;					// append replaced string to url
+    url += "&l=";					// append location flag
     
     console.log('scraping url:');
     console.log(url);
