@@ -27641,3 +27641,10 @@ create table postings(
    For example:  results 1-50 of 2,746.  Basically, with my current
    data structures, I don't think I can really support 50 results at
    a time.  
+
+   Which brings me to the topic of making the data structures more
+   efficient.  I've known about this for awhile, but it's something
+   of a large problem that I'm not sure how to tackle.  I was
+   thinking that perhaps I need to just start over from scratch on
+   the javascript.   That would be a good exercise if nothing else,
+   but I don't have that kind of time. 
