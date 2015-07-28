@@ -907,10 +907,11 @@ function jobBoardExists($name)
 
 function insertJobBoard($name)
 {
-    if ( !jobBoardExists($name) )
+    if ( jobBoardExists($name) )
     {
         $query  = "insert into jobBoards (name) ";
-        $query .= "";
+        $query .=$name;
+        return reset(returnStuff($query));
     }
     else
         return "jobBoard $name already exists.";
