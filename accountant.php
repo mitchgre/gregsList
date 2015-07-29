@@ -181,6 +181,29 @@ function getLocations($user)
 
 
 /*
+  Simply count the total number of postings in db.
+*/
+function getPostingsCount()
+{
+    $query  = "select count(id) from postings";
+    return reset(returnStuff($query));
+}
+
+/*
+  Simply count the postings linked to a specific user id.
+ */
+
+
+function getUserPostingsCount($user)
+{
+    $query  = "select count(id) from user_postings where user = $user";
+    return reset(returnStuff($query));
+
+}
+
+
+
+/*
   $user is an int referring to the SQL id of the userName.
 
   $window is a json object showing start and end postings to get.  
