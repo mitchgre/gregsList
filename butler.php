@@ -340,7 +340,6 @@ if (isset($_POST['func']))
             // $url = urldecode( $_POST['url'] );
             $url = $_POST['url'];
 
-
             // echo json_encode($url);
             $postings = scrapePostings($url);
 
@@ -349,12 +348,16 @@ if (isset($_POST['func']))
             {
                 $posting = $postings[ $i ];
                 
-                insertPosting($user,
-                              $posting["title"],
-                              $posting["link"],
-                              $posting["company"],
-                              $posting["location"],
-                              "indeed.com");
+                $postingStatus = insertPosting($user,
+                                               $posting["title"],
+                                               $posting["link"],
+                                               $posting["company"],
+                                               $posting["location"],
+                                               "indeed.com");
+
+                if ( $postingStatus !== true )
+                    echo json_encode( $postingStatus ); 
+
             }
 
             echo json_encode($postings);
