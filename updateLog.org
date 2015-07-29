@@ -27691,6 +27691,11 @@ create table postings(
    Wed Jul 29, 2015 13:09:07
    Looks like I might have gotten it.  Testing scraper again.
 
+   Wed Jul 29, 2015 13:17:10
+   Yes, that works.  And it seems a little faster too, though that
+   could just be in my head since I still don't have a reliable means
+   to verify timing.
+
 *** TODO [0/2]
 
     - [ ] Add status to user_postings table. 
