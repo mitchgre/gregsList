@@ -371,6 +371,72 @@ glo.prototype.setupIndustries =
 
 
 
+/*
+  Empty the tables of companies and rebuild them.
+*/
+glo.prototype.setupCompanies = 
+    function setupCompanies()
+{
+    var companies = $("#companies")[0]; // container div
+    
+    emptyElement(companies);
+
+    // add text fields
+    // companies.appendChild(document.createTextNode('Companies'));
+    var companyField = addInput(companies,'text','','','CompanyToAdd');
+
+    // add button
+    var addButton = addInput(companies,'button','','Add Company','addCompanyButton');
+
+    // wire button
+    addButton.onclick = insertCompany.bind(this);
+
+    // insert empty results table
+    var table = createAppendedChildToParent('table',companies);
+    this.companies.table = table;
+    table.id = 'tableOfCompanies';
+    table.className = 'io';
+
+    // fill results table
+    getStuff(this.companies);
+
+}
+
+
+
+
+/*
+  Empty the tables of locations and rebuild them.
+*/
+glo.prototype.setupLocations = 
+    function setupLocations()
+{
+    var locations = $("#locations")[0]; // container div
+    
+    emptyElement(locations);
+
+    // add text fields
+    // locations.appendChild(document.createTextNode('Locations'));
+    var locationField = addInput(locations,'text','','','LocationToAdd');
+
+    // add button
+    var addButton = addInput(locations,'button','','Add Location','addLocationButton');
+
+    // wire button
+    addButton.onclick = insertLocation.bind(this);
+
+    // insert empty results table
+    var table = createAppendedChildToParent('table',locations);
+    this.locations.table = table;
+    table.id = 'tableOfLocations';
+    table.className = 'io';
+
+    // fill results table
+    getStuff(this.locations);
+
+}
+
+
 
 /*
   empty tables and calendars then refill them from db
@@ -415,69 +481,6 @@ glo.prototype.setupSchedules =
 }
 
 
-
-/*
-  Empty the tables of companies and rebuild them.
-*/
-glo.prototype.setupCompanies = 
-    function setupCompanies()
-{
-    var companies = $("#companies")[0]; // container div
-    
-    emptyElement(companies);
-
-    // add text fields
-    // companies.appendChild(document.createTextNode('Companies'));
-    var companyField = addInput(companies,'text','','','CompanyToAdd');
-
-    // add button
-    var addButton = addInput(companies,'button','','Add Company','addCompanyButton');
-
-    // wire button
-    addButton.onclick = insertCompany.bind(this);
-
-    // insert empty results table
-    var table = createAppendedChildToParent('table',companies);
-    this.companies.table = table;
-    table.id = 'tableOfCompanies';
-    table.className = 'io';
-
-    // fill results table
-    getStuff(this.companies);
-
-}
-
-
-/*
-  Empty the tables of locations and rebuild them.
-*/
-glo.prototype.setupLocations = 
-    function setupLocations()
-{
-    var locations = $("#locations")[0]; // container div
-    
-    emptyElement(locations);
-
-    // add text fields
-    // locations.appendChild(document.createTextNode('Locations'));
-    var locationField = addInput(locations,'text','','','LocationToAdd');
-
-    // add button
-    var addButton = addInput(locations,'button','','Add Location','addLocationButton');
-
-    // wire button
-    addButton.onclick = insertLocation.bind(this);
-
-    // insert empty results table
-    var table = createAppendedChildToParent('table',locations);
-    this.locations.table = table;
-    table.id = 'tableOfLocations';
-    table.className = 'io';
-
-    // fill results table
-    getStuff(this.locations);
-
-}
 
 
 
