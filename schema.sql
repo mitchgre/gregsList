@@ -423,6 +423,8 @@ create table user_postings(
        id int primary key unique auto_increment,
        `user` int,
        `posting` int,
+       `status` int,  # 1 = applied, 0 = not applied?
+       `motivation` int,	       
        unique key uniqueUserPostings (`user`, `posting`), 
        foreign key (`user`) references users(id)
               on delete set null on update cascade,

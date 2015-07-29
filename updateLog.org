@@ -27702,7 +27702,13 @@ create table postings(
    scratch again, and when that's working then I can make some
    additions to the UI.  
 
-   Seems simple enough.  Let me get started. 
+   Seems simple enough.  Let me get started.
+
+   [[file:schema.sql::create%20table%20user_postings][file:schema.sql::create table user_postings]]
+
+   Wed Jul 29, 2015 13:28:07
+   Got that done, but not sure if I really want to destroy the
+   database and start over again.  
 
 *** TODO [0/2]
 
