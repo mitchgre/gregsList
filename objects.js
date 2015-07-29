@@ -438,6 +438,40 @@ glo.prototype.setupLocations =
 
 
 
+
+/*
+  Empty the tables of postings and rebuild them. 
+*/
+glo.prototype.setupPostings = 
+    function setupPostings()
+{
+    var postings = $("#postings")[0]; // container div
+    //var postings = this.postings.table;
+    
+    emptyElement(postings);
+
+     var addButton = addInput(postings,'button','','Add posting','addPostingButton');
+     var scrapeButton = addInput(postings,'button','','Scrape Postings','addScrapingButton');
+
+    // wire addButton
+    addButton.onclick = insertPosting.bind(this);
+
+    // wire scrapeButton
+    scrapeButton.onclick = scrapePostings.bind(this);
+
+    // insert empty results table
+    var table = createAppendedChildToParent('table',postings);
+    this.postings.table = table;
+    table.id = 'tableOfPostings';
+    table.className = 'io';
+
+    // fill results table
+    getStuff(this.postings);
+
+}
+
+
+
 /*
   empty tables and calendars then refill them from db
 */
@@ -485,37 +519,6 @@ glo.prototype.setupSchedules =
 
 
 
-
-/*
-  Empty the tables of postings and rebuild them. 
-*/
-glo.prototype.setupPostings = 
-    function setupPostings()
-{
-    var postings = $("#postings")[0]; // container div
-    //var postings = this.postings.table;
-    
-    emptyElement(postings);
-
-     var addButton = addInput(postings,'button','','Add posting','addPostingButton');
-     var scrapeButton = addInput(postings,'button','','Scrape Postings','addScrapingButton');
-
-    // wire addButton
-    addButton.onclick = insertPosting.bind(this);
-
-    // wire scrapeButton
-    scrapeButton.onclick = scrapePostings.bind(this);
-
-    // insert empty results table
-    var table = createAppendedChildToParent('table',postings);
-    this.postings.table = table;
-    table.id = 'tableOfPostings';
-    table.className = 'io';
-
-    // fill results table
-    getStuff(this.postings);
-
-}
 
 
 
