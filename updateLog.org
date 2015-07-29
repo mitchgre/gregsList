@@ -27698,7 +27698,11 @@ create table postings(
 
    Wed Jul 29, 2015 13:22:22
    So I've still got the todo list below to work on.  That'll take up
-   some time. 
+   some time.   It also means I have to rebuild the database from
+   scratch again, and when that's working then I can make some
+   additions to the UI.  
+
+   Seems simple enough.  Let me get started. 
 
 *** TODO [0/2]
 
