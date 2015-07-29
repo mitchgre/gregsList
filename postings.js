@@ -37,6 +37,7 @@ function getIndeedScraperDialogString(divId)
     string += '<table>';
     string += '<tr><td>Keyword:  <input id="scraperKeyword"></td></tr>';
     string += '<tr><td>Location:  <input id="scraperLocation"></td></tr>';
+    string += '<tr><td>Limit:  <input id="scraperLimit"></td></tr>';
     string += '</table></div>';
 
     return string;
@@ -91,7 +92,8 @@ function openScraperDialog()
 		var url = getScraperParameters();
 		// remove input boxes
 		
-		var toDestroy = ["scraperLocation","scraperKeyword","scraperDialog"];
+		var toDestroy = ["scraperLocation","scraperKeyword",
+				 "scraperLimit","scraperDialog"];
 		
 		for (var i=0; i < toDestroy.length; i++)
 		    removeElement(toDestroy[i]);
