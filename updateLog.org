@@ -27710,8 +27710,18 @@ create table postings(
    Got that done, but not sure if I really want to destroy the
    database and start over again.  
 
+   
+
 *** TODO [0/2]
 
     - [ ] Add status to user_postings table. 
     
-    - [ ] Add limit to number of postings to scrape. 
+    - [ ] Add limit to number of postings to scrape.
+
+** Wed Jul 29, 2015 13:34:18 Longer Term Goals.
+
+   Start working on scraping things from linked in.
+
+   Actually using linkedin is currently a mystery to me, but
+   definitely something I need to figure out.  Maybe going to the
+   bookstore today might help. 
