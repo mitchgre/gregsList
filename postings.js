@@ -21,33 +21,9 @@ function sendScraperRequest (divId,url)
 	      },
 	      success: function(resp)
 	      {
-		  /*
-		  if (resp !== '')
-		  {					
-		      console.log(JSON.parse(resp));
-		    
-		      if (JSON.parse(resp) === true)
-		      {
-			  console.log("input worked");
-			  // displayTable(object,[]);
-			  // getStuff(object.parent);
-			  // object.parent.refresh();
-		      }
-		      else
-		      {
-			  console.log("input failed");
-		      }
-		      
-		  }
-
-		  else
-		      console.log('empty response');
-		  // 
-		  // clear text fields
-		  */
 		  console.log('got a response from scraper');
 		  console.log(JSON.parse(resp));
-		  
+		  gregsList.refresh();
 	      } // end success func
 	  } // end ajax json
       ); // end ajax function

@@ -353,7 +353,7 @@ create table postings(
        `company` int, # references companies.id,
        `location` int, # references locations.id
        `source` int,
-       unique key uniqueURL `url`,
+       unique key uniqueURL (`url`),
        foreign key (`company`) references companies(id)
       		  on delete set null on update cascade,
        foreign key (`location`) references locations(id)
