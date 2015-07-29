@@ -27665,52 +27665,52 @@ create table postings(
    twice as many results in the db than I thought.   Evidently I need
    to look over unique keys again in the schema when I get a chance. 
 ** Wed Jul 29, 2015 10:46:02 current status
+*** logs and other random things
+      Fix unique keys in [[file:schema.sql]] (DONE).
+      
+      Set scraper ui in javascript to update everything on success.
+      [[file:postings.js]]   (DONE).
 
-   Fix unique keys in [[file:schema.sql]] (DONE).
-   
-   Set scraper ui in javascript to update everything on success.
-   [[file:postings.js]]   (DONE).
+      Testing big scrapes. 
 
-   Testing big scrapes. 
+      Wed Jul 29, 2015 11:20:35
+      Can't seem to get the same postings to match different users from
+      scraper. 
 
-   Wed Jul 29, 2015 11:20:35
-   Can't seem to get the same postings to match different users from
-   scraper. 
+      The problem is probably in [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
 
-   The problem is probably in [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
+      Wed Jul 29, 2015 11:30:43
+      Testing modified insertPosting().
 
-   Wed Jul 29, 2015 11:30:43
-   Testing modified insertPosting().
+      Wed Jul 29, 2015 11:56:28
+      Looks like insertPosting() is still broken in PHP.
 
-   Wed Jul 29, 2015 11:56:28
-   Looks like insertPosting() is still broken in PHP.
+      Wed Jul 29, 2015 12:30:11
+      Totally stuck on this broken insertPosting() function. 
 
-   Wed Jul 29, 2015 12:30:11
-   Totally stuck on this broken insertPosting() function. 
+      Wed Jul 29, 2015 13:09:07
+      Looks like I might have gotten it.  Testing scraper again.
 
-   Wed Jul 29, 2015 13:09:07
-   Looks like I might have gotten it.  Testing scraper again.
+      Wed Jul 29, 2015 13:17:10
+      Yes, that works.  And it seems a little faster too, though that
+      could just be in my head since I still don't have a reliable means
+      to verify timing.
 
-   Wed Jul 29, 2015 13:17:10
-   Yes, that works.  And it seems a little faster too, though that
-   could just be in my head since I still don't have a reliable means
-   to verify timing.
+      Wed Jul 29, 2015 13:22:22
+      So I've still got the todo list below to work on.  That'll take up
+      some time.   It also means I have to rebuild the database from
+      scratch again, and when that's working then I can make some
+      additions to the UI.  
 
-   Wed Jul 29, 2015 13:22:22
-   So I've still got the todo list below to work on.  That'll take up
-   some time.   It also means I have to rebuild the database from
-   scratch again, and when that's working then I can make some
-   additions to the UI.  
+      Seems simple enough.  Let me get started.
 
-   Seems simple enough.  Let me get started.
+      [[file:schema.sql::create%20table%20user_postings][file:schema.sql::create table user_postings]]
 
-   [[file:schema.sql::create%20table%20user_postings][file:schema.sql::create table user_postings]]
+      Wed Jul 29, 2015 13:28:07
+      Got that done, but not sure if I really want to destroy the
+      database and start over again.  
 
-   Wed Jul 29, 2015 13:28:07
-   Got that done, but not sure if I really want to destroy the
-   database and start over again.  
-
-   
+      
 
 *** TODO [2/2]
 
@@ -27722,15 +27722,28 @@ create table postings(
       - [[file:postings.js::function%20getScraperParameters][file:postings.js::function getScraperParameters]]
 
 ** Wed Jul 29, 2015 13:34:18 Longer Term Goals.
+*** logs and random thoughts
+    Start working on scraping things from linked in.
 
-   Start working on scraping things from linked in.
-
-   Actually using linkedin is currently a mystery to me, but
-   definitely something I need to figure out.  Maybe going to the
-   bookstore today might help. 
+    Actually using linkedin is currently a mystery to me, but
+    definitely something I need to figure out.  Maybe going to the
+    bookstore today might help. 
 
 
-   Brainstorm:
-   Add another table showing scraped links.   If link has already
-   been recently scraped, don't do it again (this will have to be
-   done in PHP).
+    Brainstorm:
+    Add another table showing scraped links.   If link has already
+    been recently scraped, don't do it again (this will have to be
+    done in PHP).
+
+    Wed Jul 29, 2015 14:02:08
+    The table could also show the number of postings scraped.  That
+    seems simple enough.
+
+    
+
+*** todo [0/3]
+    - [ ] connect to google docs
+      - (really difficult?)  at least could take lots of time.
+    - [ ] connect to linkedin.
+      - maybe their api isn't too difficult.
+    - [ ] do some actual job searching - applying, etc.
