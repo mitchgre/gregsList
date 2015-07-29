@@ -871,27 +871,6 @@ function addUserLocation($user,$locationId)
 }
 
 
-/*  OLD METHOD USING NAME INSTEAD OF ID
-  user is an int, location is a string
- */
-/*
-function addUserLocation($user,$locationName)
-{
-    // check if location already exists in locations
-    $query = "select count(name) from locations where name=\"$locationName\"";
-    $count = reset(returnStuff($query));
-    
-    if ($count < 1) // locationName is not in locations table yet, so add it
-        addLocation($locationName);
-    
-    $locationID = getLocationId($user,$locationName);
-
-    $query  = "insert into user_locations (user,location) ";
-    $query .= "values ($user,$locationID)";
-
-    return booleanReturn($query);        
-}
-*/
 
 
 // return jobBoard id if it exists, false otherwise?
@@ -930,15 +909,18 @@ function insertJobBoard($name)
 }
 
 
-// bare posting.
+/* 
+   insert bare posting - caller needs to ensure that $companyId,
+   $locationId,  and $sourceId already exist.
+ */
 function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
 {
     // verify that $companyId, $locationId, $sourceId all exist
     
-    if ( companyIdExists($companyId) == 0 )
+    if ( companyIdExists($companyId) < 1 )
         return "company $companyId does not exist";
 
-    if ( locationIdExists($locationId) == 0 )
+    if ( locationIdExists($locationId) < 1 )
         return "location $locationId does not exist";
 
     if ( jobBoardIdExists($sourceId) < 1 )
@@ -1031,9 +1013,15 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
     // only insert bare posting if it doesn't already exist.  
     if ( postingExists($title,$url,$companyId,$locationId,$sourceId) )
     {
-        $barePosting = insertBarePosting($title,$url,$companyId,$locationId,$sourceId);
+        $barePosting = insertBarePosting($title,
+                                         $url,
+                                         $companyId,
+                                         $locationId,
+                                         $sourceId);
+
         if ( $barePosting !== 1 )
             return "error inserting bare posting";
+
         // else, continue on with your business
     }
 
@@ -1055,7 +1043,7 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
     }
     else
     {
-        return "error inserting user_posting.";
+        return "error inserting user_posting.".$userPosting;
     }
 }
 

@@ -27685,6 +27685,9 @@ create table postings(
    Wed Jul 29, 2015 11:56:28
    Looks like insertPosting() is still broken in PHP.
 
+   Wed Jul 29, 2015 12:30:11
+   Totally stuck on this broken insertPosting() function. 
+
 *** TODO [0/2]
 
     - [ ] Add status to user_postings table. 
