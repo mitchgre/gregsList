@@ -1288,16 +1288,3 @@ function gregsListObjectById(sid,type)
     }
 
 }
-
-// generic function to show notes about an object
-// as of Mon Jul 20, 2015 18:10:02 this is too difficult
-// will only work with specifics
-
-// glo.prototype.showNotesOnObject = 
-function showNotesOnObject(object)
-{
-    console.log('showing notes on object');
-    // try to figure out object type
-    console.log(object);
-    console.log(object.type);
-}
