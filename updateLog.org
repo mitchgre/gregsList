@@ -27666,7 +27666,13 @@ create table postings(
    to look over unique keys again in the schema when I get a chance. 
 ** Wed Jul 29, 2015 10:46:02 current status
 
-   Fix unique keys in [[file:schema.sql]]
+   Fix unique keys in [[file:schema.sql]] (DONE).
    
    Set scraper ui in javascript to update everything on success.
-   [[file:postings.js]]   
+   [[file:postings.js]]   (DONE).
+
+   Testing big scrapes. 
+
+   Add status to user_postings table. 
+   
+   Add limit to number of postings to scrape. 
