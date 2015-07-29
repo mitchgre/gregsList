@@ -27664,3 +27664,5 @@ create table postings(
    Looked over database after scraping about 600 postings.   There are
    twice as many results in the db than I thought.   Evidently I need
    to look over unique keys again in the schema when I get a chance. 
+** Wed Jul 29, 2015 10:46:02 current status
+   Fix unique keys in [[file:schema.sql]]
