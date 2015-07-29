@@ -336,6 +336,42 @@ glo.prototype.setupGoals =
 
 
 
+
+/*
+  Empty the tables of industries and rebuild them.
+*/
+glo.prototype.setupIndustries = 
+    function setupIndustries()
+{
+    var industries = $("#industries")[0]; // container div
+    
+    emptyElement(industries);
+
+    // add text fields
+    // industries.appendChild(document.createTextNode('Industries'));
+    var industryField = addInput(industries,'text','','','IndustryToAdd');
+
+    // add button
+    var addButton = addInput(industries,'button','','Add Industry','addIndustryButton');
+
+    // wire button
+    addButton.onclick = insertIndustry.bind(this);
+
+    // insert empty results table
+    var table = createAppendedChildToParent('table',industries);
+    this.industries.table = table;
+    table.id = 'tableOfIndustries';
+    table.className = 'io';
+
+    // fill results table
+    getStuff(this.industries);
+
+}
+
+
+
+
+
 /*
   empty tables and calendars then refill them from db
 */
@@ -378,37 +414,6 @@ glo.prototype.setupSchedules =
     getStuff(this.schedules);
 }
 
-
-/*
-  Empty the tables of industries and rebuild them.
-*/
-glo.prototype.setupIndustries = 
-    function setupIndustries()
-{
-    var industries = $("#industries")[0]; // container div
-    
-    emptyElement(industries);
-
-    // add text fields
-    // industries.appendChild(document.createTextNode('Industries'));
-    var industryField = addInput(industries,'text','','','IndustryToAdd');
-
-    // add button
-    var addButton = addInput(industries,'button','','Add Industry','addIndustryButton');
-
-    // wire button
-    addButton.onclick = insertIndustry.bind(this);
-
-    // insert empty results table
-    var table = createAppendedChildToParent('table',industries);
-    this.industries.table = table;
-    table.id = 'tableOfIndustries';
-    table.className = 'io';
-
-    // fill results table
-    getStuff(this.industries);
-
-}
 
 
 /*
