@@ -628,6 +628,15 @@ glo.prototype.setupContacts =
 }
 
 
+
+
+
+
+
+
+
+
+
 /*
   Empty the tables of blog and rebuild them.
 */
@@ -658,6 +667,10 @@ glo.prototype.setupBlog =
     getStuff(this.blog);
 
 }
+
+
+
+
 
 
 /*
@@ -860,6 +873,13 @@ function displayTable(object)
 }
 
 
+
+
+
+
+
+
+
 /*
   Adding clicks and storing SQL ids in DOM for arbitrary gregsList
   objects that can render as tables. 
@@ -868,16 +888,6 @@ function embelishTable(object,callback)
 {
 
     var tableId = object.table.id;
-    // debugging info
-    /*
-    console.log("embelishTable called on ");
-    console.log(object);
-    
-    console.log("object's table is ");
-    console.log(object.table);
-        
-    console.log("tableId is " + tableId);
-    */
 
     // hide first children (headers and columns)   
     $("#" + tableId + " tr th:first-child").css("display","none");
@@ -902,7 +912,17 @@ function embelishTable(object,callback)
 
 }
 
-// object are those from class.js, not objects.js
+
+
+
+
+/*
+  Create a dialog for an arbitrary glo object.
+
+  object are those from class.js, not objects.js.
+
+*/
+
 function dialogObjectWrapper2(object,type)
 {
     var title;   
@@ -967,6 +987,11 @@ function dialogObjectWrapper2(object,type)
     getObjectNotes(object,type,popUp);
 
 }
+
+
+
+
+
 
 
 // object is from classes.js not objects.js
@@ -1085,6 +1110,9 @@ function getObjectNotes(object,type,div)
 
 
 
+
+
+
 // object is from classes.js not objects.js
 function addObjectNote(object,type)
 {
@@ -1150,6 +1178,13 @@ function addObjectNote(object,type)
     );
 }
 
+
+
+
+/*
+  insert blog notes on an arbitrary glo object.
+  i.e. join them in SQL. 
+*/
 function insertObjectNote (object,type,title,text)
 {
     var putter; 
@@ -1206,73 +1241,7 @@ function insertObjectNote (object,type,title,text)
 }
 
 
-// this might be too general unfortunately 
-function dialogObjectWrapper(object,type)
-{
-    /*
-    console.log(object);
-    console.log(object.type);
-    console.log(typeof object);
-    */
 
-    //var type = object.type;
-    var title;   
-
-    // see classes.js for object definitions
-    if ( type == "goal" )
-    {
-	title = object.value;
-    }
-    else if ( type ==  "industry"  )
-    {
-	title = object.name;
-    }
-    else if ( type == "company" )
-    {
-	title = object.name;
-    }
-    else if ( type == "location" )
-    {
-	title = object.name;
-    }
-
-    console.log("title="+title);
-
-    // create a string to hold a div object
-    var innerDiv = '<div id="'+title+'-dialog" title="'+title+'">'; 
-    innerDiv += '</div>';
-
-    // initialize a local buttons container
-    var objectButtons = {};
-
-
-    // concatenate buttons from object
-    // push all the parent object button types into the container
-    for ( var index in object.buttons  )
-    {
-	objectButtons[index] = object.buttons[index];
-	console.log('objectButtons: '+index);
-	console.log(objectButtons[index]);
-    }
-
-    // add a close button
-    objectButtons["Close"] = function()
-    {
-	// removeElement(innerDiv);
-	$(this).dialog('close');
-    }
-
-    
-    
-    $(innerDiv)
-    .dialog
-    (
-	{
-	    modal:true,
-	    buttons: objectButtons
-	}
-    )
-}
 
 
 
