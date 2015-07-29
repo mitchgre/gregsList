@@ -68,7 +68,8 @@ if (isset($_POST['func']))
             }
         if ($func === "getPostings")
             {
-                echo json_encode( getPostings($user) );
+                $window = $_POST['window'];
+                echo json_encode( getPostings($user,$window) );
             }
         if ($func === "getContacts")
             {

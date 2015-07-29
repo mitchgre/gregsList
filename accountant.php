@@ -229,9 +229,15 @@ function getPostings($user,$window)
     $start = $decoded_window["start"];
     $end = $decoded_window["end"];
 
+    if ( $start >= $userPostingsCount )
+        return "error: window start >= userPostingsCount";
+    
+    if ( $end >= $userPostingsCount )
+        $end = $userPostingsCount;
+    
     $mysqli = connectToDB();
     
-    // get postings count
+    // setup long query
 
     $query  = "select postings.id, postings.title, postings.url, locations.name as location, ";
     $query .= "companies.name as company, jobBoards.name as source from user_postings ";
