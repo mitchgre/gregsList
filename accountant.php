@@ -1028,38 +1028,37 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
     
     $sourceId = getJobBoardId($source);
 
+    // only insert bare posting if it doesn't already exist.  
+    if ( postingExists($title,$url,$companyId,$locationId,$sourceId) )
+    {
+        $barePosting = insertBarePosting($title,$url,$companyId,$locationId,$sourceId);
+        if ( $barePosting !== 1 )
+            return "error inserting bare posting";
+        // else, continue on with your business
+    }
 
-    // fixing it.
-    $barePosting = insertBarePosting($title,$url,$companyId,$locationId,$sourceId);
- 
-   
-    // if (booleanReturn($query))
-    if ( $barePosting == 1 )
-        {
-            $postingId = getPostingId($title,$url,$companyId,$locationId,$sourceId);
-            $userPosting = insertUserPosting($user,$postingId);
-            
-            if ( $userPosting == 1)
-            {
-                
-                // get current time/date
-                $thisTime = getCurrentDateTimeString();
-                
-                // insert a schedule event
-                insertSchedule($user, $title, "job posting", null, $thisTime, $thisTime);
-                // inserting the schedule event automatically adds an entry in user_schedule
-                
-                return true;
-            }
-            else
-            {
-                return "error inserting user_posting.";
-            }
-        }
-    else
-        return "failed to add bare posting: $barePosting" ;
+                     
+    $postingId = getPostingId($title,$url,$companyId,$locationId,$sourceId);
+    $userPosting = insertUserPosting($user,$postingId);
     
+    if ( $userPosting == 1)
+    {
+        
+        // get current time/date
+        $thisTime = getCurrentDateTimeString();
+        
+        // insert a schedule event
+        insertSchedule($user, $title, "job posting", null, $thisTime, $thisTime);
+        // inserting the schedule event automatically adds an entry in user_schedule
+        
+        return true;
+    }
+    else
+    {
+        return "error inserting user_posting.";
+    }
 }
+
 
 
 

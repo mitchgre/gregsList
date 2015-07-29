@@ -27679,6 +27679,9 @@ create table postings(
 
    The problem is probably in [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
 
+   Wed Jul 29, 2015 11:30:43
+   Testing modified insertPosting().
+
 *** TODO [0/2]
 
     - [ ] Add status to user_postings table. 
