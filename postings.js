@@ -62,7 +62,9 @@ function getScraperParameters()
     location = location.replace(/ /g,"+");		// replace ' ' chars with '+' throughout entire string
     url += location;					// append replaced string to url
     
-    url += "&limit=100";				// hardcode limit for now.
+    // url += "&limit=100";				// hardcode limit for now.
+    url += "&limit=";					// softcode limit.
+    
 
     console.log('scraping url:');
     console.log(url);
