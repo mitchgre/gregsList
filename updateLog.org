@@ -27739,6 +27739,11 @@ create table postings(
     The table could also show the number of postings scraped.  That
     seems simple enough.
 
+    Wed Jul 29, 2015 15:00:46
+    Need to work on reducing data in browser - or rather, speeding
+    data up.
+
+    This can be done in [[file:accountant.php::function%20getPostings][file:accountant.php::function getPostings]]
     
 
 *** todo [0/3]
