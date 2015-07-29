@@ -779,7 +779,8 @@ function getStuff(object)
     var getter = object.get;
     // var callback = object.display;
     var callback = object.filler;
-   
+    var limits = object.limit;
+
     $.ajax
     (
 	{
@@ -793,7 +794,8 @@ function getStuff(object)
 		// getter: true
 		user: object.parent.user.name,
 		pass: object.parent.user.password,
-		func: getter
+		func: getter,
+		window: limits
 	    },
 	    success: function(resp)
 	    {

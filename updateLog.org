@@ -27750,6 +27750,9 @@ create table postings(
     object contents in displayTable - thereby allowing for larger
     limits?
 
+    Wed Jul 29, 2015 16:00:12
+    The limiter isn't speeding things up.  Not even sure if it works. 
+
 
 *** todo [0/3]
     - [ ] connect to google docs
