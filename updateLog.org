@@ -27675,7 +27675,9 @@ create table postings(
 
    Wed Jul 29, 2015 11:20:35
    Can't seem to get the same postings to match different users from
-   scraper.    
+   scraper. 
+
+   The problem is probably in [[file:accountant.php::function%20insertPosting][file:accountant.php::function insertPosting]]
 
 *** TODO [0/2]
 

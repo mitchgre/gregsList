@@ -1021,12 +1021,6 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
             return "error adding user_company: $user, $companyId, $companyName";
     
     // check if $url is valid
-    // this won't work:
-    /*
-    $query  = "insert into postings (title,url,company,location,source,user) ";
-    $query .= "values(\"$title\", \"$url\", ";
-    $query .= "$companyId, $locationId, \"$source\", $user)";
-    */
 
     if ( jobBoardNameExists( $source ) < 1)
         if ( insertJobBoard( $source ) != true )
