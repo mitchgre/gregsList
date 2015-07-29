@@ -27745,6 +27745,11 @@ create table postings(
 
     This can be done in [[file:accountant.php::function%20getPostings][file:accountant.php::function getPostings]]
     
+    Wed Jul 29, 2015 15:57:21
+    Still working on this.  As an aside, it might be helpful to erase
+    object contents in displayTable - thereby allowing for larger
+    limits?
+
 
 *** todo [0/3]
     - [ ] connect to google docs
