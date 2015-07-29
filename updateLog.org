@@ -27728,3 +27728,9 @@ create table postings(
    Actually using linkedin is currently a mystery to me, but
    definitely something I need to figure out.  Maybe going to the
    bookstore today might help. 
+
+
+   Brainstorm:
+   Add another table showing scraped links.   If link has already
+   been recently scraped, don't do it again (this will have to be
+   done in PHP).
