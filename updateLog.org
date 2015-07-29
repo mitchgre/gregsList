@@ -27673,6 +27673,12 @@ create table postings(
 
    Testing big scrapes. 
 
-   Add status to user_postings table. 
-   
-   Add limit to number of postings to scrape. 
+   Wed Jul 29, 2015 11:20:35
+   Can't seem to get the same postings to match different users from
+   scraper.    
+
+*** TODO [0/2]
+
+    - [ ] Add status to user_postings table. 
+    
+    - [ ] Add limit to number of postings to scrape. 
