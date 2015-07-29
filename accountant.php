@@ -221,7 +221,14 @@ function getPostings($user,$window)
     $locations = array();
     $companies = array();
     $sources = array();
-    
+    $totalPostingsCount = getPostingsCount(); 
+    $userPostingsCount = getUserPostingsCount($user);
+
+    // get window parameters
+    $decoded_window = json_decode( $window , true);
+    $start = $decoded_window["start"];
+    $end = $decoded_window["end"];
+
     $mysqli = connectToDB();
     
     // get postings count
@@ -239,57 +246,61 @@ function getPostings($user,$window)
         $statement->execute();
         
         // bind results
-        // $statement->bind_result($id,$title,$url,$locationId,$companyId,$source);
         $statement->bind_result($id,$title,$url,$location,$company,$source);
         
         while($statement->fetch())
         {
-            // echo "id: $id \n";
-            // echo "title: $title \n";
-            // echo "url: $url \n";
-            // echo "location: $location \n";
-            // echo "company: $company \n";
 
             array_push($ids,$id);
             array_push($titles,utf8_encode($title));
             array_push($urls,$url);
-            // $locationName = getLocationName($locationId);
-            // array_push($locations,$locationName); 
             array_push($locations,$location); 
-            // $companyName = getCompanyName($companyId);
-            // array_push($companies,utf8_encode($companyName)); # will need to edit this
             array_push($companies,utf8_encode($company)); # will need to edit this
             array_push($sources,$source);
-        }
+        } // end while loop
+
         mysqli_close($mysqli);
                
-        // get count of ids.
 
-        // associate arrays
-        $postings = array
+        // initialize filtered containers
+        $f_ids = array();
+        $f_titles = array();
+        $f_urls = array();
+        $f_locations = array();
+        $f_companies = array();
+        $f_sources = array();
+
+
+        // limit arrays here according to window specs
+        for ( $i = $start; $i < $end; $i++ )
+        {
+            $f_ids[$i] = $ids[$i];
+            $f_titles[$i] = $titles[$i];
+            $f_urls[$i] = $urls[$i];
+            $f_locations[$i] = $locations[$i];
+            $f_companies[$i] = $companies[$i];
+            $f_sources[$i] = $sources[$i];
+        }
+
+
+        /* 
+           associate all elements of arrays.
+           This just means adding a container around them.
+        */
+        $filtered_postings = array
                   (
-                      /*
-                      "ids" => json_encode($ids),
-                      "titles" => json_encode($titles),
-                      "urls" => json_encode($urls),
-                      "locations" => json_encode($locations),
-                      "companies" => json_encode($companies),
-                      "sources" => json_encode($sources)
-                      */
                       
-                      "ids" => $ids,
-                      "titles" => $titles,
-                      "urls" => $urls,
-                      "locations" => $locations,
-                      "companies" => $companies,
-                      "sources" => $sources,
+                      "ids" => $f_ids,
+                      "titles" => $f_titles,
+                      "urls" => $f_urls,
+                      "locations" => $f_locations,
+                      "companies" => $f_companies,
+                      "sources" => $f_sources,
                       "totalPostingsCount" => $totalPostingsCount,
                       "userPostingsCount" => $userPostingsCount
                   );
 
-        // limit array here according to window specs
-
-        return $postings;
+        return $filtered_postings;
     }
     else
     {
