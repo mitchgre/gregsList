@@ -139,6 +139,11 @@ function glo()  // gregsList Object
     this.login();
 }
 
+
+
+
+
+
 /*
   On page load, open a dialog box asking for user name and password. 
 
@@ -235,6 +240,16 @@ glo.prototype.login =
     );  // end dialog function
 } // end login function
 
+
+
+
+
+
+
+
+
+
+
 /*
   After getting a login response from the server, error check that form
   was properly filled.  
@@ -286,6 +301,15 @@ glo.prototype.customs =
     
 }
 
+
+
+
+
+
+/*
+  Setup a bunch of stuff.  If there are bottlenecks, they'll probably
+  start here.
+*/
 glo.prototype.refresh = 
     function refresh()
 {
@@ -300,6 +324,13 @@ glo.prototype.refresh =
     object.setupBlog();
 
 }
+
+
+
+
+
+
+
 
 
 
@@ -707,6 +738,11 @@ function remover(e)
     
     
 }
+
+
+
+
+
 
 
 /*
