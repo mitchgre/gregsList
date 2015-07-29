@@ -355,8 +355,8 @@ if (isset($_POST['func']))
                                                $posting["location"],
                                                "indeed.com");
 
-                if ( $postingStatus !== true )
-                    echo json_encode( $postingStatus ); 
+                // if ( $postingStatus !== true )
+                //  echo json_encode( $postingStatus ); 
 
             }
 
