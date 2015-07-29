@@ -27688,6 +27688,9 @@ create table postings(
    Wed Jul 29, 2015 12:30:11
    Totally stuck on this broken insertPosting() function. 
 
+   Wed Jul 29, 2015 13:09:07
+   Looks like I might have gotten it.  Testing scraper again.
+
 *** TODO [0/2]
 
     - [ ] Add status to user_postings table. 

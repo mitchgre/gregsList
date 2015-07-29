@@ -918,13 +918,13 @@ function insertBarePosting($title,$url,$companyId,$locationId,$sourceId)
     // verify that $companyId, $locationId, $sourceId all exist
     
     if ( companyIdExists($companyId) < 1 )
-        return "company $companyId does not exist";
+        return "company id $companyId does not exist";
 
     if ( locationIdExists($locationId) < 1 )
-        return "location $locationId does not exist";
+        return "location id $locationId does not exist";
 
     if ( jobBoardIdExists($sourceId) < 1 )
-        return "jobBoard $sourceId does not exist";
+        return "jobBoard id $sourceId does not exist";
 
 
     $query  = "insert into postings (title,url,company,location,source) ";
@@ -1011,7 +1011,7 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
     $sourceId = getJobBoardId($source);
 
     // only insert bare posting if it doesn't already exist.  
-    if ( postingExists($title,$url,$companyId,$locationId,$sourceId) )
+    if ( postingExists($title,$url,$companyId,$locationId,$sourceId) == 0)
     {
         $barePosting = insertBarePosting($title,
                                          $url,
@@ -1020,7 +1020,7 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
                                          $sourceId);
 
         if ( $barePosting !== 1 )
-            return "error inserting bare posting";
+            return "error inserting bare posting: ". $barePosting;
 
         // else, continue on with your business
     }
@@ -1043,7 +1043,7 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
     }
     else
     {
-        return "error inserting user_posting.".$userPosting;
+        return "error inserting user_posting:".$userPosting;
     }
 }
 
