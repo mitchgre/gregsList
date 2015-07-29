@@ -30,6 +30,7 @@ function glo()  // gregsList Object
 	    updater: "updateGoal",
 	    destroyer: "removeGoal",
 	    displayKeys: ["sid","value"],
+	    limit: {"start":0, "end":50}
 	};
     this.industries = 
 	{
@@ -44,7 +45,8 @@ function glo()  // gregsList Object
 	    editFunction: editIndustry,
 	    updater: "updateIndustry",
 	    destroyer: "removeIndustry",
-	    displayKeys: ["sid","name"]
+	    displayKeys: ["sid","name"],
+	    limit: {"start":0, "end":50}
 	};
     this.postings = 
 	{
@@ -60,7 +62,8 @@ function glo()  // gregsList Object
 	    editFunction: editPosting,
 	    updater: "updatePosting",		// php function to update
 	    destroyer: "removePosting", // php function to remove
-	    displayKeys: ["sid","title","url","location","company","source"] // values to display in table
+	    displayKeys: ["sid","title","url","location","company","source"], // values to display in table
+	    limit: {"start":0, "end":50}
 	};
     this.companies =
 	{
@@ -74,7 +77,8 @@ function glo()  // gregsList Object
 	    add: null,
 	    removeFunction: remover,
 	    destroyer: "removeCompany", // php function to remove
-	    displayKeys: ["sid","name"] // values to display in table
+	    displayKeys: ["sid","name"], // values to display in table
+	    limit: {"start":0, "end":50}
 	};
     this.locations =
 	{
@@ -88,7 +92,8 @@ function glo()  // gregsList Object
 	    add: null,
 	    removeFunction: remover,
 	    destroyer: "removeLocation", // php function to remove
-	    displayKeys: ["sid","name"] // values to display in table
+	    displayKeys: ["sid","name"], // values to display in table
+	    limit: {"start":0, "end":50}
 	};
     this.contacts =
 	{
@@ -105,7 +110,8 @@ function glo()  // gregsList Object
 	    removeFunction: remover,
 	    destroyer: "removeContact", // php function to remove
 	    displayKeys: ["sid","fname","lname","email","phone",
-			  "facebook","linkedin","github"] // values to display in table
+			  "facebook","linkedin","github"], // values to display in table
+	    limit: {"start":0, "end":50}
 
 	};
     this.schedules =
@@ -120,7 +126,8 @@ function glo()  // gregsList Object
 	    destroyer: "removeSchedule", // php function to remove
 	    table: $("#tableOfEvents")[0],
 	    displayKeys: ["sid","name","description","start","end"],
-	    add: null
+	    add: null,
+	    limit: {"start":0, "end":50}
 	};
     this.blog =
 	{
@@ -134,7 +141,8 @@ function glo()  // gregsList Object
 	    destroyer: "removeBlog", // php function to remove
 	    table: $("#tableOfBlogs")[0],
 	    displayKeys: ["sid","text"],
-	    add: null
+	    add: null,
+	    limit: {"start":0, "end":50}
 	};
     this.login();
 }
