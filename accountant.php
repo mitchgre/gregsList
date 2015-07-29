@@ -223,11 +223,17 @@ function getPostings($user,$window)
     $sources = array();
     $totalPostingsCount = getPostingsCount(); 
     $userPostingsCount = getUserPostingsCount($user);
-
+    
+    // return $window;
+    
     // get window parameters
     $decoded_window = json_decode( $window , true);
+    return $decoded_window;
+
     $start = $decoded_window["start"];
     $end = $decoded_window["end"];
+
+    // return array('start'=>$start, 'end'=>$end);
 
     if ( $start >= $userPostingsCount )
         return "error: window start >= userPostingsCount";
@@ -293,18 +299,17 @@ function getPostings($user,$window)
            associate all elements of arrays.
            This just means adding a container around them.
         */
-        $filtered_postings = array
-                  (
-                      
-                      "ids" => $f_ids,
-                      "titles" => $f_titles,
-                      "urls" => $f_urls,
-                      "locations" => $f_locations,
-                      "companies" => $f_companies,
-                      "sources" => $f_sources,
-                      "totalPostingsCount" => $totalPostingsCount,
-                      "userPostingsCount" => $userPostingsCount
-                  );
+        $filtered_postings = 
+                           array(
+                               "ids" => $f_ids,
+                               "titles" => $f_titles,
+                               "urls" => $f_urls,
+                               "locations" => $f_locations,
+                               "companies" => $f_companies,
+                               "sources" => $f_sources,
+                               "totalPostingsCount" => $totalPostingsCount,
+                               "userPostingsCount" => $userPostingsCount
+                           );
 
         return $filtered_postings;
     }
