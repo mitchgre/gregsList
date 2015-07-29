@@ -263,7 +263,7 @@ function getPostings($user,$window)
         }
         mysqli_close($mysqli);
                
-        // echo json_encode($ids);
+        // get count of ids.
 
         // associate arrays
         $postings = array
@@ -282,10 +282,13 @@ function getPostings($user,$window)
                       "urls" => $urls,
                       "locations" => $locations,
                       "companies" => $companies,
-                      "sources" => $sources
-                      
+                      "sources" => $sources,
+                      "totalPostingsCount" => $totalPostingsCount,
+                      "userPostingsCount" => $userPostingsCount
                   );
-        
+
+        // limit array here according to window specs
+
         return $postings;
     }
     else
