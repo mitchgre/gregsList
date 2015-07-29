@@ -27712,11 +27712,13 @@ create table postings(
 
    
 
-*** TODO [0/2]
+*** TODO [1/2]
 
-    - [ ] Add status to user_postings table. 
+    - [X] Add status to user_postings table.
+      - [[file:schema.sql::create%20table%20user_postings][file:schema.sql::create table user_postings]]
     
     - [ ] Add limit to number of postings to scrape.
+      - [[file:scraper.php]]
 
 ** Wed Jul 29, 2015 13:34:18 Longer Term Goals.
 
