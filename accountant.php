@@ -1011,13 +1011,13 @@ function insertPosting($user,$title,$url,$companyName,$locationName,$source)
 
     // add $companyName to companies if it doesn't exist already
     if (companyNameExists($companyName) != true)
-        if ( addCompany($companyName) === false )
+        if ( addCompany($companyName) !== true )
             return "error adding company";
     
     $companyId = getCompanyId($companyName);
 
     if ( userCompanyIdExists($user,$companyId) < 1 )
-        if ( addUserCompany($user,$companyId) == false )
+        if ( addUserCompany($user,$companyId) !== true )
             return "error adding user_company: $user, $companyId, $companyName";
     
     // check if $url is valid
