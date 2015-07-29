@@ -180,8 +180,16 @@ function getLocations($user)
 }
 
 
+/*
+  $user is an int referring to the SQL id of the userName.
 
-function getPostings($user)
+  $window is a json object showing start and end postings to get.  
+  i.e {start:100, end:150}
+  
+  need to error check that start and end are both within range of
+  postings table. 
+ */
+function getPostings($user,$window)
 {
     // $postings = []; // return json object:  
     $ids = array();
@@ -193,13 +201,8 @@ function getPostings($user)
     
     $mysqli = connectToDB();
     
-    // $query = "select id,title,url,location,company,source from postings where user=$user ";
-    
-    // need to get id, title, url, location, company, source
-    
-    // select postings.id, postings.title, postings.url, locations.name as location, companies.name as company, jobBoards.name as source from user_postings inner join postings on user_postings.posting = postings.id inner join locations on postings.location=locations.id inner join companies on postings.company = companies.id inner join jobBoards on postings.source = jobBoards.id;
-    
-    //      ;
+    // get postings count
+
     $query  = "select postings.id, postings.title, postings.url, locations.name as location, ";
     $query .= "companies.name as company, jobBoards.name as source from user_postings ";
     $query .= "inner join postings on user_postings.posting = postings.id ";
