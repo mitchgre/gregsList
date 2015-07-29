@@ -302,6 +302,40 @@ glo.prototype.refresh =
 }
 
 
+
+/*
+  Empty the tables of goals and rebuild them.
+*/
+glo.prototype.setupGoals = 
+    function setupGoals()
+{
+    var goals = $("#goals")[0]; // container div
+    
+    emptyElement(goals);
+
+    // add text fields
+    // goals.appendChild(document.createTextNode('Goals'));
+    var goalField = addInput(goals,'text','','','GoalToAdd');
+
+    // add button
+    var addButton = addInput(goals,'button','','Add Goal','addGoalButton');
+
+    // wire button
+    addButton.onclick = insertGoal.bind(this);
+
+    // insert empty results table
+    var table = createAppendedChildToParent('table',goals);
+    this.goals.table = table;
+    table.id = 'tableOfGoals';
+    table.className = 'io';
+
+    // fill results table
+    getStuff(this.goals);
+
+}
+
+
+
 /*
   empty tables and calendars then refill them from db
 */
@@ -344,37 +378,6 @@ glo.prototype.setupSchedules =
     getStuff(this.schedules);
 }
 
-
-/*
-  Empty the tables of goals and rebuild them.
-*/
-glo.prototype.setupGoals = 
-    function setupGoals()
-{
-    var goals = $("#goals")[0]; // container div
-    
-    emptyElement(goals);
-
-    // add text fields
-    // goals.appendChild(document.createTextNode('Goals'));
-    var goalField = addInput(goals,'text','','','GoalToAdd');
-
-    // add button
-    var addButton = addInput(goals,'button','','Add Goal','addGoalButton');
-
-    // wire button
-    addButton.onclick = insertGoal.bind(this);
-
-    // insert empty results table
-    var table = createAppendedChildToParent('table',goals);
-    this.goals.table = table;
-    table.id = 'tableOfGoals';
-    table.className = 'io';
-
-    // fill results table
-    getStuff(this.goals);
-
-}
 
 /*
   Empty the tables of industries and rebuild them.
