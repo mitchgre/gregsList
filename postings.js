@@ -65,7 +65,8 @@ function getScraperParameters()
     
     // url += "&limit=100";				// hardcode limit for now.
     url += "&limit=";					// softcode limit.
-    
+    var limit = $("#scraperLimit")[0].value;		// get value from input box    
+    url += limit;
 
     console.log('scraping url:');
     console.log(url);
