@@ -27752,6 +27752,8 @@ create table postings(
 
     Wed Jul 29, 2015 16:00:12
     The limiter isn't speeding things up.  Not even sure if it works. 
+    Acutally, it returns empty arrays for postings.  That's no good.
+    Will test it on cli to start with.
 
 
 *** todo [0/3]
