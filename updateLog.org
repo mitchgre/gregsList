@@ -27718,7 +27718,8 @@ create table postings(
       - [[file:schema.sql::create%20table%20user_postings][file:schema.sql::create table user_postings]]
     
     - [ ] Add limit to number of postings to scrape.
-      - [[file:scraper.php]]
+      - [[file:scraper.php]] (no, do it in javascript)
+      - [[file:postings.js::function%20getScraperParameters][file:postings.js::function getScraperParameters]]
 
 ** Wed Jul 29, 2015 13:34:18 Longer Term Goals.
 
