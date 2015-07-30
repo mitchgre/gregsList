@@ -210,7 +210,7 @@ function fillSchedules(object,input)
 					  // copiedEventObject,false);// add to calendars
 					  */
 	displayTable(object);
-	displayEventPortlet(object);
+	// displayEventPortlet(object);
 	embelishTable(object,null);
     }
     
