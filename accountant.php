@@ -381,7 +381,7 @@ function getContacts($user)
 
 
 
-function getSchedules($user)
+function getSchedules($user,$window)
 {
 
     $ids = [];
@@ -392,9 +392,12 @@ function getSchedules($user)
     $urls = [];
     $starts = [];
     $ends = [];
+
+    // get window parameters
+    $start = $window["start"];
+    $end = $window["end"];
     
     $mysqli = connectToDB();
-
 
     $query  = "select schedule.id, schedule.name, schedule.description, schedule.location, ";
     $query .= "schedule.contact, schedule.url, schedule.start, schedule.end ";
@@ -423,6 +426,7 @@ function getSchedules($user)
                     array_push($ends,$end);
                 }
         }
+
     mysqli_close($mysqli);
     
     // associate arrays

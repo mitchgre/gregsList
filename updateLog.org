@@ -27756,7 +27756,8 @@ create table postings(
     Will test it on cli to start with.
 
     Wed Jul 29, 2015 19:09:33
-    Got the filter working on limits.  Still missing a display. 
+    Got the filter working on limits.  Still missing a display of
+    counts. 
     
 
 *** todo [0/3]

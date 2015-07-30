@@ -77,7 +77,8 @@ if (isset($_POST['func']))
             }
         if ($func === "getSchedules")
             {
-                echo json_encode(getSchedules($user));
+                $window = $_POST['window'];
+                echo json_encode(getSchedules($user,$window));
             }
         if ($func === "getCompanies")
             {
