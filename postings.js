@@ -431,6 +431,7 @@ function fillPostings(object, input)
     embelishTable(object,dialogObjectWrapper2);
     
     // display counts and next/prev buttons
+    
 }
 
 function displayPostingsPortlet(object)

@@ -63,7 +63,8 @@ function glo()  // gregsList Object
 	    updater: "updatePosting",		// php function to update
 	    destroyer: "removePosting", // php function to remove
 	    displayKeys: ["sid","title","url","location","company","source"], // values to display in table
-	    limit: {start:0, end:50}
+	    limit: {start:0, end:50},
+	    count: ""
 	};
     this.companies =
 	{
@@ -804,6 +805,7 @@ function getStuff(object)
 		console.log(resp);
 		//console.log(object);
 		//callback(object, JSON.parse(resp));
+		// set object.count
 		callback(object, resp);
 	    }
 	}
@@ -826,6 +828,11 @@ function displayTable(object)
 
     var table = object.table;
     emptyElement(table);
+
+    // add pre-row to display count
+    // var trp = createAppendedChildToParent('tr',table);
+    
+
     var tr = createAppendedChildToParent('tr',table);
 
     // console.log("from displayTable");

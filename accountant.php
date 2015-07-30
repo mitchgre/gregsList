@@ -309,8 +309,8 @@ function getPostings($user,$window)
                                "locations" => $f_locations,
                                "companies" => $f_companies,
                                "sources" => $f_sources,
-                               "totalPostingsCount" => $totalPostingsCount,
-                               "userPostingsCount" => $userPostingsCount
+                               "totalCount" => $totalPostingsCount,
+                               "count" => $userPostingsCount
                            );
 
         return $filtered_postings;
@@ -495,7 +495,7 @@ function getSchedules($user,$window)
                                "locations" => $f_locations,
                                "contacts" => $f_contacts,
                                "urls" => $f_urls,
-                               "scheduleCount" => $scheduleCount
+                               "count" => $scheduleCount
                            );
 
         return $filtered_postings;
