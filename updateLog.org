@@ -27755,6 +27755,9 @@ create table postings(
     Acutally, it returns empty arrays for postings.  That's no good.
     Will test it on cli to start with.
 
+    Wed Jul 29, 2015 19:09:33
+    Got the filter working on limits.  Still missing a display. 
+    
 
 *** todo [0/3]
     - [ ] connect to google docs

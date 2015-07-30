@@ -224,19 +224,20 @@ function getPostings($user,$window)
     $totalPostingsCount = getPostingsCount(); 
     $userPostingsCount = getUserPostingsCount($user);
     
-    // return $window;
+    //return $window;
     
     // get window parameters
-    $decoded_window = json_decode( $window , true);
-    return $decoded_window;
+    //$decoded_window = json_decode( $window , true);
+    // return $decoded_window;
 
-    $start = $decoded_window["start"];
-    $end = $decoded_window["end"];
+    $start = $window["start"];
+    $end = $window["end"];
 
+    // return "start:".$start.", end:". $end;
     // return array('start'=>$start, 'end'=>$end);
 
-    if ( $start >= $userPostingsCount )
-        return "error: window start >= userPostingsCount";
+    if ( $start > $userPostingsCount )
+        return "error: window start:".$start." >= userPostingsCount:".$userPostingsCount;
     
     if ( $end >= $userPostingsCount )
         $end = $userPostingsCount;
@@ -284,7 +285,7 @@ function getPostings($user,$window)
 
 
         // limit arrays here according to window specs
-        for ( $i = $start; $i < $end; $i++ )
+        for ( $i = $start; $i <= $end; $i++ )
         {
             $f_ids[$i] = $ids[$i];
             $f_titles[$i] = $titles[$i];
