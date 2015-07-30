@@ -413,7 +413,9 @@ function getSchedules($user,$window)
     // get window parameters
     $start = $window["start"];
     $end = $window["end"];
-    
+ 
+    // return "start:".$start.",end:".$end;
+   
     $mysqli = connectToDB();
 
     $query  = "select schedule.id, schedule.name, schedule.description, schedule.location, ";
@@ -487,6 +489,7 @@ function getSchedules($user,$window)
             $f_ends[$i] = $ends[$i];
         }
 
+        
 
         /* 
            associate all elements of arrays.
