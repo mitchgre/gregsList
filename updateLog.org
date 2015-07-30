@@ -27789,3 +27789,53 @@ create table postings(
    Looks like [[file:accountant.php::function%20getSchedules(][file:accountant.php::function getSchedules(]] is
    returning a PHP array, not json.
 
+   From firebug: (comparing getting schedules vs postings.)
+   (Postings work, whereas schedules are broken).
+
+getStuff(gregsList.schedules) =>
+
+getting schedules
+objects.js (line 782)
+Object { parent=glo,  contents=[0],  type="schedule",  more...}
+objects.js (line 784)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		3ms	
+jquery-....min.js (line 4)
+HeadersPostResponseHTML
+
+Array{"ids":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,15,19,20,21,19,5,24,25,26,27,6,29,5,31,32,33,6
+,35,36,37,27,39,5,41,42,19,44,45,46,31,48,49,50,51],"names":["write up final project","study for finals"
+,"a","Software Developer Jobs, Employment in North Dakota","Software Developer","Application Developer"
+,"Java &amp; .Net Application Developers (mulitple openings)","Mobile Web Developer\/Programmer","Software
+ Engineer (Javascript)","Business Intelligence Developer","SQL Coder","QA Engineer I","Software Engineer-ECIT"
+,"Web\/Application Developer - Systems Analyst","Software Engineer","SQL\/PLSQL Developer","Web Designer
+\/Developer","Software Engineer","Embedded Software Engineer","
+
+
+
+
+getStuff(gregsList.postings)
+getting postings
+objects.js (line 782)
+Object { parent=glo,  contents=[51],  type="posting",  more...}
+objects.js (line 784)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		3ms	
+jquery-....min.js (line 4)
+HeadersPostResponseHTMLJSON
+
+{"ids":[1,2,3,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36
+,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54],"titles":["Software Engineer \/ Application Developer"
+,"IT Support Engineer II","Computer Engineer","Software Developer Jobs, Employment in North Dakota","Software
+ Developer","Application Developer","Java &amp; .Net Application Developers (mulitple openings)","Mobile
+ Web Developer\/Programmer","Software Engineer (Javascript)","Business Intelligence Developer","SQL Coder"
+,"QA Engineer I","Software Engineer-ECIT","Web\/Application Developer - Systems Analyst","Software Engineer"
+,"SQL\/PLSQL Developer","Web Designer\/Developer","Software Engineer","Embedded Software Engineer","Software
+ Engineer 1","Web\/User Interface Designer (PENDING RECLASSIFICATION BY HRMS)","
+
+
+	Note that postings do not have an array at the front.
