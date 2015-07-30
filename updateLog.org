@@ -27839,3 +27839,12 @@ HeadersPostResponseHTMLJSON
 
 
 	Note that postings do not have an array at the front.
+
+
+	Thu Jul 30, 2015 14:19:48
+	More debugging.  For some reason [[file:schedules.js::function%20fillSchedules][file:schedules.js::function fillSchedules]]
+	is never getting called.  
+
+	It's supposed to go: setupSchedules, getStuff(schedules),
+	displayTable(), fillSchedules and fillSchedules is definitely
+	never getting called.  Not sure about displayTable(). 

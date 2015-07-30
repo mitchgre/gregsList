@@ -158,6 +158,7 @@ function editSchedule()
 
 function fillSchedules(object,input)
 {
+    console.log('filling SCHEDULES called.');
     // erase object's contents and refill them from input
     $('.fc-event').remove();  // remove from jQuery full calendar hopefully?
     $('#calendar').fullCalendar('removeEvents');

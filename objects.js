@@ -65,7 +65,7 @@ function glo()  // gregsList Object
 	    updater: "updatePosting",		// php function to update
 	    destroyer: "removePosting", // php function to remove
 	    displayKeys: ["sid","title","url","location","company","source"], // values to display in table
-	    limit: {start:0, end:50},
+	    limit: {start:0, end:500},
 	    count: 0
 	};
     this.companies =
@@ -335,8 +335,8 @@ glo.prototype.refresh =
     object.setupCompanies();
     object.setupLocations();
     object.setupPostings();
-    object.setupContacts();
     object.setupSchedules();
+    object.setupContacts();
     object.setupBlog();
 
 }
@@ -527,8 +527,8 @@ glo.prototype.setupSchedules =
 {
     var object = this.schedules;
 
-    console.log("from setupSchedule: object=");
-    console.log(object);
+    // console.log("from setupSchedule: object=");
+    // console.log(object);
 
     // empty calendar events
     $("#calendarPortlet").fullCalendar('removeEvents');
@@ -783,11 +783,13 @@ function getStuff(object)
 
     console.log(object);
 
-    // console.log(callback);
     var getter = object.get;
     // var callback = object.display;
     var callback = object.filler;
     var limits = object.limit;
+
+    console.log("object callback:");
+    console.log(callback);
 
 
     $.ajax
@@ -813,6 +815,8 @@ function getStuff(object)
 		//console.log(object);
 		//callback(object, JSON.parse(resp));
 		// set object.count
+		console.log('calling back to ');
+		console.log(callback);
 		callback(object, resp);
 	    }
 	}

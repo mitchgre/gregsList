@@ -455,7 +455,7 @@ function getSchedules($user,$window)
     
     
     // associate arrays
-    
+    /*
     $schedules = array
         (
             "ids" => $ids,
@@ -469,7 +469,8 @@ function getSchedules($user,$window)
         );
         
     return $schedules;
-    
+    */
+
     // initialize filtered containers
     $f_ids = array();
     $f_names = array();
