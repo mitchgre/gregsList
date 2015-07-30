@@ -411,10 +411,15 @@ function getSchedules($user,$window)
     $scheduleCount = getUserSchedulesCount($user);
 
     // get window parameters
-    $start = $window["start"];
-    $end = $window["end"];
+    $winStart = $window["start"];
+    $winEnd = $window["end"];
  
-    // return "start:".$start.",end:".$end;
+    if ( $winStart > $scheduleCount )
+        return "error: window start:".$start." >= userPostingsCount:".$userPostingsCount;
+    
+    if ( $winEnd >= $scheduleCount )
+        $winEnd = $scheduleCount;
+
    
     $mysqli = connectToDB();
 
@@ -465,50 +470,50 @@ function getSchedules($user,$window)
         
     return $schedules;
     */
-        // initialize filtered containers
-        $f_ids = array();
-        $f_names = array();
-        $f_descriptions = array();
-        $f_locations = array();
-        $f_contacts = array();
-        $f_urls = array();
-        $f_starts = array();
-        $f_ends = array();
+    // initialize filtered containers
+    $f_ids = array();
+    $f_names = array();
+    $f_descriptions = array();
+    $f_locations = array();
+    $f_contacts = array();
+    $f_urls = array();
+    $f_starts = array();
+    $f_ends = array();
 
 
-        // limit arrays here according to window specs
-        for ( $i = $start; $i <= $end; $i++ )
-        {
-            $f_ids[$i] = $ids[$i];
-            $f_names[$i] = $names[$i];
-            $f_descriptions[$i] = $descriptions[$i];
-            $f_locations[$i] = $locations[$i];
-            $f_contacts[$i] = $contacts[$i];
-            $f_urls[$i] = $urls[$i];
-            $f_starts[$i] = $starts[$i];
-            $f_ends[$i] = $ends[$i];
-        }
+    // limit arrays here according to window specs
+    for ( $i = $winStart; $i <= $winEnd; $i++ )
+    {
+        $f_ids[$i] = $ids[$i];
+        $f_names[$i] = $names[$i];
+        $f_descriptions[$i] = $descriptions[$i];
+        $f_locations[$i] = $locations[$i];
+        $f_contacts[$i] = $contacts[$i];
+        $f_urls[$i] = $urls[$i];
+        $f_starts[$i] = $starts[$i];
+        $f_ends[$i] = $ends[$i];
+    }
 
         
 
-        /* 
-           associate all elements of arrays.
-           This just means adding a container around them.
-        */
-        $filtered_schedule = 
-                           array(
-                               "ids" => $f_ids,
-                               "names" => $f_names,
-                               "descriptions" => $f_descriptions,
-                               "locations" => $f_locations,
-                               "contacts" => $f_contacts,
-                               "urls" => $f_urls,
-                               "starts" => $f_starts,
-                               "ends" => $f_ends,
-                               "count" => $scheduleCount
-                           );
-
-        return $filtered_schedule;
+    /* 
+       associate all elements of arrays.
+       This just means adding a container around them.
+    */
+    $filtered_schedule = 
+                       array(
+                           "ids" => $f_ids,
+                           "names" => $f_names,
+                           "descriptions" => $f_descriptions,
+                           "locations" => $f_locations,
+                           "contacts" => $f_contacts,
+                           "urls" => $f_urls,
+                           "starts" => $f_starts,
+                           "ends" => $f_ends,
+                           "count" => $scheduleCount
+                       );
+    
+    return $filtered_schedule;
 }
 
 
