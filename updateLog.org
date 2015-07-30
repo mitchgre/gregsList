@@ -27779,4 +27779,4 @@ create table postings(
    11:45:07
    Two hours later, I'm still working on the getSchedules() bug.  I
    think I got the PHP side working, but the javascript side now
-   seems to be broken. 
+   seems to be broken.  [[file:schedules.js]]

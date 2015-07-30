@@ -164,7 +164,13 @@ function fillSchedules(object,input)
     object.contents = [];
     var contents = object.contents;
 
-    
+    /*
+      NOTE:
+      If there are lots of events, then pushing them all into the
+      jQuery calendar will definitely freeze up the program. 
+
+      Need to find a workaround. 
+      */
     for (var i = 0; i < input.ids.length; i++)
     {
 	var id = input.ids[i];
