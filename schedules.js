@@ -163,7 +163,7 @@ function fillSchedules(object,input)
     $('#calendar').fullCalendar('removeEvents');
     object.contents = [];
     var contents = object.contents;
-
+    console.log(input);
     /*
       NOTE:
       If there are lots of events, then pushing them all into the

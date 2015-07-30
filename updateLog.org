@@ -27784,3 +27784,8 @@ create table postings(
    12:16:03
    Looks like [[file:objects.js::function%20displayTable][file:objects.js::function displayTable]] is never getting
    called on the schedules for some reason. 
+
+   12:21:42
+   Looks like [[file:accountant.php::function%20getSchedules(][file:accountant.php::function getSchedules(]] is
+   returning a PHP array, not json.
+
