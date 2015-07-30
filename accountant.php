@@ -310,7 +310,9 @@ function getPostings($user,$window)
                                "companies" => $f_companies,
                                "sources" => $f_sources,
                                "totalCount" => $totalPostingsCount,
-                               "count" => $userPostingsCount
+                               "count" => $userPostingsCount,
+                               "start" => $start,
+                               "end" => $end
                            );
 
         return $filtered_postings;
@@ -397,14 +399,14 @@ function getUserSchedulesCount($userId)
 function getSchedules($user,$window)
 {
 
-    $ids = [];
-    $names = [];
-    $descriptions = [];
-    $locations = [];
-    $contacts = [];
-    $urls = [];
-    $starts = [];
-    $ends = [];
+    $ids = array();
+    $names = array();
+    $descriptions = array();
+    $locations = array();
+    $contacts = array();
+    $urls = array();
+    $starts = array();
+    $ends = array();
 
     $scheduleCount = getUserSchedulesCount($user);
 
@@ -444,7 +446,9 @@ function getSchedules($user,$window)
 
     mysqli_close($mysqli);
     
+    
     // associate arrays
+    /*
     $schedules = array
         (
             "ids" => $ids,
@@ -456,8 +460,9 @@ function getSchedules($user,$window)
             "starts" => $starts,
             "ends" => $ends,            
         );
-
-
+        
+    return $schedules;
+    */
         // initialize filtered containers
         $f_ids = array();
         $f_names = array();
@@ -487,7 +492,7 @@ function getSchedules($user,$window)
            associate all elements of arrays.
            This just means adding a container around them.
         */
-        $filtered_postings = 
+        $filtered_schedule = 
                            array(
                                "ids" => $f_ids,
                                "names" => $f_names,
@@ -495,17 +500,12 @@ function getSchedules($user,$window)
                                "locations" => $f_locations,
                                "contacts" => $f_contacts,
                                "urls" => $f_urls,
+                               "starts" => $f_starts,
+                               "ends" => $f_ends,
                                "count" => $scheduleCount
                            );
 
-        return $filtered_postings;
-
-
-    
-    return $schedules;
-
-
-
+        return $filtered_schedule;
 }
 
 

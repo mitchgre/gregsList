@@ -837,8 +837,8 @@ function displayTable(object)
     emptyElement(table);
 
     // add pre-row to display count
-    // var trp = createAppendedChildToParent('tr',table);
-    
+    var trp = createAppendedChildToParent('tr',table);
+    // trp.innerHTML = 
 
     var tr = createAppendedChildToParent('tr',table);
 
