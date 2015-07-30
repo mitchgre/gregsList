@@ -27770,3 +27770,7 @@ create table postings(
     - [ ] connect to linkedin.
       - maybe their api isn't too difficult.
     - [ ] do some actual job searching - applying, etc.
+
+** Thu Jul 30, 2015 10:17:48
+   Not going to have a lot of time to work on this today.   So the
+   goal is just to get the display functioning. 
