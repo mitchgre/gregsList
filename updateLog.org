@@ -27758,6 +27758,10 @@ create table postings(
     Wed Jul 29, 2015 19:09:33
     Got the filter working on limits.  Still missing a display of
     counts. 
+
+    Wed Jul 29, 2015 22:04:26
+    Filtering schedules.  They aren't going through properly at all,
+    but load times are finally not freezing up the clients. 
     
 
 *** todo [0/3]

@@ -221,6 +221,7 @@ function getPostings($user,$window)
     $locations = array();
     $companies = array();
     $sources = array();
+
     $totalPostingsCount = getPostingsCount(); 
     $userPostingsCount = getUserPostingsCount($user);
     
@@ -378,6 +379,18 @@ function getContacts($user)
     return $contacts;
 }
 
+function getSchedulesCount()
+{
+    $query  = "select count(id) from schedule";
+    return reset(returnStuff($query));
+}
+
+
+function getUserSchedulesCount($userId)
+{
+    $query  = "select count(id) from user_schedule where user = $userId";
+    return reset(returnStuff($query));
+}
 
 
 
@@ -392,6 +405,8 @@ function getSchedules($user,$window)
     $urls = [];
     $starts = [];
     $ends = [];
+
+    $scheduleCount = getUserSchedulesCount($user);
 
     // get window parameters
     $start = $window["start"];
@@ -441,6 +456,51 @@ function getSchedules($user,$window)
             "starts" => $starts,
             "ends" => $ends,            
         );
+
+
+        // initialize filtered containers
+        $f_ids = array();
+        $f_names = array();
+        $f_descriptions = array();
+        $f_locations = array();
+        $f_contacts = array();
+        $f_urls = array();
+        $f_starts = array();
+        $f_ends = array();
+
+
+        // limit arrays here according to window specs
+        for ( $i = $start; $i <= $end; $i++ )
+        {
+            $f_ids[$i] = $ids[$i];
+            $f_names[$i] = $names[$i];
+            $f_descriptions[$i] = $descriptions[$i];
+            $f_locations[$i] = $locations[$i];
+            $f_contacts[$i] = $contacts[$i];
+            $f_urls[$i] = $urls[$i];
+            $f_starts[$i] = $starts[$i];
+            $f_ends[$i] = $ends[$i];
+        }
+
+
+        /* 
+           associate all elements of arrays.
+           This just means adding a container around them.
+        */
+        $filtered_postings = 
+                           array(
+                               "ids" => $f_ids,
+                               "names" => $f_names,
+                               "descriptions" => $f_descriptions,
+                               "locations" => $f_locations,
+                               "contacts" => $f_contacts,
+                               "urls" => $f_urls,
+                               "scheduleCount" => $scheduleCount
+                           );
+
+        return $filtered_postings;
+
+
     
     return $schedules;
 
