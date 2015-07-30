@@ -197,6 +197,7 @@ function fillSchedules(object,input)
 						  },true);
 				    // copiedEventObject,false);// add to calendars
 	// update portlet 
+	/*
 	$("#calendarPortlet").fullCalendar('renderEvent',{title:name,
 						   sid: id,
 						   description:description,
@@ -207,7 +208,7 @@ function fillSchedules(object,input)
 						   end:end
 						  },true);
 					  // copiedEventObject,false);// add to calendars
-
+					  */
 	displayTable(object);
 	displayEventPortlet(object);
 	embelishTable(object,null);
