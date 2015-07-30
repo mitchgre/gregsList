@@ -27780,3 +27780,7 @@ create table postings(
    Two hours later, I'm still working on the getSchedules() bug.  I
    think I got the PHP side working, but the javascript side now
    seems to be broken.  [[file:schedules.js]]
+
+   12:16:03
+   Looks like [[file:objects.js::function%20displayTable][file:objects.js::function displayTable]] is never getting
+   called on the schedules for some reason. 

@@ -174,6 +174,8 @@ function fillSchedules(object,input)
     for (var i = 0; i < input.ids.length; i++)
     {
 	var id = input.ids[i];
+	// debug ids
+	console.log(id);
 	var name = input.names[i]; // called 'title' in calendar
 	var description = input.descriptions[i];
 	var location = input.locations[i];
@@ -183,7 +185,8 @@ function fillSchedules(object,input)
 	var end = input.ends[i];
 
 	var p = new schedule(id,name,description,location,contact,url,start,end);
-
+	// debugging postings
+	console.log(p);
 	contents.push(p); // push to glo object
 	// calendar should have been emptied prior to calling this function
 	$("#calendar").fullCalendar('renderEvent',{title:name,
