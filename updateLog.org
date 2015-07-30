@@ -27774,3 +27774,9 @@ create table postings(
 ** Thu Jul 30, 2015 10:17:48
    Not going to have a lot of time to work on this today.   So the
    goal is just to get the display functioning. 
+
+
+   11:45:07
+   Two hours later, I'm still working on the getSchedules() bug.  I
+   think I got the PHP side working, but the javascript side now
+   seems to be broken. 
