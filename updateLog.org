@@ -27848,3 +27848,6 @@ HeadersPostResponseHTMLJSON
 	It's supposed to go: setupSchedules, getStuff(schedules),
 	displayTable(), fillSchedules and fillSchedules is definitely
 	never getting called.  Not sure about displayTable(). 
+
+	Fri Jul 31, 2015 07:20:25
+	Still debugging.
