@@ -27851,7 +27851,36 @@ HeadersPostResponseHTMLJSON
 
 	Fri Jul 31, 2015 07:20:25
 	Still debugging.
-** Sat Aug 01, 2015 22:51:58 driving. switched branches.
+*** Fri Jul 31, 2015 12:51:31 [[file:/gregsList/updateLog.org]]
+
+n900t - 38cc8686ba75fd81996dfb49b9ea6410f77daa51
+
+egil -  82c3a10885057addbb6707422e359a98cc9bbac4
+
+Both of these have working unfiltered schedules, whereas current head breaks schedules.
+
+
+Fri Jul 31, 2015 21:05:11
+
+Really confused about this still.
+
+Need to figure out how to make a new branch from the old commit.
+
+[[file:git/git.org::*%20make%20new%20branch%20from%20old%20commit][file:git/git.org::* make new branch from old commit]]
+
+
+Fri Jul 31, 2015 21:23:34
+
+Made a new branch at
+ 
+git branch fixSchedules
+git reset --hard 82c3a10885057addbb6707422e359a98cc9bbac4
+
+(This is where egil was).
+
+Not really sure what to do here.
+
+*** Sat Aug 01, 2015 22:51:58 driving. switched branches.
 *** Sun Aug 02, 2015 20:04:44 nothing to see here
 *** Mon Aug 03, 2015 13:08:43 trying to setup n900t again.
 
