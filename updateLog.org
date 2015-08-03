@@ -27905,7 +27905,8 @@ Not really sure what to do here.
 <br />
 
 
-	Mon Aug 03, 2015 13:50:54
+*** Mon Aug 03, 2015 13:50:54 error reporting problem on n900t
+
 	The PHP problem on n900t was due to error reporting.  It's a
 	PHP config file thing, but you can set it in a script also,
 	which feels more robust at the moment.
@@ -27919,4 +27920,70 @@ Not really sure what to do here.
 	The status key is already there in the user_postings table,
 	but there's nothing on the front end to touch it yet.
 	[[file:postings.js]] 
+
+
+*** Mon Aug 03, 2015 14:05:35 The schedules are not rendering.  Looking at Firebug's logs:
+
+
+    Conclusion:  the callback function for the schedules object is
+    not being called for some reason. 
+
+
+objects.js (line 792)
+POST http://192.168.42.129/gregsList/butler.php
 	
+200 OK
+		48ms	
+jquery-....min.js (line 4)
+getting postings
+objects.js (line 782)
+Object { parent=glo,  contents=[0],  type="posting",  more...}
+objects.js (line 784)
+object callback:
+objects.js (line 791)
+fillPostings(object, input)
+objects.js (line 792)
+POST http://192.168.42.129/gregsList/butler.php
+	
+200 OK
+		61ms	
+jquery-....min.js (line 4)
+getting schedules
+objects.js (line 782)
+Object { parent=glo,  contents=[0],  type="schedule",  more...}
+objects.js (line 784)
+object callback:
+objects.js (line 791)
+fillSchedules(object, input)
+objects.js (line 792)
+POST http://192.168.42.129/gregsList/butler.php
+	
+200 OK
+		42ms	
+jquery-....min.js (line 4)
+HeadersPostResponseHTML
+
+Array{"ids":[1,2,3,null],"names":["write up final project","study for finals","a",null],"descriptions"
+:["check against guidelines","make note page","job posting",null],"locations":[null,null,null,null],"contacts"
+:[null,null,"",null],"urls":[null,null,null,null],"starts":["2015-03-14 00:00:00","2015-03-15 00:00:00"
+,"2015-08-03 20:05:05",null],"ends":["2015-03-15 00:00:00","2015-03-19 00:00:00","2015-08-03 20:05:05"
+,null],"count":3}
+
+getting contacts
+objects.js (line 782)
+Object { parent=glo,  contents=[0],  type="contact",  more...}
+objects.js (line 784)
+object callback:
+objects.js (line 791)
+POST http://192.168.42.129/gregsList/butler.php
+	
+200 OK
+		67ms	
+jquery-....min.js (line 4)
+POST http://192.168.42.129/gregsList/butler.php
+	
+200 OK
+		71ms
+	
+
+
