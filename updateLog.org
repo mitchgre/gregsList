@@ -27852,4 +27852,11 @@ HeadersPostResponseHTMLJSON
 	Fri Jul 31, 2015 07:20:25
 	Still debugging.
 ** Sat Aug 01, 2015 22:51:58 driving. switched branches.
-** Sun Aug 02, 2015 20:04:44 nothing to see here
+*** Sun Aug 02, 2015 20:04:44 nothing to see here
+*** Mon Aug 03, 2015 13:08:43 trying to setup n900t again.
+
+    Not sure if this is going to work, but I'm trying it for a little
+    while today.  
+
+
+
