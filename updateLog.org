@@ -27888,4 +27888,23 @@ Not really sure what to do here.
     while today.  
 
 
+    Firebug dump from getPostings()
 
+    [[file:accountant.php]]
+
+<br />
+<b>Notice</b>:  Undefined offset: 4 in <b>/gregsList/accountant.php</b> on line <b>291</b><br />
+<br />
+<b>Notice</b>:  Undefined offset: 4 in <b>/gregsList/accountant.php</b> on line <b>292</b><br />
+<br />
+<b>Notice</b>:  Undefined offset: 4 in <b>/gregsList/accountant.php</b> on line <b>293</b><br />
+<br />
+<b>Notice</b>:  Undefined offset: 4 in <b>/gregsList/accountant.php</b> on line <b>294</b><br />
+<br />
+<b>Notice</b>:  Undefined offset: 4 in <b>/gregsList/accountant.php</b> on line <b>295</b><br />
+<br />
+
+
+	Mon Aug 03, 2015 13:50:54
+	The PHP problem on n900t was due to error reporting.  
+	

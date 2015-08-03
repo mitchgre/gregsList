@@ -287,14 +287,14 @@ function getPostings($user,$window)
 
         // limit arrays here according to window specs
         for ( $i = $start; $i <= $end; $i++ )
-        {
-            $f_ids[$i] = $ids[$i];
-            $f_titles[$i] = $titles[$i];
-            $f_urls[$i] = $urls[$i];
-            $f_locations[$i] = $locations[$i];
-            $f_companies[$i] = $companies[$i];
-            $f_sources[$i] = $sources[$i];
-        }
+            {
+                $f_ids[$i] = $ids[$i];
+                $f_titles[$i] = $titles[$i];
+                $f_urls[$i] = $urls[$i];
+                $f_locations[$i] = $locations[$i];
+                $f_companies[$i] = $companies[$i];
+                $f_sources[$i] = $sources[$i];
+            }
 
 
         /* 
