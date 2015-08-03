@@ -27906,5 +27906,17 @@ Not really sure what to do here.
 
 
 	Mon Aug 03, 2015 13:50:54
-	The PHP problem on n900t was due to error reporting.  
+	The PHP problem on n900t was due to error reporting.  It's a
+	PHP config file thing, but you can set it in a script also,
+	which feels more robust at the moment.
+
+	So now I'm rolling again on n900t as far as postings go.
+	Still wrestling with schedules, and thinking about adding
+	more tables to schema to track statuses.
+
+	[[file:schema.sql]]
+
+	The status key is already there in the user_postings table,
+	but there's nothing on the front end to touch it yet.
+	[[file:postings.js]] 
 	
