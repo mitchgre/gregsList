@@ -27996,14 +27996,41 @@ POST http://192.168.42.129/gregsList/butler.php
 *** Wed Aug 05, 2015 20:15:38 looking into piazza and linked in apis.
 ** Thu Aug 06, 2015 09:07:56 status
 *** job posting status
-    
-    This is probably highest priority if I'm going to do anything, I
-    need to do this.  
+**** overview
+     This is probably highest priority if I'm going to do anything, I
+     need to do this.  
 
-    I was even thinking that I'd get a spreadsheet to do this instead
-    of using the database, but I'm thinking that may be equally
-    difficult to manage, and I've already put so much work into the
-    db, I might as well use it.  
- 
+     I was even thinking that I'd get a spreadsheet to do this instead
+     of using the database, but I'm thinking that may be equally
+     difficult to manage, and I've already put so much work into the
+     db, I might as well use it.  
+
+**** timeframe
+***** Thu Aug 06, 2015 09:23:45 Initial Thoughts
+      As usual, I don't have a lot of time to spend on this.  As a
+      rough goal, I'd like to get around 10 applications out today,
+      and maybe try to ramp that up tomorrow and so on.  
+
+      In particular, I don't think it will be a big deal to update the
+      schema to add another relational table that includes statuses.   
+
+      The client side scripting might be a little more difficult, and
+      the middle ware might also be a challenge.  
+
+      Furthermore, since the scraper works with indeed, destroying and
+      rebuilding the db shouldn't be a big deal.
+***** Thu Aug 06, 2015 09:23:55 Goals
+10AM - get schema updated
+11AM - hack out PHP
+12AM - get javascript 
+
+**** [[file:schema.sql]]
+***** Thu Aug 06, 2015 09:21:43 Missing Relation Table For User Posting Status
+
+	No big deal, this should be an easy fix.
+	
+***** Thu Aug 06, 2015 09:23:18 Missing PHP interface.
+
+
 *** schedules bug
 *** foreign apis (piaza, linked in)
