@@ -477,6 +477,7 @@ function addMotivationInputs(object)
     var tableId = object.table.id;
 
     // get the nth children  (8th in this case)
+    var ids = $("#" + tableId + " tr td:nth-child(1)");
     var cells = $("#" + tableId + " tr td:nth-child(8)");
     console.log(cells);
 
@@ -486,11 +487,15 @@ function addMotivationInputs(object)
 	// get current contents
 	// var prev = cells[i].html();
 	var thisCell = cells[i];
+	var thisId = ids[i];
+
 	// console.log(thisCell);
 	var content = thisCell.innerHTML;
 
-	var input = addInput(thisCell, 'number', '', content);
 	// append an input element
+	var input = addInput(thisCell, 'number', '', content);
+	input.onchange = setMotivation(object,thisId);
+
 	// cells[i].html('<input type="number"></input>');
     }
 
