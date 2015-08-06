@@ -561,6 +561,48 @@ function getBlog($user)
 }
 
 
+function getResumes($user)
+{
+    $ids = [];
+    $titles = [];
+    $texts = [];
+    
+    $mysqli = connectToDB();
+    
+// select notes_user.id, notes.text from notes_user inner join notes on notes_user.note = notes.id;
+    
+    $query = "select resumes.id, resumes.title, resumes.text from resumes ";
+    $query .= "where user=$user ";
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id,$title,$text);
+            
+            while($statement->fetch())
+                {
+                    array_push($ids,$id);
+                    array_push($titles,$title);
+                    array_push($texts,$text);
+                }
+        }
+    mysqli_close($mysqli);
+    
+    // associate arrays
+    $resumes = array
+        (
+            "ids" => $ids,
+            "titles" => $titles,
+            "texts" => $texts
+        );
+    
+    return $resumes;
+}
+
+
+
 function getNoteIdFromUserNoteId($userId,$userNoteId)
 {
     $query = "select note from notes_user where user=$userId and id=$userNoteId";

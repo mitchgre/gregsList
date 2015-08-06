@@ -28277,5 +28277,6 @@ mysql>
       Not really sure how to do this.  I just want to copy an paste
       from a reference of sorts I guess.
 ***** TODO Thu Aug 06, 2015 10:31:28 working on PHP Crud
+****** Thu Aug 06, 2015 10:42:10 tested getResumes() on cli - will do getCoverLetters() on cli next, then move onto javascript. 
 *** schedules bug
 *** foreign apis (piaza, linked in)
