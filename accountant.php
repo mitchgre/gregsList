@@ -1865,6 +1865,20 @@ function removeNote ($noteId)
     booleanReturn($query);   
 }
 
+function removeResume ($resumeId)
+{
+    $query  = "delete from resumes where id = $resumeId";
+    
+    booleanReturn($query);   
+}
+
+function removeCoverLetter ($CoverLetterId)
+{
+    $query  = "delete from CoverLetters where id = $CoverLetterId";
+    
+    booleanReturn($query);   
+}
+
 
 
 
