@@ -1471,6 +1471,36 @@ function insertBlog($user,$title,$text)
     
 }
 
+
+function insertResume($user,$title,$text)
+{
+
+    $query = "insert into resumes (title,text) ";
+    $query .= "values (\"" . $title ."\",\"". $text ."\") ";
+
+    if ( booleanReturn($query) )
+        return true;
+    else
+        return "Error inserting resume.";    
+}
+
+
+
+
+function insertCoverLetter($user,$title,$text)
+{
+
+    $query = "insert into cover_letters (user,title,text) ";
+    $query .= "values ($user,\"" . $title ."\",\"". $text ."\") ";
+
+    if ( booleanReturn($query) )
+        return true;
+    else
+        return "Error inserting cover letter.";    
+}
+
+
+
 function insertNotesGoalUser($noteId,$goalId,$userId)
 {
     $query = "insert into notes_goal_user (note,goal,user)";

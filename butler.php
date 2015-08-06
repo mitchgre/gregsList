@@ -202,6 +202,24 @@ if (isset($_POST['func']))
  
                 echo json_encode(insertBlog($user,$title,$text));
             }
+        if ($func === "insertResume")
+            {
+                // need to error check $_POST
+                
+                $title = $_POST["title"];
+                $text = $_POST["text"];
+ 
+                echo json_encode(insertResume($user,$title,$text));
+            }
+        if ($func === "insertCoverLetter")
+            {
+                // need to error check $_POST
+                
+                $title = $_POST["title"];
+                $text = $_POST["text"];
+ 
+                echo json_encode(insertCoverLetter($user,$title,$text));
+            }
         if ($func === "insertNotesGoalUser")
             {
 

@@ -28025,14 +28025,16 @@ POST http://192.168.42.129/gregsList/butler.php
               that I don't have. Plus, it's all about naming right?
               So let me think clearly, and not in convoluted knots.
 
-      - [ ] build php switch for user_posting_status
+      - [ ] build php switch for user_posting_status [0/2]
 	- [ ] read
 	- [ ] toggle
-      - [ ] build javascript for user_posting_status
+
+      - [ ] build javascript for user_posting_status [0/3]
 	- [ ] proper rendering
 	- [ ] read
 	- [ ] toggle
-      - [-] add a table of text containing plain text cover letters [1/3]
+
+      - [-] add a table of text containing plain text cover letters/resumes [1/3]
 	- [X] update schema
 	- [-] build php CRUD [1/4]
 	  - [ ] create
