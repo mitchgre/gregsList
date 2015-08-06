@@ -298,7 +298,7 @@ function getPostings($user,$window)
                 $f_locations[$i] = $locations[$i];
                 $f_companies[$i] = $companies[$i];
                 $f_sources[$i] = $sources[$i];
-                $f_statuses[$i] = $statuss[$i];
+                $f_statuses[$i] = $statuses[$i];
                 $f_motivations[$i] = $motivations[$i];
             }
 
