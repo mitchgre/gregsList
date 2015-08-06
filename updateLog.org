@@ -28290,19 +28290,21 @@ mysql>
       CLOSED: [2015-08-06 Thu 10:31]
       Not really sure how to do this.  I just want to copy an paste
       from a reference of sorts I guess.
-***** TODO Thu Aug 06, 2015 10:31:28 working on PHP Crud
+***** VERIFY Thu Aug 06, 2015 10:31:28 working on PHP Crud
 ****** Thu Aug 06, 2015 10:42:10 tested getResumes() on cli - will do getCoverLetters() on cli next, then move onto javascript. 
 ****** Thu Aug 06, 2015 10:46:50 tested getCoverLetters() on cli.
 ****** Thu Aug 06, 2015 11:28:55 tested insertResumes() and insertCoverLetters() on cli.
 ****** Thu Aug 06, 2015 11:35:26 untested removeResume() and removeCoverLetter()
 ****** Thu Aug 06, 2015 12:01:24 still missing updates for resumes and cover letters
-***** Thu Aug 06, 2015 12:01:14 setup javascript
-      Need to get displays for posting status, posting motivation,
-      resumes and cover letters.
+***** TODO Thu Aug 06, 2015 12:01:14 setup javascript [0/2]
+****** overview
+       Need to get displays for posting status, posting motivation,
+       resumes and cover letters.
 
-      After this, I can work on missing CRUDs... I think the updates
-      are not setup.  Will try to update by id, instead of title and text.
-
-
+       After this, I can work on missing CRUDs... I think the updates
+       are not setup.  Will try to update by id, instead of title and text.
+****** TODO add buttons to toggle status
+****** TODO add text fields to set motivations
+	This can be done in [[file:objects.js::function%20embelishTable][file:objects.js::function embelishTable]]
 *** schedules bug
 *** foreign apis (piaza, linked in)

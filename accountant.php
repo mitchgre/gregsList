@@ -1511,19 +1511,6 @@ function insertCoverLetter($user,$title,$text)
 }
 
 
-unction insertResume($user,$title,$text)
-{
-
-    $query = "insert into resumes (user,title,text) ";
-    $query .= "values ($user,\"" . $title ."\",\"". $text ."\") ";
-
-    if ( booleanReturn($query) )
-        return true;
-    else
-        return "Error inserting resumes.";    
-}
-
-
 
 
 function insertNotesGoalUser($noteId,$goalId,$userId)

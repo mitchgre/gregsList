@@ -13,6 +13,7 @@
  */
 
 error_reporting(E_ERROR);
+// error_reporting(E_ALL);
 
 //require "./credentials.php";
 require "./engineer.php"; // utitlity functions
