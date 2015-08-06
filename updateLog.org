@@ -28294,5 +28294,6 @@ mysql>
 ****** Thu Aug 06, 2015 10:42:10 tested getResumes() on cli - will do getCoverLetters() on cli next, then move onto javascript. 
 ****** Thu Aug 06, 2015 10:46:50 tested getCoverLetters() on cli.
 ****** Thu Aug 06, 2015 11:28:55 tested insertResumes() and insertCoverLetters() on cli.
+****** Thu Aug 06, 2015 11:35:26 untested removeResume() and removeCoverLetter()
 *** schedules bug
 *** foreign apis (piaza, linked in)

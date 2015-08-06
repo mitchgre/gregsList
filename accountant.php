@@ -221,6 +221,9 @@ function getPostings($user,$window)
     $locations = array();
     $companies = array();
     $sources = array();
+    $postings = array();
+    $statuses = array();
+    $motivations = array();
 
     $totalPostingsCount = getPostingsCount(); 
     $userPostingsCount = getUserPostingsCount($user);
@@ -248,7 +251,8 @@ function getPostings($user,$window)
     // setup long query
 
     $query  = "select postings.id, postings.title, postings.url, locations.name as location, ";
-    $query .= "companies.name as company, jobBoards.name as source from user_postings ";
+    $query .= "companies.name as company, jobBoards.name as source, user_postings.status as status ";
+    $query .= "user_postings.motivation as motivation from user_postings ";
     $query .= "inner join postings on user_postings.posting = postings.id ";
     $query .= "inner join locations on postings.location=locations.id ";
     $query .= "inner join companies on postings.company = companies.id ";
@@ -260,7 +264,7 @@ function getPostings($user,$window)
         $statement->execute();
         
         // bind results
-        $statement->bind_result($id,$title,$url,$location,$company,$source);
+        $statement->bind_result($id,$title,$url,$location,$company,$source,$status,$motivation);
         
         while($statement->fetch())
         {
@@ -271,6 +275,8 @@ function getPostings($user,$window)
             array_push($locations,$location); 
             array_push($companies,utf8_encode($company)); # will need to edit this
             array_push($sources,$source);
+            array_push($statuses,$status);
+            array_push($motivations,$motivation);
         } // end while loop
 
         mysqli_close($mysqli);
@@ -283,7 +289,8 @@ function getPostings($user,$window)
         $f_locations = array();
         $f_companies = array();
         $f_sources = array();
-
+        $f_statuses = array();
+        $f_motivations = array();
 
         // limit arrays here according to window specs
         for ( $i = $start; $i <= $end; $i++ )
@@ -294,6 +301,8 @@ function getPostings($user,$window)
                 $f_locations[$i] = $locations[$i];
                 $f_companies[$i] = $companies[$i];
                 $f_sources[$i] = $sources[$i];
+                $f_statuses[$i] = $statuss[$i];
+                $f_motivations[$i] = $motivations[$i];
             }
 
 
@@ -309,6 +318,8 @@ function getPostings($user,$window)
                                "locations" => $f_locations,
                                "companies" => $f_companies,
                                "sources" => $f_sources,
+                               "statuses" => $f_statuses,
+                               "motivations" => $f_motivations,
                                "totalCount" => $totalPostingsCount,
                                "count" => $userPostingsCount,
                                "start" => $start,
