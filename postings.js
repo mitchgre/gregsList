@@ -416,12 +416,12 @@ function setMotivation(object,postingId,motivation)
 		console.log(resp);
 		//console.log(JSON.parse(resp));
 		// 
-		if (JSON.parse(resp) === true)
+		if (JSON.parse(resp) === "true")
 		{
 		    // console.log("removal worked");
-		    // displayTable(object,[]);
-		    getStuff(object);
-		    // object.parent.refresh();
+		    // displayTable(object);
+		    // getStuff(object);
+		    object.parent.refresh();
 		}
 		else
 		{
