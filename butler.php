@@ -317,6 +317,16 @@ if (isset($_POST['func']))
                 $scheduleId = $_POST["url"];  // scheduleID is stored here
                 echo json_encode(removeSchedule($user,$scheduleId));
             }
+        if ($func === "removeResume")
+            {
+                $resumeId = $_POST["url"];  // resumeID is stored here
+                echo json_encode(removeResume($resumeId));
+            }
+        if ($func === "removeCoverLetter")
+            {
+                $CoverLetterId = $_POST["url"];  // CoverLetterID is stored here
+                echo json_encode(removeCoverLetter($CoverLetterId));
+            }
         if ($func === "removeBlog")
             {
                 $userNoteId = $_POST["url"];  
