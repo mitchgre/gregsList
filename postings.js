@@ -393,8 +393,10 @@ function editPosting()
 }
 
 
-function setMotivation(object,postingId)
+function setMotivation(object,postingId,motivation)
 {
+    console.log("setting motivation for " + postingId);
+    console.log(object);
     $.ajax
     (
 	{
@@ -407,6 +409,7 @@ function setMotivation(object,postingId)
 		pass: object.parent.user.password,
 		func: "setMotivation",
 		postingId: postingId,
+		motive: motivation,
 	    },
 	    success: function(resp)
 	    {
@@ -479,7 +482,8 @@ function addMotivationInputs(object)
     // get the nth children  (8th in this case)
     var ids = $("#" + tableId + " tr td:nth-child(1)");
     var cells = $("#" + tableId + " tr td:nth-child(8)");
-    console.log(cells);
+    // console.log(cells);
+    // console.log(ids);
 
     // loop over cells, adding input elements 
     for ( var i = 0; i < cells.length; i++ )
@@ -487,14 +491,27 @@ function addMotivationInputs(object)
 	// get current contents
 	// var prev = cells[i].html();
 	var thisCell = cells[i];
-	var thisId = ids[i];
+	var thisId = ids[i].innerHTML;
+	// console.log(thisId);
 
 	// console.log(thisCell);
 	var content = thisCell.innerHTML;
+	
+	// console.log("emptying element");
+	emptyElement(thisCell);
+	
 
 	// append an input element
 	var input = addInput(thisCell, 'number', '', content);
-	input.onchange = setMotivation(object,thisId);
+	input.sid = thisId;
+
+	// handle change events
+	input.onchange = function()
+	{
+	    console.log("setting " + this.sid + " to " + this.value);
+	    // if (this.value 
+	    setMotivation(object,this.sid,this.value);
+	}
 
 	// cells[i].html('<input type="number"></input>');
     }

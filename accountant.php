@@ -825,7 +825,11 @@ function getNotesOnPosting($userId,$postingId)
 function setMotivation($userPostingId, $newMotivation)
 {
     $query = "update user_postings set motivation = $newMotivation where id = $userPostingId";
-    return booleanReturn($query);
+    $flag = booleanReturn($query);
+    if ($flag)
+        return "true";
+    else
+        return "false";
     
 }
 
