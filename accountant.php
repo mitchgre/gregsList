@@ -251,7 +251,7 @@ function getPostings($user,$window)
     // setup long query
 
     $query  = "select postings.id, postings.title, postings.url, locations.name as location, ";
-    $query .= "companies.name as company, jobBoards.name as source, user_postings.status as status ";
+    $query .= "companies.name as company, jobBoards.name as source, user_postings.status as status, ";
     $query .= "user_postings.motivation as motivation from user_postings ";
     $query .= "inner join postings on user_postings.posting = postings.id ";
     $query .= "inner join locations on postings.location=locations.id ";
