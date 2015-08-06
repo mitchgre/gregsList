@@ -821,6 +821,15 @@ function getNotesOnPosting($userId,$postingId)
         END GETTERS, START INSERTERS
 ===========================================================*/
 
+
+function setMotivation($userPostingId, $newMotivation)
+{
+    $query = "update user_postings set motivation = $newMotivation where id = $userPostingId";
+    return booleanReturn($query);
+    
+}
+
+
 function insertGoal($user,$goalName)
 {
     // if goalName doesn't already exists in goals, add it there first

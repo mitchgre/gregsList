@@ -138,6 +138,12 @@ if (isset($_POST['func']))
             }
 
         // inserters ===============================
+        if ($func === "setMotivation")
+            {
+                // postingId is actually user_posting.id
+                if ( isset($_POST["postingId"]) && $_POST["postingId"] !== '')
+                    echo json_encode(setMotivation($_POST["postingId"]));
+            }
         if ($func === "insertGoal")
             {
                 if ( isset($_POST["goal"]) && $_POST["goal"] !== '')
