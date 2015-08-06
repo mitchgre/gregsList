@@ -416,8 +416,11 @@ function fillPostings(object, input)
 	var location = input.locations[i];
 	var company = input.companies[i];
 	var source = input.sources[i];
+	var status = input.statuses[i];
+	var motivation = input.motivations[i];
 
-	var p = new posting(id,title,url,location,company,source);
+	var p = new posting(id,title,url,location,
+			    company,source,status,motivation);
 	// console.log("p");
 	// console.log(p);
 	contents.push(p);
