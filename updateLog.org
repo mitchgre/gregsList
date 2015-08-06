@@ -28005,9 +28005,9 @@ POST http://192.168.42.129/gregsList/butler.php
       of using the database, but I'm thinking that may be equally
       difficult to manage, and I've already put so much work into the
       db, I might as well use it.  
-***** Goals [0/2]
+***** Goals [1/4]
       
-      - [-] add relational table for user_posting_status [1/3]
+      - [X] add relational table for user_posting_status [1/1]
 	- [X] update schema
 	  - [[file:schema.sql::create%20table%20user_postings][file:schema.sql::create table user_postings]]
 
@@ -28025,13 +28025,25 @@ POST http://192.168.42.129/gregsList/butler.php
               that I don't have. Plus, it's all about naming right?
               So let me think clearly, and not in convoluted knots.
 
-	- [ ] build php CRUDs for user_posting_status
-	- [ ] build javascript for user_posting_status
-
-      - [ ] add a table of text containing plain text cover letters [0/3]
-	- [ ] update schema
-	- [ ] build php CRUD
-	- [ ] build javascript
+      - [ ] build php switch for user_posting_status
+	- [ ] read
+	- [ ] toggle
+      - [ ] build javascript for user_posting_status
+	- [ ] proper rendering
+	- [ ] read
+	- [ ] toggle
+      - [-] add a table of text containing plain text cover letters [1/3]
+	- [X] update schema
+	- [-] build php CRUD [1/4]
+	  - [ ] create
+	  - [X] read
+	  - [ ] update
+	  - [ ] delete
+	- [ ] build javascript CRUD [0/4]
+	  - [ ] create
+	  - [ ] read
+	  - [ ] update
+	  - [ ] delete
 
 **** timeframe
 ***** Thu Aug 06, 2015 09:23:45 Initial Thoughts
@@ -28278,5 +28290,6 @@ mysql>
       from a reference of sorts I guess.
 ***** TODO Thu Aug 06, 2015 10:31:28 working on PHP Crud
 ****** Thu Aug 06, 2015 10:42:10 tested getResumes() on cli - will do getCoverLetters() on cli next, then move onto javascript. 
+****** Thu Aug 06, 2015 10:46:50 tested getCoverLetters() on cli.
 *** schedules bug
 *** foreign apis (piaza, linked in)
