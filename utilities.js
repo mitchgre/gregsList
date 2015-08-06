@@ -97,4 +97,3 @@ function appendListToString(string,list)
 	string += list[i];
     return string;
 }
-

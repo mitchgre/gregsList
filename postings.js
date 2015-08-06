@@ -466,10 +466,36 @@ function togglePostingStatus(object,postingId)
 }
     
 /*
-  Add input boxes to all of the postings
+  Add input boxes to all of the postings. 
+  This could be generalized to companies and industries also, 
+  but for now it's just postings. 
 */
-function addMotivationInputs()
+function addMotivationInputs(object)
 {
+    console.log("adding motivation inputs");
+
+    var tableId = object.table.id;
+
+    // get the nth children  (8th in this case)
+    var cells = $("#" + tableId + " tr td:nth-child(8)");
+    console.log(cells);
+
+    // loop over cells, adding input elements 
+    for ( var i = 0; i < cells.length; i++ )
+    {
+	// get current contents
+	// var prev = cells[i].html();
+	var thisCell = cells[i];
+	// console.log(thisCell);
+	var content = thisCell.innerHTML;
+
+	var input = addInput(thisCell, 'number', '', content);
+	// append an input element
+	// cells[i].html('<input type="number"></input>');
+    }
+
+    
+
 }
 
 function displayPostingCounts()
@@ -513,7 +539,7 @@ function fillPostings(object, input)
 
     // embelishTable(object,popUpDialogForJobPosting);
     embelishTable(object,dialogObjectWrapper2);
-    addMotivationInputs();
+    addMotivationInputs(object);
 
     // display counts and next/prev buttons
     displayPostingCounts();
