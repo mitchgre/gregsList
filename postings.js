@@ -465,6 +465,16 @@ function togglePostingStatus(object,postingId)
     );
 }
     
+/*
+  Add input boxes to all of the postings
+*/
+function addMotivationInputs()
+{
+}
+
+function displayPostingCounts()
+{
+}
 
 /*
   erase gregsList object's postings and rebuild them from input
@@ -503,8 +513,10 @@ function fillPostings(object, input)
 
     // embelishTable(object,popUpDialogForJobPosting);
     embelishTable(object,dialogObjectWrapper2);
-    
+    addMotivationInputs();
+
     // display counts and next/prev buttons
+    displayPostingCounts();
     
 }
 
