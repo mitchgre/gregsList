@@ -228,11 +228,6 @@ function getPostings($user,$window)
     $totalPostingsCount = getPostingsCount(); 
     $userPostingsCount = getUserPostingsCount($user);
     
-    //return $window;
-    
-    // get window parameters
-    //$decoded_window = json_decode( $window , true);
-    // return $decoded_window;
 
     $start = $window["start"];
     $end = $window["end"];

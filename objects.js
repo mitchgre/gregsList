@@ -64,7 +64,8 @@ function glo()  // gregsList Object
 	    editFunction: editPosting,
 	    updater: "updatePosting",		// php function to update
 	    destroyer: "removePosting", // php function to remove
-	    displayKeys: ["sid","title","url","location","company","source"], // values to display in table
+	    displayKeys: ["sid","status","motivation","title","url",
+			  "location","company","source"], // values to display in table
 	    limit: {start:0, end:500},
 	    count: 0
 	};
