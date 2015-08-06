@@ -96,6 +96,14 @@ if (isset($_POST['func']))
             {
                 echo json_encode(getBlog($user));
             }
+        if ($func === "getCoverLetters")
+            {
+                echo json_encode(getCoverLetters($user));
+            }
+        if ($func === "getResumes")
+            {
+                echo json_encode(getResumes($user));
+            }
         if ($func === "getNotesOnGoal")
             {
                 $goalId = $_POST['id'];

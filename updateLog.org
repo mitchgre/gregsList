@@ -28049,7 +28049,7 @@ POST http://192.168.42.129/gregsList/butler.php
       rebuilding the db shouldn't be a big deal.
 
 ***** Thu Aug 06, 2015 09:23:55 Goals
-10:30 AM - get schema updated and tested?
+10:30 AM - +get schema updated and tested?+  10:30:57 done
 11:30 AM - PHP updates and tests 
 12:30 AM - get javascript updated and tested? 
 1:30 PM - test at least 1 complete application.
@@ -28062,7 +28062,8 @@ POST http://192.168.42.129/gregsList/butler.php
 ***** Thu Aug 06, 2015 09:23:18 Missing PHP interface.
 
 **** action logs
-***** Thu Aug 06, 2015 10:10:45 got schema updated, but untested.
+***** DONE Thu Aug 06, 2015 10:10:45 got schema updated, but untested.
+      CLOSED: [2015-08-06 Thu 10:31]
 
       This includes untested new tables: 
 
@@ -28271,8 +28272,10 @@ Query OK, 0 rows affected (0.01 sec)
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> 
-***** Thu Aug 06, 2015 10:12:25 testing inserts
+***** DONE Thu Aug 06, 2015 10:12:25 testing inserts
+      CLOSED: [2015-08-06 Thu 10:31]
       Not really sure how to do this.  I just want to copy an paste
       from a reference of sorts I guess.
+***** TODO Thu Aug 06, 2015 10:31:28 working on PHP Crud
 *** schedules bug
 *** foreign apis (piaza, linked in)
