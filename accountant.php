@@ -1475,8 +1475,8 @@ function insertBlog($user,$title,$text)
 function insertResume($user,$title,$text)
 {
 
-    $query = "insert into resumes (title,text) ";
-    $query .= "values (\"" . $title ."\",\"". $text ."\") ";
+    $query = "insert into resumes (user,title,text) ";
+    $query .= "values ($user,\"" . $title ."\",\"". $text ."\") ";
 
     if ( booleanReturn($query) )
         return true;
@@ -1498,6 +1498,20 @@ function insertCoverLetter($user,$title,$text)
     else
         return "Error inserting cover letter.";    
 }
+
+
+unction insertResume($user,$title,$text)
+{
+
+    $query = "insert into resumes (user,title,text) ";
+    $query .= "values ($user,\"" . $title ."\",\"". $text ."\") ";
+
+    if ( booleanReturn($query) )
+        return true;
+    else
+        return "Error inserting resumes.";    
+}
+
 
 
 

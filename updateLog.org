@@ -28036,8 +28036,8 @@ POST http://192.168.42.129/gregsList/butler.php
 
       - [-] add a table of text containing plain text cover letters/resumes [1/3]
 	- [X] update schema
-	- [-] build php CRUD [1/4]
-	  - [ ] create
+	- [-] build php CRUD [2/4]
+	  - [X] create
 	  - [X] read
 	  - [ ] update
 	  - [ ] delete
@@ -28293,5 +28293,6 @@ mysql>
 ***** TODO Thu Aug 06, 2015 10:31:28 working on PHP Crud
 ****** Thu Aug 06, 2015 10:42:10 tested getResumes() on cli - will do getCoverLetters() on cli next, then move onto javascript. 
 ****** Thu Aug 06, 2015 10:46:50 tested getCoverLetters() on cli.
+****** Thu Aug 06, 2015 11:28:55 tested insertResumes() and insertCoverLetters() on cli.
 *** schedules bug
 *** foreign apis (piaza, linked in)
