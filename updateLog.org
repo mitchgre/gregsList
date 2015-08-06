@@ -27993,4 +27993,4 @@ POST http://192.168.42.129/gregsList/butler.php
     The callback is embedded into the container object.  In this case, it's [[file:objects.js::this.schedules%20%3D][file:objects.js::this.schedules =]]  where the filler property is set to 'fillSchedules'.  This matches the same patterns as the other sub-objects so I'm still not sure why it's not going through the the getStuff function. 
 
     hypothesis:  the filler could be getting changed somewhere between the time it is set, and getStuff() is called. 
-*** hawaii
+*** Wed Aug 05, 2015 20:15:38 looking into piazza and linked in apis.
