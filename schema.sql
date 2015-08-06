@@ -808,6 +808,21 @@ create table notes_location_user (
 
 create table cover_letters(
 	id int primary key unique auto_increment,
-	`text` text,
+	`user` int,
+	title varchar(255),
+	`text` text
+)engine=innodb;
 
+
+# base case insertion tests?   Really want to do this in javascript or at least PHP.
+
+
+
+
+
+create table resumes(
+	id int primary key unique auto_increment,
+	`user` int,
+	title varchar(255),
+	`text` text
 )engine=innodb;
