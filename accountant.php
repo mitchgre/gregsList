@@ -254,7 +254,7 @@ function getPostings($user,$window)
     $query .= "inner join locations on postings.location=locations.id ";
     $query .= "inner join companies on postings.company = companies.id ";
     $query .= "inner join jobBoards on postings.source = jobBoards.id ";
-    $query .= "where user = $user";
+    $query .= "where user = $user order by motivation desc";
 
     if ($statement = $mysqli->prepare($query))
     {
