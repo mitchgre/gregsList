@@ -393,6 +393,77 @@ function editPosting()
 }
 
 
+function setMotivation(object,postingId)
+{
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		user: object.parent.user.name,
+		pass: object.parent.user.password,
+		func: "setMotivation",
+		postingId: postingId,
+	    },
+	    success: function(resp)
+	    {
+		console.log(resp);
+		//console.log(JSON.parse(resp));
+		// 
+		if (JSON.parse(resp) === true)
+		{
+		    // console.log("removal worked");
+		    // displayTable(object,[]);
+		    getStuff(object);
+		    // object.parent.refresh();
+		}
+		else
+		{
+		    console.log("setMotivation() failed");
+		}
+	    }	
+	}
+    );
+}
+
+function togglePostingStatus(object,postingId)
+{
+    $.ajax
+    (
+	{
+	    url: "butler.php",
+	    type: "post",
+	    dataType: "text",
+	    data:
+	    {
+		user: object.parent.user.name,
+		pass: object.parent.user.password,
+		func: "togglePostingStatus",
+		postingId: postingId,
+	    },
+	    success: function(resp)
+	    {
+		console.log(resp);
+		//console.log(JSON.parse(resp));
+		// 
+		if (JSON.parse(resp) === true)
+		{
+		    // console.log("removal worked");
+		    // displayTable(object,[]);
+		    getStuff(object);
+		    // object.parent.refresh();
+		}
+		else
+		{
+		    console.log("togglePostingStatus() failed");
+		}
+	    }	
+	}
+    );
+}
     
 
 /*
