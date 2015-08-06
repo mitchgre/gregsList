@@ -28064,8 +28064,8 @@ POST http://192.168.42.129/gregsList/butler.php
 
 ***** Thu Aug 06, 2015 09:23:55 Goals
 10:30 AM - +get schema updated and tested?+  10:30:57 done
-11:30 AM - PHP updates and tests 
-12:30 AM - get javascript updated and tested? 
+11:30 AM - +PHP updates and tests+ 
+12:30 PM - get javascript updated and tested? 
 1:30 PM - test at least 1 complete application.
 
 **** [[file:schema.sql]]
@@ -28295,5 +28295,14 @@ mysql>
 ****** Thu Aug 06, 2015 10:46:50 tested getCoverLetters() on cli.
 ****** Thu Aug 06, 2015 11:28:55 tested insertResumes() and insertCoverLetters() on cli.
 ****** Thu Aug 06, 2015 11:35:26 untested removeResume() and removeCoverLetter()
+****** Thu Aug 06, 2015 12:01:24 still missing updates for resumes and cover letters
+***** Thu Aug 06, 2015 12:01:14 setup javascript
+      Need to get displays for posting status, posting motivation,
+      resumes and cover letters.
+
+      After this, I can work on missing CRUDs... I think the updates
+      are not setup.  Will try to update by id, instead of title and text.
+
+
 *** schedules bug
 *** foreign apis (piaza, linked in)
