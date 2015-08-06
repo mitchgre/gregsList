@@ -231,7 +231,9 @@ function getPostings($user,$window)
 
     $start = $window["start"];
     $end = $window["end"];
-
+    
+    // in case of bug, break here
+    // ------------------------------
     // return "start:".$start.", end:". $end;
     // return array('start'=>$start, 'end'=>$end);
 

@@ -2,7 +2,7 @@
   This file will contain skeleton function classes specialized for this project.
 */
 
-function posting(sid,title,url,location,company,source)
+function posting(sid,title,url,location,company,source,status,motivation)
 {
     this.sid = sid || null;   // id in sql
     this.title = title || null;
@@ -11,6 +11,8 @@ function posting(sid,title,url,location,company,source)
     this.location = location || null; // location is ? city?  state? (arbitrary)
     this.company = company || null;
     this.source = source || null;
+    this.status = status || null; 
+    this.motivation = motivation || null; 
 }
 
 
