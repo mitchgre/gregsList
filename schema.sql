@@ -806,3 +806,8 @@ create table notes_location_user (
 
 # Need to add sections for resumes and cover letters here.
 
+create table cover_letters(
+	id int primary key unique auto_increment,
+	`text` text,
+
+)engine=innodb;

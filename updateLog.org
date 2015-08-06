@@ -28010,13 +28010,25 @@ POST http://192.168.42.129/gregsList/butler.php
       - [-] add relational table for user_posting_status [1/3]
 	- [X] update schema
 	  - [[file:schema.sql::create%20table%20user_postings][file:schema.sql::create table user_postings]]
+
 	  - Thu Aug 06, 2015 09:42:03 The user_postings table already
-            has a status key!  It's just not updated in gs2's db.  
-	- [ ] build php CRUDs.
-	- [ ] build javascript
+            has a status key!  It's just not updated in gs2's db.
+
+	  - Thu Aug 06, 2015 09:52:58 So I'll work on updating it,
+            but I'm still thinking about cover letters and resumes.
+
+	    - These could work as just notes, and they'd get inserted
+              in the blog feed given the current scheme of things.
+              That might be enough - and it would motivate me to work
+              on the blog UI - get things sorted more cleanly.  But
+              it's a lot more work, that could take a lot more time
+              that I don't have. 
+
+	- [ ] build php CRUDs for user_posting_status
+	- [ ] build javascript for user_posting_status
 
       - [ ] add a table of text containing plain text cover letters [0/3]
-	- [ ]  update schema
+	- [ ] update schema
 	- [ ] build php CRUD
 	- [ ] build javascript
 
