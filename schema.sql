@@ -816,7 +816,49 @@ create table cover_letters(
 
 # base case insertion tests?   Really want to do this in javascript or at least PHP.
 
+insert into cover_letters(`user`,title, `text`) values
+       (1, "sample-cover-letter-00",
+"
+Dear HR Staff,
+Your advertisement on the New York Times website on February 27, 2014, for an Assess-
+ment Coordinator seems to perfectly match my background and experience. As the Inter-
+national Brand Coordinator for Kahlúa, I coordinated meetings, prepared presentations
+58    K nock ’em Dead
 
+and materials, organized a major offsite conference, and supervised an assistant. I believe
+that I am an excellent candidate for this position, as I have illustrated below:
+
+
+YOUR REQUIREMENTS                          MY QUALIFICATIONS
+
+Highly motivated and diplomatic.           Successfully managed project teams involving
+                                           different flexible, quality-driven professional
+                                           business units. The defined end results were
+                                           achieved on every project.
+
+Exceptional organizational skills and      Planned the development and launch of the
+attention to detail.                       Kahlúa Heritage Edition bottle series. My for-
+                                           mer manager enjoyed leaving the details and
+                                           follow-through to me. Coverdale project man-
+                                           agement training.
+
+College degree and six years of            B.A. from Vassar College (2002). 6+ years’ rel-
+experience.                                evant business experience in productive, pro-
+                                           fessional environments.
+
+Computer literacy.                         Extensive knowledge of Windows and Macin-
+                                           tosh applications.
+
+
+I’m interested in this position because it fits well with my new career focus in the human
+resources field. Currently, I am enrolled in NYU’s adult career planning and development
+certificate program, and am working at Lee Hecht Harrison.
+    My resume, pasted below and attached in MSWord, will provide more information on
+my strengths and career achievements. If after reviewing my material you believe that there
+is a match, please call me. Thank you for your consideration.
+    Sincere regards,
+    Jane Swift
+");
 
 
 
@@ -826,3 +868,105 @@ create table resumes(
 	title varchar(255),
 	`text` text
 )engine=innodb;
+
+
+insert into resumes(`user`,title,`text`)
+       values (1,
+       	       "sample-resume-1",
+	       "
+Name
+Mailing address (if appropriate) • Telephone & cell phone • E-mail address
+
+
+Professional Target Job Title
+----------------------------
+This helps database visibility and tells people what they will be reading.
+
+Performance Profile / Career Summary
+------------------------------------
+No more than five lines of unbroken text, perhaps followed by a second similar paragraph or
+short list of bullet points. The idea is to capture your ability to do the target job. What goes in
+here? Take the most common requirements from your TJD exercise Step Three and rewrite
+them as your performance profile. (For more on this, see the Competitive Difference Question-
+naire on the Knock ’em Dead website.) This will help your resume’s database visibility and will
+immediately resonate with the recruiter. Always note bilingual skills, since we live in a global
+economy.
+
+Core Competencies (Professional Skills and Skill Prioritization)
+-------------------
+Specific and detailed. This is the bulleted list of keywords that you identified in Step Three of
+the TJD. It can be as long as you like. This list gives the reader an immediate focus (“Oh, she
+can talk about this and this”), and each word can be repeated in the context of the job to which
+it applied. Some of your keywords can be written in two or more ways; for example, a recruiter
+might use “Profit and Loss” responsibilities or “P & L,” and you have no way of knowing which.
+The solution is to use one variation in your Professional Skills/Core Competencies section, and
+the other within the context of the jobs where you used them.
+    Your professional skills are most readily accessible when they appear in three or four col-
+umns. This section contains a list of your important professional skills and so needs to be near
+the top of your resume, for the following reasons:
+
+1.	 Coming after a Target Job Title and a Performance Summary that focuses on the skills you
+    bring to the target job, skills reflect employer priorities. With accurate prioritization, you help
+    both the discoverability of your resume and its impact with knowledgeable readers.
+2.	 The ATS programs that recruiters use to search resume databases in turn use algorithms
+    that reward relevant words near the top of a document as a means of judging that docu-
+    ment’s relevance to the recruiters’ search terms. This means your professional skills need to
+    be relevant to the target job and appear near the top of your resume. I have been suggest-
+    ing this for years—perhaps because I have been using ATS since 1987, when it first came
+    on the scene, and have an understanding of how it works.
+3.	 A recent study showed that once a resume has been pulled from a resume database, recruit-
+    ers spend an average of six seconds on a first-time scan of that resume. This means your
+    qualifications have to jump out, and you achieve this by using a Target Job Title, followed
+    by a Performance Summary that reflects employer priorities and a Professional Skills sec-
+    tion that supports all the above claims of professional competency with a list of your relevant
+    skills. This gives a recruiter plenty of time to see your abilities in that first six-second scan.
+   However there is another issue at play when it comes to the Professional Skills section of
+your resume. Ultimately it will be read by someone who really knows this job—knows what’s a
+“must have” and what’s a “nice to have.”
+52      K nock ’em Dead
+
+
+      The easiest way to explain this is with an example: A couple of years back I did a resume for
+ a dental assistant. She gave me a list of all the important technical skills of her job. I put these
+ into three columns for visual accessibility, and when I did so, something terrible jumped out at
+ me: Her list started with “Teeth whitening” and ended with “Four-handed dentistry.” What was
+ so terrible about this? After all, all the skills were there . . .
+      Yes, they were, but in the West we read from left to right and top to bottom, and common
+ sense says that the most important skills for a job should come before the less important skills.
+ I immediately switched these phrases so that “Four-handed dentistry” came first and “Teeth
+ whitening” came last.
+      Bear this story in mind when you are creating your own Professional Skills section: By pri-
+ oritizing your skills, you are subtly telling the man or woman who will ultimately hire you that you
+ have a firm grasp of the relative importance of all the necessary professional skills of your work,
+ and that adds to the clear focus and power of the opening first half page of your resume. This
+ shows that:
+        •• You can do the job
+        •• Your skills list backs up your statements of ability
+        •• You understand the relevant importance of the component parts of your job
+   The result is that within the first half page of your resume you have gone a long way toward
+ making the short list of candidates who will be brought in for an interview.
+
+                                     Technical Competencies
+                             An optional category, depending on your needs.
+
+                                      Professional Experience
+                                       Company name and location
+                                     Job title and employment dates
+                             \(Repeat this format as many times as necessary.\)
+
+                                               Education
+     This may come at the front of the resume if these credentials are critical or especially relevant to
+                    the Target Job description, or highlight your greatest strength.
+
+                            Licenses / Professional Accreditations
+      As with Education, this may come at the front of the resume if these credentials are critical or
+          especially relevant to the Target Job description, or highlight your greatest strength.
+
+                                Ongoing Professional Education
+                           Professional Organizations / Affiliations
+                       Publications / Patents / Speaking Languages
+                                            Military Service
+                                      Extracurricular Interests
+                                   If—and only if—they relate to the job.
+
+                               References Available on Request");

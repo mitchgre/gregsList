@@ -28272,5 +28272,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 mysql> 
 ***** Thu Aug 06, 2015 10:12:25 testing inserts
+      Not really sure how to do this.  I just want to copy an paste
+      from a reference of sorts I guess.
 *** schedules bug
 *** foreign apis (piaza, linked in)
