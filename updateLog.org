@@ -27771,7 +27771,7 @@ create table postings(
       - maybe their api isn't too difficult.
     - [ ] do some actual job searching - applying, etc.
 
-** Thu Jul 30, 2015 10:17:48
+** Thu Jul 30, 2015 10:17:48 issues
 *** schedules bug
    Not going to have a lot of time to work on this today.   So the
    goal is just to get the display functioning. 
@@ -27994,3 +27994,16 @@ POST http://192.168.42.129/gregsList/butler.php
 
     hypothesis:  the filler could be getting changed somewhere between the time it is set, and getStuff() is called. 
 *** Wed Aug 05, 2015 20:15:38 looking into piazza and linked in apis.
+** Thu Aug 06, 2015 09:07:56 status
+*** job posting status
+    
+    This is probably highest priority if I'm going to do anything, I
+    need to do this.  
+
+    I was even thinking that I'd get a spreadsheet to do this instead
+    of using the database, but I'm thinking that may be equally
+    difficult to manage, and I've already put so much work into the
+    db, I might as well use it.  
+ 
+*** schedules bug
+*** foreign apis (piaza, linked in)
