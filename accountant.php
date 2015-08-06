@@ -602,6 +602,45 @@ function getResumes($user)
 }
 
 
+function getCoverLetters($user)
+{
+    $ids = [];
+    $titles = [];
+    $texts = [];
+    
+    $mysqli = connectToDB();
+    
+// select notes_user.id, notes.text from notes_user inner join notes on notes_user.note = notes.id;
+    
+    $query = "select cover_letters.id, cover_letters.title, cover_letters.text from cover_letters ";
+    $query .= "where user=$user ";
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id,$title,$text);
+            
+            while($statement->fetch())
+                {
+                    array_push($ids,$id);
+                    array_push($titles,$title);
+                    array_push($texts,$text);
+                }
+        }
+    mysqli_close($mysqli);
+    
+    // associate arrays
+    $CoverLetters = array
+        (
+            "ids" => $ids,
+            "titles" => $titles,
+            "texts" => $texts
+        );
+    
+    return $CoverLetters;
+}
 
 function getNoteIdFromUserNoteId($userId,$userNoteId)
 {
