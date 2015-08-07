@@ -28310,3 +28310,123 @@ mysql>
 *** schedules bug
 *** foreign apis (piaza, linked in)
 ** Fri Aug 07, 2015 13:26:18 somehow notes_posting_user interface got broken
+
+*** overview
+    Gotta walk through this.
+     
+    I noticed the problem while trying to insert a note on a posting.
+
+    The expected result is that blog posts should appear in the blog
+    windows when they're inserted.  There are 2 displays written in
+    jQueryUI: 1. under the blog tab, and 2. when clicking on a job
+    posting title.   Neither of them show.  
+
+    Starting from javascript:[[file:objects.js]]  [[file:blog.js]]
+
+    The function is [[file:blog.js::function%20insertBlog(][file:blog.js::function insertBlog(]] which calls
+    [[file:blog.js::function%20giveBlogInsertionToButler(][file:blog.js::function giveBlogInsertionToButler(]] .  
+
+    This sends data from the jQuery dialog to
+    [[file:butler.php::insertBlog]] which in turn calls
+    [[file:accountant.php::function%20insertBlog(][file:accountant.php::function insertBlog(]] .
+
+    13:33:52
+    Okay.  So what do the logs say?   
+
+*** firebug
+**** dump
+
+ fillSchedules(object, input)
+objects.js (line 794)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		4ms	
+jquery-....min.js (line 4)
+getting contacts
+objects.js (line 784)
+Object { parent=glo,  contents=[0],  type="contact",  more...}
+objects.js (line 786)
+object callback:
+objects.js (line 793)
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		2ms	
+jquery-....min.js (line 4)
+HeadersPostResponseHTMLJSON
+
+{"ids":[1,2,3],"fnames":["ameneh","justin","samina"],"lnames":["sarbaziazad","wolford","ehasan"],"emails"
+:["sarbazia@onid.orst.edu","wolfordj@engr.oregonstate.edu","ehsan@eecs.oregonstate.edu"],"phones":[null
+,null,null],"facebooks":[null,null,null],"githubs":["tbd","wolfordj","tbd"],"linkedins":["tbd","tbd"
+,"tbd"]}
+
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		2ms	
+jquery-....min.js (line 4)
+HeadersPostResponseHTMLJSON
+
+{"ids":[],"titles":[],"texts":[]}
+
+fillContacts(object, input)
+objects.js (line 794)
+getting blogs
+objects.js (line 784)
+Object { parent=glo,  contents=[0],  type="blog",  more...}
+objects.js (line 786)
+object callback:
+objects.js (line 793)
+fillBlog(object, input)
+
+
+**** notes
+
+***** Fri Aug 07, 2015 13:40:13
+     Things look different on the getBlog post request compared to
+     other requests.  What specificialy?
+     
+POST http://localhost/gregsList/butler.php
+	
+200 OK
+		2ms	
+jquery-....min.js (line 4)
+HeadersPostResponseHTMLJSON
+Parametersapplication/x-www-form-urlencodedDo not sort
+func	
+getBlog
+pass	
+pass
+user	
+greg
+window[end]	
+50
+window[start]	
+0
+Source
+user=greg&pass=pass&func=getBlog&window%5Bstart%5D=0&window%5Bend%5D=50
+
+RESPONSE:
+{"ids":[],"titles":[],"texts":[]}
+
+	There's a window to start with, that's new.  
+
+	
+*** Fri Aug 07, 2015 13:42:20 I don't think the problem is in JavaScript, I think it's in PHP.
+REASONING:
+
+	I checked the SQL database manually, and the
+	user_posting_notes relational table is empty, but the data is
+	in the notes table.  
+
+	
+	Since I'm working with the "Create" part of the CRUD, the
+	problem is probably in [[file:accountant.php::function%20insertBlog(][file:accountant.php::function insertBlog(]] .
+
+	I'll take a quick look at that, and I don't see anything
+	right away, I'll test in CLI.
+	
+
+
+	
