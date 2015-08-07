@@ -28539,4 +28539,42 @@ RESPONSE:
 	[[file:accountant.php::function%20insertBlog][file:accountant.php::function insertBlog]]
 
 
-	
+**** Fri Aug 07, 2015 16:12:00 	(Had to break for phone calls).
+
+	So where was I?
+
+	The callee PHP function that's causing the error is
+	[[file:accountant.php::function%20insertNotesPostingUser][file:accountant.php::function insertNotesPostingUser]]  
+
+	This gets called from [[file:butler.php::insertNotesPostingUser]]
+
+	The psuedo-process looks like this:
+
+                $title = $_POST["title"];
+                $text = $_POST["text"];
+                $postingId = $_POST["id"];
+ 
+                $noteId = insertBlog($user,$title,$text);
+                echo json_encode(
+                    insertNotesPostingUser($noteId,$postingId,$user));	
+
+	What's going wrong is that $noteId is being assignened an
+	error string instead of an int.   I don't know why this is
+	happening.  
+
+	insertBlog() is returning an error: 
+
+	"Error inserting to notes_user".
+
+	I need to find a defense against this.  I could start at the
+	pseudo process:
+
+
+                $noteId = insertBlog($user,$title,$text);
+		if ($noteId !== "Error inserting to notes_user")
+                echo json_encode(
+                    insertNotesPostingUser($noteId,$postingId,$user));	
+
+        But that's still not going to fix my problem.   As I
+        mentioned earlier, the problem is in [[file:butler.php::function%20insertBlog][file:butler.php::function
+        insertBlog]] 

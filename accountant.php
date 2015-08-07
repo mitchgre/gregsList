@@ -1466,6 +1466,7 @@ function insertBlog($user,$title,$text)
     if ( booleanReturn($query) )
         {
             // get id of note that was just added.
+            // needs error check.
             $noteId = getBlogId($user,$title,$text);
 
             // insert noteId and userId to notes_user
@@ -1478,16 +1479,18 @@ function insertBlog($user,$title,$text)
                     $thisTime = getCurrentDateTimeString();
                     
                     // insert a schedule event
-                    insertSchedule($user, $title, "blog posting", null, $thisTime, $thisTime);
+                    insertSchedule($user, $title, "blog posting", 
+                                   null, $thisTime, $thisTime);
+
                     // inserting the schedule event automatically adds an entry in user_schedule
 
                     return $noteId;
                 }
             else
-                return "Error inserting to notes_user";
+                return "Error inserting to notes_user: ". $query;
         }
     else
-        return "Error inserting to notes.";
+        return "Error inserting to notes." . $query;
 
     
 }
