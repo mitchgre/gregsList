@@ -28309,3 +28309,4 @@ mysql>
 	This can be done in [[file:objects.js::function%20embelishTable][file:objects.js::function embelishTable]]
 *** schedules bug
 *** foreign apis (piaza, linked in)
+** Fri Aug 07, 2015 13:26:18 somehow notes_posting_user interface got broken
