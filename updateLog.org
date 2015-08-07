@@ -28414,19 +28414,129 @@ RESPONSE:
 
 	
 *** Fri Aug 07, 2015 13:42:20 I don't think the problem is in JavaScript, I think it's in PHP.
-REASONING:
+**** REASONING:
 
-	I checked the SQL database manually, and the
-	user_posting_notes relational table is empty, but the data is
-	in the notes table.  
+	 I checked the SQL database manually, and the
+	 user_posting_notes relational table is empty, but the data is
+	 in the notes table.  
 
+	 
+	 Since I'm working with the "Create" part of the CRUD, the
+	 problem is probably in [[file:accountant.php::function%20insertBlog(][file:accountant.php::function insertBlog(]] .
+
+	 I'll take a quick look at that, and I don't see anything
+	 right away, I'll test in CLI.
+	 
+
+	 Fri Aug 07, 2015 13:48:34
+	 I don't immediately see anything wrong with
+	 [[file:accountant.php::function%20insertBlog(][file:accountant.php::function insertBlog(]].  But it clearly
+	 doesn't work.  
+
+	 I just checked MYSQL manually for the notes_user table
+	 contents, and those are also empty along with
+	 notes_posting_user. 
+	 
+	 Fri Aug 07, 2015 13:50:40
+	 I'm still stumped, so I'm going to try working from the
+	 bottom up starting with the SQL queries and then PHP CLI.
+
+	 Actually, I'll first try inserting a blog post, and see what
+	 the console is sending.  
+
+	 Fri Aug 07, 2015 13:53:00
+	 I just got this to work in firefox, maybe it's a chrome
+	 problem?  
+
+	 I'll try that again, but first I'll test if firefox
+	 lets me insert notes on postings - after all, all I really
+	 wanted to do was insert some thought out notes from google
+	 docs into my top priority posting. 
+
+	 Fri Aug 07, 2015 13:57:38
+	 No, that didn't work.  So I can insert notes, but I can't
+	 link notes to postings. 
+**** firebug output while trying to add a note to a posting
+
+insertNotesPostingUser
+objects.js (line 1249)
+POST http://localhost/gregsList/butler.php
 	
-	Since I'm working with the "Create" part of the CRUD, the
-	problem is probably in [[file:accountant.php::function%20insertBlog(][file:accountant.php::function insertBlog(]] .
+200 OK
+		21ms	
+jquery-....min.js (line 4)
+"Error inserting to notes_posting_user."
+objects.js (line 1271)
+getting goals
+objects.js (line 784)
 
-	I'll take a quick look at that, and I don't see anything
-	right away, I'll test in CLI.
+
+Request:
+func	insertNotesPostingUser
+id	107
+pass	pass
+text	(truncated)
+
+
+Response: "Error inserting to notes_posting_user."
+
+
+
+**** Fri Aug 07, 2015 14:04:50 So that settles where the error is right?
+     The data seems to be formatted properly, and it's sending
+     properly and getting an error response.
+
+     [[file:accountant.php::Error%20inserting%20to%20notes_posting_user.][file:accountant.php::Error inserting to notes_posting_user.]]
+
+     Finds:
+
+
+function insertNotesPostingUser($noteId, $postingId, $userId)
+{
+    $query = "insert into notes_posting_user (note,posting,user) ";
+    $query .= "values (\"" . $noteId ."\",\"". $postingId ."\",\"".$userId."\") ";
+    
+    if ( booleanReturn($query) )
+        {
+            return true;
+        }
+    else
+        return "Error inserting to notes_posting_user.";         
+}
+
+
+	Which seems okay to me at a glance.  
+	1. What are the inputs:
+	   - noteId,postingId,userId though?  
+	2. Where is the callee?
+	   - [[file:butler.php::insertNotesPostingUser]]
+	   - It's done in butler.php not accountant.php?
+	   - 
+
+
+**** Firebug Log on Insertion Error 
+insertNotesPostingUser
+objects.js (line 1249)
+POST http://localhost/gregsList/butler.php
 	
+200 OK
+		22ms	
+jquery-....min.js (line 4)
+
+REQUEST:
+func	insertNotesPostingUser
+id	107
+pass	pass
+text	Overview:...
+
+RESPONSE:
+"Error inserting to notes_posting_user. insert into notes_posting_user (note,posting,user) values (\"Error
+ inserting to notes_user\",\"107\",\"1\") "
+
+**** Fri Aug 07, 2015 14:24:14 More reasoning.
+	So in the error is coming at notes_user level and is sending the wrong
+	$noteId.   What is the function that is breaking things?
+	[[file:accountant.php::function%20insertBlog][file:accountant.php::function insertBlog]]
 
 
 	

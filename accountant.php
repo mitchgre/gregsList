@@ -1592,7 +1592,7 @@ function insertNotesPostingUser($noteId, $postingId, $userId)
             return true;
         }
     else
-        return "Error inserting to notes_posting_user.";         
+        return "Error inserting to notes_posting_user. " . $query;         
 }
 
 
