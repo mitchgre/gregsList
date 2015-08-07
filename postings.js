@@ -280,6 +280,14 @@ function editPosting()
     console.log("index:"+index);
 
     var current = object.contents[index];
+    var linkString = current.url;
+    var urlString = linkString.substr(linkString.lastIndexOf("href=\"")+1,
+				     linkString.lastIndexOf("</a>"));
+
+    console.log("urlString: "+urlString);
+    console.log("linkString: "+ linkString);
+    
+
 
     // build form 
     var string  = '<div id="postingUpdater" title="Update '+object.type+'">';
@@ -294,7 +302,9 @@ function editPosting()
 
 
     string += '<tr><td>url</td>';
-    string += '<td><input id="embedURL" value="'+current.url+'"></td></tr>';
+    
+
+    string += '<td><input id="embedURL" value="'+urlString+'"></td></tr>';
 
     string += '<tr><td>company</td>';
     string += '<td><input id="embedCompany" value="'+current.company+'"></td></tr>';
@@ -420,8 +430,8 @@ function setMotivation(object,postingId,motivation)
 		{
 		    // console.log("removal worked");
 		    // displayTable(object);
-		    // getStuff(object);
-		    object.parent.refresh();
+		    getStuff(object);
+		    // object.parent.refresh();
 		}
 		else
 		{

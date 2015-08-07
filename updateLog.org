@@ -28296,7 +28296,7 @@ mysql>
 ****** Thu Aug 06, 2015 11:28:55 tested insertResumes() and insertCoverLetters() on cli.
 ****** Thu Aug 06, 2015 11:35:26 untested removeResume() and removeCoverLetter()
 ****** Thu Aug 06, 2015 12:01:24 still missing updates for resumes and cover letters
-***** TODO Thu Aug 06, 2015 12:01:14 setup javascript [0/2]
+***** TODO Thu Aug 06, 2015 12:01:14 setup javascript [1/2]
 ****** overview
        Need to get displays for posting status, posting motivation,
        resumes and cover letters.
@@ -28304,7 +28304,8 @@ mysql>
        After this, I can work on missing CRUDs... I think the updates
        are not setup.  Will try to update by id, instead of title and text.
 ****** TODO add buttons to toggle status
-****** TODO add text fields to set motivations
+****** DONE add text fields to set motivations
+       CLOSED: [2015-08-06 Thu 18:44]
 	This can be done in [[file:objects.js::function%20embelishTable][file:objects.js::function embelishTable]]
 *** schedules bug
 *** foreign apis (piaza, linked in)
