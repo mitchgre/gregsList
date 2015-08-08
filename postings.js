@@ -567,7 +567,7 @@ function fillPostings(object, input)
     
 
     displayTable(object);
-    displayPostingsPortlet(object);
+    // displayPostingsPortlet(object);
 
     // embelishTable(object,popUpDialogForJobPosting);
     embelishTable(object,dialogObjectWrapper2);

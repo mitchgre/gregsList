@@ -280,6 +280,7 @@ if (isset($_POST['func']))
                 $postingId = $_POST["id"];
  
                 $noteId = insertBlog($user,$title,$text);
+
                 echo json_encode(
                     insertNotesPostingUser($noteId,$postingId,$user));
             }

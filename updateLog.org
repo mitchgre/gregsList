@@ -28539,47 +28539,181 @@ RESPONSE:
 	[[file:accountant.php::function%20insertBlog][file:accountant.php::function insertBlog]]
 
 
-**** Fri Aug 07, 2015 16:12:00 	(Had to break for phone calls).
+*** Fri Aug 07, 2015 16:12:00 	(Had to break for phone calls).
 
-	So where was I?
+       So where was I?
 
-	The callee PHP function that's causing the error is
-	[[file:accountant.php::function%20insertNotesPostingUser][file:accountant.php::function insertNotesPostingUser]]  
+       The callee PHP function that's causing the error is
+       [[file:accountant.php::function%20insertNotesPostingUser][file:accountant.php::function insertNotesPostingUser]]  
 
-	This gets called from [[file:butler.php::insertNotesPostingUser]]
+       This gets called from [[file:butler.php::insertNotesPostingUser]]
 
-	The psuedo-process looks like this:
+       The psuedo-process looks like this:
 
-                $title = $_POST["title"];
-                $text = $_POST["text"];
-                $postingId = $_POST["id"];
- 
-                $noteId = insertBlog($user,$title,$text);
-                echo json_encode(
-                    insertNotesPostingUser($noteId,$postingId,$user));	
+	       $title = $_POST["title"];
+	       $text = $_POST["text"];
+	       $postingId = $_POST["id"];
 
-	What's going wrong is that $noteId is being assignened an
-	error string instead of an int.   I don't know why this is
-	happening.  
+	       $noteId = insertBlog($user,$title,$text);
+	       echo json_encode(
+		   insertNotesPostingUser($noteId,$postingId,$user));	
 
-	insertBlog() is returning an error: 
+       What's going wrong is that $noteId is being assignened an
+       error string instead of an int.   I don't know why this is
+       happening.  
 
-	"Error inserting to notes_user".
+       insertBlog() is returning an error: 
 
-	I need to find a defense against this.  I could start at the
-	pseudo process:
+       "Error inserting to notes_user".
 
-
-                $noteId = insertBlog($user,$title,$text);
-		if ($noteId !== "Error inserting to notes_user")
-                echo json_encode(
-                    insertNotesPostingUser($noteId,$postingId,$user));	
-
-        But that's still not going to fix my problem.   As I
-        mentioned earlier, the problem is in
-
-	[[file:accountant.php::function%20insertBlog][file:accountant.php::function insertBlog]] 
+       I need to find a defense against this.  I could start at the
+       pseudo process:
 
 
-	..but it seems the real error is coming from
-	[[file:accountant.php::function%20getBlogId][file:accountant.php::function getBlogId]]
+	       $noteId = insertBlog($user,$title,$text);
+	       if ($noteId !== "Error inserting to notes_user")
+	       echo json_encode(
+		   insertNotesPostingUser($noteId,$postingId,$user));	
+
+       But that's still not going to fix my problem.   As I
+       mentioned earlier, the problem is in
+
+       [[file:accountant.php::function%20insertBlog][file:accountant.php::function insertBlog]] 
+
+
+       ..but it seems the real error is coming from
+       [[file:accountant.php::function%20getBlogId][file:accountant.php::function getBlogId]]
+
+*** Fri Aug 07, 2015 19:07:20 changed getBlogId, still not working.
+
+     getBlogId should now be working, but insertNotesPostingUser()
+     still is broken from javascript.  
+
+     I'm not sure why.  Looking at firebug logs now. 
+
+     The POST request's response is just 'true'.  
+
+     But it's not going into the db for some reason.
+	
+
+     Fri Aug 07, 2015 19:43:05
+
+mysql> select * from notes_posting_user;
++----+------+---------+------+
+| id | note | posting | user |
++----+------+---------+------+
+|  3 |    7 |     107 |    1 |
+|  4 |    8 |     107 |    1 |
+|  5 |    9 |     107 |    1 |
+|  7 |   11 |     107 |    1 |
+|  8 |   12 |     107 |    1 |
+|  9 |   19 |     107 |    1 |
+| 10 |   31 |     107 |    1 |
+| 11 |   32 |     107 |    1 |
++----+------+---------+------+
+8 rows in set (0.00 sec)
+
+mysql> select * from postings where id=107;
++-----+-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+---------+----------+--------+
+| id  | title                         | url                                                                                                                                     | company | location | source |
++-----+-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+---------+----------+--------+
+| 107 | Software Engineer, Automation | https://careers-solarcity.icims.com/jobs/7321/software-engineer%2c-automation/candidate?mode=apply&apply=yes&hashed=473618129&back=none |     113 |        7 |      7 |
++-----+-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------+---------+----------+--------+
+1 row in set (0.00 sec)
+
+	
+     Actually, I just checked the sql table and it's there.  So maybe
+     the problem is in javascript or PHP's getter.
+
+     
+     Will have to check firebug's getter request.
+
+     This is [[file:blog.js::function%20fillBlog][file:blog.js::function fillBlog]] ?  Or?
+     
+     Fri Aug 07, 2015 19:49:48
+     Honestly, I can't recall.  
+
+     But it had something to do with embelishTable() - which is
+     called from [[file:blog.js::function%20fillBlog][file:blog.js::function fillBlog]] ?   
+
+     No - it's called from [[file:postings.js::function%20fillPostings][file:postings.js::function fillPostings]].
+     This calls [[file:objects.js::function%20embelishTable][file:objects.js::function embelishTable]] which should
+     call [[file:objects.js::function%20dialogObjectWrapper2][file:objects.js::function dialogObjectWrapper2]].
+
+
+     The javascript getter function is then
+     [[file:objects.js::function%20getObjectNotes][file:objects.js::function getObjectNotes]] which is currently only
+     returning ids [ 7,8 ] from notes_posting_user.
+
+     The return value *should* be [3,4,5,7,8,9,10,11] according to
+     the following:
+
+mysql> select * from notes_posting_user;
++----+------+---------+------+
+| id | note | posting | user |
++----+------+---------+------+
+|  3 |    7 |     107 |    1 |
+|  4 |    8 |     107 |    1 |
+|  5 |    9 |     107 |    1 |
+|  7 |   11 |     107 |    1 |
+|  8 |   12 |     107 |    1 |
+|  9 |   19 |     107 |    1 |
+| 10 |   31 |     107 |    1 |
+| 11 |   32 |     107 |    1 |
++----+------+---------+------+
+8 rows in set (0.00 sec)
+
+	So why isn't it?  The PHP function in this context is
+	[[file:butler.php::getNotesOnPosting]]
+
+
+                $postingId = $_POST['id'];
+                echo json_encode(getNotesOnPosting($user,$postingId));
+
+	This calls [[file:accountant.php::function%20getNotesOnPosting][file:accountant.php::function getNotesOnPosting]]
+
+function getNotesOnPosting($userId,$postingId)
+{
+
+    $mysqli = connectToDB();
+
+    // container for noteIds
+    $noteIds = [];
+
+    $query  = "select notes_user.id from notes_posting_user ";
+    $query .= "inner join notes_user on notes_posting_user.note = notes_user.note ";
+    $query .= "where notes_posting_user.posting=".$postingId." and notes_user.user=".$userId;
+    
+    if ($statement = $mysqli->prepare($query))
+        {
+            $statement->execute();
+            
+            // bind results
+            $statement->bind_result($id);
+            
+            while($statement->fetch())
+                {
+                    array_push($noteIds,$id);
+                }
+        }
+    mysqli_close($mysqli);
+
+    return $noteIds;
+}
+
+
+
+*** Fri Aug 07, 2015 20:10:09 observation
+
+	Here's a strange observation:  why is there even a table for
+	notes_user? Shouldn't notes_posting_user cover everything?  
+	
+	This seems like a bad design doesn't it?  
+
+	Fri Aug 07, 2015 20:18:05
+	I suppose I could short out the join in the query.
+
+
+*** Sat Aug 08, 2015 07:15:14 recap
+    
+    - notes_user joined with notes_posting_user
