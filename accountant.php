@@ -1431,7 +1431,11 @@ function addSchedule($name,$description,$contact,$start,$end)
     return booleanReturn($query);
 }
 
+/*
+  use getBlogId with caution.  
+  It will behave unpredictably in many cases for unknown reasons.
 
+ */
 function getBlogId($user,$title,$text)
 {
     $query = "select id from notes ";
@@ -1440,7 +1444,11 @@ function getBlogId($user,$title,$text)
     
     $noteId = reset(returnStuff($query));
     //return "noteId = " . $noteId;
-    return $noteId;
+    
+    if ( is_int( $noteId ) )
+        return $noteId;
+    else
+        return "Error getting blog id from: ". $query;
 }
 
 
@@ -1459,15 +1467,29 @@ function getCurrentDateTimeString ()
 
 function insertBlog($user,$title,$text)
 {
-
+    
+        
     $query = "insert into notes (title,text) ";
     $query .= "values (\"" . $title ."\",\"". $text ."\") ";
+    
+    $mysqli = connectToDB();
+    $mysqli -> set_charset("utf8");
 
-    if ( booleanReturn($query) )
+    if( $sql = $mysqli->prepare($query))
+    {
+        $sql->execute();
+        $newId = mysqli_insert_id( $mysqli );
+    }
+    else
+        return "Error inserting to notes." . $query . "";
+
+    if ( is_int( $newId) )
         {
             // get id of note that was just added.
             // needs error check.
-            $noteId = getBlogId($user,$title,$text);
+            // $noteId = getBlogId($user,$title,$text);
+            
+            $noteId = $newId;
 
             // insert noteId and userId to notes_user
             $query = "insert into notes_user (note,user) ";
@@ -1482,17 +1504,15 @@ function insertBlog($user,$title,$text)
                     insertSchedule($user, $title, "blog posting", 
                                    null, $thisTime, $thisTime);
 
-                    // inserting the schedule event automatically adds an entry in user_schedule
-
+                    // inserting the schedule event automatically 
+                    // adds an entry in user_schedule
                     return $noteId;
                 }
             else
                 return "Error inserting to notes_user: ". $query;
         }
     else
-        return "Error inserting to notes." . $query;
-
-    
+        return "Error getting blog id. " . $result;    
 }
 
 

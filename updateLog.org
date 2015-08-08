@@ -28576,5 +28576,10 @@ RESPONSE:
                     insertNotesPostingUser($noteId,$postingId,$user));	
 
         But that's still not going to fix my problem.   As I
-        mentioned earlier, the problem is in [[file:butler.php::function%20insertBlog][file:butler.php::function
-        insertBlog]] 
+        mentioned earlier, the problem is in
+
+	[[file:accountant.php::function%20insertBlog][file:accountant.php::function insertBlog]] 
+
+
+	..but it seems the real error is coming from
+	[[file:accountant.php::function%20getBlogId][file:accountant.php::function getBlogId]]
