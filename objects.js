@@ -337,8 +337,8 @@ glo.prototype.refresh =
     object.setupCompanies();
     object.setupLocations();
     object.setupPostings();
-    object.setupSchedules();
-    object.setupContacts();
+    // object.setupSchedules();
+    // object.setupContacts();
     object.setupBlog();
 
 }
