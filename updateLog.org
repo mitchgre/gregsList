@@ -28672,6 +28672,25 @@ mysql> select * from notes_posting_user;
 
 	This calls [[file:accountant.php::function%20getNotesOnPosting][file:accountant.php::function getNotesOnPosting]]
 
+
+
+
+*** Fri Aug 07, 2015 20:10:09 observation
+
+	Here's a strange observation:  why is there even a table for
+	notes_user? Shouldn't notes_posting_user cover everything?  
+	
+	This seems like a bad design doesn't it?  
+
+	Fri Aug 07, 2015 20:18:05
+	I suppose I could short out the join in the query.
+
+
+*** Sat Aug 08, 2015 07:15:14 recap
+    
+    - notes_user joined with notes_posting_user on get routine 
+    [[file:accountant.php::function%20getNotesOnPosting][file:accountant.php::function getNotesOnPosting]]
+
 function getNotesOnPosting($userId,$postingId)
 {
 
@@ -28703,17 +28722,42 @@ function getNotesOnPosting($userId,$postingId)
 
 
 
-*** Fri Aug 07, 2015 20:10:09 observation
+    - is this the same on put routine?
+    [[file:accountant.php::function%20insertNotesPostingUser][file:accountant.php::function insertNotesPostingUser]]
 
-	Here's a strange observation:  why is there even a table for
-	notes_user? Shouldn't notes_posting_user cover everything?  
-	
-	This seems like a bad design doesn't it?  
+    - no, it's not.  That's a problem.
 
-	Fri Aug 07, 2015 20:18:05
-	I suppose I could short out the join in the query.
-
-
-*** Sat Aug 08, 2015 07:15:14 recap
+function insertNotesPostingUser($noteId, $postingId, $userId)
+{
+    $query = "insert into notes_posting_user (note,posting,user) ";
+    $query .= "values (\"" . $noteId ."\",\"". $postingId ."\",\"".$userId."\") ";
     
-    - notes_user joined with notes_posting_user
+    if ( booleanReturn($query) )
+        {
+            return true;
+        }
+    else
+        return "Error inserting to notes_posting_user. " . $query;         
+}
+
+
+	- What about the butler.php mappings?
+
+	- [[file:butler.php::getNotesOnPosting]]
+      
+                $postingId = $_POST['id'];
+                echo json_encode(getNotesOnPosting($user,$postingId));
+
+	- [[file:butler.php::insertNotesPostingUser]]
+
+
+                // insertBlog, then insertNotesPostingUser
+                $title = $_POST["title"];
+                $text = $_POST["text"];
+                $postingId = $_POST["id"];
+ 
+                $noteId = insertBlog($user,$title,$text);
+
+                echo json_encode(
+                    insertNotesPostingUser($noteId,$postingId,$user));
+
