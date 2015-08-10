@@ -28753,7 +28753,7 @@ function insertNotesPostingUser($noteId, $postingId, $userId)
 
                 // insertBlog, then insertNotesPostingUser
                 $title = $_POST["title"];
-                $text = $_POST["text"];
+3                $text = $_POST["text"];
                 $postingId = $_POST["id"];
  
                 $noteId = insertBlog($user,$title,$text);
@@ -28761,3 +28761,35 @@ function insertNotesPostingUser($noteId, $postingId, $userId)
                 echo json_encode(
                     insertNotesPostingUser($noteId,$postingId,$user));
 
+*** Sun Aug 09, 2015 09:41:59 still on blog problems
+    
+    No blogs are being received by javascript?  That is,
+    gregsList.blog.contents is an empty array. 
+
+    Here is a firebug dump:
+
+POST: 
+func getBlog
+pass pass
+user greg
+window[end]	50
+window[start]	0
+Source
+user=greg&pass=pass&func=getBlog&window%5Bstart%5D=0&window%5Bend%5D=50
+
+RESPONSE: empty
+
+	Does this work in PHP's CLI?  I think so, but let's just make
+	sure. 
+
+	Here are the snippets to test:
+
+	[[file:butler.php::getBlog]]
+
+	[[file:accountant.php::getBlog]]
+
+
+	Sun Aug 09, 2015 09:56:03
+	Yes, this works on PHP CLI.  It's not working from javascript
+	though.   
+*** Mon Aug 10, 2015 08:40:41 never got blogs sorted yesterday.
