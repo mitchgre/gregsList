@@ -28793,3 +28793,4 @@ RESPONSE: empty
 	Yes, this works on PHP CLI.  It's not working from javascript
 	though.   
 *** Mon Aug 10, 2015 08:40:41 never got blogs sorted yesterday.
+*** Tue Aug 11, 2015 18:56:06 move along, nothing to see here
